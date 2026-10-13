@@ -28,6 +28,10 @@ function storeWidth(width) {
 }
 
 export function initShell(doc = document) {
+  // Kopier-Button der Codebloecke (stCodeCopyButton)
+  doc.querySelectorAll('.st-code-copy').forEach((button) => {
+    button.addEventListener('click', () => navigator.clipboard?.writeText(button.dataset.clipboardText));
+  });
   const app = doc.querySelector('.st-app');
   const sidebar = doc.querySelector('[data-st-sidebar]');
   if (!sidebar) return;

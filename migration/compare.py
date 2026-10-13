@@ -16,6 +16,7 @@ from __future__ import annotations
 
 import json
 import math
+import os
 import sys
 import time
 from pathlib import Path
@@ -28,7 +29,7 @@ from inventory import (BASE_HEIGHT, INV, SUITE_TOOLS, Recorder, open_suite_page,
 
 ROOT = Path(__file__).resolve().parent
 SHOTS = ROOT / "screenshots" / "compare"
-NEW = "http://localhost:8000"
+NEW = os.environ.get("NEW_URL", "http://localhost:8010")  # neue Seite: node scripts/serve.mjs 8010
 RTOL = 1e-12
 
 SNAPSHOT_JS = r"""
@@ -274,6 +275,23 @@ def steps_to(value, default, step=0.01):
 
 
 TOOLS = {
+    "cell-reconstruction": {
+        "legacy": SUITE_TOOLS[1],
+        "path": "/tools/cell-reconstruction/",
+        "ids": {"SoC": "soc", "V min [V]": "vmin", "V max [V]": "vmax", "NP Ratio": "np", "LiP Ratio": "lip"},
+        "defaults": {"SoC": 0.5, "V min [V]": 2.0, "V max [V]": 4.0, "NP Ratio": 1.0, "LiP Ratio": 1.0},
+        "states": {
+            "default": [],
+            "graphite-nmc": [("select", 0, "Graphite"), ("select", 1, "NMC")],
+            "silicon-lfp-custom": [("select", 0, "Silicon"), ("select", 1, "LFP"), ("slider", "SoC", 0.75),
+                                   ("slider", "V min [V]", 2.5), ("slider", "V max [V]", 3.65),
+                                   ("slider", "NP Ratio", 1.2), ("slider", "LiP Ratio", 0.9)],
+            "all-min": [("slider", "SoC", 0.0), ("slider", "V max [V]", 3.5), ("slider", "NP Ratio", 0.8),
+                        ("slider", "LiP Ratio", 0.5)],
+            "all-max": [("slider", "SoC", 1.0), ("slider", "V min [V]", 3.5), ("slider", "V max [V]", 4.5),
+                        ("slider", "NP Ratio", 1.5), ("slider", "LiP Ratio", 1.5)],
+        },
+    },
     "aging": {
         "legacy": SUITE_TOOLS[3],
         "path": "/tools/aging/",

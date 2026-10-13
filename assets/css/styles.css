@@ -620,7 +620,60 @@ html.st-page {
   padding: 0.75rem 0 1rem;
 }
 
-/* Codeblock (eingerueckter Markdown-Text, B1) */
+/* Codeblock (eingerueckter Markdown-Text, B1): stMarkdownPre > stCode mit Kopier-Button */
+.st-md-pre {
+  margin-bottom: 1rem;
+}
+
+.st-code {
+  height: 100%;
+  position: relative;
+  margin: 0;
+}
+
+.st-code-actions {
+  opacity: 0;
+  padding: 0.5rem 0.5rem 0 0;
+  top: 0;
+  right: 0;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: transparent;
+  z-index: 101;
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-start;
+  transition: opacity 300ms 150ms;
+  pointer-events: none;
+}
+
+.st-code:hover .st-code-actions {
+  opacity: 1;
+}
+
+.st-code-copy {
+  pointer-events: auto;
+  height: 2.3rem;
+  width: 2.3rem;
+  padding: 0;
+  border: none;
+  background-color: transparent;
+  color: var(--st-faded-text-60);
+  transform: scale(0);
+  cursor: pointer;
+}
+
+.st-code:hover .st-code-copy,
+.st-code-copy:active,
+.st-code-copy:focus {
+  opacity: 1;
+  transform: scale(1);
+  outline: none;
+  transition: none;
+  color: var(--st-text);
+}
+
 .st-md pre {
   height: 100%;
   background: var(--st-code-bg);
@@ -629,7 +682,7 @@ html.st-page {
   font-size: 0.75rem;
   font-family: var(--st-code-font);
   display: block;
-  margin: 0 0 1rem;
+  margin: 0;
   overflow: auto;
   padding: 1rem 2.3rem 1rem 1rem;
 }
@@ -739,7 +792,7 @@ html.st-page {
   height: 0.75rem;
   border-radius: 100%;
   border: none;
-  background-color: var(--st-primary);
+  background-color: transparent; /* sichtbar ist .st-slider-thumb (Subpixel-Position wie BaseWeb) */
   box-shadow: none;
   cursor: grab;
 }
@@ -749,30 +802,31 @@ html.st-page {
   height: 0.75rem;
   border-radius: 100%;
   border: none;
-  background-color: var(--st-primary);
+  background-color: transparent;
   box-shadow: none;
   cursor: grab;
 }
 
-.st-slider-input:focus-visible::-webkit-slider-thumb {
-  box-shadow: var(--st-focus-ring) 0 0 0 0.2rem;
-}
-
-.st-slider-input:focus-visible::-moz-range-thumb {
-  box-shadow: var(--st-focus-ring) 0 0 0 0.2rem;
-}
-
-/* unsichtbarer Thumb-Nachbau als Anker fuer das Wert-Label (StyledThumb: Flex, zentriert) */
+/* sichtbarer Thumb (StyledThumb: Flex, zentriert - zugleich Anker fuer das Wert-Label);
+   Position wie BaseWeb translate((v-min)/(max-min) * Spur - Thumb/2) mit Bruchteil-Pixeln */
 .st-slider-thumb {
   position: absolute;
-  top: -0.25rem;
+  top: 0;
+  left: 0;
   width: 0.75rem;
   height: 0.75rem;
   display: flex;
   align-items: center;
   justify-content: center;
   pointer-events: none;
-  left: calc(var(--pct, 0%) - 0.375rem);
+  transform: translate(calc(var(--pct-px, 0px) - 0.375rem), -0.25rem); /* per JS wie react-range */
+  border-radius: 100%;
+  background-color: var(--st-primary);
+  box-shadow: none;
+}
+
+.st-slider-track-area:has(.st-slider-input:focus-visible) .st-slider-thumb {
+  box-shadow: var(--st-focus-ring) 0 0 0 0.2rem;
 }
 
 .st-slider-value {
@@ -904,6 +958,14 @@ html.st-page {
   border-color: var(--st-primary);
   background-color: var(--st-primary);
   background-image: url("data:image/svg+xml,%3Csvg width='17' height='13' viewBox='0 0 17 13' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M6.50002 12.6L0.400024 6.60002L2.60002 4.40002L6.50002 8.40002L13.9 0.900024L16.1 3.10002L6.50002 12.6Z' fill='white'/%3E%3C/svg%3E");
+}
+
+.st-checkbox-text .st-md {
+  margin-bottom: 0;
+}
+
+.st-checkbox-text .st-md p {
+  margin: 0;
 }
 
 .st-checkbox-text {

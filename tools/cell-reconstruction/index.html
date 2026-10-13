@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="en" class="st-page">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <title>Battery Tank Tool</title>
+    <link rel="shortcut icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🔋</text></svg>" />
+    <link rel="stylesheet" href="/assets/css/styles.css" />
+    <script src="/assets/vendor/plotly-3.0.1.min.js" defer></script>
+    <script type="module" src="/assets/js/tools/cell-reconstruction.js"></script>
+  </head>
+  <body>
+    <div class="st-app">
+      <div class="st-view">
+        <section class="st-sidebar" aria-expanded="true" data-st-sidebar>
+          <div class="st-sidebar-resize" data-st-sidebar-resize></div>
+          <div class="st-sidebar-content">
+            <div class="st-sidebar-header">
+              <div></div>
+              <div class="st-sidebar-collapse">
+                <button type="button" class="st-header-button" data-st-sidebar-collapse aria-label="">
+                  <span class="st-icon" translate="no">keyboard_double_arrow_left</span>
+                </button>
+              </div>
+            </div>
+            <div class="st-sidebar-user">
+              <div class="st-vblock">
+                <div class="st-element"></div>
+                <div class="st-element"><a class="st-button st-button--nav" href="/tools/suite/"><div class="st-md"><p>⬅ Back to Landing</p></div></a></div>
+                <div class="st-element"><div class="st-md"><hr /></div></div>
+                <div class="st-element"><div class="st-heading"><h2>🔧 Adjust Cell Settings</h2></div></div>
+                <div class="st-element"><div class="st-select-widget"><label class="st-label" for="anode"><p>Anode</p></label><div class="st-select"><select id="anode" name="anode" autocomplete="off" data-st-input><option selected>Ideal Anode</option><option>Graphite</option><option>Silicon</option></select><svg viewBox="0 0 24 24" aria-hidden="true"><path transform="rotate(270, 12, 12)" fill-rule="evenodd" clip-rule="evenodd" d="M9 12C9 12.2652 9.10536 12.5196 9.29289 12.7071L13.2929 16.7071C13.6834 17.0976 14.3166 17.0976 14.7071 16.7071C15.0976 16.3166 15.0976 15.6834 14.7071 15.2929L11.4142 12L14.7071 8.70711C15.0976 8.31658 15.0976 7.68342 14.7071 7.29289C14.3166 6.90237 13.6834 6.90237 13.2929 7.29289L9.29289 11.2929C9.10536 11.4804 9 11.7348 9 12Z"></path></svg></div></div></div>
+                <div class="st-element"><div class="st-select-widget"><label class="st-label" for="cathode"><p>Cathode</p></label><div class="st-select"><select id="cathode" name="cathode" autocomplete="off" data-st-input><option selected>Ideal Cathode</option><option>LCO</option><option>LFP</option><option>NCA</option><option>NMC</option></select><svg viewBox="0 0 24 24" aria-hidden="true"><path transform="rotate(270, 12, 12)" fill-rule="evenodd" clip-rule="evenodd" d="M9 12C9 12.2652 9.10536 12.5196 9.29289 12.7071L13.2929 16.7071C13.6834 17.0976 14.3166 17.0976 14.7071 16.7071C15.0976 16.3166 15.0976 15.6834 14.7071 15.2929L11.4142 12L14.7071 8.70711C15.0976 8.31658 15.0976 7.68342 14.7071 7.29289C14.3166 6.90237 13.6834 6.90237 13.2929 7.29289L9.29289 11.2929C9.10536 11.4804 9 11.7348 9 12Z"></path></svg></div></div></div>
+                <div class="st-element"><div class="st-slider" data-st-slider><label class="st-label" for="soc"><p>SoC</p></label><div class="st-slider-track-area"><div class="st-slider-track"><div class="st-slider-thumb"><div class="st-slider-value">0.50</div></div></div><input class="st-slider-input" type="range" id="soc" name="soc" min="0" max="1" step="0.01" value="0.5" aria-label="SoC" autocomplete="off" data-st-input /></div><div class="st-slider-ticks"><div>0.00</div><div>1.00</div></div></div></div>
+                <div class="st-element"><div class="st-heading"><h3>Cutoff Voltages</h3></div></div>
+                <div class="st-element"><div class="st-slider" data-st-slider><label class="st-label" for="vmin"><p>V min [V]</p></label><div class="st-slider-track-area"><div class="st-slider-track"><div class="st-slider-thumb"><div class="st-slider-value">2.00</div></div></div><input class="st-slider-input" type="range" id="vmin" name="vmin" min="2" max="3.5" step="0.01" value="2" aria-label="V min [V]" autocomplete="off" data-st-input /></div><div class="st-slider-ticks"><div>2.00</div><div>3.50</div></div></div></div>
+                <div class="st-element"><div class="st-slider" data-st-slider><label class="st-label" for="vmax"><p>V max [V]</p></label><div class="st-slider-track-area"><div class="st-slider-track"><div class="st-slider-thumb"><div class="st-slider-value">4.00</div></div></div><input class="st-slider-input" type="range" id="vmax" name="vmax" min="3.5" max="4.5" step="0.01" value="4" aria-label="V max [V]" autocomplete="off" data-st-input /></div><div class="st-slider-ticks"><div>3.50</div><div>4.50</div></div></div></div>
+                <div class="st-element"><div class="st-heading"><h3>Capacity Ratios</h3></div></div>
+                <div class="st-element"><div class="st-slider" data-st-slider><label class="st-label" for="np"><p>NP Ratio</p></label><div class="st-slider-track-area"><div class="st-slider-track"><div class="st-slider-thumb"><div class="st-slider-value">1.00</div></div></div><input class="st-slider-input" type="range" id="np" name="np" min="0.8" max="1.5" step="0.01" value="1" aria-label="NP Ratio" autocomplete="off" data-st-input /></div><div class="st-slider-ticks"><div>0.80</div><div>1.50</div></div></div></div>
+                <div class="st-element"><div class="st-slider" data-st-slider><label class="st-label" for="lip"><p>LiP Ratio</p></label><div class="st-slider-track-area"><div class="st-slider-track"><div class="st-slider-thumb"><div class="st-slider-value">1.00</div></div></div><input class="st-slider-input" type="range" id="lip" name="lip" min="0.5" max="1.5" step="0.01" value="1" aria-label="LiP Ratio" autocomplete="off" data-st-input /></div><div class="st-slider-ticks"><div>0.50</div><div>1.50</div></div></div></div>
+                <div class="st-element"><div class="st-md"><hr /></div></div>
+                <div class="st-element"></div>
+                <div class="st-element"><div class="st-md"><a class="custom-link" href="mailto:lars@chargetanks.com" target="_blank" rel="noopener noreferrer">
+💌 Send me an Email
+</a></div></div>
+                <div class="st-element"><div class="st-md"><hr /></div></div>
+                <div class="st-element"><div class="st-md"><div class="st-sidebar-footer">
+© 2025 Lars von Kolzenberg<br />
+Built with Streamlit - v0.7.0<br />
+For educational use only
+</div></div></div>
+              </div>
+            </div>
+          </div>
+        </section>
+        <div class="st-main-wrap">
+          <header class="st-header">
+            <div class="st-header-left">
+              <button type="button" class="st-header-button st-sidebar-expand" data-st-sidebar-expand aria-label="">
+                <span class="st-icon" translate="no">keyboard_double_arrow_right</span>
+              </button>
+            </div>
+          </header>
+          <section class="st-main" tabindex="-1">
+            <div class="st-block">
+              <div class="st-vblock">
+                <div class="st-element"></div>
+                <div class="st-element"></div>
+                <div class="st-element"><div class="st-heading"><h1 id="understand-batteries-with-the-tank-analogy">🔋 Understand Batteries with the Tank Analogy<span class="st-heading-actions"><a class="st-heading-anchor" href="#understand-batteries-with-the-tank-analogy"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></span></h1></div></div>
+                <div class="st-element"><details class="st-expander"><summary><span class="st-expander-label"><div class="st-md"><p>🧠 What does this tool show?</p></div></span><svg class="st-expander-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path fill="none" d="M24 24H0V0h24v24z" opacity="0.87"></path><path d="M16.59 8.59L12 13.17 7.41 8.59 6 10l6 6 6-6-1.41-1.41z"></path></svg></summary><div class="st-expander-details"><div class="st-vblock"><div class="st-element"><div class="st-md">
+<p>Think of a battery like <strong>two water tanks</strong> that share the same water.</p>
+<div class="st-md-pre"><div class="st-code"><pre><code>        - One tank is the **anode**, the other is the **cathode**.  
+        - The **water** is like the lithium that moves back and forth.  
+
+        💧 When you **charge** the battery, you **pump water uphill** into the anode tank.  
+        ⚡ When you **use** the battery, the water flows **downhill** back to the cathode.
+
+        The **height difference** between the two tanks is the **voltage** of the battery.  
+        That's how much “push” the battery can give.  
+
+        Each tank has its own **shape**. Some parts are wide (can hold a lot of water), some are narrow (hold less).  
+        This shape is shown in the **dQ/dV plot**.  
+
+        If we keep track of the height difference as the tanks fill and empty, we get the **OCV curve** — the battery’s special fingerprint.
+
+        ---
+
+        ### ⚙️ The knobs you can play with:
+        - **SoC** → how full the tanks are right now  
+        - **Vmin &amp; Vmax** → the lowest and highest “water levels” we allow  
+        - **NP ratio** → how big one tank is compared to the other  
+        - **LiP ratio** → how much total water (lithium) is in the system  
+
+        👉 Turn the knobs and watch how the tanks and the voltage curve change!</code></pre><div class="st-code-actions"><button type="button" class="st-code-copy" title="Copy to clipboard" data-clipboard-text="        - One tank is the **anode**, the other is the **cathode**.  
+        - The **water** is like the lithium that moves back and forth.  
+
+        💧 When you **charge** the battery, you **pump water uphill** into the anode tank.  
+        ⚡ When you **use** the battery, the water flows **downhill** back to the cathode.
+
+        The **height difference** between the two tanks is the **voltage** of the battery.  
+        That&#x27;s how much “push” the battery can give.  
+
+        Each tank has its own **shape**. Some parts are wide (can hold a lot of water), some are narrow (hold less).  
+        This shape is shown in the **dQ/dV plot**.  
+
+        If we keep track of the height difference as the tanks fill and empty, we get the **OCV curve** — the battery’s special fingerprint.
+
+        ---
+
+        ### ⚙️ The knobs you can play with:
+        - **SoC** → how full the tanks are right now  
+        - **Vmin &amp; Vmax** → the lowest and highest “water levels” we allow  
+        - **NP ratio** → how big one tank is compared to the other  
+        - **LiP ratio** → how much total water (lithium) is in the system  
+
+        👉 Turn the knobs and watch how the tanks and the voltage curve change!"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg></button></div></div></div>
+</div></div></div></div></details></div>
+                <div class="st-hblock st-hblock--medium"><div class="st-column" style="--st-col: 50%"><div class="st-vblock"><div class="st-element"><div class="st-md"><div class="st-heading-hover"><h3 id="electrode-d-q-d-v-tanks" style="text-align: center;">🔋 Electrode dQ/dV Tanks<span class="st-heading-actions"><a class="st-heading-anchor" href="#electrode-d-q-d-v-tanks"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></span></h3></div></div></div><div class="st-element"><div class="st-chart-frame"><div class="st-chart" data-st-chart="dqdv"></div></div></div></div></div><div class="st-column" style="--st-col: 50%"><div class="st-vblock"><div class="st-element"><div class="st-md"><div class="st-heading-hover"><h3 id="voltage-vs-so-c" style="text-align: center;">📈 Voltage vs. SoC<span class="st-heading-actions"><a class="st-heading-anchor" href="#voltage-vs-so-c"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></span></h3></div></div></div><div class="st-element"><div class="st-chart-frame"><div class="st-chart" data-st-chart="voltage"></div></div></div></div></div></div>
+              </div>
+            </div>
+          </section>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

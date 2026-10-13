@@ -27,6 +27,7 @@ export function initSlider(root, onCommit) {
   const input = root.querySelector('input[type="range"]');
   const area = root.querySelector('.st-slider-track-area');
   const thumb = root.querySelector('.st-slider-thumb');
+  const track = root.querySelector('.st-slider-track');
   const label = root.querySelector('.st-slider-value');
   const min = Number(input.min);
   const max = Number(input.max);
@@ -36,7 +37,10 @@ export function initSlider(root, onCommit) {
 
   const show = () => {
     const value = Number(input.value);
-    area.style.setProperty('--pct', `${((value - min) / (max - min)) * 100}%`);
+    const fraction = (value - min) / (max - min);
+    area.style.setProperty('--pct', `${fraction * 100}%`);
+    // react-range: translate((v-min)/(max-min) * Spurbreite - Thumb/2) in Pixeln (mit Bruchteilen)
+    thumb.style.transform = `translate(${fraction * track.getBoundingClientRect().width - thumb.offsetWidth / 2}px, -4px)`;
     const text = sprintfFixed(value, 2);
     label.textContent = text;
     input.setAttribute('aria-valuetext', text);

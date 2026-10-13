@@ -222,154 +222,154 @@
  },
  "network": [
   {
-   "url": "http://localhost:8000/tools/aging/",
+   "url": "http://localhost:8010/tools/aging/",
    "method": "GET",
    "type": "document",
    "foreign": false,
    "blocked": false
   },
   {
-   "url": "http://localhost:8000/assets/css/styles.css",
+   "url": "http://localhost:8010/assets/css/styles.css",
    "method": "GET",
    "type": "stylesheet",
    "foreign": false,
    "blocked": false
   },
   {
-   "url": "http://localhost:8000/assets/vendor/plotly-3.0.1.min.js",
+   "url": "http://localhost:8010/assets/vendor/plotly-3.0.1.min.js",
    "method": "GET",
    "type": "script",
    "foreign": false,
    "blocked": false
   },
   {
-   "url": "http://localhost:8000/assets/js/tools/aging.js",
+   "url": "http://localhost:8010/assets/js/tools/aging.js",
    "method": "GET",
    "type": "script",
    "foreign": false,
    "blocked": false
   },
   {
-   "url": "http://localhost:8000/assets/fonts/SourceCodeVF-Upright.woff2",
+   "url": "http://localhost:8010/assets/fonts/SourceCodeVF-Upright.woff2",
    "method": "GET",
    "type": "font",
    "foreign": false,
    "blocked": false
   },
   {
-   "url": "http://localhost:8000/assets/js/model/aging.js",
+   "url": "http://localhost:8010/assets/js/model/aging.js",
    "method": "GET",
    "type": "script",
    "foreign": false,
    "blocked": false
   },
   {
-   "url": "http://localhost:8000/assets/js/ui/data.js",
+   "url": "http://localhost:8010/assets/js/ui/data.js",
    "method": "GET",
    "type": "script",
    "foreign": false,
    "blocked": false
   },
   {
-   "url": "http://localhost:8000/assets/js/ui/heading.js",
+   "url": "http://localhost:8010/assets/js/ui/heading.js",
    "method": "GET",
    "type": "script",
    "foreign": false,
    "blocked": false
   },
   {
-   "url": "http://localhost:8000/assets/js/ui/plotly.js",
+   "url": "http://localhost:8010/assets/js/ui/plotly.js",
    "method": "GET",
    "type": "script",
    "foreign": false,
    "blocked": false
   },
   {
-   "url": "http://localhost:8000/assets/js/ui/shell.js",
+   "url": "http://localhost:8010/assets/js/ui/shell.js",
    "method": "GET",
    "type": "script",
    "foreign": false,
    "blocked": false
   },
   {
-   "url": "http://localhost:8000/assets/js/ui/slider.js",
+   "url": "http://localhost:8010/assets/js/ui/slider.js",
    "method": "GET",
    "type": "script",
    "foreign": false,
    "blocked": false
   },
   {
-   "url": "http://localhost:8000/assets/js/core/pyformat.js",
+   "url": "http://localhost:8010/assets/js/core/pyformat.js",
    "method": "GET",
    "type": "script",
    "foreign": false,
    "blocked": false
   },
   {
-   "url": "http://localhost:8000/assets/js/model/cellReconstruction.js",
+   "url": "http://localhost:8010/assets/js/model/cellReconstruction.js",
    "method": "GET",
    "type": "script",
    "foreign": false,
    "blocked": false
   },
   {
-   "url": "http://localhost:8000/assets/js/model/figure.js",
+   "url": "http://localhost:8010/assets/js/model/figure.js",
    "method": "GET",
    "type": "script",
    "foreign": false,
    "blocked": false
   },
   {
-   "url": "http://localhost:8000/assets/js/model/materials.js",
+   "url": "http://localhost:8010/assets/js/model/materials.js",
    "method": "GET",
    "type": "script",
    "foreign": false,
    "blocked": false
   },
   {
-   "url": "http://localhost:8000/assets/js/model/tankPlotter.js",
+   "url": "http://localhost:8010/assets/js/model/tankPlotter.js",
    "method": "GET",
    "type": "script",
    "foreign": false,
    "blocked": false
   },
   {
-   "url": "http://localhost:8000/assets/js/ui/plotlyTheme.js",
+   "url": "http://localhost:8010/assets/js/ui/plotlyTheme.js",
    "method": "GET",
    "type": "script",
    "foreign": false,
    "blocked": false
   },
   {
-   "url": "http://localhost:8000/assets/js/core/numpy.js",
+   "url": "http://localhost:8010/assets/js/core/numpy.js",
    "method": "GET",
    "type": "script",
    "foreign": false,
    "blocked": false
   },
   {
-   "url": "http://localhost:8000/assets/js/core/scipy.js",
+   "url": "http://localhost:8010/assets/js/core/scipy.js",
    "method": "GET",
    "type": "script",
    "foreign": false,
    "blocked": false
   },
   {
-   "url": "http://localhost:8000/assets/data/materials/index.json",
+   "url": "http://localhost:8010/assets/data/materials/index.json",
    "method": "GET",
    "type": "fetch",
    "foreign": false,
    "blocked": false
   },
   {
-   "url": "http://localhost:8000/assets/data/materials/ideal-anode.json",
+   "url": "http://localhost:8010/assets/data/materials/ideal-anode.json",
    "method": "GET",
    "type": "fetch",
    "foreign": false,
    "blocked": false
   },
   {
-   "url": "http://localhost:8000/assets/data/materials/ideal-cathode.json",
+   "url": "http://localhost:8010/assets/data/materials/ideal-cathode.json",
    "method": "GET",
    "type": "fetch",
    "foreign": false,
