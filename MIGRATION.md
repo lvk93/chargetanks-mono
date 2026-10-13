@@ -9,7 +9,9 @@ Dieses Dokument ist die Arbeitsgrundlage des Umzugs. Eine neue Session kann alle
   - Was nicht 1:1 geht, wird dokumentiert und dem Auftraggeber vorgelegt (Abschnitte 12 und 15).
   - Alte Repos werden nur gelesen. Es werden keine Secrets verwendet.
 
-Stand: **Phase 1 (Grundgerüst, Golden-Werte, Pilot Aging) abgeschlossen am 2026-10-13. Wartet auf Freigabe für Phase 2.** Ergebnisse: §17.
+Stand: **Umzug abgeschlossen (Phase 2, 2026-10-13); Arbeitsdateien entfernt.** Ergebnisse: §17–18, Aufräumen: §19.
+
+> **Hinweis:** `migration/`, `tests/` (inkl. `tests/golden/`), `scripts/serve.mjs` und `package.json` wurden auf Wunsch des Auftraggebers entfernt. Alle Pfade dorthin in diesem Dokument beziehen sich auf den Stand **Commit `1a07547`** und lassen sich mit `git checkout 1a07547 -- migration tests scripts package.json` wiederherstellen (`migration/.work/` war nie im Repo: per `migration/setup_legacy.ps1` neu aufbauen).
 
 ---
 
@@ -43,6 +45,8 @@ Stand: **Phase 1 (Grundgerüst, Golden-Werte, Pilot Aging) abgeschlossen am 2026
 | 2.6 | Webseite (Home, Blog, Artikel, `/tools/`, 404), Tailwind → `styles.css` Teil C | ✅ erledigt | §18.4 |
 | 2.7 | `_redirects`, `_headers`, `sitemap.xml`, `robots.txt`, `llms.txt`, Manifest, Netzwerk-Check, README | ✅ erledigt | §18.4 |
 | 3.1 | Impressum und Datenschutz (F8, Folgeschritt) | ⏳ vorgemerkt | §15 |
+| 3.2 | Aufräumen: Migrationsskripte, Tests, Dev-Server entfernt; `netlify.toml` | ✅ erledigt | §19 |
+| 3.3 | Neues Repo anlegen, Netlify umstellen | ⏳ beim Auftraggeber | §19 |
 
 ---
 
@@ -450,7 +454,7 @@ Kern (`src/ocv_teaching/`):
 | D10 | Landing-Buttons "Open …" und "⬅ Back to Landing" sind Links (`<a href="/tools/…/">`) statt `<button>` mit Seitenwechsel im Session-State. Aussehen und Zustände (Hover, Active, Fokusring) gemessen gleich; Unterschiede: Leertaste löst einen Link nicht aus (Enter schon), Mittelklick/„In neuem Tab öffnen“ funktioniert jetzt | Folge von A2/F2 | ℹ️ Folge von F2 |
 | D11 | Webseite: „Launch Tool Suite“ (`/tools/`) und „Launch Interactive App“ (Startseite) zeigen auf `/tools/suite/` statt auf https://batterytank.onrender.com/ (weiter in neuem Tab, mit External-Link-Icon) | Render wird geschlossen, Suite liegt jetzt unter `/tools/suite/` (F2) | ℹ️ Folge von F2 |
 | D12 | Webseite: Seitenwechsel sind echte Seitenaufrufe statt React-Router-Navigation (kurzer Neuaufbau). Links innerhalb derselben Seite verhalten sich wie im Original (gleiche Adresse → nichts; `/#about` → sanftes Scrollen; Zurück → wieder oben). Einzige sichtbare Folge: Wird eine Seite direkt mit `#about` geladen, springt der Browser sofort zum Abschnitt statt animiert zu scrollen | statisch, ohne Framework | ℹ️ Hinweis |
-| D13 | `_redirects`: `/migration/*`, `/tests/*`, `/scripts/*` liefern 404 (Publish-Verzeichnis = Repo-Wurzel, diese Ordner gehören nicht zur Seite; `scripts/serve.mjs` ebenso) | Arbeitsdateien nicht veröffentlichen | 🟡 vorgeschlagen |
+| D13 | `_redirects`: `/migration/*`, `/tests/*`, `/scripts/*` liefern 404 (Publish-Verzeichnis = Repo-Wurzel, diese Ordner gehören nicht zur Seite; `scripts/serve.mjs` ebenso) | Arbeitsdateien nicht veröffentlichen | ⛔ entfällt (Ordner entfernt, §19) |
 
 ## 13. Mitportierte Bugs und Quirks (am laufenden Original gemessen)
 
@@ -712,4 +716,14 @@ Ablauf je Tool: Modell-Port → `tests/tools/<tool>.test.js` gegen `tests/golden
   - `/#about`: gleiche Endposition (2628 px), sanft animiert, zweiter Klick ohne Wirkung, Zurück → oben (`/`).
   - Netzwerk: nur eigene Domain auf allen Seiten; Konsole leer bis auf die gewollte 404-Antwort des Dokuments selbst auf 404-Seiten.
   - Screenshots angesehen (u. a. Home 1280, Artikel 390, Menü offen, Post not found).
+
+---
+
+## 19. Aufräumen und Übergabe (2026-10-13)
+
+- Auf Wunsch des Auftraggebers entfernt: `migration/` (Skripte, Inventar, Screenshots, Golden-Erzeugung; lokal auch `migration/.work/` mit Legacy-Clones und venvs), `tests/` (Tests und Golden-Werte), `scripts/serve.mjs`, `package.json`, `.gitignore`. Letzter vollständiger Stand: Commit `1a07547`.
+- `_redirects`: die Regeln für `/migration/*`, `/tests/*`, `/scripts/*` (D13) entfallen; es bleibt `/tools/*` → `/tools/suite/` (302, nur für fehlende Pfade).
+- Neu: `netlify.toml` mit `publish = "."` und ohne Build-Schritt, damit alte Einstellungen in der Netlify-Oberfläche (`npm run build`, Publish `dist`, Functions) nicht greifen.
+- Lokal ansehen: beliebiger statischer Server (README).
+- Offen beim Auftraggeber: neues Repository anlegen und pushen, Netlify-Site auf das neue Repository umstellen, danach Render schließen; Impressum/Datenschutz (F8).
 

@@ -1,0 +1,5 @@
+# Netlify: statische Seite ohne Build-Schritt; Publish-Verzeichnis ist die Repository-Wurzel.
+# Die Angaben hier gelten vor denen in der Netlify-Oberflaeche (dort evtl. noch "npm run build" vom alten Repo).
+[build]
+  publish = "."
+  command = "echo Kein Build-Schritt"

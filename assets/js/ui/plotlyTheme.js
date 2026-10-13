@@ -1,4 +1,4 @@
-// Erzeugt von migration/extract_plotly_theme.py aus dem laufenden Original (Streamlit 1.47.0).
+// Erzeugt von migration/extract_plotly_theme.py aus dem laufenden Original (Streamlit 1.47.0). Skript in der Git-Historie bis Commit 1a07547.
 // Nicht von Hand aendern: Template und Config so, wie Streamlit sie an plotly.js 3.0.1 uebergibt.
 
 export const STREAMLIT_TEMPLATE = {

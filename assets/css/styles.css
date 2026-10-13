@@ -4,7 +4,7 @@
  * Teil A: Theme-Variablen (gemeinsame Palette aus ocv_teaching viz/theme.py und dem Streamlit-Theme).
  * Teil B: Nachbau der Streamlit-1.47.0-Darstellung fuer die Tool-Suite (/tools/suite/, /tools/<tool>/).
  *         Alle Werte stammen aus den CSS-Regeln des laufenden Originals
- *         (migration/inventory/suite/css-rules/*.json, gemessen mit migration/measure_ui.py).
+ *         (migration/inventory/suite/css-rules/*.json, gemessen mit migration/measure_ui.py; Git-Historie bis 1a07547).
  * Teil C: Webseite (folgt in Phase 2).
  */
 
@@ -1376,7 +1376,7 @@ html.st-page {
   line-height: 1.4;
 }
 
-/* === Teil C - Webseite (generiert aus dem Tailwind-Build von chargetanks@main, siehe migration/build_site_pages.py) === */
+/* === Teil C - Webseite (generiert aus dem Tailwind-Build von chargetanks@main, siehe migration/build_site_pages.py in der Git-Historie bis 1a07547) === */
 /* Preflight (Tailwind 3), auf Webseiten-Seiten (html.ct-page) begrenzt */
 :where(.ct-page, .ct-page *), :where(.ct-page, .ct-page *):before, :where(.ct-page, .ct-page *):after {
   --tw-border-spacing-x: 0;
