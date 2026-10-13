@@ -205,7 +205,7 @@ def page(title_text, icon, tool, sidebar_items, main_items):
               </button>
             </div>
           </header>
-          <section class="st-main" tabindex="-1">
+          <section class="st-main" tabindex="0">
             <div class="st-block">
               <div class="st-vblock">
                 {(chr(10) + '                ').join(main_items)}
@@ -290,7 +290,87 @@ def swelling():
     return page("Swelling Tool", "🫁", "swelling", side, main)
 
 
-PAGES = {"materials": materials, "cell-reconstruction": cell, "blending": blending, "aging": aging, "swelling": swelling}
+FULLSCREEN_SVG = ('<svg class="st-toolbar-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="currentColor" '
+                  'xmlns="http://www.w3.org/2000/svg"><path fill="none" d="M0 0h24v24H0V0z"></path><path d="M7 14H5v5h5v-2H7v'
+                  '-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z"></path></svg>')
+
+
+def image(src):
+    """st.image(..., use_container_width=True) mit Element-Werkzeugleiste (Vollbild)."""
+    return el(f'<div class="st-image-frame" data-st-image><div class="st-toolbar"><div class="st-toolbar-buttons">'
+              f'<button type="button" class="st-toolbar-button" aria-label="Fullscreen">{FULLSCREEN_SVG}</button></div>'
+              f'</div><div class="st-image"><div class="st-image-container"><img src="{src}" alt="0" /></div></div></div>')
+
+
+def card(text, anchor_id, desc):
+    """landing.card_block (dark=False): HTML-Markdown mit Ueberschrift samt Anker."""
+    return md(f'<div class="card">\n    <div class="st-heading-hover"><h2 id="{anchor_id}">{text}{anchor(anchor_id)}</h2></div>\n'
+              f'    <p>{desc}</p>\n</div>')
+
+
+def landing():
+    hero = md('<div style="text-align: center; padding: 2rem 1rem;">\n    <div class="st-heading-hover"><h1 id="charge-tanks-suite" '
+              'style="font-size: 3rem; margin-bottom: 1rem;">\n        🪣 Charge Tanks Suite\n    '
+              f'{anchor("charge-tanks-suite")}</h1></div>\n    <div class="st-heading-hover"><h2 id="interactive-tools-to-build-'
+              'intuition-for-battery-design-ocv-blending-and-aging" style="font-size: 1.5rem; font-weight: 400; '
+              'line-height: 1.5; max-width: 800px; margin: 0px auto; color: rgb(221, 221, 221);">\n        Interactive tools '
+              'to build intuition for <b>battery design, OCV, blending &amp; aging</b>.<br />\n    '
+              f'{anchor("interactive-tools-to-build-intuition-for-battery-design-ocv-blending-and-aging")}</h2></div>\n</div>')
+    tools = [("🪣 Materials", "materials", "Explore half-cell curves and metadata.", "Materials", "material"),
+             ("🪫 Cell Reconstruction", "cell-reconstruction", "Rebuild full-cell OCV from half-cells.", "Cell Reconstruction",
+              "cell"),
+             ("⚖️ Blending", "blending", "Blend anode/cathode; inspect OCV &amp; dQ/dV.", "Blending", "blend"),
+             ("👴 Aging", "aging", "Overlay BOL vs aged; inspect shifts &amp; losses.", "Aging", "aging"),
+             ("🫁 Swelling", "swelling", "Relate porosity/compression to thickness breathing.", "Swelling", "swelling")]
+
+    def column(tool):
+        label, slug, desc, route, thumb = tool
+        return [card(label, slug, desc),
+                el(f'<a class="st-button st-button--landing st-button--block" href="/tools/{slug}/"><div class="st-md">'
+                   f'<p>Open {route}</p></div></a>'),
+                image(f"/assets/img/suite/{thumb}_thumbnail.png")]
+
+    rows = [hblock("small", [column(t) for t in tools[i:i + 3]] + [[]] * (3 - len(tools[i:i + 3])), [100 / 3] * 3)
+            for i in range(0, len(tools), 3)]
+    main = [empty(), empty(), hero] + rows + [
+        hr(), hblock("small", [[], [], [], []], [100 / 6, 100 / 3, 100 / 3, 100 / 6]),
+        el('<a class="st-link-button" href="mailto:lars@chargetanks.com" target="_blank" rel="noreferrer"><div class="st-md">'
+           '<p>💌  Email</p></div></a>'),
+        hr(),
+        md('<div class="footer">\n© 2025 Lars von Kolzenberg<br />\nBuilt with Streamlit - v0.7.0<br />\nFor educational use '
+           'only\n</div>')]
+    items = (chr(10) + "                ").join(main)
+    return f"""<!doctype html>
+<html lang="en" class="st-page st-page--landing">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <title>Battery Tool Suite</title>
+    <link rel="shortcut icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🔋</text></svg>" />
+    <link rel="stylesheet" href="/assets/css/styles.css" />
+    <script type="module" src="/assets/js/tools/suite.js"></script>
+  </head>
+  <body>
+    <div class="st-app">
+      <div class="st-view">
+        <div class="st-main-wrap">
+          <header class="st-header"></header>
+          <section class="st-main" tabindex="0">
+            <div class="st-block">
+              <div class="st-vblock">
+                {{items}}
+              </div>
+            </div>
+          </section>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
+""".replace("{items}", items)
+
+
+PAGES = {"suite": landing, "materials": materials, "cell-reconstruction": cell, "blending": blending, "aging": aging, "swelling": swelling}
 
 if __name__ == "__main__":
     for name in sys.argv[1:] or PAGES:

@@ -596,6 +596,12 @@ html.st-page {
   letter-spacing: -0.005em;
 }
 
+.st-main .st-md h1 {
+  font-size: 2.75rem;
+  font-weight: 700;
+  padding: 1.25rem 0 1rem;
+}
+
 .st-main .st-md h2 {
   font-size: 2.25rem;
   font-weight: 600;
@@ -705,11 +711,13 @@ html.st-page {
 
 /* Markdown in Buttons und Expander-Titeln: ohne Absatzabstand (Streamlit-Varianten des Containers) */
 .st-button .st-md,
+.st-link-button .st-md,
 .st-expander-label .st-md {
   margin-bottom: 0;
 }
 
 .st-button .st-md p,
+.st-link-button .st-md p,
 .st-expander-label .st-md p {
   word-break: break-word;
   margin: 0;
@@ -982,6 +990,7 @@ html.st-page {
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  text-align: center; /* UA-Standard von <button>; hier auch fuer <a class="st-button"> */
   font-weight: 400;
   padding: 0.25rem 0.75rem;
   border-radius: 0.5rem;
@@ -1204,8 +1213,112 @@ html.st-page {
 }
 
 .st-image-container > img {
+  display: block;
   border-radius: 0.5rem;
+  width: 100%;
   max-width: 100%;
+}
+
+/* Rahmen mit Element-Werkzeugleiste (stFullScreenFrame > div, stElementToolbar); Vollbild per JS (ui/image.js) */
+.st-image-frame {
+  position: relative;
+}
+
+.st-image-frame.is-fullscreen {
+  position: fixed;
+  inset: 0;
+  z-index: 1000050;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 46px 12px 12px;
+  background-color: var(--st-bg);
+}
+
+.st-image-frame.is-fullscreen > .st-image {
+  height: 100%;
+}
+
+.st-image-frame.is-fullscreen img {
+  max-height: calc(100dvh - 58px);
+  object-fit: contain;
+}
+
+.st-toolbar {
+  position: absolute;
+  top: -1rem;
+  right: 0;
+  padding: 0.5rem 0 0.5rem 0.5rem;
+  opacity: 0;
+  transition: none;
+}
+
+.st-image-frame:hover > .st-toolbar,
+.st-image-frame:active > .st-toolbar,
+.st-image-frame:focus-visible > .st-toolbar,
+.st-toolbar:hover,
+.st-toolbar:active,
+.st-toolbar:focus-visible {
+  transition: opacity 150ms 100ms, top 100ms 100ms;
+  opacity: 1;
+  top: -2.65rem;
+}
+
+/* Vollbild: Werkzeugleiste fest sichtbar, oberhalb des Bildbereichs (Innenrahmen beginnt bei 46px) */
+.st-image-frame.is-fullscreen > .st-toolbar {
+  opacity: 1;
+  transition: none;
+  top: calc(46px - 2.65rem);
+  right: 12px;
+}
+
+.st-toolbar-buttons {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  z-index: 101;
+  position: relative;
+  padding: 0.25rem;
+  border-radius: 0.5rem;
+  background-color: rgb(0, 66, 128);
+  box-shadow: rgba(0, 0, 0, 0.08) 1px 2px 8px 0px;
+}
+
+.st-toolbar-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 0.25rem;
+  border: none;
+  border-radius: 0.5rem;
+  background-color: transparent;
+  color: var(--st-text);
+  font-size: 0.75rem;
+  line-height: 1.2;
+  cursor: pointer;
+}
+
+.st-toolbar-button:hover {
+  background-color: rgba(181, 207, 232, 0.15);
+}
+
+.st-toolbar-button:focus {
+  outline: none;
+}
+
+/* Original: Tastaturfokus nur als hellerer Hintergrund, Leiste bleibt dabei unsichtbar (B13) */
+.st-toolbar-button:focus-visible {
+  background-color: rgba(181, 207, 232, 0.25);
+}
+
+.st-toolbar-icon {
+  display: flex;
+  width: 0.9rem;
+  height: 0.9rem;
+  font-size: 0.9rem;
+  line-height: 0.9rem;
+  flex-shrink: 0;
 }
 
 /* --- Sidebar-Fusszeile (frontend/sidebar.py) --------------------------------------------- */
@@ -1250,7 +1363,8 @@ html.st-page {
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
 }
 
-.card h2 {
+/* .card h2 steht im Original hinter den Markdown-Regeln gleicher Spezifitaet und gewinnt */
+.st-page .card h2 {
   margin-top: 0;
   font-size: 1.5rem;
 }

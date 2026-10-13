@@ -39,7 +39,7 @@ Stand: **Phase 1 (Grundgerüst, Golden-Werte, Pilot Aging) abgeschlossen am 2026
 | 2.2 | Materials (`/tools/materials/`) | ✅ erledigt | §18.1 |
 | 2.3 | Blending (`/tools/blending/`) | ✅ erledigt | §18.1 |
 | 2.4 | Swelling (`/tools/swelling/`) inkl. SoH-Slider mit negativem Schritt (B2) | ✅ erledigt | §18.2 |
-| 2.5 | Landing `/tools/suite/` | ⏳ offen | §17.7 |
+| 2.5 | Landing `/tools/suite/` | ✅ erledigt | §18.3 |
 | 2.6 | Webseite (Home, Blog, Artikel, `/tools/`, 404), Tailwind → `styles.css` Teil C | ⏳ offen | §17.7 |
 | 2.7 | `_redirects`, `_headers`, `sitemap.xml`, `robots.txt`, `llms.txt`, Manifest, Netzwerk-Check, README | ⏳ offen | §17.7 |
 
@@ -446,6 +446,7 @@ Kern (`src/ocv_teaching/`):
 | D7 | Selectbox als natives `<select>`: geschlossen 1:1 (gemessen: Pfeil, Rahmen, Fokusrahmen nach Auswahl); aufgeklappt die Liste des Browsers/Betriebssystems, kein Tipp-Filter (Anfangsbuchstabe springt) | Grundsatz "native Elemente" | ✅ freigegeben (2026-10-13) |
 | D8 | Kein Header-Inhalt rechts ("Deploy", ⋮). In jedem Suite-Screenshot ≈ 250 Pixel Unterschied genau dort | Teil von A5 | ✅ laut Auftrag |
 | D9 | Sidebar-Breite wird wie im Original in `localStorage` (`sidebarWidth`) gespeichert – jetzt unter der Domain chargetanks.com statt batterytank.onrender.com (früher gespeicherte Breiten gehen verloren) | anderer Ursprung | ℹ️ Hinweis |
+| D10 | Landing-Buttons "Open …" und "⬅ Back to Landing" sind Links (`<a href="/tools/…/">`) statt `<button>` mit Seitenwechsel im Session-State. Aussehen und Zustände (Hover, Active, Fokusring) gemessen gleich; Unterschiede: Leertaste löst einen Link nicht aus (Enter schon), Mittelklick/„In neuem Tab öffnen“ funktioniert jetzt | Folge von A2/F2 | ℹ️ Folge von F2 |
 
 ## 13. Mitportierte Bugs und Quirks (am laufenden Original gemessen)
 
@@ -463,6 +464,7 @@ Kern (`src/ocv_teaching/`):
 | B10 | Tracking-Geo vom Server statt vom Besucher | entfällt mit A1 |
 | B11 | Aging: Die Anker-ID der Zeile "Capacities … SoH: …" bleibt beim ersten Wert (`…-so-h-100-00`), auch wenn der Text z. B. 70.85 % zeigt | Browser-Vergleich (`inventory/compare/aging.json`), portiert in `assets/js/ui/heading.js` |
 | B12 | Aging: Die gepunkteten Referenzlinien im Tank-Chart zeigen immer den BOL-Zustand (`add_reference_voltage_lines` ohne Aging-Parameter aufgerufen) | `aging_demo.py:290`, portiert in `assets/js/model/aging.js` |
+| B13 | Landing: Der Vollbild-Button der Vorschaubilder ist per Tab erreichbar, die Werkzeugleiste bleibt dabei aber unsichtbar (opacity 0); der Fokus zeigt sich nur als hellerer Button-Hintergrund. Nach Vollbild an/aus geht der Fokus verloren (Leiste wird neu aufgebaut) | `migration/landing_compare.py` + Fokus-Probe (§18.3), portiert in `styles.css`/`assets/js/ui/image.js` |
 
 ---
 
@@ -666,4 +668,13 @@ Ablauf je Tool: Modell-Port → `tests/tools/<tool>.test.js` gegen `tests/golden
 - **Cylindrical?:** blendet den Compression-Slider aus (`st-element--hidden`); da er im Original keinen `key` hat, kommt er beim Abwählen mit 0.0 zurück (`slider.reset(0)`). Aktivierte Checkbox pixelgleich.
 - **Browser-Vergleich** (12 Zustände: Default, SoH per Pfeilen/k/j/Bild/Pos1/Ende, Klick Mitte/links/links+Taste, SoC per Klick+k/j, Compression 25, Cylindrical, Cylindrical+gealtert+SoC 0, Compression-Reset, gemischt): **0 Abweichungen** in Plotly-Zustand (3.651 Zahlen je Zustand, bitgleich) und Texten (Slider-Werte, Checkbox). Screenshots 1280/390 (Default, Expander, Sidebar offen) angesehen: nur D8. Vollbild pixelgleich, Sidebar eingeklappt nur D8. Netzwerk: nur eigene Domain, keine Konsolenmeldungen.
 - **Gefunden und behoben:** Nach Mausklick zeigte der SoH-Thumb einen Fokusring (programmatisches `focus()` nach `preventDefault`); jetzt bleibt der native Fokus des Klicks erhalten, native Wertänderungen werden bei negativem Schritt verworfen.
+
+### 18.3 Landing `/tools/suite/`
+
+- **Seite:** `tools/suite/index.html` (erzeugt mit `build_suite_pages.py suite`, danach Quelle). Inhalt wie `apps/landing.py` im Live-Stand: Kopf (h1/h2 als HTML-Markdown samt Ankern), 5 Karten in Zeilen à 3 Spalten (dritte Spalte der zweiten Zeile leer), Buttons, Vorschaubilder, Trenner, leere 4er-Spaltenzeile `[1,2,2,1]` (erzeugt nur Abstand), Linkbutton „💌  Email“, Fusszeile. Free Demo und Login entfallen (F1, A6). Titel „Battery Tool Suite“, Favicon 🔋.
+- **Bilder:** `assets/img/suite/*.png` bytegleich (`migration/copy_thumbnails.py`, `SHA256SUMS`). Streamlit 1.47.0 liefert `st.image(<Pfad>)` unverändert aus (`image_utils.image_to_url` liest nur die Bytes), daher identisch mit dem, was der Browser im Original bekommt.
+- **Bild-Werkzeugleiste (st.image):** gemessen mit `migration/measure_landing.py` (`inventory/suite/landing-image/`): Leiste bei `top:-1rem`, unsichtbar; bei Hover nach `-2.65rem`, sichtbar (Übergang 150/100 ms); Vollbild: fester Rahmen, Padding 46/12/12, Bild in natürlicher Breite (höchstens Rahmenbreite) mit `object-fit: contain`, Body ohne Scrollen, Escape/„Close fullscreen“ beendet. Umsetzung: `assets/js/ui/image.js`, `assets/js/tools/suite.js`, CSS `.st-image-frame`/`.st-toolbar*`. Kein Tooltip (im Original nicht erschienen).
+- **Tests:** `tests/tools/suite.test.js` gegen den Golden-Fall (Karten, Button-Reihenfolge und Ziele, Linkbutton, Fusszeile) und Bild-Hashes.
+- **Browser-Vergleich** (`migration/landing_compare.py` → `inventory/compare/suite.json`, `screenshots/compare/suite/`): Lage und berechnete Stile von 19 Elementgruppen (Überschriften, Karten, Buttons, Bilder, Werkzeugleiste, Trenner, Spalten, Linkbutton, Fusszeile, Header, App) bei 1280 und 390 px: **0 Abweichungen**; Texte, Anker-IDs und Linkziele gleich. Screenshots ganze Seite 1280/390, Hover, Button-Hover, Vollbild und nach Escape (erstes und fünftes Bild) angesehen: nur D8; **Vollbild pixelgleich**. Hover/Active von Button und Linkbutton gleich. Netzwerk: nur eigene Domain, keine Konsolenmeldungen.
+- **Gefunden und behoben (gilt für alle Suite-Seiten):** `stMain` hat im Original `tabindex="0"` (Tab-Stopp, Tastatur-Scrollen); die Seiten hatten `-1` → korrigiert in allen `tools/*/index.html`. Tab-Reihenfolge der Landing jetzt wie im Original (ohne die Header-Buttons, D8). `<a class="st-button">` zentriert Text wie ein `<button>` (`text-align: center`).
 
