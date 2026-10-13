@@ -275,6 +275,19 @@ def steps_to(value, default, step=0.01):
 
 
 TOOLS = {
+    "materials": {
+        "legacy": SUITE_TOOLS[0],
+        "path": "/tools/materials/",
+        "ids": {"SoL": "sol"},
+        "defaults": {"SoL": 0.5},
+        "states": {
+            "default": [],
+            "graphite-0.27": [("select", 0, "Graphite"), ("slider", "SoL", 0.27)],
+            "lfp-0": [("select", 0, "LFP"), ("slider", "SoL", 0.0)],
+            "silicon-1": [("select", 0, "Silicon"), ("slider", "SoL", 1.0)],
+            "nmc-0.5": [("select", 0, "NMC")],
+        },
+    },
     "cell-reconstruction": {
         "legacy": SUITE_TOOLS[1],
         "path": "/tools/cell-reconstruction/",

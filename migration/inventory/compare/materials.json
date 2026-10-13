@@ -1,0 +1,322 @@
+{
+ "tool": "materials",
+ "states": {
+  "default": {
+   "numbers": 232,
+   "not_bitidentical": 0,
+   "max_rel_deviation": 0.0,
+   "differences": []
+  },
+  "graphite-0.27": {
+   "numbers": 2974,
+   "not_bitidentical": 0,
+   "max_rel_deviation": 0.0,
+   "differences": []
+  },
+  "lfp-0": {
+   "numbers": 2546,
+   "not_bitidentical": 0,
+   "max_rel_deviation": 0.0,
+   "differences": []
+  },
+  "silicon-1": {
+   "numbers": 4142,
+   "not_bitidentical": 0,
+   "max_rel_deviation": 0.0,
+   "differences": []
+  },
+  "nmc-0.5": {
+   "numbers": 3342,
+   "not_bitidentical": 0,
+   "max_rel_deviation": 0.0,
+   "differences": []
+  }
+ },
+ "screenshots": {
+  "default__1280": {
+   "size_old": [
+    1280,
+    940
+   ],
+   "size_new": [
+    1280,
+    940
+   ],
+   "changed_pixels": 252,
+   "changed_percent": 0.021,
+   "bbox": [
+    1181,
+    23,
+    1250,
+    37
+   ]
+  },
+  "graphite-0.27__1280": {
+   "size_old": [
+    1280,
+    940
+   ],
+   "size_new": [
+    1280,
+    940
+   ],
+   "changed_pixels": 252,
+   "changed_percent": 0.021,
+   "bbox": [
+    1181,
+    23,
+    1250,
+    37
+   ]
+  },
+  "lfp-0__1280": {
+   "size_old": [
+    1280,
+    940
+   ],
+   "size_new": [
+    1280,
+    940
+   ],
+   "changed_pixels": 252,
+   "changed_percent": 0.021,
+   "bbox": [
+    1181,
+    23,
+    1250,
+    37
+   ]
+  },
+  "silicon-1__1280": {
+   "size_old": [
+    1280,
+    940
+   ],
+   "size_new": [
+    1280,
+    940
+   ],
+   "changed_pixels": 253,
+   "changed_percent": 0.021,
+   "bbox": [
+    91,
+    23,
+    1250,
+    330
+   ]
+  },
+  "nmc-0.5__1280": {
+   "size_old": [
+    1280,
+    940
+   ],
+   "size_new": [
+    1280,
+    940
+   ],
+   "changed_pixels": 253,
+   "changed_percent": 0.021,
+   "bbox": [
+    82,
+    23,
+    1250,
+    328
+   ]
+  },
+  "expander-open__1280": {
+   "size_old": [
+    1280,
+    1183
+   ],
+   "size_new": [
+    1280,
+    1183
+   ],
+   "changed_pixels": 252,
+   "changed_percent": 0.017,
+   "bbox": [
+    1181,
+    23,
+    1250,
+    37
+   ]
+  },
+  "expander-open__390": {
+   "size_old": [
+    390,
+    2137
+   ],
+   "size_new": [
+    390,
+    2137
+   ],
+   "changed_pixels": 252,
+   "changed_percent": 0.03,
+   "bbox": [
+    291,
+    23,
+    360,
+    37
+   ]
+  },
+  "sidebar-open__390": {
+   "size_old": [
+    390,
+    1526
+   ],
+   "size_new": [
+    390,
+    1526
+   ],
+   "changed_pixels": 252,
+   "changed_percent": 0.042,
+   "bbox": [
+    291,
+    23,
+    360,
+    37
+   ]
+  },
+  "default__390": {
+   "size_old": [
+    390,
+    1526
+   ],
+   "size_new": [
+    390,
+    1526
+   ],
+   "changed_pixels": 252,
+   "changed_percent": 0.042,
+   "bbox": [
+    291,
+    23,
+    360,
+    37
+   ]
+  }
+ },
+ "network": [
+  {
+   "url": "http://localhost:8010/tools/materials/",
+   "method": "GET",
+   "type": "document",
+   "foreign": false,
+   "blocked": false
+  },
+  {
+   "url": "http://localhost:8010/assets/css/styles.css",
+   "method": "GET",
+   "type": "stylesheet",
+   "foreign": false,
+   "blocked": false
+  },
+  {
+   "url": "http://localhost:8010/assets/vendor/plotly-3.0.1.min.js",
+   "method": "GET",
+   "type": "script",
+   "foreign": false,
+   "blocked": false
+  },
+  {
+   "url": "http://localhost:8010/assets/js/tools/materials.js",
+   "method": "GET",
+   "type": "script",
+   "foreign": false,
+   "blocked": false
+  },
+  {
+   "url": "http://localhost:8010/assets/js/model/materialExplorer.js",
+   "method": "GET",
+   "type": "script",
+   "foreign": false,
+   "blocked": false
+  },
+  {
+   "url": "http://localhost:8010/assets/js/ui/data.js",
+   "method": "GET",
+   "type": "script",
+   "foreign": false,
+   "blocked": false
+  },
+  {
+   "url": "http://localhost:8010/assets/js/ui/plotly.js",
+   "method": "GET",
+   "type": "script",
+   "foreign": false,
+   "blocked": false
+  },
+  {
+   "url": "http://localhost:8010/assets/js/ui/shell.js",
+   "method": "GET",
+   "type": "script",
+   "foreign": false,
+   "blocked": false
+  },
+  {
+   "url": "http://localhost:8010/assets/js/ui/slider.js",
+   "method": "GET",
+   "type": "script",
+   "foreign": false,
+   "blocked": false
+  },
+  {
+   "url": "http://localhost:8010/assets/fonts/SourceCodeVF-Upright.woff2",
+   "method": "GET",
+   "type": "font",
+   "foreign": false,
+   "blocked": false
+  },
+  {
+   "url": "http://localhost:8010/assets/js/core/numpy.js",
+   "method": "GET",
+   "type": "script",
+   "foreign": false,
+   "blocked": false
+  },
+  {
+   "url": "http://localhost:8010/assets/js/model/figure.js",
+   "method": "GET",
+   "type": "script",
+   "foreign": false,
+   "blocked": false
+  },
+  {
+   "url": "http://localhost:8010/assets/js/model/materials.js",
+   "method": "GET",
+   "type": "script",
+   "foreign": false,
+   "blocked": false
+  },
+  {
+   "url": "http://localhost:8010/assets/js/ui/plotlyTheme.js",
+   "method": "GET",
+   "type": "script",
+   "foreign": false,
+   "blocked": false
+  },
+  {
+   "url": "http://localhost:8010/assets/js/core/pyformat.js",
+   "method": "GET",
+   "type": "script",
+   "foreign": false,
+   "blocked": false
+  },
+  {
+   "url": "http://localhost:8010/assets/data/materials/index.json",
+   "method": "GET",
+   "type": "fetch",
+   "foreign": false,
+   "blocked": false
+  },
+  {
+   "url": "http://localhost:8010/assets/data/materials/ideal-anode.json",
+   "method": "GET",
+   "type": "fetch",
+   "foreign": false,
+   "blocked": false
+  }
+ ],
+ "console": [],
+ "foreign_requests": []
+}
