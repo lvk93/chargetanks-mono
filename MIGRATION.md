@@ -9,7 +9,7 @@ Dieses Dokument ist die Arbeitsgrundlage des Umzugs. Eine neue Session kann alle
   - Was nicht 1:1 geht, wird dokumentiert und dem Auftraggeber vorgelegt (Abschnitte 12 und 15).
   - Alte Repos werden nur gelesen. Es werden keine Secrets verwendet.
 
-Stand: **Phase 0 (Bestandsaufnahme) abgeschlossen am 2026-10-13. Wartet auf Freigabe.**
+Stand: **Phase 1 (Grundgerüst, Golden-Werte, Pilot Aging) abgeschlossen am 2026-10-13. Wartet auf Freigabe für Phase 2.** Ergebnisse: §17.
 
 ---
 
@@ -27,10 +27,15 @@ Stand: **Phase 0 (Bestandsaufnahme) abgeschlossen am 2026-10-13. Wartet auf Frei
 | 0.8 | Externe Dienste und Secrets | ✅ erledigt | §9 |
 | 0.9 | Doppelte Logik | ✅ erledigt | §10 |
 | 0.10 | Referenz-Screenshots 1280/390 (`migration/screenshots/legacy/`) | ✅ erledigt | §16 |
-| 0.11 | Vorschläge: Zielstruktur, Portierbarkeit, Toleranzen | 🟡 vorgelegt, Freigabe offen | §14 |
-| 0.12 | Offene Fragen | 🟡 vorgelegt, Antworten offen | §15 |
-| 1.x | Phase 1: Grundgerüst, Golden-Werte, Pilot-Tool | ⏳ nicht begonnen | – |
-| 2.x | Phase 2: übrige Tools und Seiten | ⏳ nicht begonnen | – |
+| 0.11 | Vorschläge: Zielstruktur, Portierbarkeit, Toleranzen | ✅ freigegeben (2026-10-13) | §14 |
+| 0.12 | Offene Fragen | ✅ beantwortet (2026-10-13) | §15 |
+| 1.1 | Repo-Basis (package.json ohne Dependencies, Dev-Server, plotly.js 3.0.1, Fonts, Materialdaten) | ✅ erledigt | §17.1 |
+| 1.2 | Zusatzmessungen am Original (CSS-Regeln, Breakpoints, Verhalten) | ✅ erledigt | §17.2 |
+| 1.3 | Golden-Werte aller Tools (AppTest + Direktimporte), Gegenprobe, Determinismus | ✅ erledigt | §17.3 |
+| 1.4 | Rechenkern JS (pyformat, numpy, scipy, pandas) – bitgenau | ✅ erledigt | §17.4 |
+| 1.5 | `styles.css` (Theme-Variablen, alle Streamlit-Elemente der Suite) | ✅ erledigt (Nicht-Aging-Teile in Phase 2 am Tool prüfen) | §17.5 |
+| 1.6 | Pilot Aging (`/tools/aging/`) mit Tests und Browser-Vergleich | ✅ erledigt | §17.6 |
+| 2.x | Phase 2: übrige Tools (Materials, Cell Reconstruction, Blending, Swelling, Landing) und Webseite | ⏳ nicht begonnen | §17.7 |
 
 ---
 
@@ -142,7 +147,7 @@ Texte und Layout der beiden Fassungen **unterscheiden sich deutlich**. Beispiel 
 | `/tools/` | `/tools/` | gleich (Webseiten-Toolseite) |
 | `/tools`, `/blog`, `/blog/<slug>` (ohne `/`) | → mit `/` | 301 (Netlify-Standard, bleibt) |
 | `/tools/*` (bisher 302 → Render) | existierende Tool-Seiten direkt, sonst → `/tools/suite/` | 302, Netlify-Regel ohne Force |
-| `batterytank.onrender.com/*` | `https://chargetanks.com/tools/suite/` | 301/302, **auf Render einzurichten (Auftraggeber)** |
+| `batterytank.onrender.com/*` | – | entfällt: Render wird nach dem Umzug geschlossen (Entscheidung 2026-10-13); alte Links auf batterytank.onrender.com laufen dann ins Leere |
 | Suite-Seite "Materials" usw. (bisher ohne URL) | `/tools/materials/`, `/tools/cell-reconstruction/`, `/tools/blending/`, `/tools/aging/`, `/tools/swelling/` | neu |
 | unbekannte Pfade | `404.html` mit Status 404 | **Abweichung**: bisher 200 + React-404 |
 | `/.netlify/functions/visitor-country` | entfällt | Tracking entfällt |
@@ -416,17 +421,25 @@ Kern (`src/ocv_teaching/`):
 | 2026-10-13 | Tracking (Webseite und Suite) entfällt; Original-Events sind in §9 dokumentiert | Auftraggeber |
 | 2026-10-13 | Referenz-Umgebung der Suite per `--uploaded-prior-to 2026-03-09T22:04:49Z` (Render-Stand) | Bestandsaufnahme (belegt §2) |
 | 2026-10-13 | Messungen mit Playwright 1.50 (Chromium), dsf 1, `color_scheme` light, `is_mobile` aus, Viewport-Höhe für Suite-Screenshots auf Inhaltshöhe gestreckt | Bestandsaufnahme |
+| 2026-10-13 | F1 keine Free Demo · F2 URLs `/tools/suite/` und `/tools/<tool>/` · F3 Webseite mit den Texten der React-Ansicht · F4 Tailwind → semantische Klassen in `styles.css` · F5 Fullscreen-Button mitnehmen · F6 `404.html` mit 404 · F7 Supabase-Variablen nur fürs Tracking (entfällt) · F8 Impressum/Datenschutz für den Folgeschritt vormerken · F9 Netlify bleibt | Auftraggeber |
+| 2026-10-13 | Render wird nach dem Umzug geschlossen; keine Weiterleitung von batterytank.onrender.com | Auftraggeber |
+| 2026-10-13 | Selectbox als natives `<select>` (Abweichung D7) | Auftraggeber |
+| 2026-10-13 | Pilot: Aging; Zahlen-Toleranz 1e-12 relativ, angezeigte Texte exakt (§14.3) | Plan Phase 1, freigegeben |
+| 2026-10-13 | Materialdateien bytegleich mit Slug-Namen (`ideal-anode.json` …) + `index.json` | Umsetzung (Hash-Test) |
 
 ## 12. Abweichungen (vorgeschlagen = Freigabe offen)
 
 | # | Abweichung | Grund | Status |
 |---|---|---|---|
 | A1 | Kein Tracking, keine Visitor-Country-Function, keine Streamlit-Telemetrie | Regel "keine fremden Domains", Entscheidung 2026-10-13 | ✅ freigegeben |
-| A2 | Jedes Tool bekommt eine eigene URL. Reload bleibt im Tool, Browser-Zurück führt zur Landing. Original: eine URL, Reload → Landing | statische Seiten, im Auftrag so vorgesehen | 🟡 vorgeschlagen |
-| A3 | Unbekannte Pfade bekommen `404.html` mit Status 404 statt 200 + SPA-404 | statisch, kein SPA-Router | 🟡 vorgeschlagen |
-| A4 | Pro Webseiten-URL gibt es nur eine Fassung (statt Snapshot + React) | ein HTML je Seite | 🟡 vorgeschlagen, Frage F3 |
+| A2 | Jedes Tool bekommt eine eigene URL. Reload bleibt im Tool, Browser-Zurück führt zur Landing. Original: eine URL, Reload → Landing | statische Seiten | ✅ freigegeben (F2) |
+| A3 | Unbekannte Pfade bekommen `404.html` mit Status 404 statt 200 + SPA-404 | statisch, kein SPA-Router | ✅ freigegeben (F6) |
+| A4 | Pro Webseiten-URL nur die React-Fassung (Crawler-Snapshot-Texte entfallen) | ein HTML je Seite | ✅ freigegeben (F3) |
 | A5 | Streamlit-Chrome entfällt (Deploy, ⋮-Menü, Running-Anzeige, Stale-Dimmen); Header-Fläche bleibt | Auftrag | ✅ laut Auftrag |
 | A6 | Login/Authenticator wird nicht portiert (im Original ohne Funktion) | toter Code | 🟡 vorgeschlagen |
+| D7 | Selectbox als natives `<select>`: geschlossen 1:1 (gemessen: Pfeil, Rahmen, Fokusrahmen nach Auswahl); aufgeklappt die Liste des Browsers/Betriebssystems, kein Tipp-Filter (Anfangsbuchstabe springt) | Grundsatz "native Elemente" | ✅ freigegeben (2026-10-13) |
+| D8 | Kein Header-Inhalt rechts ("Deploy", ⋮). In jedem Suite-Screenshot ≈ 250 Pixel Unterschied genau dort | Teil von A5 | ✅ laut Auftrag |
+| D9 | Sidebar-Breite wird wie im Original in `localStorage` (`sidebarWidth`) gespeichert – jetzt unter der Domain chargetanks.com statt batterytank.onrender.com (früher gespeicherte Breiten gehen verloren) | anderer Ursprung | ℹ️ Hinweis |
 
 ## 13. Mitportierte Bugs und Quirks (am laufenden Original gemessen)
 
@@ -442,6 +455,8 @@ Kern (`src/ocv_teaching/`):
 | B8 | Materials: Punkte an der Füllfläche bei Materialien mit < 20 Stützstellen (Plotly-Default-Mode) | §4.2 |
 | B9 | Webseite: `posts/README.md` wird mit ins Bundle geladen (vom Parser verworfen, unsichtbar) | Bundle-Diff |
 | B10 | Tracking-Geo vom Server statt vom Besucher | entfällt mit A1 |
+| B11 | Aging: Die Anker-ID der Zeile "Capacities … SoH: …" bleibt beim ersten Wert (`…-so-h-100-00`), auch wenn der Text z. B. 70.85 % zeigt | Browser-Vergleich (`inventory/compare/aging.json`), portiert in `assets/js/ui/heading.js` |
+| B12 | Aging: Die gepunkteten Referenzlinien im Tank-Chart zeigen immer den BOL-Zustand (`add_reference_voltage_lines` ohne Aging-Parameter aufgerufen) | `aging_demo.py:290`, portiert in `assets/js/model/aging.js` |
 
 ---
 
@@ -527,6 +542,14 @@ Die Golden-Werte entstehen in Phase 1 mit der Render-Umgebung (§2). Zusätzlich
 | `migration/env/` | Freeze-Dateien, Node-Version, Build-Nachweis, Legacy-Zustand vorher/nachher |
 | `migration/screenshots/legacy/site/` | 6 Seiten × {js, nojs} × {1280, 390} + Hamburger-Menü offen (390) |
 | `migration/screenshots/legacy/suite/` | Landing + 5 Tools × {1280, 390}; Tools zusätzlich mit offenem Expander und bei 390 mit offener Sidebar |
+| `migration/fetch_vendor.mjs` | holt plotly.js-dist-min@3.0.1 vom npm-Registry (sha512 geprüft) → `assets/vendor/` |
+| `migration/copy_streamlit_assets.py` | Schriften unverändert aus Streamlit 1.47.0 + Lizenztexte → `assets/fonts/` |
+| `migration/convert_materials.py` | Materialdaten bytegleich mit Slug-Namen + `index.json` → `assets/data/materials/` |
+| `migration/measure_ui.py` | CSS-Regel-Dump, Breakpoint-Sweep, Verhalten (Sidebar, Fullscreen, Tastatur, Debounce) → `migration/inventory/suite/` |
+| `migration/make_goldens.py` | Golden-Werte (core/model/ui) aus dem Original → `tests/golden/` |
+| `migration/setup_crosscheck_env.ps1` | zweite Legacy-venv mit älteren Rechenbibliotheken für die Gegenprobe |
+| `migration/extract_plotly_theme.py` | Streamlits Plotly-Template/Config/Fullscreen-Icons aus dem Browser → `assets/js/ui/plotlyTheme.js` |
+| `migration/compare.py`, `migration/behaviour_compare.py` | Browser-Vergleich alt/neu (Plotly-Zustand, Texte, Netzwerk, Screenshots, Vollbild, Sidebar) → `migration/inventory/compare/`, `migration/screenshots/compare/` |
 
 ### Legacy lokal starten
 
@@ -541,3 +564,72 @@ migration\.work\venv-tools\Scripts\python.exe migration\inventory.py all  # Mess
 Hinweise:
 - Die Suite-Screenshots sind Viewport-Aufnahmen. Die Viewport-Höhe wird dafür auf die Inhaltshöhe gestreckt, weil Streamlit in einem eigenen Container scrollt.
 - Die Webseiten-Screenshots sind Full-Page-Aufnahmen nach Durchscrollen (Lazy-Bilder).
+
+
+---
+
+## 17. Phase 1 – Ergebnisse (2026-10-13)
+
+### 17.1 Repo-Basis
+- `package.json` ohne Dependencies (`"type": "module"`, `npm test` = `node --test "tests/**/*.test.js"`; ein bloßes `node --test` findet dieselben 64 Tests).
+- `scripts/serve.mjs`: lokaler Server (Verzeichnis-Index, 301 auf `/`, `/tools/*` → `/tools/suite/` nur für fehlende Pfade, sonst `404.html` mit 404).
+- `assets/vendor/plotly-3.0.1.min.js` (MIT, 4,65 MB): dieselbe plotly.js-Version wie im Streamlit-1.47.0-Bundle.
+- `assets/fonts/`: `SourceCodeVF-Upright.woff2` (90 KB, OFL), `MaterialSymbols-Rounded.woff2` (415 KB, Apache-2.0), unverändert aus Streamlit 1.47.0.
+- `assets/data/materials/`: 8 Dateien bytegleich (sha256 im `index.json`, Test `tests/data/materials.test.js`).
+- `.gitattributes`: LF für Text.
+
+### 17.2 Zusatzmessungen am Original (Spezifikation der UI)
+- CSS-Regeln aller Suite-Elemente inkl. Zuständen und Media-Queries: `migration/inventory/suite/css-rules/` (inkl. `sidebar-states.json`).
+- Breakpoints (`inventory/suite/breakpoints.json`): Sidebar bis 768 px eingeklappt; Block-Container 1rem → 5rem Seitenabstand ab `736px + 8rem` (864 px); Spalten stapeln ≤ 640 px; Gaps small/medium/large = 1/2/4 rem.
+- Verhalten (`inventory/suite/behaviour-ui.json`, Streamlit-Quelle 1.47.0):
+  - Slider: Debounce 200 ms (auch beim Ziehen), Anzeige `sprintf("%0.2f")`, Pfeile ±1 Schritt, Bild auf/ab ±10, Pos1/Ende ohne Wirkung; Wert-Label mittig über dem Thumb, am Rand bündig (`fixLabelOverflow`).
+  - Sidebar: 256 px Standard, Griff 200–600 px (mobil ≤ 90 % der Fensterbreite), Breite in `localStorage` (`sidebarWidth`), Doppelklick → 256; Einklapp-Button beim Mouseover; ≤ 768 px: Klick außerhalb klappt ein, Verkleinern auf ≤ 768 px klappt ein.
+  - Fullscreen (Modebar): Rahmen `position: fixed` über den Viewport, Navy, Innenabstand 46/12/12 px → Chart 1256×842 bei 1280×900; Button wird "Close fullscreen"; Escape beendet.
+  - Selectbox: nach Mausauswahl bleibt sie fokussiert (Primary-Rahmen).
+  - `<style>`-Markdown-Elemente sind leere Flex-Elemente und erzeugen je 1rem Abstand (übernommen).
+
+### 17.3 Golden-Werte (`tests/golden/`, 19 MB)
+- **ui** (AppTest, Plotly-Spec wie an den Browser gesendet): Landing 1, Materials 32, Cell Reconstruction 60, Blending 20, Aging 52, Swelling 29 Fälle = 194; keine Exceptions. Swelling enthält die vom Browser gelieferten SoH-Werte (0.79, 0.89 …).
+- **model**: `CellOCVReconstruction` für 15 Materialpaare × 6 Einstellungen inkl. Aging-Modi (90 Fälle); `SwellingModel` (30 Fälle).
+- **core**: Differential-Vektoren für Python-Format (9.165 Fälle), linspace, np.interp, interp1d, PCHIP (alle Materialkurven), nearest, pow.
+- Arrays bitgenau und dedupliziert (`arrays/`, 1.775 Dateien), Plotly-Template einmal (`ui/_templates/`).
+- **Determinismus:** zweiter Lauf byteidentisch.
+- **Gegenprobe** mit numpy 1.26.4 / scipy 1.16.0 / pandas 2.3.0 / plotly 6.2.0: alle Arrays und alle UI-Dateien byteidentisch; Unterschied nur in drei Beschreibungstexten (Versionsnummer). Die Ergebnisse hängen also nicht von den auf Render ungepinnten Versionen ab.
+
+### 17.4 Rechenkern (`assets/js/core/`) – bitgenau
+| Baustein | Ergebnis gegen Original |
+|---|---|
+| `formatFixed` (Python `format(x, ".Nf")`) | 9.165/9.165 Strings identisch (inkl. Ties, `-0.00`, `nan`, `inf`, ≥1e21) |
+| `linspace`, `interp` | bitgleich (inkl. Sonderfall 1 Stützstelle: NaN → `fp[0]`) |
+| `interp1d` (extrapolate, Tupel-Fill) | bitgleich |
+| `pchip` (scipy, Potenzsummen-Auswertung) | bitgleich auf allen Materialkurven und Zufallsdaten |
+| `getIndexerNearest` | identisch |
+| `CellOCVReconstruction` | bitgleich (90 Fälle, alle Arrays und Aging-Modi) |
+
+### 17.5 `assets/css/styles.css`
+- Teil A: Theme-Variablen (Palette aus `viz/theme.py` + Streamlit-Theme und gemessene abgeleitete Farben), `@font-face`.
+- Teil B: alle Streamlit-Elemente der Suite (Gerüst, Sidebar, Header-Fläche, Spalten, Überschriften mit Anker, Markdown inkl. Codeblock, Slider, Select, Checkbox, Buttons inkl. eingeschleuster Stile, Linkbutton, Expander, Chart/Vollbild, Bild, Sidebar-Fußzeile, Landing-Karten).
+- **Offen für Phase 2:** Checkbox (aktivierter Zustand), Linkbutton, Bild und Landing-Stile sind aus den Regeln übernommen, aber erst am jeweiligen Tool im Browser-Vergleich bestätigt.
+
+### 17.6 Pilot Aging (`/tools/aging/`)
+- Dateien: `tools/aging/index.html` (alle Texte im HTML, Default-Werte vorbefüllt), `assets/js/tools/aging.js`, `assets/js/model/{materials,cellReconstruction,figure,tankPlotter,aging}.js`, `assets/js/ui/{shell,slider,data,heading,plotly,plotlyTheme}.js`.
+- **Tests (`npm test`):** 64/64 grün; Aging 52 Golden-Fälle mit 882.044 verglichenen Zahlen, **0 nicht bitgleich**, alle Texte (SoH-Zeile, ΔV, Q, Balkenwerte) identisch.
+- **Browser-Vergleich** (`inventory/compare/aging.json`): 6 Zustände (Default, Graphite+NMC, Silicon+LFP gealtert, alle Aging-Regler 0.5, SoC 0, SoC 1), bedient per Klick/Pfeiltasten/Bild auf-ab: je 17.087 Zahlen aus `gd.data`, `gd.layout`, `_fullLayout`, Config sowie alle Texte – **0 Abweichungen, alles bitgleich**. Diagramm-Positionen pixelgenau gleich.
+- **Screenshot-Paare** (`migration/screenshots/compare/aging/`, je `__old`/`__new`/`__diff`), alle gesichtet:
+
+| Ansicht | Pixel-Unterschied | Benannter Unterschied |
+|---|---|---|
+| 6 Zustände bei 1280 px | 0,013 % (≈ 254 px) | "Deploy ⋮" im Header (D8) + 1–2 Einzelpixel Kantenglättung |
+| Expander offen 1280 / 390 | 0,009 % / 0,019 % | nur D8 |
+| Default 390 | 0,027 % | nur D8 |
+| Sidebar offen 390 | 0,027 % | nur D8 |
+| Vollbild 1280 | 0,000 % | keiner |
+| Sidebar eingeklappt 1280 | 0,022 % | nur D8 |
+
+- **Netzwerk:** nur eigene Domain, keine Konsolenmeldungen.
+- **Leistung:** Rechnung 4–6 ms, Plotly je Diagramm ≈ 8 ms → kein Web Worker nötig (wie im Original kein Spinner).
+
+### 17.7 Nächste Schritte (Phase 2)
+1. Materials, Cell Reconstruction, Blending, Swelling (SoH-Slider mit negativem Schritt: react-range-Normalisierung nachbauen, B2), Landing `/tools/suite/` – je ein Commit mit Tests und Screenshot-Vergleich.
+2. Webseite (Home, Blog, Artikel, `/tools/`, 404): React-Ansicht als statisches HTML, Tailwind → `styles.css` (Teil C), Vergleich über berechnete Stile und Screenshots.
+3. `_redirects`/`_headers`, `sitemap.xml`, `robots.txt`, `llms.txt`, `site.webmanifest`; Netzwerk-Check aller Seiten; README final.

@@ -1,0 +1,381 @@
+{
+ "tool": "aging",
+ "states": {
+  "default": {
+   "numbers": 17087,
+   "not_bitidentical": 0,
+   "max_rel_deviation": 0.0,
+   "differences": []
+  },
+  "graphite-nmc": {
+   "numbers": 17087,
+   "not_bitidentical": 0,
+   "max_rel_deviation": 0.0,
+   "differences": []
+  },
+  "silicon-lfp-aged": {
+   "numbers": 17087,
+   "not_bitidentical": 0,
+   "max_rel_deviation": 0.0,
+   "differences": []
+  },
+  "all-aging-0.5": {
+   "numbers": 17087,
+   "not_bitidentical": 0,
+   "max_rel_deviation": 0.0,
+   "differences": []
+  },
+  "soc-0": {
+   "numbers": 17087,
+   "not_bitidentical": 0,
+   "max_rel_deviation": 0.0,
+   "differences": []
+  },
+  "soc-1": {
+   "numbers": 17087,
+   "not_bitidentical": 0,
+   "max_rel_deviation": 0.0,
+   "differences": []
+  }
+ },
+ "screenshots": {
+  "default__1280": {
+   "size_old": [
+    1280,
+    1527
+   ],
+   "size_new": [
+    1280,
+    1527
+   ],
+   "changed_pixels": 254,
+   "changed_percent": 0.013,
+   "bbox": [
+    135,
+    23,
+    1250,
+    437
+   ]
+  },
+  "graphite-nmc__1280": {
+   "size_old": [
+    1280,
+    1527
+   ],
+   "size_new": [
+    1280,
+    1527
+   ],
+   "changed_pixels": 253,
+   "changed_percent": 0.013,
+   "bbox": [
+    82,
+    23,
+    1250,
+    436
+   ]
+  },
+  "silicon-lfp-aged__1280": {
+   "size_old": [
+    1280,
+    1527
+   ],
+   "size_new": [
+    1280,
+    1527
+   ],
+   "changed_pixels": 253,
+   "changed_percent": 0.013,
+   "bbox": [
+    91,
+    23,
+    1250,
+    354
+   ]
+  },
+  "all-aging-0.5__1280": {
+   "size_old": [
+    1280,
+    1527
+   ],
+   "size_new": [
+    1280,
+    1527
+   ],
+   "changed_pixels": 254,
+   "changed_percent": 0.013,
+   "bbox": [
+    135,
+    23,
+    1250,
+    437
+   ]
+  },
+  "soc-0__1280": {
+   "size_old": [
+    1280,
+    1527
+   ],
+   "size_new": [
+    1280,
+    1527
+   ],
+   "changed_pixels": 254,
+   "changed_percent": 0.013,
+   "bbox": [
+    135,
+    23,
+    1250,
+    437
+   ]
+  },
+  "soc-1__1280": {
+   "size_old": [
+    1280,
+    1527
+   ],
+   "size_new": [
+    1280,
+    1527
+   ],
+   "changed_pixels": 254,
+   "changed_percent": 0.013,
+   "bbox": [
+    135,
+    23,
+    1250,
+    437
+   ]
+  },
+  "expander-open__1280": {
+   "size_old": [
+    1280,
+    2210
+   ],
+   "size_new": [
+    1280,
+    2210
+   ],
+   "changed_pixels": 254,
+   "changed_percent": 0.009,
+   "bbox": [
+    135,
+    23,
+    1250,
+    437
+   ]
+  },
+  "expander-open__390": {
+   "size_old": [
+    390,
+    3464
+   ],
+   "size_new": [
+    390,
+    3464
+   ],
+   "changed_pixels": 252,
+   "changed_percent": 0.019,
+   "bbox": [
+    291,
+    23,
+    360,
+    37
+   ]
+  },
+  "sidebar-open__390": {
+   "size_old": [
+    390,
+    2389
+   ],
+   "size_new": [
+    390,
+    2389
+   ],
+   "changed_pixels": 254,
+   "changed_percent": 0.027,
+   "bbox": [
+    135,
+    23,
+    360,
+    437
+   ]
+  },
+  "default__390": {
+   "size_old": [
+    390,
+    2389
+   ],
+   "size_new": [
+    390,
+    2389
+   ],
+   "changed_pixels": 252,
+   "changed_percent": 0.027,
+   "bbox": [
+    291,
+    23,
+    360,
+    37
+   ]
+  }
+ },
+ "network": [
+  {
+   "url": "http://localhost:8000/tools/aging/",
+   "method": "GET",
+   "type": "document",
+   "foreign": false,
+   "blocked": false
+  },
+  {
+   "url": "http://localhost:8000/assets/css/styles.css",
+   "method": "GET",
+   "type": "stylesheet",
+   "foreign": false,
+   "blocked": false
+  },
+  {
+   "url": "http://localhost:8000/assets/vendor/plotly-3.0.1.min.js",
+   "method": "GET",
+   "type": "script",
+   "foreign": false,
+   "blocked": false
+  },
+  {
+   "url": "http://localhost:8000/assets/js/tools/aging.js",
+   "method": "GET",
+   "type": "script",
+   "foreign": false,
+   "blocked": false
+  },
+  {
+   "url": "http://localhost:8000/assets/fonts/SourceCodeVF-Upright.woff2",
+   "method": "GET",
+   "type": "font",
+   "foreign": false,
+   "blocked": false
+  },
+  {
+   "url": "http://localhost:8000/assets/js/model/aging.js",
+   "method": "GET",
+   "type": "script",
+   "foreign": false,
+   "blocked": false
+  },
+  {
+   "url": "http://localhost:8000/assets/js/ui/data.js",
+   "method": "GET",
+   "type": "script",
+   "foreign": false,
+   "blocked": false
+  },
+  {
+   "url": "http://localhost:8000/assets/js/ui/heading.js",
+   "method": "GET",
+   "type": "script",
+   "foreign": false,
+   "blocked": false
+  },
+  {
+   "url": "http://localhost:8000/assets/js/ui/plotly.js",
+   "method": "GET",
+   "type": "script",
+   "foreign": false,
+   "blocked": false
+  },
+  {
+   "url": "http://localhost:8000/assets/js/ui/shell.js",
+   "method": "GET",
+   "type": "script",
+   "foreign": false,
+   "blocked": false
+  },
+  {
+   "url": "http://localhost:8000/assets/js/ui/slider.js",
+   "method": "GET",
+   "type": "script",
+   "foreign": false,
+   "blocked": false
+  },
+  {
+   "url": "http://localhost:8000/assets/js/core/pyformat.js",
+   "method": "GET",
+   "type": "script",
+   "foreign": false,
+   "blocked": false
+  },
+  {
+   "url": "http://localhost:8000/assets/js/model/cellReconstruction.js",
+   "method": "GET",
+   "type": "script",
+   "foreign": false,
+   "blocked": false
+  },
+  {
+   "url": "http://localhost:8000/assets/js/model/figure.js",
+   "method": "GET",
+   "type": "script",
+   "foreign": false,
+   "blocked": false
+  },
+  {
+   "url": "http://localhost:8000/assets/js/model/materials.js",
+   "method": "GET",
+   "type": "script",
+   "foreign": false,
+   "blocked": false
+  },
+  {
+   "url": "http://localhost:8000/assets/js/model/tankPlotter.js",
+   "method": "GET",
+   "type": "script",
+   "foreign": false,
+   "blocked": false
+  },
+  {
+   "url": "http://localhost:8000/assets/js/ui/plotlyTheme.js",
+   "method": "GET",
+   "type": "script",
+   "foreign": false,
+   "blocked": false
+  },
+  {
+   "url": "http://localhost:8000/assets/js/core/numpy.js",
+   "method": "GET",
+   "type": "script",
+   "foreign": false,
+   "blocked": false
+  },
+  {
+   "url": "http://localhost:8000/assets/js/core/scipy.js",
+   "method": "GET",
+   "type": "script",
+   "foreign": false,
+   "blocked": false
+  },
+  {
+   "url": "http://localhost:8000/assets/data/materials/index.json",
+   "method": "GET",
+   "type": "fetch",
+   "foreign": false,
+   "blocked": false
+  },
+  {
+   "url": "http://localhost:8000/assets/data/materials/ideal-anode.json",
+   "method": "GET",
+   "type": "fetch",
+   "foreign": false,
+   "blocked": false
+  },
+  {
+   "url": "http://localhost:8000/assets/data/materials/ideal-cathode.json",
+   "method": "GET",
+   "type": "fetch",
+   "foreign": false,
+   "blocked": false
+  }
+ ],
+ "console": [],
+ "foreign_requests": []
+}
