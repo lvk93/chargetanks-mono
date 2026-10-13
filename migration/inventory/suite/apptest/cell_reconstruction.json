@@ -1,0 +1,2022 @@
+{
+ "page": "Cell Reconstruction",
+ "exceptions": [],
+ "elements": [
+  {
+   "where": "main",
+   "type": "SpecialBlock",
+   "container": true,
+   "proto": null
+  },
+  {
+   "where": "main/0",
+   "type": "Markdown",
+   "value": "<style>\n.block-container { padding-top: 0rem !important; padding-bottom: 0.5rem !important; }\n.block-container h1 { margin-top: 1.5rem !important; margin-bottom: 0.5rem !important; }\n</style>",
+   "key": null,
+   "help": "",
+   "proto": {
+    "body": "<style>\n.block-container { padding-top: 0rem !important; padding-bottom: 0.5rem !important; }\n.block-container h1 { margin-top: 1.5rem !important; margin-bottom: 0.5rem !important; }\n</style>",
+    "allow_html": true,
+    "element_type": "NATIVE"
+   }
+  },
+  {
+   "where": "main/1",
+   "type": "Markdown",
+   "value": "<style>\n.block-container { padding-top: 0rem !important; padding-bottom: 0.5rem !important; }\n.block-container h1 { margin-top: 1.5rem !important; margin-bottom: 0.5rem !important; }\n</style>",
+   "key": null,
+   "help": "",
+   "proto": {
+    "body": "<style>\n.block-container { padding-top: 0rem !important; padding-bottom: 0.5rem !important; }\n.block-container h1 { margin-top: 1.5rem !important; margin-bottom: 0.5rem !important; }\n</style>",
+    "allow_html": true,
+    "element_type": "NATIVE"
+   }
+  },
+  {
+   "where": "main/2",
+   "type": "UnknownElement",
+   "key": null,
+   "proto": {}
+  },
+  {
+   "where": "main/3",
+   "type": "Title",
+   "value": "🔋 Understand Batteries with the Tank Analogy",
+   "key": null,
+   "help": "",
+   "proto": {
+    "tag": "h1",
+    "body": "🔋 Understand Batteries with the Tank Analogy"
+   }
+  },
+  {
+   "where": "main/4",
+   "type": "Expander",
+   "container": true,
+   "proto": {
+    "label": "🧠 What does this tool show?",
+    "expanded": false
+   }
+  },
+  {
+   "where": "main/4/0",
+   "type": "Markdown",
+   "value": "Think of a battery like **two water tanks** that share the same water.\n\n            - One tank is the **anode**, the other is the **cathode**.  \n            - The **water** is like the lithium that moves back and forth.  \n\n            💧 When you **charge** the battery, you **pump water uphill** into the anode tank.  \n            ⚡ When you **use** the battery, the water flows **downhill** back to the cathode.\n\n            The **height difference** between the two tanks is the **voltage** of the battery.  \n            That's how much “push” the battery can give.  \n\n            Each tank has its own **shape**. Some parts are wide (can hold a lot of water), some are narrow (hold less).  \n            This shape is shown in the **dQ/dV plot**.  \n\n            If we keep track of the height difference as the tanks fill and empty, we get the **OCV curve** — the battery’s special fingerprint.\n\n            ---\n\n            ### ⚙️ The knobs you can play with:\n            - **SoC** → how full the tanks are right now  \n            - **Vmin & Vmax** → the lowest and highest “water levels” we allow  \n            - **NP ratio** → how big one tank is compared to the other  \n            - **LiP ratio** → how much total water (lithium) is in the system  \n\n            👉 Turn the knobs and watch how the tanks and the voltage curve change!",
+   "key": null,
+   "help": "",
+   "proto": {
+    "body": "Think of a battery like **two water tanks** that share the same water.\n\n            - One tank is the **anode**, the other is the **cathode**.  \n            - The **water** is like the lithium that moves back and forth.  \n\n            💧 When you **charge** the battery, you **pump water uphill** into the anode tank.  \n            ⚡ When you **use** the battery, the water flows **downhill** back to the cathode.\n\n            The **height difference** between the two tanks is the **voltage** of the battery.  \n            That's how much “push” the battery can give.  \n\n            Each tank has its own **shape**. Some parts are wide (can hold a lot of water), some are narrow (hold less).  \n            This shape is shown in the **dQ/dV plot**.  \n\n            If we keep track of the height difference as the tanks fill and empty, we get the **OCV curve** — the battery’s special fingerprint.\n\n            ---\n\n            ### ⚙️ The knobs you can play with:\n            - **SoC** → how full the tanks are right now  \n            - **Vmin & Vmax** → the lowest and highest “water levels” we allow  \n            - **NP ratio** → how big one tank is compared to the other  \n            - **LiP ratio** → how much total water (lithium) is in the system  \n\n            👉 Turn the knobs and watch how the tanks and the voltage curve change!",
+    "element_type": "NATIVE"
+   }
+  },
+  {
+   "where": "main/5",
+   "type": "Block",
+   "container": true,
+   "proto": {
+    "flex_container": {
+     "gap_config": {
+      "gap_size": "MEDIUM"
+     },
+     "scale": 1.0,
+     "direction": "HORIZONTAL",
+     "wrap": true
+    }
+   }
+  },
+  {
+   "where": "main/5/0",
+   "type": "Column",
+   "container": true,
+   "proto": {
+    "weight": 0.5,
+    "gap_config": {
+     "gap_size": "MEDIUM"
+    }
+   }
+  },
+  {
+   "where": "main/5/0/0",
+   "type": "Markdown",
+   "value": "<h3 style='text-align: center;'>🔋 Electrode dQ/dV Tanks</h3>",
+   "key": null,
+   "help": "",
+   "proto": {
+    "body": "<h3 style='text-align: center;'>🔋 Electrode dQ/dV Tanks</h3>",
+    "allow_html": true,
+    "element_type": "NATIVE"
+   }
+  },
+  {
+   "where": "main/5/0/1",
+   "type": "UnknownElement",
+   "key": null,
+   "proto": {
+    "use_container_width": true,
+    "theme": "streamlit",
+    "id": "$$ID-10531da9f6f8418fbcac5a5fb0e9027c-None",
+    "spec": {
+     "data": [
+      {
+       "line": {
+        "color": "#70AD47",
+        "dash": "dash"
+       },
+       "mode": "lines",
+       "showlegend": false,
+       "x": {
+        "dtype": "f8",
+        "bdata_chars": 4268,
+        "shape": null
+       },
+       "y": {
+        "dtype": "f8",
+        "bdata_chars": 4268,
+        "shape": null
+       },
+       "type": "scatter"
+      },
+      {
+       "line": {
+        "color": "#70AD47",
+        "dash": "dash"
+       },
+       "mode": "lines",
+       "showlegend": false,
+       "x": {
+        "len": 400,
+        "head": [
+         1.0,
+         1.0,
+         1.0
+        ],
+        "tail": [
+         1.0,
+         1.0,
+         1.0
+        ]
+       },
+       "y": {
+        "dtype": "f8",
+        "bdata_chars": 4268,
+        "shape": null
+       },
+       "type": "scatter"
+      },
+      {
+       "line": {
+        "color": "#F39C12",
+        "dash": "dash"
+       },
+       "mode": "lines",
+       "showlegend": false,
+       "x": {
+        "dtype": "f8",
+        "bdata_chars": 4268,
+        "shape": null
+       },
+       "y": {
+        "dtype": "f8",
+        "bdata_chars": 4268,
+        "shape": null
+       },
+       "type": "scatter"
+      },
+      {
+       "line": {
+        "color": "#F39C12",
+        "dash": "dash"
+       },
+       "mode": "lines",
+       "showlegend": false,
+       "x": {
+        "len": 400,
+        "head": [
+         1.0,
+         1.0,
+         1.0
+        ],
+        "tail": [
+         1.0,
+         1.0,
+         1.0
+        ]
+       },
+       "y": {
+        "dtype": "f8",
+        "bdata_chars": 4268,
+        "shape": null
+       },
+       "type": "scatter"
+      },
+      {
+       "line": {
+        "color": "#70AD47",
+        "dash": "solid"
+       },
+       "mode": "lines",
+       "name": "Anode",
+       "showlegend": true,
+       "x": {
+        "dtype": "f8",
+        "bdata_chars": 4268,
+        "shape": null
+       },
+       "y": {
+        "dtype": "f8",
+        "bdata_chars": 4268,
+        "shape": null
+       },
+       "type": "scatter"
+      },
+      {
+       "line": {
+        "color": "#70AD47",
+        "dash": "solid"
+       },
+       "mode": "lines",
+       "showlegend": false,
+       "x": {
+        "len": 400,
+        "head": [
+         1.0,
+         1.0,
+         1.0
+        ],
+        "tail": [
+         1.0,
+         1.0,
+         1.0
+        ]
+       },
+       "y": {
+        "dtype": "f8",
+        "bdata_chars": 4268,
+        "shape": null
+       },
+       "type": "scatter"
+      },
+      {
+       "line": {
+        "color": "#F39C12",
+        "dash": "solid"
+       },
+       "mode": "lines",
+       "name": "Cathode",
+       "showlegend": true,
+       "x": {
+        "dtype": "f8",
+        "bdata_chars": 4268,
+        "shape": null
+       },
+       "y": {
+        "dtype": "f8",
+        "bdata_chars": 4268,
+        "shape": null
+       },
+       "type": "scatter"
+      },
+      {
+       "line": {
+        "color": "#F39C12",
+        "dash": "solid"
+       },
+       "mode": "lines",
+       "showlegend": false,
+       "x": {
+        "len": 400,
+        "head": [
+         1.0,
+         1.0,
+         1.0
+        ],
+        "tail": [
+         1.0,
+         1.0,
+         1.0
+        ]
+       },
+       "y": {
+        "dtype": "f8",
+        "bdata_chars": 4268,
+        "shape": null
+       },
+       "type": "scatter"
+      },
+      {
+       "fill": "toself",
+       "fillcolor": "#5DADE2",
+       "line": {
+        "width": 0
+       },
+       "name": "Anode Fill",
+       "opacity": 0.5,
+       "showlegend": false,
+       "x": {
+        "dtype": "f8",
+        "bdata_chars": 8536,
+        "shape": null
+       },
+       "y": {
+        "dtype": "f8",
+        "bdata_chars": 8536,
+        "shape": null
+       },
+       "type": "scatter"
+      },
+      {
+       "fill": "toself",
+       "fillcolor": "#5DADE2",
+       "line": {
+        "width": 0
+       },
+       "name": "Cathode Fill",
+       "opacity": 0.5,
+       "showlegend": false,
+       "x": {
+        "dtype": "f8",
+        "bdata_chars": 8536,
+        "shape": null
+       },
+       "y": {
+        "dtype": "f8",
+        "bdata_chars": 8536,
+        "shape": null
+       },
+       "type": "scatter"
+      }
+     ],
+     "layout": {
+      "template": {
+       "data": {
+        "candlestick": [
+         {
+          "decreasing": {
+           "line": {
+            "color": "#000033"
+           }
+          },
+          "increasing": {
+           "line": {
+            "color": "#000032"
+           }
+          },
+          "type": "candlestick"
+         }
+        ],
+        "contourcarpet": [
+         {
+          "colorscale": [
+           [
+            0.0,
+            "#000011"
+           ],
+           [
+            0.1111111111111111,
+            "#000012"
+           ],
+           [
+            0.2222222222222222,
+            "#000013"
+           ],
+           [
+            0.3333333333333333,
+            "#000014"
+           ],
+           [
+            0.4444444444444444,
+            "#000015"
+           ],
+           [
+            0.5555555555555556,
+            "#000016"
+           ],
+           [
+            0.6666666666666666,
+            "#000017"
+           ],
+           [
+            0.7777777777777778,
+            "#000018"
+           ],
+           [
+            0.8888888888888888,
+            "#000019"
+           ],
+           [
+            1.0,
+            "#000020"
+           ]
+          ],
+          "type": "contourcarpet"
+         }
+        ],
+        "contour": [
+         {
+          "colorscale": [
+           [
+            0.0,
+            "#000011"
+           ],
+           [
+            0.1111111111111111,
+            "#000012"
+           ],
+           [
+            0.2222222222222222,
+            "#000013"
+           ],
+           [
+            0.3333333333333333,
+            "#000014"
+           ],
+           [
+            0.4444444444444444,
+            "#000015"
+           ],
+           [
+            0.5555555555555556,
+            "#000016"
+           ],
+           [
+            0.6666666666666666,
+            "#000017"
+           ],
+           [
+            0.7777777777777778,
+            "#000018"
+           ],
+           [
+            0.8888888888888888,
+            "#000019"
+           ],
+           [
+            1.0,
+            "#000020"
+           ]
+          ],
+          "type": "contour"
+         }
+        ],
+        "heatmap": [
+         {
+          "colorscale": [
+           [
+            0.0,
+            "#000011"
+           ],
+           [
+            0.1111111111111111,
+            "#000012"
+           ],
+           [
+            0.2222222222222222,
+            "#000013"
+           ],
+           [
+            0.3333333333333333,
+            "#000014"
+           ],
+           [
+            0.4444444444444444,
+            "#000015"
+           ],
+           [
+            0.5555555555555556,
+            "#000016"
+           ],
+           [
+            0.6666666666666666,
+            "#000017"
+           ],
+           [
+            0.7777777777777778,
+            "#000018"
+           ],
+           [
+            0.8888888888888888,
+            "#000019"
+           ],
+           [
+            1.0,
+            "#000020"
+           ]
+          ],
+          "type": "heatmap"
+         }
+        ],
+        "histogram2d": [
+         {
+          "colorscale": [
+           [
+            0.0,
+            "#000011"
+           ],
+           [
+            0.1111111111111111,
+            "#000012"
+           ],
+           [
+            0.2222222222222222,
+            "#000013"
+           ],
+           [
+            0.3333333333333333,
+            "#000014"
+           ],
+           [
+            0.4444444444444444,
+            "#000015"
+           ],
+           [
+            0.5555555555555556,
+            "#000016"
+           ],
+           [
+            0.6666666666666666,
+            "#000017"
+           ],
+           [
+            0.7777777777777778,
+            "#000018"
+           ],
+           [
+            0.8888888888888888,
+            "#000019"
+           ],
+           [
+            1.0,
+            "#000020"
+           ]
+          ],
+          "type": "histogram2d"
+         }
+        ],
+        "icicle": [
+         {
+          "textfont": {
+           "color": "white"
+          },
+          "type": "icicle"
+         }
+        ],
+        "sankey": [
+         {
+          "textfont": {
+           "color": "#000036"
+          },
+          "type": "sankey"
+         }
+        ],
+        "scatter": [
+         {
+          "marker": {
+           "line": {
+            "width": 0
+           }
+          },
+          "type": "scatter"
+         }
+        ],
+        "table": [
+         {
+          "cells": {
+           "fill": {
+            "color": "#000038"
+           },
+           "font": {
+            "color": "#000037"
+           },
+           "line": {
+            "color": "#000039"
+           }
+          },
+          "header": {
+           "fill": {
+            "color": "#000040"
+           },
+           "font": {
+            "color": "#000036"
+           },
+           "line": {
+            "color": "#000039"
+           }
+          },
+          "type": "table"
+         }
+        ],
+        "waterfall": [
+         {
+          "connector": {
+           "line": {
+            "color": "#000036",
+            "width": 2
+           }
+          },
+          "decreasing": {
+           "marker": {
+            "color": "#000033"
+           }
+          },
+          "increasing": {
+           "marker": {
+            "color": "#000032"
+           }
+          },
+          "totals": {
+           "marker": {
+            "color": "#000034"
+           }
+          },
+          "type": "waterfall"
+         }
+        ]
+       },
+       "layout": {
+        "coloraxis": {
+         "colorscale": [
+          [
+           0.0,
+           "#000011"
+          ],
+          [
+           0.1111111111111111,
+           "#000012"
+          ],
+          [
+           0.2222222222222222,
+           "#000013"
+          ],
+          [
+           0.3333333333333333,
+           "#000014"
+          ],
+          [
+           0.4444444444444444,
+           "#000015"
+          ],
+          [
+           0.5555555555555556,
+           "#000016"
+          ],
+          [
+           0.6666666666666666,
+           "#000017"
+          ],
+          [
+           0.7777777777777778,
+           "#000018"
+          ],
+          [
+           0.8888888888888888,
+           "#000019"
+          ],
+          [
+           1.0,
+           "#000020"
+          ]
+         ]
+        },
+        "colorscale": {
+         "diverging": [
+          [
+           0.0,
+           "#000021"
+          ],
+          [
+           0.1,
+           "#000022"
+          ],
+          [
+           0.2,
+           "#000023"
+          ],
+          [
+           0.3,
+           "#000024"
+          ],
+          [
+           0.4,
+           "#000025"
+          ],
+          [
+           0.5,
+           "#000026"
+          ],
+          [
+           0.6,
+           "#000027"
+          ],
+          [
+           0.7,
+           "#000028"
+          ],
+          [
+           0.8,
+           "#000029"
+          ],
+          [
+           0.9,
+           "#000030"
+          ],
+          [
+           1.0,
+           "#000031"
+          ]
+         ],
+         "sequential": [
+          [
+           0.0,
+           "#000011"
+          ],
+          [
+           0.1111111111111111,
+           "#000012"
+          ],
+          [
+           0.2222222222222222,
+           "#000013"
+          ],
+          [
+           0.3333333333333333,
+           "#000014"
+          ],
+          [
+           0.4444444444444444,
+           "#000015"
+          ],
+          [
+           0.5555555555555556,
+           "#000016"
+          ],
+          [
+           0.6666666666666666,
+           "#000017"
+          ],
+          [
+           0.7777777777777778,
+           "#000018"
+          ],
+          [
+           0.8888888888888888,
+           "#000019"
+          ],
+          [
+           1.0,
+           "#000020"
+          ]
+         ],
+         "sequentialminus": [
+          [
+           0.0,
+           "#000011"
+          ],
+          [
+           0.1111111111111111,
+           "#000012"
+          ],
+          [
+           0.2222222222222222,
+           "#000013"
+          ],
+          [
+           0.3333333333333333,
+           "#000014"
+          ],
+          [
+           0.4444444444444444,
+           "#000015"
+          ],
+          [
+           0.5555555555555556,
+           "#000016"
+          ],
+          [
+           0.6666666666666666,
+           "#000017"
+          ],
+          [
+           0.7777777777777778,
+           "#000018"
+          ],
+          [
+           0.8888888888888888,
+           "#000019"
+          ],
+          [
+           1.0,
+           "#000020"
+          ]
+         ]
+        },
+        "colorway": [
+         "#000001",
+         "#000002",
+         "#000003",
+         "#000004",
+         "#000005",
+         "#000006",
+         "#000007",
+         "#000008",
+         "#000009",
+         "#000010"
+        ]
+       }
+      },
+      "font": {
+       "color": "#FFFFFF",
+       "family": "Open Sans",
+       "size": 24
+      },
+      "margin": {
+       "l": 60,
+       "r": 60,
+       "t": 60,
+       "b": 60
+      },
+      "xaxis": {
+       "title": {
+        "font": {
+         "size": 24
+        },
+        "text": "dQ/dV [Ah/V]"
+       },
+       "tickfont": {
+        "size": 18
+       },
+       "range": [
+        -5,
+        5
+       ],
+       "showgrid": true,
+       "gridcolor": "#666666",
+       "gridwidth": 0.5,
+       "griddash": "dot",
+       "zeroline": false,
+       "showline": true,
+       "linecolor": "#FFFFFF",
+       "linewidth": 3,
+       "mirror": true
+      },
+      "yaxis": {
+       "title": {
+        "font": {
+         "size": 24
+        },
+        "text": "Voltage [V]"
+       },
+       "tickfont": {
+        "size": 18
+       },
+       "range": [
+        -5,
+        0
+       ],
+       "showgrid": true,
+       "gridcolor": "#666666",
+       "gridwidth": 0.5,
+       "griddash": "dot",
+       "showline": true,
+       "linecolor": "#FFFFFF",
+       "linewidth": 3,
+       "mirror": true,
+       "tickvals": [
+        -5,
+        -4,
+        -3,
+        -2,
+        -1,
+        0
+       ],
+       "ticktext": [
+        "5",
+        "4",
+        "3",
+        "2",
+        "1",
+        "0"
+       ]
+      },
+      "legend": {
+       "font": {
+        "size": 20
+       },
+       "x": 0.02,
+       "y": 0.5,
+       "xanchor": "left",
+       "yanchor": "middle",
+       "bgcolor": "rgba(0,0,0,0)"
+      },
+      "width": 500,
+      "height": 650,
+      "plot_bgcolor": "#333333",
+      "paper_bgcolor": "#003B73",
+      "annotations": [
+       {
+        "arrowcolor": "#FFFFFF",
+        "arrowhead": 3,
+        "arrowwidth": 3,
+        "ax": 0,
+        "axref": "x",
+        "ay": -0.5,
+        "ayref": "y",
+        "showarrow": true,
+        "standoff": 0,
+        "x": 0,
+        "xref": "x",
+        "y": -3.5,
+        "yref": "y"
+       },
+       {
+        "arrowcolor": "#FFFFFF",
+        "arrowhead": 3,
+        "arrowwidth": 3,
+        "ax": 0,
+        "axref": "x",
+        "ay": -3.5,
+        "ayref": "y",
+        "showarrow": true,
+        "standoff": 0,
+        "x": 0,
+        "xref": "x",
+        "y": -0.5,
+        "yref": "y"
+       },
+       {
+        "font": {
+         "color": "#FFFFFF",
+         "size": 20
+        },
+        "showarrow": false,
+        "text": "ΔV = 3.00 V",
+        "x": 0.1,
+        "xanchor": "left",
+        "y": -2.0
+       },
+       {
+        "font": {
+         "color": "#5DADE2",
+         "size": 20
+        },
+        "showarrow": false,
+        "text": "<b>Q<sub>an</sub> = 0.50 Ah</b>",
+        "x": -4.3,
+        "xanchor": "left",
+        "y": -0.8
+       },
+       {
+        "font": {
+         "color": "#5DADE2",
+         "size": 20
+        },
+        "showarrow": false,
+        "text": "<b>Q<sub>cath</sub> = 0.50 Ah</b>",
+        "x": -4.3,
+        "xanchor": "left",
+        "y": -2.8
+       }
+      ],
+      "shapes": [
+       {
+        "line": {
+         "color": "#5DADE2",
+         "dash": "dot",
+         "width": 1
+        },
+        "type": "line",
+        "x0": -5,
+        "x1": 5,
+        "y0": -1.0,
+        "y1": -1.0
+       },
+       {
+        "line": {
+         "color": "#5DADE2",
+         "dash": "dot",
+         "width": 1
+        },
+        "type": "line",
+        "x0": -5,
+        "x1": 5,
+        "y0": -0.0,
+        "y1": -0.0
+       },
+       {
+        "line": {
+         "color": "#5DADE2",
+         "dash": "dot",
+         "width": 1
+        },
+        "type": "line",
+        "x0": -5,
+        "x1": 5,
+        "y0": -3.0,
+        "y1": -3.0
+       },
+       {
+        "line": {
+         "color": "#5DADE2",
+         "dash": "dot",
+         "width": 1
+        },
+        "type": "line",
+        "x0": -5,
+        "x1": 5,
+        "y0": -4.0,
+        "y1": -4.0
+       }
+      ]
+     }
+    },
+    "config": {
+     "showLink": false,
+     "linkText": false
+    }
+   }
+  },
+  {
+   "where": "main/5/1",
+   "type": "Column",
+   "container": true,
+   "proto": {
+    "weight": 0.5,
+    "gap_config": {
+     "gap_size": "MEDIUM"
+    }
+   }
+  },
+  {
+   "where": "main/5/1/0",
+   "type": "Markdown",
+   "value": "<h3 style='text-align: center;'>📈 Voltage vs. SoC</h3>",
+   "key": null,
+   "help": "",
+   "proto": {
+    "body": "<h3 style='text-align: center;'>📈 Voltage vs. SoC</h3>",
+    "allow_html": true,
+    "element_type": "NATIVE"
+   }
+  },
+  {
+   "where": "main/5/1/1",
+   "type": "UnknownElement",
+   "key": null,
+   "proto": {
+    "use_container_width": true,
+    "theme": "streamlit",
+    "id": "$$ID-0cdb8470e5a3dd8dfd66110a128d2278-None",
+    "spec": {
+     "data": [
+      {
+       "line": {
+        "color": "#5DADE2",
+        "dash": "dash",
+        "width": 2
+       },
+       "mode": "lines",
+       "name": "OCV BOL",
+       "showlegend": false,
+       "x": {
+        "dtype": "f8",
+        "bdata_chars": 4268,
+        "shape": null
+       },
+       "y": {
+        "dtype": "f8",
+        "bdata_chars": 4268,
+        "shape": null
+       },
+       "type": "scatter"
+      },
+      {
+       "line": {
+        "color": "#5DADE2",
+        "dash": "solid",
+        "width": 2
+       },
+       "mode": "lines",
+       "name": "Battery OCV",
+       "showlegend": true,
+       "x": {
+        "dtype": "f8",
+        "bdata_chars": 4268,
+        "shape": null
+       },
+       "y": {
+        "dtype": "f8",
+        "bdata_chars": 4268,
+        "shape": null
+       },
+       "type": "scatter"
+      },
+      {
+       "marker": {
+        "color": "#FFFFFF",
+        "size": 8,
+        "symbol": "circle"
+       },
+       "mode": "markers",
+       "showlegend": false,
+       "x": [
+        0.5
+       ],
+       "y": [
+        3.0
+       ],
+       "type": "scatter"
+      }
+     ],
+     "layout": {
+      "template": {
+       "data": {
+        "candlestick": [
+         {
+          "decreasing": {
+           "line": {
+            "color": "#000033"
+           }
+          },
+          "increasing": {
+           "line": {
+            "color": "#000032"
+           }
+          },
+          "type": "candlestick"
+         }
+        ],
+        "contourcarpet": [
+         {
+          "colorscale": [
+           [
+            0.0,
+            "#000011"
+           ],
+           [
+            0.1111111111111111,
+            "#000012"
+           ],
+           [
+            0.2222222222222222,
+            "#000013"
+           ],
+           [
+            0.3333333333333333,
+            "#000014"
+           ],
+           [
+            0.4444444444444444,
+            "#000015"
+           ],
+           [
+            0.5555555555555556,
+            "#000016"
+           ],
+           [
+            0.6666666666666666,
+            "#000017"
+           ],
+           [
+            0.7777777777777778,
+            "#000018"
+           ],
+           [
+            0.8888888888888888,
+            "#000019"
+           ],
+           [
+            1.0,
+            "#000020"
+           ]
+          ],
+          "type": "contourcarpet"
+         }
+        ],
+        "contour": [
+         {
+          "colorscale": [
+           [
+            0.0,
+            "#000011"
+           ],
+           [
+            0.1111111111111111,
+            "#000012"
+           ],
+           [
+            0.2222222222222222,
+            "#000013"
+           ],
+           [
+            0.3333333333333333,
+            "#000014"
+           ],
+           [
+            0.4444444444444444,
+            "#000015"
+           ],
+           [
+            0.5555555555555556,
+            "#000016"
+           ],
+           [
+            0.6666666666666666,
+            "#000017"
+           ],
+           [
+            0.7777777777777778,
+            "#000018"
+           ],
+           [
+            0.8888888888888888,
+            "#000019"
+           ],
+           [
+            1.0,
+            "#000020"
+           ]
+          ],
+          "type": "contour"
+         }
+        ],
+        "heatmap": [
+         {
+          "colorscale": [
+           [
+            0.0,
+            "#000011"
+           ],
+           [
+            0.1111111111111111,
+            "#000012"
+           ],
+           [
+            0.2222222222222222,
+            "#000013"
+           ],
+           [
+            0.3333333333333333,
+            "#000014"
+           ],
+           [
+            0.4444444444444444,
+            "#000015"
+           ],
+           [
+            0.5555555555555556,
+            "#000016"
+           ],
+           [
+            0.6666666666666666,
+            "#000017"
+           ],
+           [
+            0.7777777777777778,
+            "#000018"
+           ],
+           [
+            0.8888888888888888,
+            "#000019"
+           ],
+           [
+            1.0,
+            "#000020"
+           ]
+          ],
+          "type": "heatmap"
+         }
+        ],
+        "histogram2d": [
+         {
+          "colorscale": [
+           [
+            0.0,
+            "#000011"
+           ],
+           [
+            0.1111111111111111,
+            "#000012"
+           ],
+           [
+            0.2222222222222222,
+            "#000013"
+           ],
+           [
+            0.3333333333333333,
+            "#000014"
+           ],
+           [
+            0.4444444444444444,
+            "#000015"
+           ],
+           [
+            0.5555555555555556,
+            "#000016"
+           ],
+           [
+            0.6666666666666666,
+            "#000017"
+           ],
+           [
+            0.7777777777777778,
+            "#000018"
+           ],
+           [
+            0.8888888888888888,
+            "#000019"
+           ],
+           [
+            1.0,
+            "#000020"
+           ]
+          ],
+          "type": "histogram2d"
+         }
+        ],
+        "icicle": [
+         {
+          "textfont": {
+           "color": "white"
+          },
+          "type": "icicle"
+         }
+        ],
+        "sankey": [
+         {
+          "textfont": {
+           "color": "#000036"
+          },
+          "type": "sankey"
+         }
+        ],
+        "scatter": [
+         {
+          "marker": {
+           "line": {
+            "width": 0
+           }
+          },
+          "type": "scatter"
+         }
+        ],
+        "table": [
+         {
+          "cells": {
+           "fill": {
+            "color": "#000038"
+           },
+           "font": {
+            "color": "#000037"
+           },
+           "line": {
+            "color": "#000039"
+           }
+          },
+          "header": {
+           "fill": {
+            "color": "#000040"
+           },
+           "font": {
+            "color": "#000036"
+           },
+           "line": {
+            "color": "#000039"
+           }
+          },
+          "type": "table"
+         }
+        ],
+        "waterfall": [
+         {
+          "connector": {
+           "line": {
+            "color": "#000036",
+            "width": 2
+           }
+          },
+          "decreasing": {
+           "marker": {
+            "color": "#000033"
+           }
+          },
+          "increasing": {
+           "marker": {
+            "color": "#000032"
+           }
+          },
+          "totals": {
+           "marker": {
+            "color": "#000034"
+           }
+          },
+          "type": "waterfall"
+         }
+        ]
+       },
+       "layout": {
+        "coloraxis": {
+         "colorscale": [
+          [
+           0.0,
+           "#000011"
+          ],
+          [
+           0.1111111111111111,
+           "#000012"
+          ],
+          [
+           0.2222222222222222,
+           "#000013"
+          ],
+          [
+           0.3333333333333333,
+           "#000014"
+          ],
+          [
+           0.4444444444444444,
+           "#000015"
+          ],
+          [
+           0.5555555555555556,
+           "#000016"
+          ],
+          [
+           0.6666666666666666,
+           "#000017"
+          ],
+          [
+           0.7777777777777778,
+           "#000018"
+          ],
+          [
+           0.8888888888888888,
+           "#000019"
+          ],
+          [
+           1.0,
+           "#000020"
+          ]
+         ]
+        },
+        "colorscale": {
+         "diverging": [
+          [
+           0.0,
+           "#000021"
+          ],
+          [
+           0.1,
+           "#000022"
+          ],
+          [
+           0.2,
+           "#000023"
+          ],
+          [
+           0.3,
+           "#000024"
+          ],
+          [
+           0.4,
+           "#000025"
+          ],
+          [
+           0.5,
+           "#000026"
+          ],
+          [
+           0.6,
+           "#000027"
+          ],
+          [
+           0.7,
+           "#000028"
+          ],
+          [
+           0.8,
+           "#000029"
+          ],
+          [
+           0.9,
+           "#000030"
+          ],
+          [
+           1.0,
+           "#000031"
+          ]
+         ],
+         "sequential": [
+          [
+           0.0,
+           "#000011"
+          ],
+          [
+           0.1111111111111111,
+           "#000012"
+          ],
+          [
+           0.2222222222222222,
+           "#000013"
+          ],
+          [
+           0.3333333333333333,
+           "#000014"
+          ],
+          [
+           0.4444444444444444,
+           "#000015"
+          ],
+          [
+           0.5555555555555556,
+           "#000016"
+          ],
+          [
+           0.6666666666666666,
+           "#000017"
+          ],
+          [
+           0.7777777777777778,
+           "#000018"
+          ],
+          [
+           0.8888888888888888,
+           "#000019"
+          ],
+          [
+           1.0,
+           "#000020"
+          ]
+         ],
+         "sequentialminus": [
+          [
+           0.0,
+           "#000011"
+          ],
+          [
+           0.1111111111111111,
+           "#000012"
+          ],
+          [
+           0.2222222222222222,
+           "#000013"
+          ],
+          [
+           0.3333333333333333,
+           "#000014"
+          ],
+          [
+           0.4444444444444444,
+           "#000015"
+          ],
+          [
+           0.5555555555555556,
+           "#000016"
+          ],
+          [
+           0.6666666666666666,
+           "#000017"
+          ],
+          [
+           0.7777777777777778,
+           "#000018"
+          ],
+          [
+           0.8888888888888888,
+           "#000019"
+          ],
+          [
+           1.0,
+           "#000020"
+          ]
+         ]
+        },
+        "colorway": [
+         "#000001",
+         "#000002",
+         "#000003",
+         "#000004",
+         "#000005",
+         "#000006",
+         "#000007",
+         "#000008",
+         "#000009",
+         "#000010"
+        ]
+       }
+      },
+      "font": {
+       "color": "#FFFFFF",
+       "family": "Open Sans",
+       "size": 24
+      },
+      "margin": {
+       "l": 60,
+       "r": 60,
+       "t": 60,
+       "b": 60
+      },
+      "xaxis": {
+       "title": {
+        "font": {
+         "size": 24
+        },
+        "text": "State of Charge"
+       },
+       "tickfont": {
+        "size": 18
+       },
+       "range": [
+        0,
+        1
+       ],
+       "showgrid": true,
+       "gridcolor": "#666666",
+       "gridwidth": 0.5,
+       "griddash": "dot",
+       "zeroline": false,
+       "showline": true,
+       "linecolor": "#FFFFFF",
+       "linewidth": 3,
+       "mirror": true
+      },
+      "yaxis": {
+       "title": {
+        "font": {
+         "size": 24
+        },
+        "text": "Voltage [V]"
+       },
+       "tickfont": {
+        "size": 18
+       },
+       "range": [
+        2,
+        4.5
+       ],
+       "showgrid": true,
+       "gridcolor": "#666666",
+       "gridwidth": 0.5,
+       "griddash": "dot",
+       "zeroline": false,
+       "showline": true,
+       "linecolor": "#FFFFFF",
+       "linewidth": 3,
+       "mirror": true
+      },
+      "legend": {
+       "font": {
+        "size": 20
+       },
+       "x": 0.01,
+       "y": 0.99,
+       "xanchor": "left",
+       "yanchor": "top",
+       "bgcolor": "rgba(0,0,0,0)"
+      },
+      "width": 500,
+      "height": 650,
+      "plot_bgcolor": "#333333",
+      "paper_bgcolor": "#003B73"
+     }
+    },
+    "config": {
+     "showLink": false,
+     "linkText": false
+    }
+   }
+  },
+  {
+   "where": "sidebar",
+   "type": "SpecialBlock",
+   "container": true,
+   "proto": null
+  },
+  {
+   "where": "sidebar/0",
+   "type": "Markdown",
+   "value": "<style>\ndiv.stButton > button:first-child {\n    width: 100%;\n    background-color: #5DADE2;  /* dunkelblau */\n    color: white;               /* Textfarbe */\n    border-radius: 8px;         /* abgerundete Ecken */\n    height: 3em;                /* etwas höher machen */\n    font-weight: bold;\n    font-size:18\n}\ndiv.stButton > button:first-child:hover {\n    background-color: #0059b3;  /* Hover-Effekt */\n    color: #fff;\n}\n</style>",
+   "key": null,
+   "help": "",
+   "proto": {
+    "body": "<style>\ndiv.stButton > button:first-child {\n    width: 100%;\n    background-color: #5DADE2;  /* dunkelblau */\n    color: white;               /* Textfarbe */\n    border-radius: 8px;         /* abgerundete Ecken */\n    height: 3em;                /* etwas höher machen */\n    font-weight: bold;\n    font-size:18\n}\ndiv.stButton > button:first-child:hover {\n    background-color: #0059b3;  /* Hover-Effekt */\n    color: #fff;\n}\n</style>",
+    "allow_html": true,
+    "element_type": "NATIVE"
+   }
+  },
+  {
+   "where": "sidebar/1",
+   "type": "Button",
+   "label": "⬅ Back to Landing",
+   "value": false,
+   "key": null,
+   "help": "",
+   "disabled": false,
+   "icon": "",
+   "proto": {
+    "id": "$$ID-089b41c97b8fb8d923ef9511d602b1a1-None",
+    "label": "⬅ Back to Landing",
+    "type": "secondary"
+   }
+  },
+  {
+   "where": "sidebar/2",
+   "type": "Markdown",
+   "value": "---",
+   "key": null,
+   "help": "",
+   "proto": {
+    "body": "---",
+    "element_type": "NATIVE"
+   }
+  },
+  {
+   "where": "sidebar/3",
+   "type": "Header",
+   "value": "🔧 Adjust Cell Settings",
+   "key": null,
+   "help": "",
+   "proto": {
+    "tag": "h2",
+    "body": "🔧 Adjust Cell Settings"
+   }
+  },
+  {
+   "where": "sidebar/4",
+   "type": "Selectbox",
+   "label": "Anode",
+   "value": "Ideal Anode",
+   "key": "select_anode",
+   "help": "",
+   "options": [
+    "Ideal Anode",
+    "Graphite",
+    "Silicon"
+   ],
+   "index": 0,
+   "placeholder": "",
+   "disabled": false,
+   "proto": {
+    "id": "$$ID-440e5a1c2de2a93428bc2c8b74cb927d-select_anode",
+    "label": "Anode",
+    "default": 0,
+    "options": [
+     "Ideal Anode",
+     "Graphite",
+     "Silicon"
+    ],
+    "label_visibility": {},
+    "accept_new_options": false
+   }
+  },
+  {
+   "where": "sidebar/5",
+   "type": "Selectbox",
+   "label": "Cathode",
+   "value": "Ideal Cathode",
+   "key": "select_cathode",
+   "help": "",
+   "options": [
+    "Ideal Cathode",
+    "LCO",
+    "LFP",
+    "NCA",
+    "NMC"
+   ],
+   "index": 0,
+   "placeholder": "",
+   "disabled": false,
+   "proto": {
+    "id": "$$ID-947d2f81b29b847fc465243db113f27f-select_cathode",
+    "label": "Cathode",
+    "default": 0,
+    "options": [
+     "Ideal Cathode",
+     "LCO",
+     "LFP",
+     "NCA",
+     "NMC"
+    ],
+    "label_visibility": {},
+    "accept_new_options": false
+   }
+  },
+  {
+   "where": "sidebar/6",
+   "type": "Slider",
+   "label": "SoC",
+   "value": 0.5,
+   "key": "slider_soc",
+   "help": "",
+   "min": 0.0,
+   "max": 1.0,
+   "step": 0.01,
+   "format": "%0.2f",
+   "options": "[]",
+   "disabled": false,
+   "proto": {
+    "id": "$$ID-c69381127337b22ba841ec2071552842-slider_soc",
+    "label": "SoC",
+    "format": "%0.2f",
+    "data_type": "FLOAT",
+    "default": [
+     0.5
+    ],
+    "max": 1.0,
+    "step": 0.01,
+    "label_visibility": {},
+    "type": "SLIDER"
+   }
+  },
+  {
+   "where": "sidebar/7",
+   "type": "Subheader",
+   "value": "Cutoff Voltages",
+   "key": null,
+   "help": "",
+   "proto": {
+    "tag": "h3",
+    "body": "Cutoff Voltages"
+   }
+  },
+  {
+   "where": "sidebar/8",
+   "type": "Slider",
+   "label": "V min [V]",
+   "value": 2.0,
+   "key": "slider_vmin",
+   "help": "",
+   "min": 2.0,
+   "max": 3.5,
+   "step": 0.01,
+   "format": "%0.2f",
+   "options": "[]",
+   "disabled": false,
+   "proto": {
+    "id": "$$ID-6fcfb0abb1cb0c574eadf430017519e4-slider_vmin",
+    "label": "V min [V]",
+    "format": "%0.2f",
+    "data_type": "FLOAT",
+    "default": [
+     2.0
+    ],
+    "min": 2.0,
+    "max": 3.5,
+    "step": 0.01,
+    "label_visibility": {},
+    "type": "SLIDER"
+   }
+  },
+  {
+   "where": "sidebar/9",
+   "type": "Slider",
+   "label": "V max [V]",
+   "value": 4.0,
+   "key": "slider_vmax",
+   "help": "",
+   "min": 3.5,
+   "max": 4.5,
+   "step": 0.01,
+   "format": "%0.2f",
+   "options": "[]",
+   "disabled": false,
+   "proto": {
+    "id": "$$ID-0bed66caf8fe73023513453a3cf6421a-slider_vmax",
+    "label": "V max [V]",
+    "format": "%0.2f",
+    "data_type": "FLOAT",
+    "default": [
+     4.0
+    ],
+    "min": 3.5,
+    "max": 4.5,
+    "step": 0.01,
+    "label_visibility": {},
+    "type": "SLIDER"
+   }
+  },
+  {
+   "where": "sidebar/10",
+   "type": "Subheader",
+   "value": "Capacity Ratios",
+   "key": null,
+   "help": "",
+   "proto": {
+    "tag": "h3",
+    "body": "Capacity Ratios"
+   }
+  },
+  {
+   "where": "sidebar/11",
+   "type": "Slider",
+   "label": "NP Ratio",
+   "value": 1.0,
+   "key": "slider_np",
+   "help": "",
+   "min": 0.8,
+   "max": 1.5,
+   "step": 0.01,
+   "format": "%0.2f",
+   "options": "[]",
+   "disabled": false,
+   "proto": {
+    "id": "$$ID-f27cfd47dccaeace655bd00b154b378b-slider_np",
+    "label": "NP Ratio",
+    "format": "%0.2f",
+    "data_type": "FLOAT",
+    "default": [
+     1.0
+    ],
+    "min": 0.8,
+    "max": 1.5,
+    "step": 0.01,
+    "label_visibility": {},
+    "type": "SLIDER"
+   }
+  },
+  {
+   "where": "sidebar/12",
+   "type": "Slider",
+   "label": "LiP Ratio",
+   "value": 1.0,
+   "key": "slider_lip",
+   "help": "",
+   "min": 0.5,
+   "max": 1.5,
+   "step": 0.01,
+   "format": "%0.2f",
+   "options": "[]",
+   "disabled": false,
+   "proto": {
+    "id": "$$ID-86ae231aee85cb90dce5950084762257-slider_lip",
+    "label": "LiP Ratio",
+    "format": "%0.2f",
+    "data_type": "FLOAT",
+    "default": [
+     1.0
+    ],
+    "min": 0.5,
+    "max": 1.5,
+    "step": 0.01,
+    "label_visibility": {},
+    "type": "SLIDER"
+   }
+  },
+  {
+   "where": "sidebar/13",
+   "type": "Markdown",
+   "value": "---",
+   "key": null,
+   "help": "",
+   "proto": {
+    "body": "---",
+    "element_type": "NATIVE"
+   }
+  },
+  {
+   "where": "sidebar/14",
+   "type": "Markdown",
+   "value": "<style>\n.custom-link {\n    display: inline-block;\n    width: 100%;\n    padding: 0.5rem 1rem;\n    text-align: center;\n    text-decoration: none !important;\n    border-radius: 5px;\n    font-weight: 500;\n    color: white !important;\n    background-color: transparent;\n    border: none;\n    margin-bottom: 0.5rem;\n}\n.custom-link:hover {\n    background-color: #003B73;\n    text-decoration: none;\n}\n</style>",
+   "key": null,
+   "help": "",
+   "proto": {
+    "body": "<style>\n.custom-link {\n    display: inline-block;\n    width: 100%;\n    padding: 0.5rem 1rem;\n    text-align: center;\n    text-decoration: none !important;\n    border-radius: 5px;\n    font-weight: 500;\n    color: white !important;\n    background-color: transparent;\n    border: none;\n    margin-bottom: 0.5rem;\n}\n.custom-link:hover {\n    background-color: #003B73;\n    text-decoration: none;\n}\n</style>",
+    "allow_html": true,
+    "element_type": "NATIVE"
+   }
+  },
+  {
+   "where": "sidebar/15",
+   "type": "Markdown",
+   "value": "<a class=\"custom-link\" href=\"mailto:lars@chargetanks.com\" target=\"_blank\">\n💌 Send me an Email\n</a>",
+   "key": null,
+   "help": "",
+   "proto": {
+    "body": "<a class=\"custom-link\" href=\"mailto:lars@chargetanks.com\" target=\"_blank\">\n💌 Send me an Email\n</a>",
+    "allow_html": true,
+    "element_type": "NATIVE"
+   }
+  },
+  {
+   "where": "sidebar/16",
+   "type": "Markdown",
+   "value": "---",
+   "key": null,
+   "help": "",
+   "proto": {
+    "body": "---",
+    "element_type": "NATIVE"
+   }
+  },
+  {
+   "where": "sidebar/17",
+   "type": "Markdown",
+   "value": "<div style=\"text-align:center;font-size:.85rem;color:gray;line-height:1.4\">\n© 2025 Lars von Kolzenberg<br>\nBuilt with Streamlit - v0.7.0<br>\nFor educational use only\n</div>",
+   "key": null,
+   "help": "",
+   "proto": {
+    "body": "<div style=\"text-align:center;font-size:.85rem;color:gray;line-height:1.4\">\n© 2025 Lars von Kolzenberg<br>\nBuilt with Streamlit - v0.7.0<br>\nFor educational use only\n</div>",
+    "allow_html": true,
+    "element_type": "NATIVE"
+   }
+  }
+ ]
+}

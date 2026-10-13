@@ -1,0 +1,6 @@
+# pip freeze der Mess-Werkzeuge
+greenlet==3.5.6
+pillow==12.3.0
+playwright==1.50.0
+pyee==12.1.1
+typing_extensions==4.16.0

@@ -1,0 +1,2488 @@
+{
+ "page": "Swelling",
+ "exceptions": [],
+ "elements": [
+  {
+   "where": "main",
+   "type": "SpecialBlock",
+   "container": true,
+   "proto": null
+  },
+  {
+   "where": "main/0",
+   "type": "Markdown",
+   "value": "<style>\n.block-container { padding-top: 0rem !important; padding-bottom: 0.5rem !important; }\n.block-container h1 { margin-top: 1.5rem !important; margin-bottom: 0.5rem !important; }\n</style>",
+   "key": null,
+   "help": "",
+   "proto": {
+    "body": "<style>\n.block-container { padding-top: 0rem !important; padding-bottom: 0.5rem !important; }\n.block-container h1 { margin-top: 1.5rem !important; margin-bottom: 0.5rem !important; }\n</style>",
+    "allow_html": true,
+    "element_type": "NATIVE"
+   }
+  },
+  {
+   "where": "main/1",
+   "type": "Markdown",
+   "value": "<style>\n.block-container { padding-top: 0rem !important; padding-bottom: 0.5rem !important; }\n.block-container h1 { margin-top: 1.5rem !important; margin-bottom: 0.5rem !important; }\n</style>",
+   "key": null,
+   "help": "",
+   "proto": {
+    "body": "<style>\n.block-container { padding-top: 0rem !important; padding-bottom: 0.5rem !important; }\n.block-container h1 { margin-top: 1.5rem !important; margin-bottom: 0.5rem !important; }\n</style>",
+    "allow_html": true,
+    "element_type": "NATIVE"
+   }
+  },
+  {
+   "where": "main/2",
+   "type": "Title",
+   "value": "🫁 Understand Swelling",
+   "key": null,
+   "help": "",
+   "proto": {
+    "tag": "h1",
+    "body": "🫁 Understand Swelling"
+   }
+  },
+  {
+   "where": "main/3",
+   "type": "Expander",
+   "container": true,
+   "proto": {
+    "label": "🧠 What does this tool show?",
+    "expanded": false
+   }
+  },
+  {
+   "where": "main/3/0",
+   "type": "Markdown",
+   "value": "Why can a battery get thicker? Three simple reasons:\n\n1) **Breathing** When SoC goes up or down, the anode and cathode gently\nexpand and shrink (like lungs).\n2) **Irreversible swelling** Over life a thin **SEI “crust”** grows and\nadds permanent thickness (lower SoH → more swelling).\n3) **Compression** Squeezing the stack pushes back.\n- **Cylindrical**: the metal can fixes thickness; you can't tune the squeeze.\n- **Pouch/Prismatic**: you *can* clamp it (springs/pads). More squeeze = less empty space.\n\n### ⚙️ Knobs\n- **SoC** drives breathing\n- **SoH** lower = more SEI swelling\n- **Cylindrical** toggle fixed-thickness can\n- **Compression** clamp force for pouch/prismatic cells\n\n👉 Move the sliders and watch layers and total thickness respond.",
+   "key": null,
+   "help": "",
+   "proto": {
+    "body": "Why can a battery get thicker? Three simple reasons:\n\n1) **Breathing** When SoC goes up or down, the anode and cathode gently\nexpand and shrink (like lungs).\n2) **Irreversible swelling** Over life a thin **SEI “crust”** grows and\nadds permanent thickness (lower SoH → more swelling).\n3) **Compression** Squeezing the stack pushes back.\n- **Cylindrical**: the metal can fixes thickness; you can't tune the squeeze.\n- **Pouch/Prismatic**: you *can* clamp it (springs/pads). More squeeze = less empty space.\n\n### ⚙️ Knobs\n- **SoC** drives breathing\n- **SoH** lower = more SEI swelling\n- **Cylindrical** toggle fixed-thickness can\n- **Compression** clamp force for pouch/prismatic cells\n\n👉 Move the sliders and watch layers and total thickness respond.",
+    "element_type": "NATIVE"
+   }
+  },
+  {
+   "where": "main/4",
+   "type": "UnknownElement",
+   "key": null,
+   "proto": {}
+  },
+  {
+   "where": "main/5",
+   "type": "UnknownElement",
+   "key": null,
+   "proto": {}
+  },
+  {
+   "where": "main/6",
+   "type": "UnknownElement",
+   "key": null,
+   "proto": {}
+  },
+  {
+   "where": "main/7",
+   "type": "Block",
+   "container": true,
+   "proto": {
+    "flex_container": {
+     "gap_config": {
+      "gap_size": "LARGE"
+     },
+     "scale": 1.0,
+     "direction": "HORIZONTAL",
+     "wrap": true
+    }
+   }
+  },
+  {
+   "where": "main/7/0",
+   "type": "Column",
+   "container": true,
+   "proto": {
+    "weight": 0.5,
+    "gap_config": {
+     "gap_size": "LARGE"
+    }
+   }
+  },
+  {
+   "where": "main/7/0/0",
+   "type": "Subheader",
+   "value": "Electrode Stack Geometry",
+   "key": null,
+   "help": "",
+   "proto": {
+    "tag": "h3",
+    "body": "Electrode Stack Geometry"
+   }
+  },
+  {
+   "where": "main/7/0/1",
+   "type": "UnknownElement",
+   "key": null,
+   "proto": {
+    "use_container_width": true,
+    "theme": "streamlit",
+    "id": "$$ID-25361deccef54dd820a59189a568684e-None",
+    "spec": {
+     "data": [],
+     "layout": {
+      "template": {
+       "data": {
+        "candlestick": [
+         {
+          "decreasing": {
+           "line": {
+            "color": "#000033"
+           }
+          },
+          "increasing": {
+           "line": {
+            "color": "#000032"
+           }
+          },
+          "type": "candlestick"
+         }
+        ],
+        "contourcarpet": [
+         {
+          "colorscale": [
+           [
+            0.0,
+            "#000011"
+           ],
+           [
+            0.1111111111111111,
+            "#000012"
+           ],
+           [
+            0.2222222222222222,
+            "#000013"
+           ],
+           [
+            0.3333333333333333,
+            "#000014"
+           ],
+           [
+            0.4444444444444444,
+            "#000015"
+           ],
+           [
+            0.5555555555555556,
+            "#000016"
+           ],
+           [
+            0.6666666666666666,
+            "#000017"
+           ],
+           [
+            0.7777777777777778,
+            "#000018"
+           ],
+           [
+            0.8888888888888888,
+            "#000019"
+           ],
+           [
+            1.0,
+            "#000020"
+           ]
+          ],
+          "type": "contourcarpet"
+         }
+        ],
+        "contour": [
+         {
+          "colorscale": [
+           [
+            0.0,
+            "#000011"
+           ],
+           [
+            0.1111111111111111,
+            "#000012"
+           ],
+           [
+            0.2222222222222222,
+            "#000013"
+           ],
+           [
+            0.3333333333333333,
+            "#000014"
+           ],
+           [
+            0.4444444444444444,
+            "#000015"
+           ],
+           [
+            0.5555555555555556,
+            "#000016"
+           ],
+           [
+            0.6666666666666666,
+            "#000017"
+           ],
+           [
+            0.7777777777777778,
+            "#000018"
+           ],
+           [
+            0.8888888888888888,
+            "#000019"
+           ],
+           [
+            1.0,
+            "#000020"
+           ]
+          ],
+          "type": "contour"
+         }
+        ],
+        "heatmap": [
+         {
+          "colorscale": [
+           [
+            0.0,
+            "#000011"
+           ],
+           [
+            0.1111111111111111,
+            "#000012"
+           ],
+           [
+            0.2222222222222222,
+            "#000013"
+           ],
+           [
+            0.3333333333333333,
+            "#000014"
+           ],
+           [
+            0.4444444444444444,
+            "#000015"
+           ],
+           [
+            0.5555555555555556,
+            "#000016"
+           ],
+           [
+            0.6666666666666666,
+            "#000017"
+           ],
+           [
+            0.7777777777777778,
+            "#000018"
+           ],
+           [
+            0.8888888888888888,
+            "#000019"
+           ],
+           [
+            1.0,
+            "#000020"
+           ]
+          ],
+          "type": "heatmap"
+         }
+        ],
+        "histogram2d": [
+         {
+          "colorscale": [
+           [
+            0.0,
+            "#000011"
+           ],
+           [
+            0.1111111111111111,
+            "#000012"
+           ],
+           [
+            0.2222222222222222,
+            "#000013"
+           ],
+           [
+            0.3333333333333333,
+            "#000014"
+           ],
+           [
+            0.4444444444444444,
+            "#000015"
+           ],
+           [
+            0.5555555555555556,
+            "#000016"
+           ],
+           [
+            0.6666666666666666,
+            "#000017"
+           ],
+           [
+            0.7777777777777778,
+            "#000018"
+           ],
+           [
+            0.8888888888888888,
+            "#000019"
+           ],
+           [
+            1.0,
+            "#000020"
+           ]
+          ],
+          "type": "histogram2d"
+         }
+        ],
+        "icicle": [
+         {
+          "textfont": {
+           "color": "white"
+          },
+          "type": "icicle"
+         }
+        ],
+        "sankey": [
+         {
+          "textfont": {
+           "color": "#000036"
+          },
+          "type": "sankey"
+         }
+        ],
+        "scatter": [
+         {
+          "marker": {
+           "line": {
+            "width": 0
+           }
+          },
+          "type": "scatter"
+         }
+        ],
+        "table": [
+         {
+          "cells": {
+           "fill": {
+            "color": "#000038"
+           },
+           "font": {
+            "color": "#000037"
+           },
+           "line": {
+            "color": "#000039"
+           }
+          },
+          "header": {
+           "fill": {
+            "color": "#000040"
+           },
+           "font": {
+            "color": "#000036"
+           },
+           "line": {
+            "color": "#000039"
+           }
+          },
+          "type": "table"
+         }
+        ],
+        "waterfall": [
+         {
+          "connector": {
+           "line": {
+            "color": "#000036",
+            "width": 2
+           }
+          },
+          "decreasing": {
+           "marker": {
+            "color": "#000033"
+           }
+          },
+          "increasing": {
+           "marker": {
+            "color": "#000032"
+           }
+          },
+          "totals": {
+           "marker": {
+            "color": "#000034"
+           }
+          },
+          "type": "waterfall"
+         }
+        ]
+       },
+       "layout": {
+        "coloraxis": {
+         "colorscale": [
+          [
+           0.0,
+           "#000011"
+          ],
+          [
+           0.1111111111111111,
+           "#000012"
+          ],
+          [
+           0.2222222222222222,
+           "#000013"
+          ],
+          [
+           0.3333333333333333,
+           "#000014"
+          ],
+          [
+           0.4444444444444444,
+           "#000015"
+          ],
+          [
+           0.5555555555555556,
+           "#000016"
+          ],
+          [
+           0.6666666666666666,
+           "#000017"
+          ],
+          [
+           0.7777777777777778,
+           "#000018"
+          ],
+          [
+           0.8888888888888888,
+           "#000019"
+          ],
+          [
+           1.0,
+           "#000020"
+          ]
+         ]
+        },
+        "colorscale": {
+         "diverging": [
+          [
+           0.0,
+           "#000021"
+          ],
+          [
+           0.1,
+           "#000022"
+          ],
+          [
+           0.2,
+           "#000023"
+          ],
+          [
+           0.3,
+           "#000024"
+          ],
+          [
+           0.4,
+           "#000025"
+          ],
+          [
+           0.5,
+           "#000026"
+          ],
+          [
+           0.6,
+           "#000027"
+          ],
+          [
+           0.7,
+           "#000028"
+          ],
+          [
+           0.8,
+           "#000029"
+          ],
+          [
+           0.9,
+           "#000030"
+          ],
+          [
+           1.0,
+           "#000031"
+          ]
+         ],
+         "sequential": [
+          [
+           0.0,
+           "#000011"
+          ],
+          [
+           0.1111111111111111,
+           "#000012"
+          ],
+          [
+           0.2222222222222222,
+           "#000013"
+          ],
+          [
+           0.3333333333333333,
+           "#000014"
+          ],
+          [
+           0.4444444444444444,
+           "#000015"
+          ],
+          [
+           0.5555555555555556,
+           "#000016"
+          ],
+          [
+           0.6666666666666666,
+           "#000017"
+          ],
+          [
+           0.7777777777777778,
+           "#000018"
+          ],
+          [
+           0.8888888888888888,
+           "#000019"
+          ],
+          [
+           1.0,
+           "#000020"
+          ]
+         ],
+         "sequentialminus": [
+          [
+           0.0,
+           "#000011"
+          ],
+          [
+           0.1111111111111111,
+           "#000012"
+          ],
+          [
+           0.2222222222222222,
+           "#000013"
+          ],
+          [
+           0.3333333333333333,
+           "#000014"
+          ],
+          [
+           0.4444444444444444,
+           "#000015"
+          ],
+          [
+           0.5555555555555556,
+           "#000016"
+          ],
+          [
+           0.6666666666666666,
+           "#000017"
+          ],
+          [
+           0.7777777777777778,
+           "#000018"
+          ],
+          [
+           0.8888888888888888,
+           "#000019"
+          ],
+          [
+           1.0,
+           "#000020"
+          ]
+         ]
+        },
+        "colorway": [
+         "#000001",
+         "#000002",
+         "#000003",
+         "#000004",
+         "#000005",
+         "#000006",
+         "#000007",
+         "#000008",
+         "#000009",
+         "#000010"
+        ]
+       }
+      },
+      "font": {
+       "color": "#FFFFFF",
+       "family": "Open Sans",
+       "size": 24
+      },
+      "margin": {
+       "l": 70,
+       "r": 30,
+       "t": 10,
+       "b": 70
+      },
+      "xaxis": {
+       "tickfont": {
+        "size": 16,
+        "color": "#003B73"
+       },
+       "showgrid": false,
+       "gridcolor": "#666666",
+       "gridwidth": 0.5,
+       "griddash": "dot",
+       "zeroline": false,
+       "showline": true,
+       "linecolor": "#FFFFFF",
+       "linewidth": 3,
+       "mirror": true,
+       "title": {
+        "font": {
+         "size": 24
+        },
+        "text": "",
+        "standoff": 22
+       },
+       "ticklabelstandoff": 8,
+       "ticktext": [
+        " 0",
+        " 1"
+       ],
+       "ticks": "outside",
+       "tickvals": [
+        0,
+        1
+       ],
+       "range": [
+        0,
+        1
+       ]
+      },
+      "yaxis": {
+       "tickfont": {
+        "size": 18
+       },
+       "showgrid": false,
+       "gridcolor": "#666666",
+       "gridwidth": 0.5,
+       "griddash": "dot",
+       "showline": true,
+       "linecolor": "#FFFFFF",
+       "linewidth": 3,
+       "mirror": true,
+       "title": {
+        "font": {
+         "size": 24
+        },
+        "text": "Normalized thickness"
+       },
+       "range": [
+        0,
+        1.2
+       ]
+      },
+      "legend": {
+       "font": {
+        "size": 20
+       },
+       "x": 0,
+       "y": 0,
+       "xanchor": "left",
+       "yanchor": "bottom",
+       "bgcolor": "#FFFFFF"
+      },
+      "width": 500,
+      "height": 500,
+      "plot_bgcolor": "#333333",
+      "paper_bgcolor": "#003B73",
+      "shapes": [
+       {
+        "fillcolor": "#CCCCCC",
+        "layer": "below",
+        "line": {
+         "color": "#333333",
+         "width": 1
+        },
+        "type": "rect",
+        "x0": 0,
+        "x1": 1,
+        "y0": 0.0,
+        "y1": 0.09944751381215469
+       },
+       {
+        "fillcolor": "#70AD47",
+        "layer": "below",
+        "line": {
+         "color": "#333333",
+         "width": 1
+        },
+        "type": "rect",
+        "x0": 0,
+        "x1": 1,
+        "y0": 0.09944751381215469,
+        "y1": 0.2364555005974566
+       },
+       {
+        "fillcolor": "#5DADE2",
+        "layer": "below",
+        "line": {
+         "color": "#333333",
+         "width": 1
+        },
+        "type": "rect",
+        "x0": 0,
+        "x1": 1,
+        "y0": 0.2364555005974566,
+        "y1": 0.4574499757355781
+       },
+       {
+        "fillcolor": "#F39C12",
+        "layer": "below",
+        "line": {
+         "color": "#333333",
+         "width": 1
+        },
+        "type": "rect",
+        "x0": 0,
+        "x1": 1,
+        "y0": 0.4574499757355781,
+        "y1": 0.9678008034806967
+       },
+       {
+        "fillcolor": "#CCCCCC",
+        "layer": "below",
+        "line": {
+         "color": "#333333",
+         "width": 1
+        },
+        "type": "rect",
+        "x0": 0,
+        "x1": 1,
+        "y0": 0.9678008034806967,
+        "y1": 1.0506737316574923
+       }
+      ],
+      "annotations": [
+       {
+        "font": {
+         "color": "#333333",
+         "size": 24
+        },
+        "showarrow": false,
+        "text": "Anode CC — 0.099 ",
+        "x": 0.5,
+        "xanchor": "center",
+        "y": 0.049723756906077346,
+        "yanchor": "middle"
+       },
+       {
+        "font": {
+         "color": "#333333",
+         "size": 24
+        },
+        "showarrow": false,
+        "text": "Anode — 0.137 ",
+        "x": 0.5,
+        "xanchor": "center",
+        "y": 0.16795150720480564,
+        "yanchor": "middle"
+       },
+       {
+        "font": {
+         "color": "#333333",
+         "size": 24
+        },
+        "showarrow": false,
+        "text": "Separator — 0.221 ",
+        "x": 0.5,
+        "xanchor": "center",
+        "y": 0.34695273816651734,
+        "yanchor": "middle"
+       },
+       {
+        "font": {
+         "color": "#333333",
+         "size": 24
+        },
+        "showarrow": false,
+        "text": "Cathode — 0.510 ",
+        "x": 0.5,
+        "xanchor": "center",
+        "y": 0.7126253896081374,
+        "yanchor": "middle"
+       },
+       {
+        "font": {
+         "color": "#333333",
+         "size": 24
+        },
+        "showarrow": false,
+        "text": "Cathode CC — 0.083 ",
+        "x": 0.5,
+        "xanchor": "center",
+        "y": 1.0092372675690946,
+        "yanchor": "middle"
+       },
+       {
+        "font": {
+         "color": "#FFFFFF",
+         "size": 24
+        },
+        "showarrow": false,
+        "text": "Total: 1.051",
+        "x": 0.5,
+        "y": 1.1006737316574924
+       }
+      ],
+      "showlegend": false
+     }
+    },
+    "config": {
+     "showLink": false,
+     "linkText": false
+    }
+   }
+  },
+  {
+   "where": "main/7/1",
+   "type": "Column",
+   "container": true,
+   "proto": {
+    "weight": 0.5,
+    "gap_config": {
+     "gap_size": "LARGE"
+    }
+   }
+  },
+  {
+   "where": "main/7/1/0",
+   "type": "Subheader",
+   "value": "Stack by categories",
+   "key": null,
+   "help": "",
+   "proto": {
+    "tag": "h3",
+    "body": "Stack by categories"
+   }
+  },
+  {
+   "where": "main/7/1/1",
+   "type": "UnknownElement",
+   "key": null,
+   "proto": {
+    "use_container_width": true,
+    "theme": "streamlit",
+    "id": "$$ID-d0007155ba03cdda2218acf41aa2f215-None",
+    "spec": {
+     "data": [
+      {
+       "customdata": {
+        "dtype": "f8",
+        "bdata_chars": 2136,
+        "shape": "200, 1"
+       },
+       "fill": "tozeroy",
+       "fillcolor": "#CCCCCC",
+       "hovertemplate": "%{customdata[0]:.4f}<extra></extra>",
+       "line": {
+        "color": "#FFFFFF",
+        "width": 1.5
+       },
+       "mode": "lines",
+       "name": "Dead volume (CCs + Sep)",
+       "showlegend": false,
+       "x": {
+        "dtype": "f8",
+        "bdata_chars": 2136,
+        "shape": null
+       },
+       "y": {
+        "dtype": "f8",
+        "bdata_chars": 2136,
+        "shape": null
+       },
+       "type": "scatter"
+      },
+      {
+       "customdata": {
+        "dtype": "f8",
+        "bdata_chars": 2136,
+        "shape": "200, 1"
+       },
+       "fill": "tonexty",
+       "fillcolor": "#44546A",
+       "hovertemplate": "%{customdata[0]:.4f}<extra></extra>",
+       "line": {
+        "color": "#FFFFFF",
+        "width": 1.5
+       },
+       "mode": "lines",
+       "name": "SEI",
+       "showlegend": false,
+       "x": {
+        "dtype": "f8",
+        "bdata_chars": 2136,
+        "shape": null
+       },
+       "y": {
+        "dtype": "f8",
+        "bdata_chars": 2136,
+        "shape": null
+       },
+       "type": "scatter"
+      },
+      {
+       "customdata": {
+        "dtype": "f8",
+        "bdata_chars": 2136,
+        "shape": "200, 1"
+       },
+       "fill": "tonexty",
+       "fillcolor": "#70AD47",
+       "hovertemplate": "%{customdata[0]:.4f}<extra></extra>",
+       "line": {
+        "color": "#FFFFFF",
+        "width": 1.5
+       },
+       "mode": "lines",
+       "name": "Anode Particles",
+       "showlegend": false,
+       "x": {
+        "dtype": "f8",
+        "bdata_chars": 2136,
+        "shape": null
+       },
+       "y": {
+        "dtype": "f8",
+        "bdata_chars": 2136,
+        "shape": null
+       },
+       "type": "scatter"
+      },
+      {
+       "customdata": {
+        "dtype": "f8",
+        "bdata_chars": 2136,
+        "shape": "200, 1"
+       },
+       "fill": "tonexty",
+       "fillcolor": "#F39C12",
+       "hovertemplate": "%{customdata[0]:.4f}<extra></extra>",
+       "line": {
+        "color": "#FFFFFF",
+        "width": 1.5
+       },
+       "mode": "lines",
+       "name": "Cathode Particles",
+       "showlegend": false,
+       "x": {
+        "dtype": "f8",
+        "bdata_chars": 2136,
+        "shape": null
+       },
+       "y": {
+        "dtype": "f8",
+        "bdata_chars": 2136,
+        "shape": null
+       },
+       "type": "scatter"
+      },
+      {
+       "customdata": {
+        "dtype": "f8",
+        "bdata_chars": 2136,
+        "shape": "200, 1"
+       },
+       "fill": "tonexty",
+       "fillcolor": "#5DADE2",
+       "hovertemplate": "%{customdata[0]:.4f}<extra></extra>",
+       "line": {
+        "color": "#FFFFFF",
+        "width": 1.5
+       },
+       "mode": "lines",
+       "name": "Pore volume (An+Sep+Cath)",
+       "showlegend": false,
+       "x": {
+        "dtype": "f8",
+        "bdata_chars": 2136,
+        "shape": null
+       },
+       "y": {
+        "dtype": "f8",
+        "bdata_chars": 2136,
+        "shape": null
+       },
+       "type": "scatter"
+      },
+      {
+       "hovertemplate": "SoC: %{x:.3f}<br>Total: %{y:.4f}<extra></extra>",
+       "marker": {
+        "color": "#FFFFFF",
+        "line": {
+         "color": "#444444",
+         "width": 1.5
+        },
+        "size": 10
+       },
+       "mode": "markers",
+       "name": "",
+       "showlegend": false,
+       "x": [
+        0.5
+       ],
+       "y": [
+        1.0506737316574923
+       ],
+       "type": "scatter"
+      }
+     ],
+     "layout": {
+      "template": {
+       "data": {
+        "candlestick": [
+         {
+          "decreasing": {
+           "line": {
+            "color": "#000033"
+           }
+          },
+          "increasing": {
+           "line": {
+            "color": "#000032"
+           }
+          },
+          "type": "candlestick"
+         }
+        ],
+        "contourcarpet": [
+         {
+          "colorscale": [
+           [
+            0.0,
+            "#000011"
+           ],
+           [
+            0.1111111111111111,
+            "#000012"
+           ],
+           [
+            0.2222222222222222,
+            "#000013"
+           ],
+           [
+            0.3333333333333333,
+            "#000014"
+           ],
+           [
+            0.4444444444444444,
+            "#000015"
+           ],
+           [
+            0.5555555555555556,
+            "#000016"
+           ],
+           [
+            0.6666666666666666,
+            "#000017"
+           ],
+           [
+            0.7777777777777778,
+            "#000018"
+           ],
+           [
+            0.8888888888888888,
+            "#000019"
+           ],
+           [
+            1.0,
+            "#000020"
+           ]
+          ],
+          "type": "contourcarpet"
+         }
+        ],
+        "contour": [
+         {
+          "colorscale": [
+           [
+            0.0,
+            "#000011"
+           ],
+           [
+            0.1111111111111111,
+            "#000012"
+           ],
+           [
+            0.2222222222222222,
+            "#000013"
+           ],
+           [
+            0.3333333333333333,
+            "#000014"
+           ],
+           [
+            0.4444444444444444,
+            "#000015"
+           ],
+           [
+            0.5555555555555556,
+            "#000016"
+           ],
+           [
+            0.6666666666666666,
+            "#000017"
+           ],
+           [
+            0.7777777777777778,
+            "#000018"
+           ],
+           [
+            0.8888888888888888,
+            "#000019"
+           ],
+           [
+            1.0,
+            "#000020"
+           ]
+          ],
+          "type": "contour"
+         }
+        ],
+        "heatmap": [
+         {
+          "colorscale": [
+           [
+            0.0,
+            "#000011"
+           ],
+           [
+            0.1111111111111111,
+            "#000012"
+           ],
+           [
+            0.2222222222222222,
+            "#000013"
+           ],
+           [
+            0.3333333333333333,
+            "#000014"
+           ],
+           [
+            0.4444444444444444,
+            "#000015"
+           ],
+           [
+            0.5555555555555556,
+            "#000016"
+           ],
+           [
+            0.6666666666666666,
+            "#000017"
+           ],
+           [
+            0.7777777777777778,
+            "#000018"
+           ],
+           [
+            0.8888888888888888,
+            "#000019"
+           ],
+           [
+            1.0,
+            "#000020"
+           ]
+          ],
+          "type": "heatmap"
+         }
+        ],
+        "histogram2d": [
+         {
+          "colorscale": [
+           [
+            0.0,
+            "#000011"
+           ],
+           [
+            0.1111111111111111,
+            "#000012"
+           ],
+           [
+            0.2222222222222222,
+            "#000013"
+           ],
+           [
+            0.3333333333333333,
+            "#000014"
+           ],
+           [
+            0.4444444444444444,
+            "#000015"
+           ],
+           [
+            0.5555555555555556,
+            "#000016"
+           ],
+           [
+            0.6666666666666666,
+            "#000017"
+           ],
+           [
+            0.7777777777777778,
+            "#000018"
+           ],
+           [
+            0.8888888888888888,
+            "#000019"
+           ],
+           [
+            1.0,
+            "#000020"
+           ]
+          ],
+          "type": "histogram2d"
+         }
+        ],
+        "icicle": [
+         {
+          "textfont": {
+           "color": "white"
+          },
+          "type": "icicle"
+         }
+        ],
+        "sankey": [
+         {
+          "textfont": {
+           "color": "#000036"
+          },
+          "type": "sankey"
+         }
+        ],
+        "scatter": [
+         {
+          "marker": {
+           "line": {
+            "width": 0
+           }
+          },
+          "type": "scatter"
+         }
+        ],
+        "table": [
+         {
+          "cells": {
+           "fill": {
+            "color": "#000038"
+           },
+           "font": {
+            "color": "#000037"
+           },
+           "line": {
+            "color": "#000039"
+           }
+          },
+          "header": {
+           "fill": {
+            "color": "#000040"
+           },
+           "font": {
+            "color": "#000036"
+           },
+           "line": {
+            "color": "#000039"
+           }
+          },
+          "type": "table"
+         }
+        ],
+        "waterfall": [
+         {
+          "connector": {
+           "line": {
+            "color": "#000036",
+            "width": 2
+           }
+          },
+          "decreasing": {
+           "marker": {
+            "color": "#000033"
+           }
+          },
+          "increasing": {
+           "marker": {
+            "color": "#000032"
+           }
+          },
+          "totals": {
+           "marker": {
+            "color": "#000034"
+           }
+          },
+          "type": "waterfall"
+         }
+        ]
+       },
+       "layout": {
+        "coloraxis": {
+         "colorscale": [
+          [
+           0.0,
+           "#000011"
+          ],
+          [
+           0.1111111111111111,
+           "#000012"
+          ],
+          [
+           0.2222222222222222,
+           "#000013"
+          ],
+          [
+           0.3333333333333333,
+           "#000014"
+          ],
+          [
+           0.4444444444444444,
+           "#000015"
+          ],
+          [
+           0.5555555555555556,
+           "#000016"
+          ],
+          [
+           0.6666666666666666,
+           "#000017"
+          ],
+          [
+           0.7777777777777778,
+           "#000018"
+          ],
+          [
+           0.8888888888888888,
+           "#000019"
+          ],
+          [
+           1.0,
+           "#000020"
+          ]
+         ]
+        },
+        "colorscale": {
+         "diverging": [
+          [
+           0.0,
+           "#000021"
+          ],
+          [
+           0.1,
+           "#000022"
+          ],
+          [
+           0.2,
+           "#000023"
+          ],
+          [
+           0.3,
+           "#000024"
+          ],
+          [
+           0.4,
+           "#000025"
+          ],
+          [
+           0.5,
+           "#000026"
+          ],
+          [
+           0.6,
+           "#000027"
+          ],
+          [
+           0.7,
+           "#000028"
+          ],
+          [
+           0.8,
+           "#000029"
+          ],
+          [
+           0.9,
+           "#000030"
+          ],
+          [
+           1.0,
+           "#000031"
+          ]
+         ],
+         "sequential": [
+          [
+           0.0,
+           "#000011"
+          ],
+          [
+           0.1111111111111111,
+           "#000012"
+          ],
+          [
+           0.2222222222222222,
+           "#000013"
+          ],
+          [
+           0.3333333333333333,
+           "#000014"
+          ],
+          [
+           0.4444444444444444,
+           "#000015"
+          ],
+          [
+           0.5555555555555556,
+           "#000016"
+          ],
+          [
+           0.6666666666666666,
+           "#000017"
+          ],
+          [
+           0.7777777777777778,
+           "#000018"
+          ],
+          [
+           0.8888888888888888,
+           "#000019"
+          ],
+          [
+           1.0,
+           "#000020"
+          ]
+         ],
+         "sequentialminus": [
+          [
+           0.0,
+           "#000011"
+          ],
+          [
+           0.1111111111111111,
+           "#000012"
+          ],
+          [
+           0.2222222222222222,
+           "#000013"
+          ],
+          [
+           0.3333333333333333,
+           "#000014"
+          ],
+          [
+           0.4444444444444444,
+           "#000015"
+          ],
+          [
+           0.5555555555555556,
+           "#000016"
+          ],
+          [
+           0.6666666666666666,
+           "#000017"
+          ],
+          [
+           0.7777777777777778,
+           "#000018"
+          ],
+          [
+           0.8888888888888888,
+           "#000019"
+          ],
+          [
+           1.0,
+           "#000020"
+          ]
+         ]
+        },
+        "colorway": [
+         "#000001",
+         "#000002",
+         "#000003",
+         "#000004",
+         "#000005",
+         "#000006",
+         "#000007",
+         "#000008",
+         "#000009",
+         "#000010"
+        ]
+       }
+      },
+      "font": {
+       "color": "#FFFFFF",
+       "family": "Open Sans",
+       "size": 24
+      },
+      "margin": {
+       "l": 70,
+       "r": 30,
+       "t": 10,
+       "b": 70
+      },
+      "xaxis": {
+       "tickfont": {
+        "size": 18
+       },
+       "showgrid": true,
+       "gridcolor": "#666666",
+       "gridwidth": 0.5,
+       "griddash": "dot",
+       "zeroline": false,
+       "showline": true,
+       "linecolor": "#FFFFFF",
+       "linewidth": 3,
+       "mirror": true,
+       "title": {
+        "font": {
+         "size": 24
+        },
+        "text": "SoC",
+        "standoff": 22
+       },
+       "ticklabelstandoff": 8,
+       "range": [
+        0,
+        1
+       ]
+      },
+      "yaxis": {
+       "tickfont": {
+        "size": 18
+       },
+       "showgrid": true,
+       "gridcolor": "#666666",
+       "gridwidth": 0.5,
+       "griddash": "dot",
+       "showline": true,
+       "linecolor": "#FFFFFF",
+       "linewidth": 3,
+       "mirror": true,
+       "title": {
+        "font": {
+         "size": 24
+        },
+        "text": "Normalized thickness"
+       },
+       "range": [
+        0,
+        1.2
+       ]
+      },
+      "legend": {
+       "font": {
+        "size": 20
+       },
+       "x": 0,
+       "y": 0,
+       "xanchor": "left",
+       "yanchor": "bottom",
+       "bgcolor": "#FFFFFF"
+      },
+      "width": 500,
+      "height": 500,
+      "plot_bgcolor": "#333333",
+      "paper_bgcolor": "#003B73",
+      "hovermode": "x unified",
+      "showlegend": false,
+      "annotations": [
+       {
+        "font": {
+         "color": "#444444",
+         "size": 24
+        },
+        "showarrow": false,
+        "text": "Dead volume (CCs + Sep)",
+        "x": 0.5,
+        "xanchor": "center",
+        "y": 0.1574585635359116,
+        "yanchor": "middle"
+       },
+       {
+        "font": {
+         "color": "#FFFFFF",
+         "size": 24
+        },
+        "showarrow": false,
+        "text": "SEI",
+        "x": 0.5,
+        "xanchor": "center",
+        "y": 0.3149171270718232,
+        "yanchor": "middle"
+       },
+       {
+        "font": {
+         "color": "#333333",
+         "size": 24
+        },
+        "showarrow": false,
+        "text": "Anode Particles",
+        "x": 0.5,
+        "xanchor": "center",
+        "y": 0.37181891051972277,
+        "yanchor": "middle"
+       },
+       {
+        "font": {
+         "color": "#333333",
+         "size": 24
+        },
+        "showarrow": false,
+        "text": "Cathode Particles",
+        "x": 0.5,
+        "xanchor": "center",
+        "y": 0.6189789807683584,
+        "yanchor": "middle"
+       },
+       {
+        "font": {
+         "color": "#333333",
+         "size": 24
+        },
+        "showarrow": false,
+        "text": "Pore volume (An + Sep + Cath)",
+        "x": 0.5,
+        "xanchor": "center",
+        "y": 0.9299554996132935,
+        "yanchor": "middle"
+       }
+      ]
+     }
+    },
+    "config": {
+     "showLink": false,
+     "linkText": false
+    }
+   }
+  },
+  {
+   "where": "main/8",
+   "type": "Subheader",
+   "value": "Compression vs. porosity",
+   "key": null,
+   "help": "",
+   "proto": {
+    "tag": "h3",
+    "body": "Compression vs. porosity"
+   }
+  },
+  {
+   "where": "main/9",
+   "type": "UnknownElement",
+   "key": null,
+   "proto": {
+    "use_container_width": true,
+    "theme": "streamlit",
+    "id": "$$ID-82fe8450810d2e29d5266db45c606874-None",
+    "spec": {
+     "data": [
+      {
+       "line": {
+        "color": "#5DADE2",
+        "width": 3
+       },
+       "mode": "lines",
+       "name": "Porosity(compression)",
+       "x": {
+        "dtype": "f8",
+        "bdata_chars": 2144,
+        "shape": null
+       },
+       "y": {
+        "dtype": "f8",
+        "bdata_chars": 2144,
+        "shape": null
+       },
+       "type": "scatter"
+      },
+      {
+       "hovertemplate": "Porosity: %{x:.4f}<br>Compression: %{y:.2f} MPa<extra></extra>",
+       "marker": {
+        "color": "#FFFFFF",
+        "line": {
+         "color": "#444444",
+         "width": 1.5
+        },
+        "size": 11
+       },
+       "mode": "markers",
+       "name": "Applied",
+       "x": [
+        0.27812949050249064
+       ],
+       "y": [
+        0.0
+       ],
+       "type": "scatter"
+      }
+     ],
+     "layout": {
+      "template": {
+       "data": {
+        "candlestick": [
+         {
+          "decreasing": {
+           "line": {
+            "color": "#000033"
+           }
+          },
+          "increasing": {
+           "line": {
+            "color": "#000032"
+           }
+          },
+          "type": "candlestick"
+         }
+        ],
+        "contourcarpet": [
+         {
+          "colorscale": [
+           [
+            0.0,
+            "#000011"
+           ],
+           [
+            0.1111111111111111,
+            "#000012"
+           ],
+           [
+            0.2222222222222222,
+            "#000013"
+           ],
+           [
+            0.3333333333333333,
+            "#000014"
+           ],
+           [
+            0.4444444444444444,
+            "#000015"
+           ],
+           [
+            0.5555555555555556,
+            "#000016"
+           ],
+           [
+            0.6666666666666666,
+            "#000017"
+           ],
+           [
+            0.7777777777777778,
+            "#000018"
+           ],
+           [
+            0.8888888888888888,
+            "#000019"
+           ],
+           [
+            1.0,
+            "#000020"
+           ]
+          ],
+          "type": "contourcarpet"
+         }
+        ],
+        "contour": [
+         {
+          "colorscale": [
+           [
+            0.0,
+            "#000011"
+           ],
+           [
+            0.1111111111111111,
+            "#000012"
+           ],
+           [
+            0.2222222222222222,
+            "#000013"
+           ],
+           [
+            0.3333333333333333,
+            "#000014"
+           ],
+           [
+            0.4444444444444444,
+            "#000015"
+           ],
+           [
+            0.5555555555555556,
+            "#000016"
+           ],
+           [
+            0.6666666666666666,
+            "#000017"
+           ],
+           [
+            0.7777777777777778,
+            "#000018"
+           ],
+           [
+            0.8888888888888888,
+            "#000019"
+           ],
+           [
+            1.0,
+            "#000020"
+           ]
+          ],
+          "type": "contour"
+         }
+        ],
+        "heatmap": [
+         {
+          "colorscale": [
+           [
+            0.0,
+            "#000011"
+           ],
+           [
+            0.1111111111111111,
+            "#000012"
+           ],
+           [
+            0.2222222222222222,
+            "#000013"
+           ],
+           [
+            0.3333333333333333,
+            "#000014"
+           ],
+           [
+            0.4444444444444444,
+            "#000015"
+           ],
+           [
+            0.5555555555555556,
+            "#000016"
+           ],
+           [
+            0.6666666666666666,
+            "#000017"
+           ],
+           [
+            0.7777777777777778,
+            "#000018"
+           ],
+           [
+            0.8888888888888888,
+            "#000019"
+           ],
+           [
+            1.0,
+            "#000020"
+           ]
+          ],
+          "type": "heatmap"
+         }
+        ],
+        "histogram2d": [
+         {
+          "colorscale": [
+           [
+            0.0,
+            "#000011"
+           ],
+           [
+            0.1111111111111111,
+            "#000012"
+           ],
+           [
+            0.2222222222222222,
+            "#000013"
+           ],
+           [
+            0.3333333333333333,
+            "#000014"
+           ],
+           [
+            0.4444444444444444,
+            "#000015"
+           ],
+           [
+            0.5555555555555556,
+            "#000016"
+           ],
+           [
+            0.6666666666666666,
+            "#000017"
+           ],
+           [
+            0.7777777777777778,
+            "#000018"
+           ],
+           [
+            0.8888888888888888,
+            "#000019"
+           ],
+           [
+            1.0,
+            "#000020"
+           ]
+          ],
+          "type": "histogram2d"
+         }
+        ],
+        "icicle": [
+         {
+          "textfont": {
+           "color": "white"
+          },
+          "type": "icicle"
+         }
+        ],
+        "sankey": [
+         {
+          "textfont": {
+           "color": "#000036"
+          },
+          "type": "sankey"
+         }
+        ],
+        "scatter": [
+         {
+          "marker": {
+           "line": {
+            "width": 0
+           }
+          },
+          "type": "scatter"
+         }
+        ],
+        "table": [
+         {
+          "cells": {
+           "fill": {
+            "color": "#000038"
+           },
+           "font": {
+            "color": "#000037"
+           },
+           "line": {
+            "color": "#000039"
+           }
+          },
+          "header": {
+           "fill": {
+            "color": "#000040"
+           },
+           "font": {
+            "color": "#000036"
+           },
+           "line": {
+            "color": "#000039"
+           }
+          },
+          "type": "table"
+         }
+        ],
+        "waterfall": [
+         {
+          "connector": {
+           "line": {
+            "color": "#000036",
+            "width": 2
+           }
+          },
+          "decreasing": {
+           "marker": {
+            "color": "#000033"
+           }
+          },
+          "increasing": {
+           "marker": {
+            "color": "#000032"
+           }
+          },
+          "totals": {
+           "marker": {
+            "color": "#000034"
+           }
+          },
+          "type": "waterfall"
+         }
+        ]
+       },
+       "layout": {
+        "coloraxis": {
+         "colorscale": [
+          [
+           0.0,
+           "#000011"
+          ],
+          [
+           0.1111111111111111,
+           "#000012"
+          ],
+          [
+           0.2222222222222222,
+           "#000013"
+          ],
+          [
+           0.3333333333333333,
+           "#000014"
+          ],
+          [
+           0.4444444444444444,
+           "#000015"
+          ],
+          [
+           0.5555555555555556,
+           "#000016"
+          ],
+          [
+           0.6666666666666666,
+           "#000017"
+          ],
+          [
+           0.7777777777777778,
+           "#000018"
+          ],
+          [
+           0.8888888888888888,
+           "#000019"
+          ],
+          [
+           1.0,
+           "#000020"
+          ]
+         ]
+        },
+        "colorscale": {
+         "diverging": [
+          [
+           0.0,
+           "#000021"
+          ],
+          [
+           0.1,
+           "#000022"
+          ],
+          [
+           0.2,
+           "#000023"
+          ],
+          [
+           0.3,
+           "#000024"
+          ],
+          [
+           0.4,
+           "#000025"
+          ],
+          [
+           0.5,
+           "#000026"
+          ],
+          [
+           0.6,
+           "#000027"
+          ],
+          [
+           0.7,
+           "#000028"
+          ],
+          [
+           0.8,
+           "#000029"
+          ],
+          [
+           0.9,
+           "#000030"
+          ],
+          [
+           1.0,
+           "#000031"
+          ]
+         ],
+         "sequential": [
+          [
+           0.0,
+           "#000011"
+          ],
+          [
+           0.1111111111111111,
+           "#000012"
+          ],
+          [
+           0.2222222222222222,
+           "#000013"
+          ],
+          [
+           0.3333333333333333,
+           "#000014"
+          ],
+          [
+           0.4444444444444444,
+           "#000015"
+          ],
+          [
+           0.5555555555555556,
+           "#000016"
+          ],
+          [
+           0.6666666666666666,
+           "#000017"
+          ],
+          [
+           0.7777777777777778,
+           "#000018"
+          ],
+          [
+           0.8888888888888888,
+           "#000019"
+          ],
+          [
+           1.0,
+           "#000020"
+          ]
+         ],
+         "sequentialminus": [
+          [
+           0.0,
+           "#000011"
+          ],
+          [
+           0.1111111111111111,
+           "#000012"
+          ],
+          [
+           0.2222222222222222,
+           "#000013"
+          ],
+          [
+           0.3333333333333333,
+           "#000014"
+          ],
+          [
+           0.4444444444444444,
+           "#000015"
+          ],
+          [
+           0.5555555555555556,
+           "#000016"
+          ],
+          [
+           0.6666666666666666,
+           "#000017"
+          ],
+          [
+           0.7777777777777778,
+           "#000018"
+          ],
+          [
+           0.8888888888888888,
+           "#000019"
+          ],
+          [
+           1.0,
+           "#000020"
+          ]
+         ]
+        },
+        "colorway": [
+         "#000001",
+         "#000002",
+         "#000003",
+         "#000004",
+         "#000005",
+         "#000006",
+         "#000007",
+         "#000008",
+         "#000009",
+         "#000010"
+        ]
+       }
+      },
+      "font": {
+       "color": "#FFFFFF",
+       "family": "Open Sans",
+       "size": 24
+      },
+      "margin": {
+       "l": 70,
+       "r": 40,
+       "t": 10,
+       "b": 60
+      },
+      "xaxis": {
+       "tickfont": {
+        "size": 18
+       },
+       "showgrid": true,
+       "gridcolor": "#666666",
+       "gridwidth": 0.5,
+       "griddash": "dot",
+       "zeroline": false,
+       "showline": true,
+       "linecolor": "#FFFFFF",
+       "linewidth": 3,
+       "mirror": true,
+       "title": {
+        "font": {
+         "size": 24
+        },
+        "text": "Porosity [-]"
+       },
+       "range": [
+        0,
+        0.3198489140778642
+       ]
+      },
+      "yaxis": {
+       "tickfont": {
+        "size": 18
+       },
+       "showgrid": true,
+       "gridcolor": "#666666",
+       "gridwidth": 0.5,
+       "griddash": "dot",
+       "showline": true,
+       "linecolor": "#FFFFFF",
+       "linewidth": 3,
+       "mirror": true,
+       "title": {
+        "font": {
+         "size": 24
+        },
+        "text": "Compression [MPa]"
+       },
+       "range": [
+        0,
+        60
+       ],
+       "zeroline": false
+      },
+      "legend": {
+       "font": {
+        "size": 20
+       },
+       "x": 0,
+       "y": 0,
+       "xanchor": "left",
+       "yanchor": "bottom",
+       "bgcolor": "#FFFFFF"
+      },
+      "width": 500,
+      "height": 500,
+      "plot_bgcolor": "#333333",
+      "paper_bgcolor": "#003B73",
+      "hovermode": "closest",
+      "showlegend": false
+     }
+    },
+    "config": {
+     "showLink": false,
+     "linkText": false
+    }
+   }
+  },
+  {
+   "where": "sidebar",
+   "type": "SpecialBlock",
+   "container": true,
+   "proto": null
+  },
+  {
+   "where": "sidebar/0",
+   "type": "Markdown",
+   "value": "<style>\ndiv.stButton > button:first-child {\n    width: 100%;\n    background-color: #5DADE2;  /* dunkelblau */\n    color: white;               /* Textfarbe */\n    border-radius: 8px;         /* abgerundete Ecken */\n    height: 3em;                /* etwas höher machen */\n    font-weight: bold;\n    font-size:18\n}\ndiv.stButton > button:first-child:hover {\n    background-color: #0059b3;  /* Hover-Effekt */\n    color: #fff;\n}\n</style>",
+   "key": null,
+   "help": "",
+   "proto": {
+    "body": "<style>\ndiv.stButton > button:first-child {\n    width: 100%;\n    background-color: #5DADE2;  /* dunkelblau */\n    color: white;               /* Textfarbe */\n    border-radius: 8px;         /* abgerundete Ecken */\n    height: 3em;                /* etwas höher machen */\n    font-weight: bold;\n    font-size:18\n}\ndiv.stButton > button:first-child:hover {\n    background-color: #0059b3;  /* Hover-Effekt */\n    color: #fff;\n}\n</style>",
+    "allow_html": true,
+    "element_type": "NATIVE"
+   }
+  },
+  {
+   "where": "sidebar/1",
+   "type": "Button",
+   "label": "⬅ Back to Landing",
+   "value": false,
+   "key": null,
+   "help": "",
+   "disabled": false,
+   "icon": "",
+   "proto": {
+    "id": "$$ID-089b41c97b8fb8d923ef9511d602b1a1-None",
+    "label": "⬅ Back to Landing",
+    "type": "secondary"
+   }
+  },
+  {
+   "where": "sidebar/2",
+   "type": "Markdown",
+   "value": "---",
+   "key": null,
+   "help": "",
+   "proto": {
+    "body": "---",
+    "element_type": "NATIVE"
+   }
+  },
+  {
+   "where": "sidebar/3",
+   "type": "Header",
+   "value": "🔧 Swelling conditions",
+   "key": null,
+   "help": "",
+   "proto": {
+    "tag": "h2",
+    "body": "🔧 Swelling conditions"
+   }
+  },
+  {
+   "where": "sidebar/4",
+   "type": "Slider",
+   "label": "SoC",
+   "value": 0.5,
+   "key": "slider_soc",
+   "help": "",
+   "min": 0.0,
+   "max": 1.0,
+   "step": 0.01,
+   "format": "%0.2f",
+   "options": "[]",
+   "disabled": false,
+   "proto": {
+    "id": "$$ID-c69381127337b22ba841ec2071552842-slider_soc",
+    "label": "SoC",
+    "format": "%0.2f",
+    "data_type": "FLOAT",
+    "default": [
+     0.5
+    ],
+    "max": 1.0,
+    "step": 0.01,
+    "label_visibility": {},
+    "type": "SLIDER"
+   }
+  },
+  {
+   "where": "sidebar/5",
+   "type": "Slider",
+   "label": "State of Health",
+   "value": 1.0,
+   "key": "slider_soh",
+   "help": "",
+   "min": 0.8,
+   "max": 1.0,
+   "step": -0.01,
+   "format": "%0.2f",
+   "options": "[]",
+   "disabled": false,
+   "proto": {
+    "id": "$$ID-0c01e0dd0a11eaf9fb74d704f985be1d-slider_soh",
+    "label": "State of Health",
+    "format": "%0.2f",
+    "data_type": "FLOAT",
+    "default": [
+     1.0
+    ],
+    "min": 0.8,
+    "max": 1.0,
+    "step": -0.01,
+    "label_visibility": {},
+    "type": "SLIDER"
+   }
+  },
+  {
+   "where": "sidebar/6",
+   "type": "Checkbox",
+   "label": "Cylindrical?",
+   "value": false,
+   "key": null,
+   "help": "",
+   "disabled": false,
+   "proto": {
+    "id": "$$ID-6866ad057e6ae9f2412b896668ee6d44-None",
+    "label": "Cylindrical?",
+    "label_visibility": {}
+   }
+  },
+  {
+   "where": "sidebar/7",
+   "type": "Slider",
+   "label": "Compression [MPa]",
+   "value": 0.0,
+   "key": null,
+   "help": "",
+   "min": 0.0,
+   "max": 60.0,
+   "step": 1.0,
+   "format": "%0.2f",
+   "options": "[]",
+   "disabled": false,
+   "proto": {
+    "id": "$$ID-7c1c8e0c2ba1f63af3eb9112032d1f04-None",
+    "label": "Compression [MPa]",
+    "format": "%0.2f",
+    "data_type": "FLOAT",
+    "default": [
+     0.0
+    ],
+    "max": 60.0,
+    "step": 1.0,
+    "label_visibility": {},
+    "type": "SLIDER"
+   }
+  },
+  {
+   "where": "sidebar/8",
+   "type": "Markdown",
+   "value": "---",
+   "key": null,
+   "help": "",
+   "proto": {
+    "body": "---",
+    "element_type": "NATIVE"
+   }
+  },
+  {
+   "where": "sidebar/9",
+   "type": "Markdown",
+   "value": "<style>\n.custom-link {\n    display: inline-block;\n    width: 100%;\n    padding: 0.5rem 1rem;\n    text-align: center;\n    text-decoration: none !important;\n    border-radius: 5px;\n    font-weight: 500;\n    color: white !important;\n    background-color: transparent;\n    border: none;\n    margin-bottom: 0.5rem;\n}\n.custom-link:hover {\n    background-color: #003B73;\n    text-decoration: none;\n}\n</style>",
+   "key": null,
+   "help": "",
+   "proto": {
+    "body": "<style>\n.custom-link {\n    display: inline-block;\n    width: 100%;\n    padding: 0.5rem 1rem;\n    text-align: center;\n    text-decoration: none !important;\n    border-radius: 5px;\n    font-weight: 500;\n    color: white !important;\n    background-color: transparent;\n    border: none;\n    margin-bottom: 0.5rem;\n}\n.custom-link:hover {\n    background-color: #003B73;\n    text-decoration: none;\n}\n</style>",
+    "allow_html": true,
+    "element_type": "NATIVE"
+   }
+  },
+  {
+   "where": "sidebar/10",
+   "type": "Markdown",
+   "value": "<a class=\"custom-link\" href=\"mailto:lars@chargetanks.com\" target=\"_blank\">\n💌 Send me an Email\n</a>",
+   "key": null,
+   "help": "",
+   "proto": {
+    "body": "<a class=\"custom-link\" href=\"mailto:lars@chargetanks.com\" target=\"_blank\">\n💌 Send me an Email\n</a>",
+    "allow_html": true,
+    "element_type": "NATIVE"
+   }
+  },
+  {
+   "where": "sidebar/11",
+   "type": "Markdown",
+   "value": "---",
+   "key": null,
+   "help": "",
+   "proto": {
+    "body": "---",
+    "element_type": "NATIVE"
+   }
+  },
+  {
+   "where": "sidebar/12",
+   "type": "Markdown",
+   "value": "<div style=\"text-align:center;font-size:.85rem;color:gray;line-height:1.4\">\n© 2025 Lars von Kolzenberg<br>\nBuilt with Streamlit - v0.7.0<br>\nFor educational use only\n</div>",
+   "key": null,
+   "help": "",
+   "proto": {
+    "body": "<div style=\"text-align:center;font-size:.85rem;color:gray;line-height:1.4\">\n© 2025 Lars von Kolzenberg<br>\nBuilt with Streamlit - v0.7.0<br>\nFor educational use only\n</div>",
+    "allow_html": true,
+    "element_type": "NATIVE"
+   }
+  }
+ ]
+}

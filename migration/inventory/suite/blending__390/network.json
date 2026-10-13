@@ -1,0 +1,186 @@
+{
+ "requests": [
+  {
+   "url": "http://localhost:8501/",
+   "method": "GET",
+   "type": "document",
+   "foreign": false,
+   "blocked": false
+  },
+  {
+   "url": "http://localhost:8501/static/media/SourceSansVF-Upright.ttf.BsWL4Kly.woff2",
+   "method": "GET",
+   "type": "font",
+   "foreign": false,
+   "blocked": false
+  },
+  {
+   "url": "http://localhost:8501/static/js/index.BTGIlECR.js",
+   "method": "GET",
+   "type": "script",
+   "foreign": false,
+   "blocked": false
+  },
+  {
+   "url": "http://localhost:8501/static/css/index.CJVRHjQZ.css",
+   "method": "GET",
+   "type": "stylesheet",
+   "foreign": false,
+   "blocked": false
+  },
+  {
+   "url": "http://localhost:8501/_stcore/health",
+   "method": "GET",
+   "type": "xhr",
+   "foreign": false,
+   "blocked": false
+  },
+  {
+   "url": "http://localhost:8501/_stcore/host-config",
+   "method": "GET",
+   "type": "xhr",
+   "foreign": false,
+   "blocked": false
+  },
+  {
+   "url": "https://data.streamlit.io/metrics.json",
+   "method": "GET",
+   "type": "fetch",
+   "foreign": true,
+   "blocked": true
+  },
+  {
+   "url": "http://localhost:8501/static/js/index.BteAxTUz.js",
+   "method": "GET",
+   "type": "script",
+   "foreign": false,
+   "blocked": false
+  },
+  {
+   "url": "http://localhost:8501/static/js/index.4yEdNndV.js",
+   "method": "GET",
+   "type": "script",
+   "foreign": false,
+   "blocked": false
+  },
+  {
+   "url": "http://localhost:8501/static/js/withFullScreenWrapper.DkugyWpW.js",
+   "method": "GET",
+   "type": "script",
+   "foreign": false,
+   "blocked": false
+  },
+  {
+   "url": "http://localhost:8501/static/js/Toolbar.D8wuuqZd.js",
+   "method": "GET",
+   "type": "script",
+   "foreign": false,
+   "blocked": false
+  },
+  {
+   "url": "http://localhost:8501/static/js/index.94f3Fw7s.js",
+   "method": "GET",
+   "type": "script",
+   "foreign": false,
+   "blocked": false
+  },
+  {
+   "url": "http://localhost:8501/media/3bf56e779e6555a89d8db99ac88646fd4cf8aafb55df6cade08b3055.png",
+   "method": "GET",
+   "type": "image",
+   "foreign": false,
+   "blocked": false
+  },
+  {
+   "url": "http://localhost:8501/media/3854cd9fe14e8871a5c81e2d78ea37aa01fce712d225088b8ac337eb.png",
+   "method": "GET",
+   "type": "image",
+   "foreign": false,
+   "blocked": false
+  },
+  {
+   "url": "http://localhost:8501/media/b608d882fc9e4fc064e403040ad346ce1701ebc50aafc1a6198d15f8.png",
+   "method": "GET",
+   "type": "image",
+   "foreign": false,
+   "blocked": false
+  },
+  {
+   "url": "http://localhost:8501/media/7569ceea56b35c46c6ca27b8149723e59ba377ae34d4403d781a65c7.png",
+   "method": "GET",
+   "type": "image",
+   "foreign": false,
+   "blocked": false
+  },
+  {
+   "url": "http://localhost:8501/media/0d8f854437987744307d28b6d6819fd5632553f4001ddcd218f985df.png",
+   "method": "GET",
+   "type": "image",
+   "foreign": false,
+   "blocked": false
+  },
+  {
+   "url": "http://localhost:8501/static/media/MaterialSymbols-Rounded.DsbC8sYI.woff2",
+   "method": "GET",
+   "type": "font",
+   "foreign": false,
+   "blocked": false
+  },
+  {
+   "url": "http://localhost:8501/static/js/index.BjbAdGl1.js",
+   "method": "GET",
+   "type": "script",
+   "foreign": false,
+   "blocked": false
+  },
+  {
+   "url": "http://localhost:8501/static/js/sprintf.D7DtBTRn.js",
+   "method": "GET",
+   "type": "script",
+   "foreign": false,
+   "blocked": false
+  },
+  {
+   "url": "http://localhost:8501/static/js/useBasicWidgetState.oPxte5Mj.js",
+   "method": "GET",
+   "type": "script",
+   "foreign": false,
+   "blocked": false
+  },
+  {
+   "url": "http://localhost:8501/static/js/FormClearHelper.DuzI-rET.js",
+   "method": "GET",
+   "type": "script",
+   "foreign": false,
+   "blocked": false
+  },
+  {
+   "url": "http://localhost:8501/static/media/SourceCodeVF-Upright.ttf.BjWn63N-.woff2",
+   "method": "GET",
+   "type": "font",
+   "foreign": false,
+   "blocked": false
+  },
+  {
+   "url": "http://localhost:8501/static/js/index.BQWRZ6al.js",
+   "method": "GET",
+   "type": "script",
+   "foreign": false,
+   "blocked": false
+  }
+ ],
+ "console": [
+  {
+   "type": "error",
+   "text": "Failed to load resource: net::ERR_FAILED"
+  },
+  {
+   "type": "error",
+   "text": "Failed to fetch metrics config: TypeError: Failed to fetch\n    at MetricsManager.requestDefaultMetricsConfig (http://localhost:8501/static/js/index.BTGIlECR.js:807:4752)\n    at MetricsManager.initialize (http://localhost:8501/static/js/index.BTGIlECR.js:807:4064)\n    at App.handleInitialization (http://localhost:8501/static/js/index.BTGIlECR.js:807:25891)\n    at App.handleNewSession (http://localhost:8501/static/js/index.BTGIlECR.js:807:24855)\n    at Object.newSession (http://localhost:8501/stat"
+  },
+  {
+   "type": "error",
+   "text": "Undefined metrics config - deactivating metrics tracking."
+  }
+ ]
+}

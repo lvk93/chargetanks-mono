@@ -1,0 +1,11 @@
+# Zustand der Legacy-Repos nach Phase 0 (2026-10-13T11:24:58+02:00)
+[chargetanks]
+checked_out_branch=claude_refactor
+HEAD=52f570a6c6e89785a3210cb01d6adbea5ff1c8bf
+porcelain_status_lines=0
+main=3199678a334a3e807d6e934c3961331db752dc22
+[ocv_teaching]
+checked_out_branch=refactor_claude
+HEAD=b3740f03df8e30fb01e854a113c54b1dd0c14323
+porcelain_status_lines=0
+master=deb0609214a70972d5a343b2f09a6414a59638f3

@@ -1,0 +1,103 @@
+{
+ "sliders": [],
+ "selects": [],
+ "checkboxes": [],
+ "buttons": [
+  {
+   "text": "",
+   "testid": null,
+   "kind": null,
+   "disabled": false,
+   "ariaLabel": "Open navigation menu"
+  }
+ ],
+ "expanders": [],
+ "headings": [
+  {
+   "tag": "h1",
+   "text": "This page does not exist",
+   "id": ""
+  },
+  {
+   "tag": "h3",
+   "text": "Quick Links",
+   "id": ""
+  }
+ ],
+ "images": [],
+ "links": [
+  {
+   "text": "Charge Tanks",
+   "href": "/",
+   "target": "",
+   "rel": ""
+  },
+  {
+   "text": "Tools",
+   "href": "/tools/",
+   "target": "",
+   "rel": ""
+  },
+  {
+   "text": "Blog",
+   "href": "/blog/",
+   "target": "",
+   "rel": ""
+  },
+  {
+   "text": "About",
+   "href": "/#about",
+   "target": "",
+   "rel": ""
+  },
+  {
+   "text": "Back to Home",
+   "href": "/",
+   "target": "",
+   "rel": ""
+  },
+  {
+   "text": "Browse Articles",
+   "href": "/blog/",
+   "target": "",
+   "rel": ""
+  },
+  {
+   "text": "Explore Tools",
+   "href": "/tools/",
+   "target": "",
+   "rel": ""
+  },
+  {
+   "text": "",
+   "href": "https://www.linkedin.com/in/lars-von-kolzenberg/",
+   "target": "_blank",
+   "rel": "noopener noreferrer"
+  },
+  {
+   "text": "",
+   "href": "mailto:lars@chargetanks.com",
+   "target": "",
+   "rel": ""
+  },
+  {
+   "text": "About",
+   "href": "/#about",
+   "target": "",
+   "rel": ""
+  },
+  {
+   "text": "Tools",
+   "href": "/tools/",
+   "target": "",
+   "rel": ""
+  },
+  {
+   "text": "Blog",
+   "href": "/blog/",
+   "target": "",
+   "rel": ""
+  }
+ ],
+ "status": null
+}

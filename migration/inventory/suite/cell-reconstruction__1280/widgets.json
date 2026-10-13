@@ -1,0 +1,159 @@
+{
+ "sliders": [
+  {
+   "label": "SoC",
+   "ariaMin": "0",
+   "ariaMax": "1",
+   "ariaNow": "0.5",
+   "ariaText": "0.50",
+   "thumbValue": "0.50",
+   "tickMin": "0.00",
+   "tickMax": "1.00",
+   "thumbCenterFraction": 0.5
+  },
+  {
+   "label": "V min [V]",
+   "ariaMin": "2",
+   "ariaMax": "3.5",
+   "ariaNow": "2",
+   "ariaText": "2.00",
+   "thumbValue": "2.00",
+   "tickMin": "2.00",
+   "tickMax": "3.50",
+   "thumbCenterFraction": 0
+  },
+  {
+   "label": "V max [V]",
+   "ariaMin": "3.5",
+   "ariaMax": "4.5",
+   "ariaNow": "4",
+   "ariaText": "4.00",
+   "thumbValue": "4.00",
+   "tickMin": "3.50",
+   "tickMax": "4.50",
+   "thumbCenterFraction": 0.5
+  },
+  {
+   "label": "NP Ratio",
+   "ariaMin": "0.8",
+   "ariaMax": "1.5",
+   "ariaNow": "1",
+   "ariaText": "1.00",
+   "thumbValue": "1.00",
+   "tickMin": "0.80",
+   "tickMax": "1.50",
+   "thumbCenterFraction": 0.28571427997789883
+  },
+  {
+   "label": "LiP Ratio",
+   "ariaMin": "0.5",
+   "ariaMax": "1.5",
+   "ariaNow": "1",
+   "ariaText": "1.00",
+   "thumbValue": "1.00",
+   "tickMin": "0.50",
+   "tickMax": "1.50",
+   "thumbCenterFraction": 0.5
+  }
+ ],
+ "selects": [
+  {
+   "label": "Anode",
+   "value": "Ideal Anodeopen"
+  },
+  {
+   "label": "Cathode",
+   "value": "Ideal Cathodeopen"
+  }
+ ],
+ "checkboxes": [],
+ "buttons": [
+  {
+   "text": "keyboard_double_arrow_left",
+   "testid": "stBaseButton-headerNoPadding",
+   "kind": "headerNoPadding",
+   "disabled": false,
+   "ariaLabel": ""
+  },
+  {
+   "text": "⬅ Back to Landing",
+   "testid": "stBaseButton-secondary",
+   "kind": "secondary",
+   "disabled": false,
+   "ariaLabel": ""
+  },
+  {
+   "text": "Deploy",
+   "testid": "stBaseButton-header",
+   "kind": "header",
+   "disabled": false,
+   "ariaLabel": ""
+  }
+ ],
+ "expanders": [
+  {
+   "summary": "🧠 What does this tool show?",
+   "open": false
+  }
+ ],
+ "headings": [
+  {
+   "tag": "h2",
+   "text": "🔧 Adjust Cell Settings",
+   "id": ""
+  },
+  {
+   "tag": "h3",
+   "text": "Cutoff Voltages",
+   "id": ""
+  },
+  {
+   "tag": "h3",
+   "text": "Capacity Ratios",
+   "id": ""
+  },
+  {
+   "tag": "h1",
+   "text": "🔋 Understand Batteries with the Tank Analogy",
+   "id": "understand-batteries-with-the-tank-analogy"
+  },
+  {
+   "tag": "h3",
+   "text": "🔋 Electrode dQ/dV Tanks",
+   "id": "electrode-d-q-d-v-tanks"
+  },
+  {
+   "tag": "h3",
+   "text": "📈 Voltage vs. SoC",
+   "id": "voltage-vs-so-c"
+  }
+ ],
+ "images": [],
+ "links": [
+  {
+   "text": "💌 Send me an Email",
+   "href": "mailto:lars@chargetanks.com",
+   "target": "_blank",
+   "rel": "noopener noreferrer"
+  },
+  {
+   "text": "",
+   "href": "#understand-batteries-with-the-tank-analogy",
+   "target": "",
+   "rel": ""
+  },
+  {
+   "text": "",
+   "href": "#electrode-d-q-d-v-tanks",
+   "target": "",
+   "rel": ""
+  },
+  {
+   "text": "",
+   "href": "#voltage-vs-so-c",
+   "target": "",
+   "rel": ""
+  }
+ ],
+ "status": null
+}

@@ -1,0 +1,109 @@
+{
+ "url": "http://localhost:4173/blog/",
+ "title": "Battery Blog | Charge Tanks",
+ "lang": "en",
+ "meta": [
+  {
+   "charset": "UTF-8"
+  },
+  {
+   "name": "viewport",
+   "content": "width=device-width, initial-scale=1.0"
+  },
+  {
+   "name": "description",
+   "content": "Articles from Charge Tanks about battery design trade-offs, OCV interpretation, and battery aging through the two-tank analogy."
+  },
+  {
+   "name": "author",
+   "content": "Lars von Kolzenberg"
+  },
+  {
+   "name": "robots",
+   "content": "index, follow"
+  },
+  {
+   "name": "theme-color",
+   "content": "#003B73"
+  },
+  {
+   "property": "og:site_name",
+   "content": "Charge Tanks"
+  },
+  {
+   "property": "og:type",
+   "content": "website"
+  },
+  {
+   "property": "og:title",
+   "content": "Battery Blog | Charge Tanks"
+  },
+  {
+   "property": "og:description",
+   "content": "Articles from Charge Tanks about battery design trade-offs, OCV interpretation, and battery aging through the two-tank analogy."
+  },
+  {
+   "property": "og:url",
+   "content": "https://chargetanks.com/blog/"
+  },
+  {
+   "property": "og:image",
+   "content": "https://chargetanks.com/images/introduction_post/2026-03-03_twotank_charge.png"
+  },
+  {
+   "property": "og:image:alt",
+   "content": "Two connected tanks illustrating lithium movement during battery charging."
+  },
+  {
+   "name": "twitter:card",
+   "content": "summary_large_image"
+  },
+  {
+   "name": "twitter:title",
+   "content": "Battery Blog | Charge Tanks"
+  },
+  {
+   "name": "twitter:description",
+   "content": "Articles from Charge Tanks about battery design trade-offs, OCV interpretation, and battery aging through the two-tank analogy."
+  },
+  {
+   "name": "twitter:image",
+   "content": "https://chargetanks.com/images/introduction_post/2026-03-03_twotank_charge.png"
+  },
+  {
+   "name": "twitter:image:alt",
+   "content": "Two connected tanks illustrating lithium movement during battery charging."
+  }
+ ],
+ "links": [
+  {
+   "rel": "canonical",
+   "href": "https://chargetanks.com/blog/",
+   "type": "",
+   "sizes": null
+  },
+  {
+   "rel": "icon",
+   "href": "/favicon.svg",
+   "type": "image/svg+xml",
+   "sizes": null
+  },
+  {
+   "rel": "manifest",
+   "href": "/site.webmanifest",
+   "type": "",
+   "sizes": null
+  },
+  {
+   "rel": "stylesheet",
+   "href": "/assets/index-D016u5sb.css",
+   "type": "",
+   "sizes": null
+  }
+ ],
+ "jsonld": [
+  "[{\"@context\":\"https://schema.org\",\"@type\":\"CollectionPage\",\"name\":\"Battery Blog | Charge Tanks\",\"description\":\"Articles from Charge Tanks about battery design trade-offs, OCV interpretation, and battery aging through the two-tank analogy.\",\"url\":\"https://chargetanks.com/blog/\",\"isPartOf\":{\"@type\":\"WebSite\",\"name\":\"Charge Tanks\",\"url\":\"https://chargetanks.com\"},\"inLanguage\":\"en\"},{\"@context\":\"https://schema.org\",\"@type\":\"BreadcrumbList\",\"itemListElement\":[{\"@type\":\"ListItem\",\"position\":1,\"name\":\"Home\",\"item\":\"https://chargetanks.com/\"},{\"@type\":\"ListItem\",\"position\":2,\"name\":\"Blog\",\"item\":\"https://chargetanks.com/blog/\"}]}]"
+ ],
+ "bodyBackground": "rgba(0, 0, 0, 0)",
+ "scrollHeight": 1139
+}

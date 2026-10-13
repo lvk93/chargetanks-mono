@@ -1,0 +1,19 @@
+{
+ "requests": [
+  {
+   "url": "http://localhost:4173/blog/",
+   "method": "GET",
+   "type": "document",
+   "foreign": false,
+   "blocked": false
+  },
+  {
+   "url": "http://localhost:4173/assets/index-D016u5sb.css",
+   "method": "GET",
+   "type": "stylesheet",
+   "foreign": false,
+   "blocked": false
+  }
+ ],
+ "console": []
+}

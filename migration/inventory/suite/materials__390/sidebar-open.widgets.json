@@ -1,0 +1,101 @@
+{
+ "sliders": [
+  {
+   "label": "SoL",
+   "ariaMin": "0",
+   "ariaMax": "1",
+   "ariaNow": "0.5",
+   "ariaText": "0.50",
+   "thumbValue": "0.50",
+   "tickMin": "0.00",
+   "tickMax": "1.00",
+   "thumbCenterFraction": 0.5
+  }
+ ],
+ "selects": [
+  {
+   "label": "Material",
+   "value": "Ideal Anodeopen"
+  }
+ ],
+ "checkboxes": [],
+ "buttons": [
+  {
+   "text": "keyboard_double_arrow_left",
+   "testid": "stBaseButton-headerNoPadding",
+   "kind": "headerNoPadding",
+   "disabled": false,
+   "ariaLabel": ""
+  },
+  {
+   "text": "⬅ Back to Landing",
+   "testid": "stBaseButton-secondary",
+   "kind": "secondary",
+   "disabled": false,
+   "ariaLabel": ""
+  },
+  {
+   "text": "Deploy",
+   "testid": "stBaseButton-header",
+   "kind": "header",
+   "disabled": false,
+   "ariaLabel": ""
+  }
+ ],
+ "expanders": [
+  {
+   "summary": "🧠 What does this tool show?",
+   "open": false
+  }
+ ],
+ "headings": [
+  {
+   "tag": "h2",
+   "text": "Choose your material",
+   "id": ""
+  },
+  {
+   "tag": "h1",
+   "text": "🪣 Understand Materials with the Tank Analogy",
+   "id": "understand-materials-with-the-tank-analogy"
+  },
+  {
+   "tag": "h3",
+   "text": "🪣 Electrode dQ/dV Tank",
+   "id": "electrode-d-q-d-v-tank"
+  },
+  {
+   "tag": "h3",
+   "text": "📈 Voltage vs. SoL",
+   "id": "voltage-vs-so-l"
+  }
+ ],
+ "images": [],
+ "links": [
+  {
+   "text": "💌 Send me an Email",
+   "href": "mailto:lars@chargetanks.com",
+   "target": "_blank",
+   "rel": "noopener noreferrer"
+  },
+  {
+   "text": "",
+   "href": "#understand-materials-with-the-tank-analogy",
+   "target": "",
+   "rel": ""
+  },
+  {
+   "text": "",
+   "href": "#electrode-d-q-d-v-tank",
+   "target": "",
+   "rel": ""
+  },
+  {
+   "text": "",
+   "href": "#voltage-vs-so-l",
+   "target": "",
+   "rel": ""
+  }
+ ],
+ "status": null
+}

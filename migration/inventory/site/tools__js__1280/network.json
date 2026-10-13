@@ -1,0 +1,47 @@
+{
+ "requests": [
+  {
+   "url": "http://localhost:4173/tools/",
+   "method": "GET",
+   "type": "document",
+   "foreign": false,
+   "blocked": false
+  },
+  {
+   "url": "http://localhost:4173/assets/index-DnyaQ7kt.js",
+   "method": "GET",
+   "type": "script",
+   "foreign": false,
+   "blocked": false
+  },
+  {
+   "url": "http://localhost:4173/assets/index-D016u5sb.css",
+   "method": "GET",
+   "type": "stylesheet",
+   "foreign": false,
+   "blocked": false
+  },
+  {
+   "url": "http://localhost:4173/assets/ToolsPage-yx7NQv4C.js",
+   "method": "GET",
+   "type": "script",
+   "foreign": false,
+   "blocked": false
+  },
+  {
+   "url": "http://localhost:4173/images/cell_thumbnail.png",
+   "method": "GET",
+   "type": "image",
+   "foreign": false,
+   "blocked": false
+  },
+  {
+   "url": "http://localhost:4173/images/cell_thumbnail.png",
+   "method": "GET",
+   "type": "image",
+   "foreign": false,
+   "blocked": false
+  }
+ ],
+ "console": []
+}

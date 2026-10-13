@@ -1,0 +1,217 @@
+{
+ "sliders": [],
+ "selects": [],
+ "checkboxes": [],
+ "buttons": [
+  {
+   "text": "Deploy",
+   "testid": "stBaseButton-header",
+   "kind": "header",
+   "disabled": false,
+   "ariaLabel": ""
+  },
+  {
+   "text": "Open Materials",
+   "testid": "stBaseButton-secondary",
+   "kind": "secondary",
+   "disabled": false,
+   "ariaLabel": ""
+  },
+  {
+   "text": "",
+   "testid": "stBaseButton-elementToolbar",
+   "kind": "elementToolbar",
+   "disabled": false,
+   "ariaLabel": "Fullscreen"
+  },
+  {
+   "text": "Open Cell Reconstruction",
+   "testid": "stBaseButton-secondary",
+   "kind": "secondary",
+   "disabled": false,
+   "ariaLabel": ""
+  },
+  {
+   "text": "",
+   "testid": "stBaseButton-elementToolbar",
+   "kind": "elementToolbar",
+   "disabled": false,
+   "ariaLabel": "Fullscreen"
+  },
+  {
+   "text": "Open Blending",
+   "testid": "stBaseButton-secondary",
+   "kind": "secondary",
+   "disabled": false,
+   "ariaLabel": ""
+  },
+  {
+   "text": "",
+   "testid": "stBaseButton-elementToolbar",
+   "kind": "elementToolbar",
+   "disabled": false,
+   "ariaLabel": "Fullscreen"
+  },
+  {
+   "text": "Open Aging",
+   "testid": "stBaseButton-secondary",
+   "kind": "secondary",
+   "disabled": false,
+   "ariaLabel": ""
+  },
+  {
+   "text": "",
+   "testid": "stBaseButton-elementToolbar",
+   "kind": "elementToolbar",
+   "disabled": false,
+   "ariaLabel": "Fullscreen"
+  },
+  {
+   "text": "Open Swelling",
+   "testid": "stBaseButton-secondary",
+   "kind": "secondary",
+   "disabled": false,
+   "ariaLabel": ""
+  },
+  {
+   "text": "",
+   "testid": "stBaseButton-elementToolbar",
+   "kind": "elementToolbar",
+   "disabled": false,
+   "ariaLabel": "Fullscreen"
+  },
+  {
+   "text": "💌 Email",
+   "testid": "stBaseLinkButton-secondary",
+   "kind": "secondary",
+   "disabled": false,
+   "ariaLabel": null
+  }
+ ],
+ "expanders": [],
+ "headings": [
+  {
+   "tag": "h1",
+   "text": "🪣 Charge Tanks Suite",
+   "id": "charge-tanks-suite"
+  },
+  {
+   "tag": "h2",
+   "text": "Interactive tools to build intuition for battery design, OCV, blending & aging.",
+   "id": "interactive-tools-to-build-intuition-for-battery-design-ocv-blending-and-aging"
+  },
+  {
+   "tag": "h2",
+   "text": "🪣 Materials",
+   "id": "materials"
+  },
+  {
+   "tag": "h2",
+   "text": "🪫 Cell Reconstruction",
+   "id": "cell-reconstruction"
+  },
+  {
+   "tag": "h2",
+   "text": "⚖️ Blending",
+   "id": "blending"
+  },
+  {
+   "tag": "h2",
+   "text": "👴 Aging",
+   "id": "aging"
+  },
+  {
+   "tag": "h2",
+   "text": "🫁 Swelling",
+   "id": "swelling"
+  }
+ ],
+ "images": [
+  {
+   "src": "http://localhost:8501/media/3bf56e779e6555a89d8db99ac88646fd4cf8aafb55df6cade08b3055.png",
+   "alt": "0",
+   "naturalWidth": 629,
+   "naturalHeight": 500,
+   "renderedWidth": 362.671875
+  },
+  {
+   "src": "http://localhost:8501/media/3854cd9fe14e8871a5c81e2d78ea37aa01fce712d225088b8ac337eb.png",
+   "alt": "0",
+   "naturalWidth": 624,
+   "naturalHeight": 650,
+   "renderedWidth": 362.671875
+  },
+  {
+   "src": "http://localhost:8501/media/b608d882fc9e4fc064e403040ad346ce1701ebc50aafc1a6198d15f8.png",
+   "alt": "0",
+   "naturalWidth": 624,
+   "naturalHeight": 450,
+   "renderedWidth": 362.671875
+  },
+  {
+   "src": "http://localhost:8501/media/7569ceea56b35c46c6ca27b8149723e59ba377ae34d4403d781a65c7.png",
+   "alt": "0",
+   "naturalWidth": 608,
+   "naturalHeight": 650,
+   "renderedWidth": 362.671875
+  },
+  {
+   "src": "http://localhost:8501/media/0d8f854437987744307d28b6d6819fd5632553f4001ddcd218f985df.png",
+   "alt": "0",
+   "naturalWidth": 608,
+   "naturalHeight": 500,
+   "renderedWidth": 362.671875
+  }
+ ],
+ "links": [
+  {
+   "text": "",
+   "href": "#charge-tanks-suite",
+   "target": "",
+   "rel": ""
+  },
+  {
+   "text": "",
+   "href": "#interactive-tools-to-build-intuition-for-battery-design-ocv-blending-and-aging",
+   "target": "",
+   "rel": ""
+  },
+  {
+   "text": "",
+   "href": "#materials",
+   "target": "",
+   "rel": ""
+  },
+  {
+   "text": "",
+   "href": "#cell-reconstruction",
+   "target": "",
+   "rel": ""
+  },
+  {
+   "text": "",
+   "href": "#blending",
+   "target": "",
+   "rel": ""
+  },
+  {
+   "text": "",
+   "href": "#aging",
+   "target": "",
+   "rel": ""
+  },
+  {
+   "text": "",
+   "href": "#swelling",
+   "target": "",
+   "rel": ""
+  },
+  {
+   "text": "💌 Email",
+   "href": "mailto:lars@chargetanks.com",
+   "target": "_blank",
+   "rel": "noreferrer"
+  }
+ ],
+ "status": null
+}

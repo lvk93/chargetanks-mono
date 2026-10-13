@@ -1,0 +1,168 @@
+{
+ "sliders": [],
+ "selects": [],
+ "checkboxes": [],
+ "buttons": [
+  {
+   "text": "",
+   "testid": null,
+   "kind": null,
+   "disabled": false,
+   "ariaLabel": "Open navigation menu"
+  }
+ ],
+ "expanders": [],
+ "headings": [
+  {
+   "tag": "h1",
+   "text": "Understanding Batteries Through Two Tanks",
+   "id": ""
+  },
+  {
+   "tag": "h3",
+   "text": "The Core Idea",
+   "id": ""
+  },
+  {
+   "tag": "h2",
+   "text": "Charge Tank Tools",
+   "id": ""
+  },
+  {
+   "tag": "h2",
+   "text": "Latest Articles",
+   "id": ""
+  },
+  {
+   "tag": "h3",
+   "text": "Two-tank battery model: a practical way to understand voltage, capacity, and aging",
+   "id": ""
+  },
+  {
+   "tag": "h2",
+   "text": "About Me",
+   "id": ""
+  },
+  {
+   "tag": "h3",
+   "text": "Quick Links",
+   "id": ""
+  }
+ ],
+ "images": [
+  {
+   "src": "/images/cell_thumbnail.png",
+   "alt": "Two connected tanks representing battery anode and cathode",
+   "naturalWidth": 624,
+   "naturalHeight": 650,
+   "renderedWidth": 258
+  },
+  {
+   "src": "/images/introduction_post/2026-03-03_twotank_charge.png",
+   "alt": "Two connected tanks showing lithium moving during battery charging.",
+   "naturalWidth": 1102,
+   "naturalHeight": 702,
+   "renderedWidth": 356
+  },
+  {
+   "src": "/images/lars.jpg",
+   "alt": "Lars von Kolzenberg",
+   "naturalWidth": 7250,
+   "naturalHeight": 4833,
+   "renderedWidth": 308
+  }
+ ],
+ "links": [
+  {
+   "text": "Charge Tanks",
+   "href": "/",
+   "target": "",
+   "rel": ""
+  },
+  {
+   "text": "Tools",
+   "href": "/tools/",
+   "target": "",
+   "rel": ""
+  },
+  {
+   "text": "Blog",
+   "href": "/blog/",
+   "target": "",
+   "rel": ""
+  },
+  {
+   "text": "About",
+   "href": "/#about",
+   "target": "",
+   "rel": ""
+  },
+  {
+   "text": "Explore Tools",
+   "href": "/tools/",
+   "target": "",
+   "rel": ""
+  },
+  {
+   "text": "Read the Blog",
+   "href": "/blog/",
+   "target": "",
+   "rel": ""
+  },
+  {
+   "text": "Explore the Tool Suite",
+   "href": "/tools/",
+   "target": "",
+   "rel": ""
+  },
+  {
+   "text": "Launch Interactive App",
+   "href": "https://batterytank.onrender.com/",
+   "target": "_blank",
+   "rel": "noopener noreferrer"
+  },
+  {
+   "text": "Browse the Blog",
+   "href": "/blog/",
+   "target": "",
+   "rel": ""
+  },
+  {
+   "text": "BasicsMar 3, 20267 min readTwo-tank battery model: a practical way to understand voltage, capacity, and agingLearn how the two-tank battery model explains cell voltage, usable capacity, NP ratio, aging, lithium inventory, and dQ/dV in one coherent framework.Read Article",
+   "href": "/blog/two-tank-battery-model/",
+   "target": "",
+   "rel": ""
+  },
+  {
+   "text": "",
+   "href": "https://www.linkedin.com/in/lars-von-kolzenberg/",
+   "target": "_blank",
+   "rel": "noopener noreferrer"
+  },
+  {
+   "text": "",
+   "href": "mailto:lars@chargetanks.com",
+   "target": "",
+   "rel": ""
+  },
+  {
+   "text": "About",
+   "href": "/#about",
+   "target": "",
+   "rel": ""
+  },
+  {
+   "text": "Tools",
+   "href": "/tools/",
+   "target": "",
+   "rel": ""
+  },
+  {
+   "text": "Blog",
+   "href": "/blog/",
+   "target": "",
+   "rel": ""
+  }
+ ],
+ "status": null
+}

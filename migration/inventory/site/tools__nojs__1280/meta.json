@@ -1,0 +1,109 @@
+{
+ "url": "http://localhost:4173/tools/",
+ "title": "Battery Tools | Charge Tanks",
+ "lang": "en",
+ "meta": [
+  {
+   "charset": "UTF-8"
+  },
+  {
+   "name": "viewport",
+   "content": "width=device-width, initial-scale=1.0"
+  },
+  {
+   "name": "description",
+   "content": "Interactive Charge Tanks tools for exploring battery voltage limits, OCV behavior, capacity balance, and aging through the two-tank analogy."
+  },
+  {
+   "name": "author",
+   "content": "Lars von Kolzenberg"
+  },
+  {
+   "name": "robots",
+   "content": "index, follow"
+  },
+  {
+   "name": "theme-color",
+   "content": "#003B73"
+  },
+  {
+   "property": "og:site_name",
+   "content": "Charge Tanks"
+  },
+  {
+   "property": "og:type",
+   "content": "website"
+  },
+  {
+   "property": "og:title",
+   "content": "Battery Tools | Charge Tanks"
+  },
+  {
+   "property": "og:description",
+   "content": "Interactive Charge Tanks tools for exploring battery voltage limits, OCV behavior, capacity balance, and aging through the two-tank analogy."
+  },
+  {
+   "property": "og:url",
+   "content": "https://chargetanks.com/tools/"
+  },
+  {
+   "property": "og:image",
+   "content": "https://chargetanks.com/images/cell_thumbnail.png"
+  },
+  {
+   "property": "og:image:alt",
+   "content": "Screenshot of the Charge Tanks battery modeling tool suite"
+  },
+  {
+   "name": "twitter:card",
+   "content": "summary_large_image"
+  },
+  {
+   "name": "twitter:title",
+   "content": "Battery Tools | Charge Tanks"
+  },
+  {
+   "name": "twitter:description",
+   "content": "Interactive Charge Tanks tools for exploring battery voltage limits, OCV behavior, capacity balance, and aging through the two-tank analogy."
+  },
+  {
+   "name": "twitter:image",
+   "content": "https://chargetanks.com/images/cell_thumbnail.png"
+  },
+  {
+   "name": "twitter:image:alt",
+   "content": "Screenshot of the Charge Tanks battery modeling tool suite"
+  }
+ ],
+ "links": [
+  {
+   "rel": "canonical",
+   "href": "https://chargetanks.com/tools/",
+   "type": "",
+   "sizes": null
+  },
+  {
+   "rel": "icon",
+   "href": "/favicon.svg",
+   "type": "image/svg+xml",
+   "sizes": null
+  },
+  {
+   "rel": "manifest",
+   "href": "/site.webmanifest",
+   "type": "",
+   "sizes": null
+  },
+  {
+   "rel": "stylesheet",
+   "href": "/assets/index-D016u5sb.css",
+   "type": "",
+   "sizes": null
+  }
+ ],
+ "jsonld": [
+  "[{\"@context\":\"https://schema.org\",\"@type\":\"CollectionPage\",\"name\":\"Battery Tools | Charge Tanks\",\"description\":\"Interactive Charge Tanks tools for exploring battery voltage limits, OCV behavior, capacity balance, and aging through the two-tank analogy.\",\"url\":\"https://chargetanks.com/tools/\",\"isPartOf\":{\"@type\":\"WebSite\",\"name\":\"Charge Tanks\",\"url\":\"https://chargetanks.com\"},\"inLanguage\":\"en\"},{\"@context\":\"https://schema.org\",\"@type\":\"BreadcrumbList\",\"itemListElement\":[{\"@type\":\"ListItem\",\"position\":1,\"name\":\"Home\",\"item\":\"https://chargetanks.com/\"},{\"@type\":\"ListItem\",\"position\":2,\"name\":\"Tools\",\"item\":\"https://chargetanks.com/tools/\"}]}]"
+ ],
+ "bodyBackground": "rgba(0, 0, 0, 0)",
+ "scrollHeight": 1351
+}

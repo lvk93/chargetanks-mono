@@ -1,0 +1,6 @@
+# Arbeitsverzeichnis der Migration: Legacy-Clones, venvs, Builds (reproduzierbar per migration/setup_legacy.ps1)
+migration/.work/
+__pycache__/
+*.pyc
+node_modules/
+migration/*.log

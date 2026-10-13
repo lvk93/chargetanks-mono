@@ -1,0 +1,117 @@
+{
+ "url": "http://localhost:4173/blog/two-tank-battery-model/",
+ "title": "Two-tank battery model: a practical way to understand voltage, capacity, and aging | Charge Tanks",
+ "lang": "en",
+ "meta": [
+  {
+   "charset": "UTF-8"
+  },
+  {
+   "name": "viewport",
+   "content": "width=device-width, initial-scale=1.0"
+  },
+  {
+   "name": "description",
+   "content": "Learn how the two-tank battery model explains cell voltage, usable capacity, NP ratio, aging, lithium inventory, and dQ/dV in one coherent framework."
+  },
+  {
+   "name": "author",
+   "content": "Lars von Kolzenberg"
+  },
+  {
+   "name": "robots",
+   "content": "index, follow"
+  },
+  {
+   "name": "theme-color",
+   "content": "#003B73"
+  },
+  {
+   "property": "og:site_name",
+   "content": "Charge Tanks"
+  },
+  {
+   "property": "og:type",
+   "content": "article"
+  },
+  {
+   "property": "og:title",
+   "content": "Two-tank battery model: a practical way to understand voltage, capacity, and aging | Charge Tanks"
+  },
+  {
+   "property": "og:description",
+   "content": "Learn how the two-tank battery model explains cell voltage, usable capacity, NP ratio, aging, lithium inventory, and dQ/dV in one coherent framework."
+  },
+  {
+   "property": "og:url",
+   "content": "https://chargetanks.com/blog/two-tank-battery-model/"
+  },
+  {
+   "property": "og:image",
+   "content": "https://chargetanks.com/images/introduction_post/2026-03-03_twotank_charge.png"
+  },
+  {
+   "property": "og:image:alt",
+   "content": "Two connected tanks showing lithium moving during battery charging."
+  },
+  {
+   "name": "twitter:card",
+   "content": "summary_large_image"
+  },
+  {
+   "name": "twitter:title",
+   "content": "Two-tank battery model: a practical way to understand voltage, capacity, and aging | Charge Tanks"
+  },
+  {
+   "name": "twitter:description",
+   "content": "Learn how the two-tank battery model explains cell voltage, usable capacity, NP ratio, aging, lithium inventory, and dQ/dV in one coherent framework."
+  },
+  {
+   "name": "twitter:image",
+   "content": "https://chargetanks.com/images/introduction_post/2026-03-03_twotank_charge.png"
+  },
+  {
+   "name": "twitter:image:alt",
+   "content": "Two connected tanks showing lithium moving during battery charging."
+  },
+  {
+   "property": "article:published_time",
+   "content": "2026-03-03T00:00:00.000Z"
+  },
+  {
+   "property": "article:modified_time",
+   "content": "2026-03-16T00:00:00.000Z"
+  }
+ ],
+ "links": [
+  {
+   "rel": "canonical",
+   "href": "https://chargetanks.com/blog/two-tank-battery-model/",
+   "type": "",
+   "sizes": null
+  },
+  {
+   "rel": "icon",
+   "href": "/favicon.svg",
+   "type": "image/svg+xml",
+   "sizes": null
+  },
+  {
+   "rel": "manifest",
+   "href": "/site.webmanifest",
+   "type": "",
+   "sizes": null
+  },
+  {
+   "rel": "stylesheet",
+   "href": "/assets/index-D016u5sb.css",
+   "type": "",
+   "sizes": null
+  }
+ ],
+ "jsonld": [
+  "[{\"@context\":\"https://schema.org\",\"@type\":\"Person\",\"@id\":\"https://chargetanks.com/#author\",\"name\":\"Lars von Kolzenberg\",\"url\":\"https://chargetanks.com\",\"sameAs\":[\"https://www.linkedin.com/in/lars-von-kolzenberg/\"],\"jobTitle\":\"Battery modeling engineer\"},{\"@context\":\"https://schema.org\",\"@type\":\"BlogPosting\",\"@id\":\"https://chargetanks.com/blog/two-tank-battery-model/#blog-posting\",\"headline\":\"Two-tank battery model: a practical way to understand voltage, capacity, and aging\",\"description\":\"Learn how the two-tank battery model explains cell voltage, usable capacity, NP ratio, aging, lithium inventory, and dQ/dV in one coherent framework.\",\"url\":\"https://chargetanks.com/blog/two-tank-battery-model/\",\"mainEntityOfPage\":\"https://chargetanks.com/blog/two-tank-battery-model/\",\"image\":\"https://chargetanks.com/images/introduction_post/2026-03-03_twotank_charge.png\",\"datePublished\":\"2026-03-03T00:00:00.000Z\",\"dateModified\":\"2026-03-16T00:00:00.000Z\",\"author\":{\"@id\":\"https://chargetanks.com/#author\",\"@type\":\"Person\",\"name\":\"Lars von Kolzenberg\",\"sameAs\":\"https://www.linkedin.com/in/lars-von-kolzenberg/\"},\"publisher\":{\"@type\":\"Organization\",\"name\":\"Charge Tanks\",\"url\":\"https://chargetanks.com\",\"logo\":{\"@type\":\"ImageObject\",\"url\":\"https://chargetanks.com/favicon.svg\"}},\"inLanguage\":\"en\",\"articleSection\":\"Basics\"},{\"@context\":\"https://schema.org\",\"@type\":\"Article\",\"@id\":\"https://chargetanks.com/blog/two-tank-battery-model/#article\",\"headline\":\"Two-tank battery model: a practical way to understand voltage, capacity, and aging\",\"description\":\"Learn how the two-tank battery model explains cell voltage, usable capacity, NP ratio, aging, lithium inventory, and dQ/dV in one coherent framework.\",\"url\":\"https://chargetanks.com/blog/two-tank-battery-model/\",\"mainEntityOfPage\":\"https://chargetanks.com/blog/two-tank-battery-model/\",\"image\":\"https://chargetanks.com/images/introduction_post/2026-03-03_twotank_charge.png\",\"datePublished\":\"2026-03-03T00:00:00.000Z\",\"dateModified\":\"2026-03-16T00:00:00.000Z\",\"author\":{\"@id\":\"https://chargetanks.com/#author\",\"@type\":\"Person\",\"name\":\"Lars von Kolzenberg\",\"sameAs\":\"https://www.linkedin.com/in/lars-von-kolzenberg/\"},\"publisher\":{\"@type\":\"Organization\",\"name\":\"Charge Tanks\",\"url\":\"https://chargetanks.com\",\"logo\":{\"@type\":\"ImageObject\",\"url\":\"https://chargetanks.com/favicon.svg\"}},\"inLanguage\":\"en\",\"articleSection\":\"Basics\",\"isPartOf\":{\"@type\":\"Blog\",\"name\":\"Charge Tanks Blog\",\"url\":\"https://chargetanks.com/blog/\"}},{\"@context\":\"https://schema.org\",\"@type\":\"BreadcrumbList\",\"itemListElement\":[{\"@type\":\"ListItem\",\"position\":1,\"name\":\"Home\",\"item\":\"https://chargetanks.com/\"},{\"@type\":\"ListItem\",\"position\":2,\"name\":\"Blog\",\"item\":\"https://chargetanks.com/blog/\"},{\"@type\":\"ListItem\",\"position\":3,\"name\":\"Two-tank battery model: a practical way to understand voltage, capacity, and aging\",\"item\":\"https://chargetanks.com/blog/two-tank-battery-model/\"}]}]"
+ ],
+ "bodyBackground": "rgba(0, 0, 0, 0)",
+ "scrollHeight": 8292
+}

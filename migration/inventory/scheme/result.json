@@ -1,0 +1,30 @@
+{
+ "site-home": {
+  "shots": {
+   "light": {
+    "path": "inventory\\scheme\\site-home__light.png",
+    "body_bg": "rgba(0, 0, 0, 0)"
+   },
+   "dark": {
+    "path": "inventory\\scheme\\site-home__dark.png",
+    "body_bg": "rgba(0, 0, 0, 0)"
+   }
+  },
+  "pixel_difference_bbox": null,
+  "identical": true
+ },
+ "suite-landing": {
+  "shots": {
+   "light": {
+    "path": "inventory\\scheme\\suite-landing__light.png",
+    "body_bg": "rgb(0, 59, 115)"
+   },
+   "dark": {
+    "path": "inventory\\scheme\\suite-landing__dark.png",
+    "body_bg": "rgb(0, 59, 115)"
+   }
+  },
+  "pixel_difference_bbox": null,
+  "identical": true
+ }
+}

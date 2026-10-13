@@ -1,0 +1,172 @@
+{
+ "sliders": [
+  {
+   "label": "SoC",
+   "ariaMin": "0",
+   "ariaMax": "1",
+   "ariaNow": "0.5",
+   "ariaText": "0.50",
+   "thumbValue": "0.50",
+   "tickMin": "0.00",
+   "tickMax": "1.00",
+   "thumbCenterFraction": NaN
+  },
+  {
+   "label": "Cathode LAM (lampe)",
+   "ariaMin": "0",
+   "ariaMax": "0.5",
+   "ariaNow": "0",
+   "ariaText": "0.00",
+   "thumbValue": "0.00",
+   "tickMin": "0.00",
+   "tickMax": "0.50",
+   "thumbCenterFraction": NaN
+  },
+  {
+   "label": "Anode LAM (lamne)",
+   "ariaMin": "0",
+   "ariaMax": "0.5",
+   "ariaNow": "0",
+   "ariaText": "0.00",
+   "thumbValue": "0.00",
+   "tickMin": "0.00",
+   "tickMax": "0.50",
+   "thumbCenterFraction": NaN
+  },
+  {
+   "label": "LLI (lithium loss)",
+   "ariaMin": "0",
+   "ariaMax": "0.5",
+   "ariaNow": "0",
+   "ariaText": "0.00",
+   "thumbValue": "0.00",
+   "tickMin": "0.00",
+   "tickMax": "0.50",
+   "thumbCenterFraction": NaN
+  }
+ ],
+ "selects": [
+  {
+   "label": "Anode",
+   "value": "Ideal Anodeopen"
+  },
+  {
+   "label": "Cathode",
+   "value": "Ideal Cathodeopen"
+  }
+ ],
+ "checkboxes": [],
+ "buttons": [
+  {
+   "text": "keyboard_double_arrow_left",
+   "testid": "stBaseButton-headerNoPadding",
+   "kind": "headerNoPadding",
+   "disabled": false,
+   "ariaLabel": ""
+  },
+  {
+   "text": "⬅ Back to Landing",
+   "testid": "stBaseButton-secondary",
+   "kind": "secondary",
+   "disabled": false,
+   "ariaLabel": ""
+  },
+  {
+   "text": "keyboard_double_arrow_right",
+   "testid": "stExpandSidebarButton",
+   "kind": "headerNoPadding",
+   "disabled": false,
+   "ariaLabel": ""
+  },
+  {
+   "text": "Deploy",
+   "testid": "stBaseButton-header",
+   "kind": "header",
+   "disabled": false,
+   "ariaLabel": ""
+  }
+ ],
+ "expanders": [
+  {
+   "summary": "🧠 What does this tool show?",
+   "open": false
+  }
+ ],
+ "headings": [
+  {
+   "tag": "h2",
+   "text": "🔧 Adjust Cell Settings",
+   "id": ""
+  },
+  {
+   "tag": "h3",
+   "text": "🧓 Aging Modes",
+   "id": ""
+  },
+  {
+   "tag": "h1",
+   "text": "🧓 Understand Aging Modes with the Tank Analogy",
+   "id": "understand-aging-modes-with-the-tank-analogy"
+  },
+  {
+   "tag": "h3",
+   "text": "⚙️ The knobs you can play with:",
+   "id": "the-knobs-you-can-play-with"
+  },
+  {
+   "tag": "h3",
+   "text": "Capacities (relative to cathode). SoH: 100.00%",
+   "id": "capacities-relative-to-cathode-so-h-100-00"
+  },
+  {
+   "tag": "h3",
+   "text": "🔋 Electrode dQ/dV Tanks",
+   "id": "electrode-d-q-d-v-tanks"
+  },
+  {
+   "tag": "h3",
+   "text": "📈 Voltage vs. SoC",
+   "id": "voltage-vs-so-c"
+  }
+ ],
+ "images": [],
+ "links": [
+  {
+   "text": "💌 Send me an Email",
+   "href": "mailto:lars@chargetanks.com",
+   "target": "_blank",
+   "rel": "noopener noreferrer"
+  },
+  {
+   "text": "",
+   "href": "#understand-aging-modes-with-the-tank-analogy",
+   "target": "",
+   "rel": ""
+  },
+  {
+   "text": "",
+   "href": "#the-knobs-you-can-play-with",
+   "target": "",
+   "rel": ""
+  },
+  {
+   "text": "",
+   "href": "#capacities-relative-to-cathode-so-h-100-00",
+   "target": "",
+   "rel": ""
+  },
+  {
+   "text": "",
+   "href": "#electrode-d-q-d-v-tanks",
+   "target": "",
+   "rel": ""
+  },
+  {
+   "text": "",
+   "href": "#voltage-vs-so-c",
+   "target": "",
+   "rel": ""
+  }
+ ],
+ "status": null
+}

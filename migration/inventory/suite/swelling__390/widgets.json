@@ -1,0 +1,152 @@
+{
+ "sliders": [
+  {
+   "label": "SoC",
+   "ariaMin": "0",
+   "ariaMax": "1",
+   "ariaNow": "0.5",
+   "ariaText": "0.50",
+   "thumbValue": "0.50",
+   "tickMin": "0.00",
+   "tickMax": "1.00",
+   "thumbCenterFraction": NaN
+  },
+  {
+   "label": "State of Health",
+   "ariaMin": "0.8",
+   "ariaMax": "1",
+   "ariaNow": "1",
+   "ariaText": "1.00",
+   "thumbValue": "1.00",
+   "tickMin": "0.80",
+   "tickMax": "1.00",
+   "thumbCenterFraction": NaN
+  },
+  {
+   "label": "Compression [MPa]",
+   "ariaMin": "0",
+   "ariaMax": "60",
+   "ariaNow": "0",
+   "ariaText": "0.00",
+   "thumbValue": "0.00",
+   "tickMin": "0.00",
+   "tickMax": "60.00",
+   "thumbCenterFraction": NaN
+  }
+ ],
+ "selects": [],
+ "checkboxes": [
+  {
+   "label": "Cylindrical?",
+   "checked": false
+  }
+ ],
+ "buttons": [
+  {
+   "text": "keyboard_double_arrow_left",
+   "testid": "stBaseButton-headerNoPadding",
+   "kind": "headerNoPadding",
+   "disabled": false,
+   "ariaLabel": ""
+  },
+  {
+   "text": "⬅ Back to Landing",
+   "testid": "stBaseButton-secondary",
+   "kind": "secondary",
+   "disabled": false,
+   "ariaLabel": ""
+  },
+  {
+   "text": "keyboard_double_arrow_right",
+   "testid": "stExpandSidebarButton",
+   "kind": "headerNoPadding",
+   "disabled": false,
+   "ariaLabel": ""
+  },
+  {
+   "text": "Deploy",
+   "testid": "stBaseButton-header",
+   "kind": "header",
+   "disabled": false,
+   "ariaLabel": ""
+  }
+ ],
+ "expanders": [
+  {
+   "summary": "🧠 What does this tool show?",
+   "open": false
+  }
+ ],
+ "headings": [
+  {
+   "tag": "h2",
+   "text": "🔧 Swelling conditions",
+   "id": ""
+  },
+  {
+   "tag": "h1",
+   "text": "🫁 Understand Swelling",
+   "id": "understand-swelling"
+  },
+  {
+   "tag": "h3",
+   "text": "⚙️ Knobs",
+   "id": "knobs"
+  },
+  {
+   "tag": "h3",
+   "text": "Electrode Stack Geometry",
+   "id": "electrode-stack-geometry"
+  },
+  {
+   "tag": "h3",
+   "text": "Stack by categories",
+   "id": "stack-by-categories"
+  },
+  {
+   "tag": "h3",
+   "text": "Compression vs. porosity",
+   "id": "compression-vs-porosity"
+  }
+ ],
+ "images": [],
+ "links": [
+  {
+   "text": "💌 Send me an Email",
+   "href": "mailto:lars@chargetanks.com",
+   "target": "_blank",
+   "rel": "noopener noreferrer"
+  },
+  {
+   "text": "",
+   "href": "#understand-swelling",
+   "target": "",
+   "rel": ""
+  },
+  {
+   "text": "",
+   "href": "#knobs",
+   "target": "",
+   "rel": ""
+  },
+  {
+   "text": "",
+   "href": "#electrode-stack-geometry",
+   "target": "",
+   "rel": ""
+  },
+  {
+   "text": "",
+   "href": "#stack-by-categories",
+   "target": "",
+   "rel": ""
+  },
+  {
+   "text": "",
+   "href": "#compression-vs-porosity",
+   "target": "",
+   "rel": ""
+  }
+ ],
+ "status": null
+}

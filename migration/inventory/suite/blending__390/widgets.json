@@ -1,0 +1,180 @@
+{
+ "sliders": [
+  {
+   "label": "SoL (Blend)",
+   "ariaMin": "0",
+   "ariaMax": "1",
+   "ariaNow": "0.5",
+   "ariaText": "0.50",
+   "thumbValue": "0.50",
+   "tickMin": "0.00",
+   "tickMax": "1.00",
+   "thumbCenterFraction": NaN
+  },
+  {
+   "label": "q% (Material A)",
+   "ariaMin": "0",
+   "ariaMax": "1",
+   "ariaNow": "0.7",
+   "ariaText": "0.70",
+   "thumbValue": "0.70",
+   "tickMin": "0.00",
+   "tickMax": "1.00",
+   "thumbCenterFraction": NaN
+  }
+ ],
+ "selects": [],
+ "checkboxes": [],
+ "buttons": [
+  {
+   "text": "keyboard_double_arrow_left",
+   "testid": "stBaseButton-headerNoPadding",
+   "kind": "headerNoPadding",
+   "disabled": false,
+   "ariaLabel": ""
+  },
+  {
+   "text": "⬅ Back to Landing",
+   "testid": "stBaseButton-secondary",
+   "kind": "secondary",
+   "disabled": false,
+   "ariaLabel": ""
+  },
+  {
+   "text": "keyboard_double_arrow_right",
+   "testid": "stExpandSidebarButton",
+   "kind": "headerNoPadding",
+   "disabled": false,
+   "ariaLabel": ""
+  },
+  {
+   "text": "Deploy",
+   "testid": "stBaseButton-header",
+   "kind": "header",
+   "disabled": false,
+   "ariaLabel": ""
+  }
+ ],
+ "expanders": [
+  {
+   "summary": "🧠 What does this tool show?",
+   "open": false
+  }
+ ],
+ "headings": [
+  {
+   "tag": "h2",
+   "text": "Blend Setup",
+   "id": ""
+  },
+  {
+   "tag": "h1",
+   "text": "🧪 Blend OCV Tool",
+   "id": "blend-ocv-tool"
+  },
+  {
+   "tag": "h3",
+   "text": "1) The tanks (top-left)",
+   "id": "1-the-tanks-top-left"
+  },
+  {
+   "tag": "h3",
+   "text": "2) The blend tank (bottom-left)",
+   "id": "2-the-blend-tank-bottom-left"
+  },
+  {
+   "tag": "h3",
+   "text": "3) Voltage as water level (top-right)",
+   "id": "3-voltage-as-water-level-top-right"
+  },
+  {
+   "tag": "h3",
+   "text": "4) Mapping SoLs (bottom-right)",
+   "id": "4-mapping-so-ls-bottom-right"
+  },
+  {
+   "tag": "h3",
+   "text": "🪣 Tanks of Each Material",
+   "id": "tanks-of-each-material"
+  },
+  {
+   "tag": "h3",
+   "text": "🪣 Blend Tank (Sum of Both)",
+   "id": "blend-tank-sum-of-both"
+  },
+  {
+   "tag": "h3",
+   "text": "🔋 Voltage from Water Level",
+   "id": "voltage-from-water-level"
+  },
+  {
+   "tag": "h3",
+   "text": "🔀 Mapping SoLs to Blend SoL",
+   "id": "mapping-so-ls-to-blend-so-l"
+  }
+ ],
+ "images": [],
+ "links": [
+  {
+   "text": "💌 Send me an Email",
+   "href": "mailto:lars@chargetanks.com",
+   "target": "_blank",
+   "rel": "noopener noreferrer"
+  },
+  {
+   "text": "",
+   "href": "#blend-ocv-tool",
+   "target": "",
+   "rel": ""
+  },
+  {
+   "text": "",
+   "href": "#1-the-tanks-top-left",
+   "target": "",
+   "rel": ""
+  },
+  {
+   "text": "",
+   "href": "#2-the-blend-tank-bottom-left",
+   "target": "",
+   "rel": ""
+  },
+  {
+   "text": "",
+   "href": "#3-voltage-as-water-level-top-right",
+   "target": "",
+   "rel": ""
+  },
+  {
+   "text": "",
+   "href": "#4-mapping-so-ls-bottom-right",
+   "target": "",
+   "rel": ""
+  },
+  {
+   "text": "",
+   "href": "#tanks-of-each-material",
+   "target": "",
+   "rel": ""
+  },
+  {
+   "text": "",
+   "href": "#blend-tank-sum-of-both",
+   "target": "",
+   "rel": ""
+  },
+  {
+   "text": "",
+   "href": "#voltage-from-water-level",
+   "target": "",
+   "rel": ""
+  },
+  {
+   "text": "",
+   "href": "#mapping-so-ls-to-blend-so-l",
+   "target": "",
+   "rel": ""
+  }
+ ],
+ "status": null
+}

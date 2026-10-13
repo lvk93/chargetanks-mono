@@ -1,0 +1,103 @@
+{
+ "requests": [
+  {
+   "url": "http://localhost:4173/blog/two-tank-battery-model/",
+   "method": "GET",
+   "type": "document",
+   "foreign": false,
+   "blocked": false
+  },
+  {
+   "url": "http://localhost:4173/assets/index-DnyaQ7kt.js",
+   "method": "GET",
+   "type": "script",
+   "foreign": false,
+   "blocked": false
+  },
+  {
+   "url": "http://localhost:4173/assets/index-D016u5sb.css",
+   "method": "GET",
+   "type": "stylesheet",
+   "foreign": false,
+   "blocked": false
+  },
+  {
+   "url": "http://localhost:4173/images/introduction_post/2026-03-03_twotank_charge.png",
+   "method": "GET",
+   "type": "image",
+   "foreign": false,
+   "blocked": false
+  },
+  {
+   "url": "http://localhost:4173/images/introduction_post/2026-03-03_twotank_voltage.png",
+   "method": "GET",
+   "type": "image",
+   "foreign": false,
+   "blocked": false
+  },
+  {
+   "url": "http://localhost:4173/assets/PostDetail-CaBWpxIb.js",
+   "method": "GET",
+   "type": "script",
+   "foreign": false,
+   "blocked": false
+  },
+  {
+   "url": "http://localhost:4173/assets/arrow-left-FFkLrArT.js",
+   "method": "GET",
+   "type": "script",
+   "foreign": false,
+   "blocked": false
+  },
+  {
+   "url": "http://localhost:4173/images/introduction_post/2026-03-03_twotank_charge.png",
+   "method": "GET",
+   "type": "image",
+   "foreign": false,
+   "blocked": false
+  },
+  {
+   "url": "http://localhost:4173/images/introduction_post/2026-03-03_twotank_voltage.png",
+   "method": "GET",
+   "type": "image",
+   "foreign": false,
+   "blocked": false
+  },
+  {
+   "url": "http://localhost:4173/images/introduction_post/2026-03-03_twotank_voltage_limits.png",
+   "method": "GET",
+   "type": "image",
+   "foreign": false,
+   "blocked": false
+  },
+  {
+   "url": "http://localhost:4173/images/introduction_post/2026-03-03_twotank_npratio.png",
+   "method": "GET",
+   "type": "image",
+   "foreign": false,
+   "blocked": false
+  },
+  {
+   "url": "http://localhost:4173/images/introduction_post/2026-03-03_twotank_aging.png",
+   "method": "GET",
+   "type": "image",
+   "foreign": false,
+   "blocked": false
+  },
+  {
+   "url": "http://localhost:4173/images/introduction_post/2026-03-03_twotank_blends.png",
+   "method": "GET",
+   "type": "image",
+   "foreign": false,
+   "blocked": false
+  },
+  {
+   "url": "http://localhost:4173/images/introduction_post/2026-03-03_graphite_dqdv.png",
+   "method": "GET",
+   "type": "image",
+   "foreign": false,
+   "blocked": false
+  }
+ ],
+ "console": []
+}

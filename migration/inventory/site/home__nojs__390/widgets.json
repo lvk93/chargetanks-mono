@@ -1,0 +1,108 @@
+{
+ "sliders": [],
+ "selects": [],
+ "checkboxes": [],
+ "buttons": [],
+ "expanders": [],
+ "headings": [
+  {
+   "tag": "h1",
+   "text": "Battery intuition through the two-tank analogy",
+   "id": ""
+  },
+  {
+   "tag": "h2",
+   "text": "What you will find here",
+   "id": ""
+  },
+  {
+   "tag": "h3",
+   "text": "Articles",
+   "id": ""
+  },
+  {
+   "tag": "h3",
+   "text": "Core model",
+   "id": ""
+  },
+  {
+   "tag": "h3",
+   "text": "Tools",
+   "id": ""
+  },
+  {
+   "tag": "h2",
+   "text": "Latest articles",
+   "id": ""
+  },
+  {
+   "tag": "h2",
+   "text": "Two-tank battery model: a practical way to understand voltage, capacity, and aging",
+   "id": ""
+  }
+ ],
+ "images": [],
+ "links": [
+  {
+   "text": "Charge Tanks",
+   "href": "/",
+   "target": "",
+   "rel": ""
+  },
+  {
+   "text": "Tools",
+   "href": "/tools/",
+   "target": "",
+   "rel": ""
+  },
+  {
+   "text": "Blog",
+   "href": "/blog/",
+   "target": "",
+   "rel": ""
+  },
+  {
+   "text": "About",
+   "href": "/#about",
+   "target": "",
+   "rel": ""
+  },
+  {
+   "text": "Read the Blog",
+   "href": "/blog/",
+   "target": "",
+   "rel": ""
+  },
+  {
+   "text": "Explore Tools",
+   "href": "/tools/",
+   "target": "",
+   "rel": ""
+  },
+  {
+   "text": "Two-tank battery model: a practical way to understand voltage, capacity, and aging",
+   "href": "/blog/two-tank-battery-model/",
+   "target": "",
+   "rel": ""
+  },
+  {
+   "text": "Read the article",
+   "href": "/blog/two-tank-battery-model/",
+   "target": "",
+   "rel": ""
+  },
+  {
+   "text": "Battery Blog",
+   "href": "/blog/",
+   "target": "",
+   "rel": ""
+  },
+  {
+   "text": "Battery Tools",
+   "href": "/tools/",
+   "target": "",
+   "rel": ""
+  }
+ ],
+ "status": null
+}

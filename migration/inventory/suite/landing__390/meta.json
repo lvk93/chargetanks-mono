@@ -1,0 +1,55 @@
+{
+ "url": "http://localhost:8501/",
+ "title": "Battery Tool Suite",
+ "lang": "en",
+ "meta": [
+  {
+   "charset": "UTF-8"
+  },
+  {
+   "name": "viewport",
+   "content": "width=device-width, initial-scale=1, shrink-to-fit=no"
+  }
+ ],
+ "links": [
+  {
+   "rel": "shortcut icon",
+   "href": "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🔋</text></svg>",
+   "type": "",
+   "sizes": null
+  },
+  {
+   "rel": "preload",
+   "href": "./static/media/SourceSansVF-Upright.ttf.BsWL4Kly.woff2",
+   "type": "font/woff2",
+   "sizes": null
+  },
+  {
+   "rel": "stylesheet",
+   "href": "./static/css/index.CJVRHjQZ.css",
+   "type": "",
+   "sizes": null
+  },
+  {
+   "rel": "modulepreload",
+   "href": "http://localhost:8501/static/js/index.4yEdNndV.js",
+   "type": "",
+   "sizes": null
+  },
+  {
+   "rel": "modulepreload",
+   "href": "http://localhost:8501/static/js/withFullScreenWrapper.DkugyWpW.js",
+   "type": "",
+   "sizes": null
+  },
+  {
+   "rel": "modulepreload",
+   "href": "http://localhost:8501/static/js/Toolbar.D8wuuqZd.js",
+   "type": "",
+   "sizes": null
+  }
+ ],
+ "jsonld": [],
+ "bodyBackground": "rgb(0, 59, 115)",
+ "scrollHeight": 900
+}
