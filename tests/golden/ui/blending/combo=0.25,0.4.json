@@ -1,0 +1,1157 @@
+{
+ "tool": "blending",
+ "case": "combo=0.25,0.4",
+ "steps": [
+  {
+   "kind": "slider",
+   "label": "SoL (Blend)",
+   "value": 0.25
+  },
+  {
+   "kind": "slider",
+   "label": "q% (Material A)",
+   "value": 0.4
+  }
+ ],
+ "exceptions": [],
+ "elements": [
+  {
+   "where": "main",
+   "block": "main",
+   "proto": {}
+  },
+  {
+   "where": "main/0",
+   "type": "markdown",
+   "value": "<style>\n.block-container { padding-top: 0rem !important; padding-bottom: 0.5rem !important; }\n.block-container h1 { margin-top: 1.5rem !important; margin-bottom: 0.5rem !important; }\n</style>",
+   "help": "",
+   "key": null,
+   "proto": {
+    "body": "<style>\n.block-container { padding-top: 0rem !important; padding-bottom: 0.5rem !important; }\n.block-container h1 { margin-top: 1.5rem !important; margin-bottom: 0.5rem !important; }\n</style>",
+    "allow_html": true,
+    "element_type": "NATIVE"
+   }
+  },
+  {
+   "where": "main/1",
+   "type": "markdown",
+   "value": "<style>\n.block-container { padding-top: 0rem !important; padding-bottom: 0.5rem !important; }\n.block-container h1 { margin-top: 1.5rem !important; margin-bottom: 0.5rem !important; }\n</style>",
+   "help": "",
+   "key": null,
+   "proto": {
+    "body": "<style>\n.block-container { padding-top: 0rem !important; padding-bottom: 0.5rem !important; }\n.block-container h1 { margin-top: 1.5rem !important; margin-bottom: 0.5rem !important; }\n</style>",
+    "allow_html": true,
+    "element_type": "NATIVE"
+   }
+  },
+  {
+   "where": "main/2",
+   "type": "title",
+   "value": "🧪 Blend OCV Tool",
+   "help": "",
+   "key": null,
+   "proto": {
+    "tag": "h1",
+    "body": "🧪 Blend OCV Tool"
+   }
+  },
+  {
+   "where": "main/3",
+   "block": "expander",
+   "proto": {
+    "label": "🧠 What does this tool show?",
+    "expanded": false
+   }
+  },
+  {
+   "where": "main/3/0",
+   "type": "markdown",
+   "value": "### 1) The tanks (top-left)\nImagine two water tanks side by side.  \n- Each tank represents one **battery material**.  \n- The **shape** of the tank tells us how much lithium it can hold at each \"height\".  \n- This shape is shown by the curve called **dQ/dV** (capacity per voltage).  \n\nIn the plot you see:\n- Left (green): tank of **material A**, scaled by its capacity fraction (**q%**).  \n- Right (yellow): tank of **material B**, scaled by **(1-q%)**.  \n- The light-blue filling marks the **current water level** (voltage).\n\n### 2) The blend tank (bottom-left)\nIf we now put both tanks together, we get the **blend tank**.  \n- The blend curve (dark blue) is just the **sum** of both separate tanks.  \n- This shows how the **mixture** of A and B behaves as one electrode.  \n- Thin green and yellow lines remind you of the individual tanks.  \n- The thick dark-blue line shows the combined response.\n\n### 3) Voltage as water level (top-right)\nThe **height of the water level** is the **voltage** of the blend.  \n- As you slide the **blend state of lithiation (θ_blend)**, the level moves up or down.  \n- At each level we can read:  \n- **OCV of material A** (green)  \n- **OCV of material B** (yellow)  \n- **OCV of the blend** (light gray blue, thick line)  \n- The dots show the current operating point for each.\n\n### 4) Mapping SoLs (bottom-right)\nHere comes the trickier part:  \n- The **blend SoL** is just one slider you control.  \n- But inside, each material has its own **SoL** (SoL A, SoL B).  \n- The curves show how SoL A and SoL B change as SoL Blend moves.  \n- The dashed line is a simple reference.  \n\n---\n**In summary:**  \n- Top-left: the **individual tanks**.  \n- Bottom-left: the **blend tank** = A + B.  \n- Top-right: the **voltage** comes from the water level.  \n- Bottom-right: the **hidden mapping** between blend SoL and the two material SoLs.  \n\nBy adjusting **SoL Blend** and **q%**, you can explore how different mixtures behave and see how electrode design shapes battery voltage.",
+   "help": "",
+   "key": null,
+   "proto": {
+    "body": "### 1) The tanks (top-left)\nImagine two water tanks side by side.  \n- Each tank represents one **battery material**.  \n- The **shape** of the tank tells us how much lithium it can hold at each \"height\".  \n- This shape is shown by the curve called **dQ/dV** (capacity per voltage).  \n\nIn the plot you see:\n- Left (green): tank of **material A**, scaled by its capacity fraction (**q%**).  \n- Right (yellow): tank of **material B**, scaled by **(1-q%)**.  \n- The light-blue filling marks the **current water level** (voltage).\n\n### 2) The blend tank (bottom-left)\nIf we now put both tanks together, we get the **blend tank**.  \n- The blend curve (dark blue) is just the **sum** of both separate tanks.  \n- This shows how the **mixture** of A and B behaves as one electrode.  \n- Thin green and yellow lines remind you of the individual tanks.  \n- The thick dark-blue line shows the combined response.\n\n### 3) Voltage as water level (top-right)\nThe **height of the water level** is the **voltage** of the blend.  \n- As you slide the **blend state of lithiation (θ_blend)**, the level moves up or down.  \n- At each level we can read:  \n- **OCV of material A** (green)  \n- **OCV of material B** (yellow)  \n- **OCV of the blend** (light gray blue, thick line)  \n- The dots show the current operating point for each.\n\n### 4) Mapping SoLs (bottom-right)\nHere comes the trickier part:  \n- The **blend SoL** is just one slider you control.  \n- But inside, each material has its own **SoL** (SoL A, SoL B).  \n- The curves show how SoL A and SoL B change as SoL Blend moves.  \n- The dashed line is a simple reference.  \n\n---\n**In summary:**  \n- Top-left: the **individual tanks**.  \n- Bottom-left: the **blend tank** = A + B.  \n- Top-right: the **voltage** comes from the water level.  \n- Bottom-right: the **hidden mapping** between blend SoL and the two material SoLs.  \n\nBy adjusting **SoL Blend** and **q%**, you can explore how different mixtures behave and see how electrode design shapes battery voltage.",
+    "element_type": "NATIVE"
+   }
+  },
+  {
+   "where": "main/4",
+   "block": "flex_container",
+   "proto": {
+    "flex_container": {
+     "gap_config": {
+      "gap_size": "MEDIUM"
+     },
+     "scale": 1.0,
+     "direction": "HORIZONTAL",
+     "wrap": true
+    }
+   }
+  },
+  {
+   "where": "main/4/0",
+   "block": "column",
+   "proto": {
+    "weight": 0.5,
+    "gap_config": {
+     "gap_size": "MEDIUM"
+    }
+   }
+  },
+  {
+   "where": "main/4/0/0",
+   "type": "markdown",
+   "value": "### 🪣 Tanks of Each Material",
+   "help": "",
+   "key": null,
+   "proto": {
+    "body": "### 🪣 Tanks of Each Material",
+    "element_type": "NATIVE"
+   }
+  },
+  {
+   "where": "main/4/0/1",
+   "type": "plotly_chart",
+   "key": null,
+   "proto": {
+    "use_container_width": true,
+    "theme": "streamlit",
+    "spec": {
+     "data": [
+      {
+       "line": {
+        "color": "#70AD47",
+        "width": 3
+       },
+       "mode": "lines",
+       "name": "dQ/dV A",
+       "x": {
+        "$array": "6bf5d9631c8aba25795f",
+        "dtype": "f8",
+        "shape": [
+         3000
+        ],
+        "plotly": "bdata"
+       },
+       "y": {
+        "$array": "79dbdc55a5afd823ea41",
+        "dtype": "f8",
+        "shape": [
+         3000
+        ],
+        "plotly": "bdata"
+       },
+       "type": "scatter"
+      },
+      {
+       "line": {
+        "color": "#F39C12",
+        "width": 3
+       },
+       "mode": "lines",
+       "name": "dQ/dV B",
+       "x": {
+        "$array": "bb79e3a994637aa26a4b",
+        "dtype": "f8",
+        "shape": [
+         3000
+        ],
+        "plotly": "bdata"
+       },
+       "y": {
+        "$array": "79dbdc55a5afd823ea41",
+        "dtype": "f8",
+        "shape": [
+         3000
+        ],
+        "plotly": "bdata"
+       },
+       "type": "scatter"
+      },
+      {
+       "fill": "toself",
+       "fillcolor": "#5DADE2",
+       "line": {
+        "width": 0
+       },
+       "showlegend": false,
+       "x": {
+        "$array": "260f91703112486fff36",
+        "dtype": "f8",
+        "shape": [
+         3100
+        ],
+        "plotly": "bdata"
+       },
+       "y": {
+        "$array": "ac8ab3c9d671f61bbf52",
+        "dtype": "f8",
+        "shape": [
+         3100
+        ],
+        "plotly": "bdata"
+       },
+       "type": "scatter"
+      },
+      {
+       "fill": "toself",
+       "fillcolor": "#5DADE2",
+       "line": {
+        "width": 0
+       },
+       "showlegend": false,
+       "x": {
+        "$array": "ef846e488d7903e93ecb",
+        "dtype": "f8",
+        "shape": [
+         3100
+        ],
+        "plotly": "bdata"
+       },
+       "y": {
+        "$array": "ac8ab3c9d671f61bbf52",
+        "dtype": "f8",
+        "shape": [
+         3100
+        ],
+        "plotly": "bdata"
+       },
+       "type": "scatter"
+      }
+     ],
+     "layout": {
+      "template": {
+       "$template": "38ade8ae26c72865"
+      },
+      "yaxis": {
+       "autorange": false,
+       "title": {
+        "text": "Voltage [V]",
+        "font": {
+         "size": 24
+        }
+       },
+       "range": [
+        1,
+        0
+       ],
+       "tick0": 0,
+       "dtick": 0.5,
+       "tickfont": {
+        "size": 18
+       },
+       "showgrid": true,
+       "gridcolor": "#666666",
+       "zeroline": false,
+       "linecolor": "#FFFFFF",
+       "mirror": true,
+       "ticks": "outside",
+       "linewidth": 3
+      },
+      "xaxis": {
+       "title": {
+        "text": "dQ/dV [Ah/V]",
+        "font": {
+         "size": 24
+        }
+       },
+       "range": [
+        -5,
+        5
+       ],
+       "tickfont": {
+        "size": 18
+       },
+       "showgrid": true,
+       "gridcolor": "#666666",
+       "zeroline": false,
+       "linecolor": "#FFFFFF",
+       "mirror": true,
+       "ticks": "outside",
+       "linewidth": 3
+      },
+      "margin": {
+       "l": 70,
+       "r": 30,
+       "t": 10,
+       "b": 70
+      },
+      "font": {
+       "color": "#FFFFFF"
+      },
+      "legend": {
+       "font": {
+        "size": 20
+       },
+       "x": 0,
+       "y": 0,
+       "xanchor": "left",
+       "yanchor": "bottom",
+       "bgcolor": "rgba(0,0,0,0)",
+       "borderwidth": 0
+      },
+      "plot_bgcolor": "#333333",
+      "paper_bgcolor": "#003B73",
+      "showlegend": true
+     }
+    },
+    "config": {
+     "showLink": false,
+     "linkText": false
+    }
+   }
+  },
+  {
+   "where": "main/4/0/2",
+   "type": "markdown",
+   "value": "### 🪣 Blend Tank (Sum of Both)",
+   "help": "",
+   "key": null,
+   "proto": {
+    "body": "### 🪣 Blend Tank (Sum of Both)",
+    "element_type": "NATIVE"
+   }
+  },
+  {
+   "where": "main/4/0/3",
+   "type": "plotly_chart",
+   "key": null,
+   "proto": {
+    "use_container_width": true,
+    "theme": "streamlit",
+    "spec": {
+     "data": [
+      {
+       "line": {
+        "color": "#70AD47",
+        "width": 1
+       },
+       "mode": "lines",
+       "name": "dQ/dV A",
+       "x": {
+        "$array": "6bf5d9631c8aba25795f",
+        "dtype": "f8",
+        "shape": [
+         3000
+        ],
+        "plotly": "bdata"
+       },
+       "y": {
+        "$array": "79dbdc55a5afd823ea41",
+        "dtype": "f8",
+        "shape": [
+         3000
+        ],
+        "plotly": "bdata"
+       },
+       "type": "scatter"
+      },
+      {
+       "line": {
+        "color": "#70AD47",
+        "width": 1
+       },
+       "mode": "lines",
+       "name": "dQ/dV A",
+       "showlegend": false,
+       "x": {
+        "$array": "9ae19b5e0bfe290074dc",
+        "dtype": "f8",
+        "shape": [
+         3000
+        ],
+        "plotly": "bdata"
+       },
+       "y": {
+        "$array": "79dbdc55a5afd823ea41",
+        "dtype": "f8",
+        "shape": [
+         3000
+        ],
+        "plotly": "bdata"
+       },
+       "type": "scatter"
+      },
+      {
+       "line": {
+        "color": "#F39C12",
+        "width": 1
+       },
+       "mode": "lines",
+       "name": "dQ/dV B",
+       "x": {
+        "$array": "f189c1187e57c7caa925",
+        "dtype": "f8",
+        "shape": [
+         3000
+        ],
+        "plotly": "bdata"
+       },
+       "y": {
+        "$array": "79dbdc55a5afd823ea41",
+        "dtype": "f8",
+        "shape": [
+         3000
+        ],
+        "plotly": "bdata"
+       },
+       "type": "scatter"
+      },
+      {
+       "line": {
+        "color": "#F39C12",
+        "width": 1
+       },
+       "mode": "lines",
+       "name": "dQ/dV B",
+       "showlegend": false,
+       "x": {
+        "$array": "bb79e3a994637aa26a4b",
+        "dtype": "f8",
+        "shape": [
+         3000
+        ],
+        "plotly": "bdata"
+       },
+       "y": {
+        "$array": "79dbdc55a5afd823ea41",
+        "dtype": "f8",
+        "shape": [
+         3000
+        ],
+        "plotly": "bdata"
+       },
+       "type": "scatter"
+      },
+      {
+       "line": {
+        "color": "#CCCCCC",
+        "width": 3
+       },
+       "mode": "lines",
+       "name": "dQ/dV Blend",
+       "x": {
+        "$array": "d45027a2960431854f51",
+        "dtype": "f8",
+        "shape": [
+         3000
+        ],
+        "plotly": "bdata"
+       },
+       "y": {
+        "$array": "79dbdc55a5afd823ea41",
+        "dtype": "f8",
+        "shape": [
+         3000
+        ],
+        "plotly": "bdata"
+       },
+       "type": "scatter"
+      },
+      {
+       "line": {
+        "color": "#CCCCCC",
+        "width": 3
+       },
+       "mode": "lines",
+       "name": "dQ/dV Blend",
+       "showlegend": false,
+       "x": {
+        "$array": "979128fd13dabd0dc713",
+        "dtype": "f8",
+        "shape": [
+         3000
+        ],
+        "plotly": "bdata"
+       },
+       "y": {
+        "$array": "79dbdc55a5afd823ea41",
+        "dtype": "f8",
+        "shape": [
+         3000
+        ],
+        "plotly": "bdata"
+       },
+       "type": "scatter"
+      }
+     ],
+     "layout": {
+      "template": {
+       "$template": "38ade8ae26c72865"
+      },
+      "yaxis": {
+       "autorange": false,
+       "title": {
+        "text": "Voltage [V]",
+        "font": {
+         "size": 24
+        }
+       },
+       "range": [
+        1,
+        0
+       ],
+       "tick0": 0,
+       "dtick": 0.5,
+       "tickfont": {
+        "size": 18
+       },
+       "showgrid": true,
+       "gridcolor": "#666666",
+       "zeroline": false,
+       "linecolor": "#FFFFFF",
+       "mirror": true,
+       "ticks": "outside",
+       "linewidth": 3
+      },
+      "xaxis": {
+       "title": {
+        "text": "dQ/dV [Ah/V]",
+        "font": {
+         "size": 24
+        }
+       },
+       "range": [
+        -5,
+        5
+       ],
+       "tickfont": {
+        "size": 18
+       },
+       "showgrid": true,
+       "gridcolor": "#666666",
+       "zeroline": false,
+       "linecolor": "#FFFFFF",
+       "mirror": true,
+       "ticks": "outside",
+       "linewidth": 3
+      },
+      "margin": {
+       "l": 70,
+       "r": 30,
+       "t": 10,
+       "b": 70
+      },
+      "font": {
+       "color": "#FFFFFF"
+      },
+      "legend": {
+       "font": {
+        "size": 20
+       },
+       "x": 0,
+       "y": 0,
+       "xanchor": "left",
+       "yanchor": "bottom",
+       "bgcolor": "rgba(0,0,0,0)",
+       "borderwidth": 0
+      },
+      "plot_bgcolor": "#333333",
+      "paper_bgcolor": "#003B73",
+      "showlegend": true
+     }
+    },
+    "config": {
+     "showLink": false,
+     "linkText": false
+    }
+   }
+  },
+  {
+   "where": "main/4/1",
+   "block": "column",
+   "proto": {
+    "weight": 0.5,
+    "gap_config": {
+     "gap_size": "MEDIUM"
+    }
+   }
+  },
+  {
+   "where": "main/4/1/0",
+   "type": "markdown",
+   "value": "### 🔋 Voltage from Water Level",
+   "help": "",
+   "key": null,
+   "proto": {
+    "body": "### 🔋 Voltage from Water Level",
+    "element_type": "NATIVE"
+   }
+  },
+  {
+   "where": "main/4/1/1",
+   "type": "plotly_chart",
+   "key": null,
+   "proto": {
+    "use_container_width": true,
+    "theme": "streamlit",
+    "spec": {
+     "data": [
+      {
+       "line": {
+        "color": "#70AD47",
+        "width": 1
+       },
+       "mode": "lines",
+       "name": "OCV A",
+       "x": {
+        "$array": "63c201a25c6f3eb1a04b",
+        "dtype": "f8",
+        "shape": [
+         3000
+        ],
+        "plotly": "bdata"
+       },
+       "y": {
+        "$array": "79dbdc55a5afd823ea41",
+        "dtype": "f8",
+        "shape": [
+         3000
+        ],
+        "plotly": "bdata"
+       },
+       "type": "scatter"
+      },
+      {
+       "line": {
+        "color": "#F39C12",
+        "width": 1
+       },
+       "mode": "lines",
+       "name": "OCV B",
+       "x": {
+        "$array": "7ca0c18af443e227553a",
+        "dtype": "f8",
+        "shape": [
+         3000
+        ],
+        "plotly": "bdata"
+       },
+       "y": {
+        "$array": "79dbdc55a5afd823ea41",
+        "dtype": "f8",
+        "shape": [
+         3000
+        ],
+        "plotly": "bdata"
+       },
+       "type": "scatter"
+      },
+      {
+       "line": {
+        "color": "#CCCCCC",
+        "width": 3
+       },
+       "mode": "lines",
+       "name": "OCV Blend",
+       "x": {
+        "$array": "1da9135007da5092b2a3",
+        "dtype": "f8",
+        "shape": [
+         3000
+        ],
+        "plotly": "bdata"
+       },
+       "y": {
+        "$array": "79dbdc55a5afd823ea41",
+        "dtype": "f8",
+        "shape": [
+         3000
+        ],
+        "plotly": "bdata"
+       },
+       "type": "scatter"
+      },
+      {
+       "marker": {
+        "color": "#70AD47",
+        "size": 8
+       },
+       "mode": "markers",
+       "name": "A @ V_blend(θ_blend)",
+       "showlegend": false,
+       "x": [
+        0.07300460488088717
+       ],
+       "y": [
+        0.22959783038434417
+       ],
+       "type": "scatter"
+      },
+      {
+       "marker": {
+        "color": "#F39C12",
+        "size": 8
+       },
+       "mode": "markers",
+       "name": "B @ V_blend(θ_blend)",
+       "showlegend": false,
+       "x": [
+        0.36799693007940854
+       ],
+       "y": [
+        0.22959783038434417
+       ],
+       "type": "scatter"
+      },
+      {
+       "marker": {
+        "color": "#CCCCCC",
+        "size": 8
+       },
+       "mode": "markers",
+       "name": "Blend @ (θ_blend, V_blend)",
+       "showlegend": false,
+       "x": [
+        0.25
+       ],
+       "y": [
+        0.22959783038434417
+       ],
+       "type": "scatter"
+      }
+     ],
+     "layout": {
+      "template": {
+       "$template": "38ade8ae26c72865"
+      },
+      "xaxis": {
+       "title": {
+        "text": "State of Lithiation",
+        "font": {
+         "size": 24
+        }
+       },
+       "range": [
+        0,
+        1
+       ],
+       "tickfont": {
+        "size": 18
+       },
+       "showgrid": true,
+       "gridcolor": "#666666",
+       "zeroline": false,
+       "linecolor": "#FFFFFF",
+       "mirror": true,
+       "ticks": "outside",
+       "linewidth": 3
+      },
+      "yaxis": {
+       "title": {
+        "text": "Voltage [V]",
+        "font": {
+         "size": 24
+        }
+       },
+       "range": [
+        0,
+        1
+       ],
+       "tickfont": {
+        "size": 18
+       },
+       "showgrid": true,
+       "gridcolor": "#666666",
+       "zeroline": false,
+       "linecolor": "#FFFFFF",
+       "mirror": true,
+       "ticks": "outside",
+       "linewidth": 3
+      },
+      "margin": {
+       "l": 70,
+       "r": 30,
+       "t": 10,
+       "b": 70
+      },
+      "font": {
+       "color": "#FFFFFF"
+      },
+      "legend": {
+       "font": {
+        "size": 20
+       },
+       "x": 0.02,
+       "y": 0.98,
+       "xanchor": "left",
+       "yanchor": "top",
+       "bgcolor": "rgba(0,0,0,0)",
+       "borderwidth": 0
+      },
+      "plot_bgcolor": "#333333",
+      "paper_bgcolor": "#003B73",
+      "showlegend": true
+     }
+    },
+    "config": {
+     "showLink": false,
+     "linkText": false
+    }
+   }
+  },
+  {
+   "where": "main/4/1/2",
+   "type": "markdown",
+   "value": "### 🔀 Mapping SoLs to Blend SoL",
+   "help": "",
+   "key": null,
+   "proto": {
+    "body": "### 🔀 Mapping SoLs to Blend SoL",
+    "element_type": "NATIVE"
+   }
+  },
+  {
+   "where": "main/4/1/3",
+   "type": "plotly_chart",
+   "key": null,
+   "proto": {
+    "use_container_width": true,
+    "theme": "streamlit",
+    "spec": {
+     "data": [
+      {
+       "line": {
+        "color": "#70AD47",
+        "width": 3
+       },
+       "mode": "lines",
+       "name": "SoL A",
+       "x": {
+        "$array": "1da9135007da5092b2a3",
+        "dtype": "f8",
+        "shape": [
+         3000
+        ],
+        "plotly": "bdata"
+       },
+       "y": {
+        "$array": "63c201a25c6f3eb1a04b",
+        "dtype": "f8",
+        "shape": [
+         3000
+        ],
+        "plotly": "bdata"
+       },
+       "type": "scatter"
+      },
+      {
+       "line": {
+        "color": "#F39C12",
+        "width": 3
+       },
+       "mode": "lines",
+       "name": "SoL B",
+       "x": {
+        "$array": "1da9135007da5092b2a3",
+        "dtype": "f8",
+        "shape": [
+         3000
+        ],
+        "plotly": "bdata"
+       },
+       "y": {
+        "$array": "7ca0c18af443e227553a",
+        "dtype": "f8",
+        "shape": [
+         3000
+        ],
+        "plotly": "bdata"
+       },
+       "type": "scatter"
+      },
+      {
+       "line": {
+        "color": "#CCCCCC",
+        "dash": "dash",
+        "width": 1
+       },
+       "mode": "lines",
+       "name": "SoL Blend (ref.)",
+       "x": {
+        "$array": "1da9135007da5092b2a3",
+        "dtype": "f8",
+        "shape": [
+         3000
+        ],
+        "plotly": "bdata"
+       },
+       "y": {
+        "$array": "1da9135007da5092b2a3",
+        "dtype": "f8",
+        "shape": [
+         3000
+        ],
+        "plotly": "bdata"
+       },
+       "type": "scatter"
+      },
+      {
+       "marker": {
+        "color": "#70AD47",
+        "size": 8
+       },
+       "mode": "markers",
+       "showlegend": false,
+       "x": [
+        0.25
+       ],
+       "y": [
+        0.07300460488088717
+       ],
+       "type": "scatter"
+      },
+      {
+       "marker": {
+        "color": "#F39C12",
+        "size": 8
+       },
+       "mode": "markers",
+       "showlegend": false,
+       "x": [
+        0.25
+       ],
+       "y": [
+        0.36799693007940854
+       ],
+       "type": "scatter"
+      }
+     ],
+     "layout": {
+      "template": {
+       "$template": "38ade8ae26c72865"
+      },
+      "xaxis": {
+       "title": {
+        "text": "Blend State of Lithiation",
+        "font": {
+         "size": 24
+        }
+       },
+       "range": [
+        0,
+        1
+       ],
+       "tickfont": {
+        "size": 18
+       },
+       "showgrid": true,
+       "gridcolor": "#666666",
+       "zeroline": false,
+       "linecolor": "#FFFFFF",
+       "mirror": true,
+       "ticks": "outside",
+       "linewidth": 3
+      },
+      "yaxis": {
+       "title": {
+        "text": "Material State of Lithiation",
+        "font": {
+         "size": 24
+        }
+       },
+       "range": [
+        0,
+        1
+       ],
+       "tickfont": {
+        "size": 18
+       },
+       "showgrid": true,
+       "gridcolor": "#666666",
+       "zeroline": false,
+       "linecolor": "#FFFFFF",
+       "mirror": true,
+       "ticks": "outside",
+       "linewidth": 3
+      },
+      "margin": {
+       "l": 70,
+       "r": 30,
+       "t": 10,
+       "b": 70
+      },
+      "font": {
+       "color": "#FFFFFF"
+      },
+      "legend": {
+       "font": {
+        "size": 20
+       },
+       "x": 0.02,
+       "y": 0.98,
+       "xanchor": "left",
+       "yanchor": "top",
+       "bgcolor": "rgba(0,0,0,0)",
+       "borderwidth": 0
+      },
+      "plot_bgcolor": "#333333",
+      "paper_bgcolor": "#003B73",
+      "showlegend": true
+     }
+    },
+    "config": {
+     "showLink": false,
+     "linkText": false
+    }
+   }
+  },
+  {
+   "where": "sidebar",
+   "block": "sidebar",
+   "proto": {}
+  },
+  {
+   "where": "sidebar/0",
+   "type": "markdown",
+   "value": "<style>\ndiv.stButton > button:first-child {\n    width: 100%;\n    background-color: #5DADE2;  /* dunkelblau */\n    color: white;               /* Textfarbe */\n    border-radius: 8px;         /* abgerundete Ecken */\n    height: 3em;                /* etwas höher machen */\n    font-weight: bold;\n    font-size:18\n}\ndiv.stButton > button:first-child:hover {\n    background-color: #0059b3;  /* Hover-Effekt */\n    color: #fff;\n}\n</style>",
+   "help": "",
+   "key": null,
+   "proto": {
+    "body": "<style>\ndiv.stButton > button:first-child {\n    width: 100%;\n    background-color: #5DADE2;  /* dunkelblau */\n    color: white;               /* Textfarbe */\n    border-radius: 8px;         /* abgerundete Ecken */\n    height: 3em;                /* etwas höher machen */\n    font-weight: bold;\n    font-size:18\n}\ndiv.stButton > button:first-child:hover {\n    background-color: #0059b3;  /* Hover-Effekt */\n    color: #fff;\n}\n</style>",
+    "allow_html": true,
+    "element_type": "NATIVE"
+   }
+  },
+  {
+   "where": "sidebar/1",
+   "type": "button",
+   "label": "⬅ Back to Landing",
+   "value": false,
+   "help": "",
+   "key": null,
+   "proto": {
+    "label": "⬅ Back to Landing",
+    "type": "secondary"
+   }
+  },
+  {
+   "where": "sidebar/2",
+   "type": "markdown",
+   "value": "---",
+   "help": "",
+   "key": null,
+   "proto": {
+    "body": "---",
+    "element_type": "NATIVE"
+   }
+  },
+  {
+   "where": "sidebar/3",
+   "type": "header",
+   "value": "Blend Setup",
+   "help": "",
+   "key": null,
+   "proto": {
+    "tag": "h2",
+    "body": "Blend Setup"
+   }
+  },
+  {
+   "where": "sidebar/4",
+   "type": "slider",
+   "label": "SoL (Blend)",
+   "value": 0.25,
+   "min": 0.0,
+   "max": 1.0,
+   "step": 0.01,
+   "format": "%0.2f",
+   "help": "",
+   "key": null,
+   "proto": {
+    "label": "SoL (Blend)",
+    "format": "%0.2f",
+    "data_type": "FLOAT",
+    "default": [
+     0.5
+    ],
+    "max": 1.0,
+    "step": 0.01,
+    "label_visibility": {},
+    "type": "SLIDER"
+   }
+  },
+  {
+   "where": "sidebar/5",
+   "type": "slider",
+   "label": "q% (Material A)",
+   "value": 0.4,
+   "min": 0.0,
+   "max": 1.0,
+   "step": 0.01,
+   "format": "%0.2f",
+   "help": "",
+   "key": null,
+   "proto": {
+    "label": "q% (Material A)",
+    "format": "%0.2f",
+    "data_type": "FLOAT",
+    "default": [
+     0.7
+    ],
+    "max": 1.0,
+    "step": 0.01,
+    "label_visibility": {},
+    "type": "SLIDER"
+   }
+  },
+  {
+   "where": "sidebar/6",
+   "type": "markdown",
+   "value": "---",
+   "help": "",
+   "key": null,
+   "proto": {
+    "body": "---",
+    "element_type": "NATIVE"
+   }
+  },
+  {
+   "where": "sidebar/7",
+   "type": "markdown",
+   "value": "<style>\n.custom-link {\n    display: inline-block;\n    width: 100%;\n    padding: 0.5rem 1rem;\n    text-align: center;\n    text-decoration: none !important;\n    border-radius: 5px;\n    font-weight: 500;\n    color: white !important;\n    background-color: transparent;\n    border: none;\n    margin-bottom: 0.5rem;\n}\n.custom-link:hover {\n    background-color: #003B73;\n    text-decoration: none;\n}\n</style>",
+   "help": "",
+   "key": null,
+   "proto": {
+    "body": "<style>\n.custom-link {\n    display: inline-block;\n    width: 100%;\n    padding: 0.5rem 1rem;\n    text-align: center;\n    text-decoration: none !important;\n    border-radius: 5px;\n    font-weight: 500;\n    color: white !important;\n    background-color: transparent;\n    border: none;\n    margin-bottom: 0.5rem;\n}\n.custom-link:hover {\n    background-color: #003B73;\n    text-decoration: none;\n}\n</style>",
+    "allow_html": true,
+    "element_type": "NATIVE"
+   }
+  },
+  {
+   "where": "sidebar/8",
+   "type": "markdown",
+   "value": "<a class=\"custom-link\" href=\"mailto:lars@chargetanks.com\" target=\"_blank\">\n💌 Send me an Email\n</a>",
+   "help": "",
+   "key": null,
+   "proto": {
+    "body": "<a class=\"custom-link\" href=\"mailto:lars@chargetanks.com\" target=\"_blank\">\n💌 Send me an Email\n</a>",
+    "allow_html": true,
+    "element_type": "NATIVE"
+   }
+  },
+  {
+   "where": "sidebar/9",
+   "type": "markdown",
+   "value": "---",
+   "help": "",
+   "key": null,
+   "proto": {
+    "body": "---",
+    "element_type": "NATIVE"
+   }
+  },
+  {
+   "where": "sidebar/10",
+   "type": "markdown",
+   "value": "<div style=\"text-align:center;font-size:.85rem;color:gray;line-height:1.4\">\n© 2025 Lars von Kolzenberg<br>\nBuilt with Streamlit - v0.7.0<br>\nFor educational use only\n</div>",
+   "help": "",
+   "key": null,
+   "proto": {
+    "body": "<div style=\"text-align:center;font-size:.85rem;color:gray;line-height:1.4\">\n© 2025 Lars von Kolzenberg<br>\nBuilt with Streamlit - v0.7.0<br>\nFor educational use only\n</div>",
+    "allow_html": true,
+    "element_type": "NATIVE"
+   }
+  }
+ ]
+}

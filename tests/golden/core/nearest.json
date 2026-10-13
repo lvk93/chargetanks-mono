@@ -1,0 +1,80 @@
+{
+ "description": "pandas Index.get_indexer([t], method='nearest') 2.3.3",
+ "cases": [
+  {
+   "index": {
+    "$array": "32e90fe5b1ce141e80a5",
+    "dtype": "f8",
+    "shape": [
+     200
+    ]
+   },
+   "targets": {
+    "$array": "bf3791306d9a1faa2ffb",
+    "dtype": "f8",
+    "shape": [
+     332
+    ]
+   },
+   "out": {
+    "$array": "1b35b660f172f07e0ca1",
+    "dtype": "i8",
+    "shape": [
+     332
+    ]
+   }
+  },
+  {
+   "index": {
+    "$array": "b022a7c04ef44b7cbff5",
+    "dtype": "f8",
+    "shape": [
+     100
+    ]
+   },
+   "targets": {
+    "$array": "3ae2b42170c317043d02",
+    "dtype": "f8",
+    "shape": [
+     232
+    ]
+   },
+   "out": {
+    "$array": "af3d93f89a73448b6294",
+    "dtype": "i8",
+    "shape": [
+     232
+    ]
+   }
+  },
+  {
+   "index": [
+    0.0,
+    0.1,
+    0.2,
+    0.30000000000000004,
+    0.4,
+    0.5,
+    0.6000000000000001,
+    0.7000000000000001,
+    0.8,
+    0.9,
+    1.0
+   ],
+   "targets": {
+    "$array": "c996f14a067f6e275dd1",
+    "dtype": "f8",
+    "shape": [
+     143
+    ]
+   },
+   "out": {
+    "$array": "5832f9ea0b3e626cb1e3",
+    "dtype": "i8",
+    "shape": [
+     143
+    ]
+   }
+  }
+ ]
+}

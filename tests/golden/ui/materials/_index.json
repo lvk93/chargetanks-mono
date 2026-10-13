@@ -1,0 +1,162 @@
+[
+ {
+  "case": "default",
+  "file": "default.json",
+  "exceptions": 0
+ },
+ {
+  "case": "material=Ideal Anode",
+  "file": "material=Ideal_Anode.json",
+  "exceptions": 0
+ },
+ {
+  "case": "material=Ideal Cathode",
+  "file": "material=Ideal_Cathode.json",
+  "exceptions": 0
+ },
+ {
+  "case": "material=Graphite",
+  "file": "material=Graphite.json",
+  "exceptions": 0
+ },
+ {
+  "case": "material=LCO",
+  "file": "material=LCO.json",
+  "exceptions": 0
+ },
+ {
+  "case": "material=LFP",
+  "file": "material=LFP.json",
+  "exceptions": 0
+ },
+ {
+  "case": "material=NCA",
+  "file": "material=NCA.json",
+  "exceptions": 0
+ },
+ {
+  "case": "material=NMC",
+  "file": "material=NMC.json",
+  "exceptions": 0
+ },
+ {
+  "case": "material=Silicon",
+  "file": "material=Silicon.json",
+  "exceptions": 0
+ },
+ {
+  "case": "SoL=min",
+  "file": "SoL=min.json",
+  "exceptions": 0
+ },
+ {
+  "case": "SoL=min_plus",
+  "file": "SoL=min_plus.json",
+  "exceptions": 0
+ },
+ {
+  "case": "SoL=max_minus",
+  "file": "SoL=max_minus.json",
+  "exceptions": 0
+ },
+ {
+  "case": "SoL=max",
+  "file": "SoL=max.json",
+  "exceptions": 0
+ },
+ {
+  "case": "SoL=mid",
+  "file": "SoL=mid.json",
+  "exceptions": 0
+ },
+ {
+  "case": "material=Graphite,SoL=0.0",
+  "file": "material=Graphite,SoL=0.0.json",
+  "exceptions": 0
+ },
+ {
+  "case": "material=Graphite,SoL=1.0",
+  "file": "material=Graphite,SoL=1.0.json",
+  "exceptions": 0
+ },
+ {
+  "case": "material=Graphite,SoL=0.27",
+  "file": "material=Graphite,SoL=0.27.json",
+  "exceptions": 0
+ },
+ {
+  "case": "material=Silicon,SoL=0.0",
+  "file": "material=Silicon,SoL=0.0.json",
+  "exceptions": 0
+ },
+ {
+  "case": "material=Silicon,SoL=1.0",
+  "file": "material=Silicon,SoL=1.0.json",
+  "exceptions": 0
+ },
+ {
+  "case": "material=Silicon,SoL=0.27",
+  "file": "material=Silicon,SoL=0.27.json",
+  "exceptions": 0
+ },
+ {
+  "case": "material=LFP,SoL=0.0",
+  "file": "material=LFP,SoL=0.0.json",
+  "exceptions": 0
+ },
+ {
+  "case": "material=LFP,SoL=1.0",
+  "file": "material=LFP,SoL=1.0.json",
+  "exceptions": 0
+ },
+ {
+  "case": "material=LFP,SoL=0.27",
+  "file": "material=LFP,SoL=0.27.json",
+  "exceptions": 0
+ },
+ {
+  "case": "material=Ideal Cathode,SoL=0.0",
+  "file": "material=Ideal_Cathode,SoL=0.0.json",
+  "exceptions": 0
+ },
+ {
+  "case": "material=Ideal Cathode,SoL=1.0",
+  "file": "material=Ideal_Cathode,SoL=1.0.json",
+  "exceptions": 0
+ },
+ {
+  "case": "material=Ideal Cathode,SoL=0.27",
+  "file": "material=Ideal_Cathode,SoL=0.27.json",
+  "exceptions": 0
+ },
+ {
+  "case": "random0",
+  "file": "random0.json",
+  "exceptions": 0
+ },
+ {
+  "case": "random1",
+  "file": "random1.json",
+  "exceptions": 0
+ },
+ {
+  "case": "random2",
+  "file": "random2.json",
+  "exceptions": 0
+ },
+ {
+  "case": "random3",
+  "file": "random3.json",
+  "exceptions": 0
+ },
+ {
+  "case": "random4",
+  "file": "random4.json",
+  "exceptions": 0
+ },
+ {
+  "case": "random5",
+  "file": "random5.json",
+  "exceptions": 0
+ }
+]

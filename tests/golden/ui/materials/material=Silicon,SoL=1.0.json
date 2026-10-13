@@ -1,0 +1,629 @@
+{
+ "tool": "materials",
+ "case": "material=Silicon,SoL=1.0",
+ "steps": [
+  {
+   "kind": "selectbox",
+   "label": "Material",
+   "value": "Silicon"
+  },
+  {
+   "kind": "slider",
+   "label": "SoL",
+   "value": 1.0
+  }
+ ],
+ "exceptions": [],
+ "elements": [
+  {
+   "where": "main",
+   "block": "main",
+   "proto": {}
+  },
+  {
+   "where": "main/0",
+   "type": "markdown",
+   "value": "<style>\n.block-container { padding-top: 0rem !important; padding-bottom: 0.5rem !important; }\n.block-container h1 { margin-top: 1.5rem !important; margin-bottom: 0.5rem !important; }\n</style>",
+   "help": "",
+   "key": null,
+   "proto": {
+    "body": "<style>\n.block-container { padding-top: 0rem !important; padding-bottom: 0.5rem !important; }\n.block-container h1 { margin-top: 1.5rem !important; margin-bottom: 0.5rem !important; }\n</style>",
+    "allow_html": true,
+    "element_type": "NATIVE"
+   }
+  },
+  {
+   "where": "main/1",
+   "type": "markdown",
+   "value": "<style>\n.block-container { padding-top: 0rem !important; padding-bottom: 0.5rem !important; }\n.block-container h1 { margin-top: 1.5rem !important; margin-bottom: 0.5rem !important; }\n</style>",
+   "help": "",
+   "key": null,
+   "proto": {
+    "body": "<style>\n.block-container { padding-top: 0rem !important; padding-bottom: 0.5rem !important; }\n.block-container h1 { margin-top: 1.5rem !important; margin-bottom: 0.5rem !important; }\n</style>",
+    "allow_html": true,
+    "element_type": "NATIVE"
+   }
+  },
+  {
+   "where": "main/2",
+   "type": "title",
+   "value": "🪣 Understand Materials with the Tank Analogy",
+   "help": "",
+   "key": null,
+   "proto": {
+    "tag": "h1",
+    "body": "🪣 Understand Materials with the Tank Analogy"
+   }
+  },
+  {
+   "where": "main/3",
+   "block": "expander",
+   "proto": {
+    "label": "🧠 What does this tool show?",
+    "expanded": false
+   }
+  },
+  {
+   "where": "main/3/0",
+   "type": "markdown",
+   "value": "This tool shows how a **single electrode material** behaves inside a battery,\nusing the **tank analogy**.  \n\n- Think of the material as a tank that can be filled with lithium, just like\nfilling water into a container.  \n- The **curve shape** of the tank tells us how much lithium fits at each \"height\".  \n- The **steep parts** of the curve (big dQ/dV) mean the material can take in a lot\nof lithium without much change in voltage, like a wide part of the tank.  \n- The **flat parts** mean even a small amount of lithium changes the voltage a lot,\nlike a narrow neck of the tank.  \n\nOn the left, you see the **tank view** (dQ/dV). On the right, you see how the\n**voltage changes** as the tank fills (the OCV curve). Observe, how peaks in the dQ/dV reflect as plateaus in the OCV curve.\n\nBy moving the slider (SoC), you can explore how the lithium filling level relates\nto both views at the same time.",
+   "help": "",
+   "key": null,
+   "proto": {
+    "body": "This tool shows how a **single electrode material** behaves inside a battery,\nusing the **tank analogy**.  \n\n- Think of the material as a tank that can be filled with lithium, just like\nfilling water into a container.  \n- The **curve shape** of the tank tells us how much lithium fits at each \"height\".  \n- The **steep parts** of the curve (big dQ/dV) mean the material can take in a lot\nof lithium without much change in voltage, like a wide part of the tank.  \n- The **flat parts** mean even a small amount of lithium changes the voltage a lot,\nlike a narrow neck of the tank.  \n\nOn the left, you see the **tank view** (dQ/dV). On the right, you see how the\n**voltage changes** as the tank fills (the OCV curve). Observe, how peaks in the dQ/dV reflect as plateaus in the OCV curve.\n\nBy moving the slider (SoC), you can explore how the lithium filling level relates\nto both views at the same time.",
+    "element_type": "NATIVE"
+   }
+  },
+  {
+   "where": "main/4",
+   "block": "flex_container",
+   "proto": {
+    "flex_container": {
+     "gap_config": {
+      "gap_size": "MEDIUM"
+     },
+     "scale": 1.0,
+     "direction": "HORIZONTAL",
+     "wrap": true
+    }
+   }
+  },
+  {
+   "where": "main/4/0",
+   "block": "column",
+   "proto": {
+    "weight": 0.5,
+    "gap_config": {
+     "gap_size": "MEDIUM"
+    }
+   }
+  },
+  {
+   "where": "main/4/0/0",
+   "type": "markdown",
+   "value": "<h3 style='text-align: center;'>🪣 Electrode dQ/dV Tank</h3>",
+   "help": "",
+   "key": null,
+   "proto": {
+    "body": "<h3 style='text-align: center;'>🪣 Electrode dQ/dV Tank</h3>",
+    "allow_html": true,
+    "element_type": "NATIVE"
+   }
+  },
+  {
+   "where": "main/4/0/1",
+   "type": "plotly_chart",
+   "key": null,
+   "proto": {
+    "use_container_width": true,
+    "theme": "streamlit",
+    "spec": {
+     "data": [
+      {
+       "line": {
+        "color": "#70AD47",
+        "width": 3
+       },
+       "mode": "lines",
+       "name": "Silicon dQ/dV",
+       "showlegend": true,
+       "x": {
+        "$array": "08bf63f179f30526bf5c",
+        "dtype": "f8",
+        "shape": [
+         400
+        ],
+        "plotly": "bdata"
+       },
+       "y": {
+        "$array": "676531fcfcc6a62d26ea",
+        "dtype": "f8",
+        "shape": [
+         400
+        ],
+        "plotly": "bdata"
+       },
+       "type": "scatter"
+      },
+      {
+       "line": {
+        "color": "#70AD47",
+        "width": 3
+       },
+       "mode": "lines",
+       "name": "-dQ/dV",
+       "showlegend": false,
+       "x": {
+        "$array": "17ab9ef83224110867f1",
+        "dtype": "f8",
+        "shape": [
+         400
+        ],
+        "plotly": "bdata"
+       },
+       "y": {
+        "$array": "676531fcfcc6a62d26ea",
+        "dtype": "f8",
+        "shape": [
+         400
+        ],
+        "plotly": "bdata"
+       },
+       "type": "scatter"
+      },
+      {
+       "fill": "toself",
+       "fillcolor": "#5DADE2",
+       "line": {
+        "width": 0
+       },
+       "name": "Lithium",
+       "opacity": 0.25,
+       "x": {
+        "$array": "c033337ff9def02480aa",
+        "dtype": "f8",
+        "shape": [
+         800
+        ],
+        "plotly": "bdata"
+       },
+       "y": {
+        "$array": "e2c04c3f2d5bb348353f",
+        "dtype": "f8",
+        "shape": [
+         800
+        ],
+        "plotly": "bdata"
+       },
+       "type": "scatter"
+      }
+     ],
+     "layout": {
+      "template": {
+       "$template": "413a361ae6e57929"
+      },
+      "font": {
+       "color": "#FFFFFF",
+       "family": "Open Sans",
+       "size": 24
+      },
+      "margin": {
+       "l": 60,
+       "r": 60,
+       "t": 60,
+       "b": 60
+      },
+      "xaxis": {
+       "title": {
+        "font": {
+         "size": 24
+        },
+        "text": "dQ/dV [Ah/V]"
+       },
+       "tickfont": {
+        "size": 18
+       },
+       "showgrid": true,
+       "gridcolor": "#666666",
+       "gridwidth": 0.5,
+       "griddash": "dot",
+       "zeroline": false,
+       "showline": true,
+       "linecolor": "#FFFFFF",
+       "linewidth": 3,
+       "mirror": true,
+       "range": [
+        -7.0,
+        7.0
+       ]
+      },
+      "yaxis": {
+       "title": {
+        "font": {
+         "size": 24
+        },
+        "text": "Voltage [V]"
+       },
+       "tickfont": {
+        "size": 18
+       },
+       "range": [
+        -0.6332946935577898,
+        -0.0
+       ],
+       "showgrid": true,
+       "gridcolor": "#666666",
+       "gridwidth": 0.5,
+       "griddash": "dot",
+       "showline": true,
+       "linecolor": "#FFFFFF",
+       "linewidth": 3,
+       "mirror": true,
+       "tickvals": [
+        -5,
+        -4,
+        -3,
+        -2,
+        -1,
+        0
+       ],
+       "ticktext": [
+        "5",
+        "4",
+        "3",
+        "2",
+        "1",
+        "0"
+       ]
+      },
+      "legend": {
+       "font": {
+        "size": 20
+       },
+       "x": 0,
+       "y": 0,
+       "xanchor": "left",
+       "yanchor": "bottom",
+       "bgcolor": "rgba(0,0,0,0)"
+      },
+      "width": 500,
+      "height": 500,
+      "plot_bgcolor": "#333333",
+      "paper_bgcolor": "#003B73"
+     }
+    },
+    "config": {
+     "showLink": false,
+     "linkText": false
+    }
+   }
+  },
+  {
+   "where": "main/4/1",
+   "block": "column",
+   "proto": {
+    "weight": 0.5,
+    "gap_config": {
+     "gap_size": "MEDIUM"
+    }
+   }
+  },
+  {
+   "where": "main/4/1/0",
+   "type": "markdown",
+   "value": "<h3 style='text-align: center;'>📈 Voltage vs. SoL</h3>",
+   "help": "",
+   "key": null,
+   "proto": {
+    "body": "<h3 style='text-align: center;'>📈 Voltage vs. SoL</h3>",
+    "allow_html": true,
+    "element_type": "NATIVE"
+   }
+  },
+  {
+   "where": "main/4/1/1",
+   "type": "plotly_chart",
+   "key": null,
+   "proto": {
+    "use_container_width": true,
+    "theme": "streamlit",
+    "spec": {
+     "data": [
+      {
+       "line": {
+        "color": "#70AD47",
+        "width": 3
+       },
+       "mode": "lines",
+       "name": "Silicon OCV",
+       "showlegend": true,
+       "x": {
+        "$array": "7d54449fa64694168768",
+        "dtype": "f8",
+        "shape": [
+         400
+        ],
+        "plotly": "bdata"
+       },
+       "y": {
+        "$array": "5db80c5946d7581842d8",
+        "dtype": "f8",
+        "shape": [
+         400
+        ],
+        "plotly": "bdata"
+       },
+       "type": "scatter"
+      },
+      {
+       "marker": {
+        "color": "#70AD47",
+        "size": 8,
+        "symbol": "circle"
+       },
+       "mode": "markers",
+       "showlegend": false,
+       "x": [
+        1.0
+       ],
+       "y": [
+        -1.6276014959760465
+       ],
+       "type": "scatter"
+      }
+     ],
+     "layout": {
+      "template": {
+       "$template": "413a361ae6e57929"
+      },
+      "font": {
+       "color": "#FFFFFF",
+       "family": "Open Sans",
+       "size": 24
+      },
+      "margin": {
+       "l": 60,
+       "r": 60,
+       "t": 60,
+       "b": 60
+      },
+      "xaxis": {
+       "title": {
+        "font": {
+         "size": 24
+        },
+        "text": "State of Lithiation"
+       },
+       "tickfont": {
+        "size": 18
+       },
+       "range": [
+        0,
+        1
+       ],
+       "showgrid": true,
+       "gridcolor": "#666666",
+       "gridwidth": 0.5,
+       "griddash": "dot",
+       "zeroline": false,
+       "showline": true,
+       "linecolor": "#FFFFFF",
+       "linewidth": 3,
+       "mirror": true
+      },
+      "yaxis": {
+       "title": {
+        "font": {
+         "size": 24
+        },
+        "text": "Voltage [V]"
+       },
+       "tickfont": {
+        "size": 18
+       },
+       "range": [
+        0.0,
+        0.6332946935577898
+       ],
+       "showgrid": true,
+       "gridcolor": "#666666",
+       "gridwidth": 0.5,
+       "griddash": "dot",
+       "zeroline": false,
+       "showline": true,
+       "linecolor": "#FFFFFF",
+       "linewidth": 3,
+       "mirror": true
+      },
+      "legend": {
+       "font": {
+        "size": 20
+       },
+       "x": 0,
+       "y": 0,
+       "xanchor": "left",
+       "yanchor": "bottom",
+       "bgcolor": "rgba(0,0,0,0)"
+      },
+      "width": 500,
+      "height": 500,
+      "plot_bgcolor": "#333333",
+      "paper_bgcolor": "#003B73"
+     }
+    },
+    "config": {
+     "showLink": false,
+     "linkText": false
+    }
+   }
+  },
+  {
+   "where": "sidebar",
+   "block": "sidebar",
+   "proto": {}
+  },
+  {
+   "where": "sidebar/0",
+   "type": "markdown",
+   "value": "<style>\ndiv.stButton > button:first-child {\n    width: 100%;\n    background-color: #5DADE2;  /* dunkelblau */\n    color: white;               /* Textfarbe */\n    border-radius: 8px;         /* abgerundete Ecken */\n    height: 3em;                /* etwas höher machen */\n    font-weight: bold;\n    font-size:18\n}\ndiv.stButton > button:first-child:hover {\n    background-color: #0059b3;  /* Hover-Effekt */\n    color: #fff;\n}\n</style>",
+   "help": "",
+   "key": null,
+   "proto": {
+    "body": "<style>\ndiv.stButton > button:first-child {\n    width: 100%;\n    background-color: #5DADE2;  /* dunkelblau */\n    color: white;               /* Textfarbe */\n    border-radius: 8px;         /* abgerundete Ecken */\n    height: 3em;                /* etwas höher machen */\n    font-weight: bold;\n    font-size:18\n}\ndiv.stButton > button:first-child:hover {\n    background-color: #0059b3;  /* Hover-Effekt */\n    color: #fff;\n}\n</style>",
+    "allow_html": true,
+    "element_type": "NATIVE"
+   }
+  },
+  {
+   "where": "sidebar/1",
+   "type": "button",
+   "label": "⬅ Back to Landing",
+   "value": false,
+   "help": "",
+   "key": null,
+   "proto": {
+    "label": "⬅ Back to Landing",
+    "type": "secondary"
+   }
+  },
+  {
+   "where": "sidebar/2",
+   "type": "markdown",
+   "value": "---",
+   "help": "",
+   "key": null,
+   "proto": {
+    "body": "---",
+    "element_type": "NATIVE"
+   }
+  },
+  {
+   "where": "sidebar/3",
+   "type": "header",
+   "value": "Choose your material",
+   "help": "",
+   "key": null,
+   "proto": {
+    "tag": "h2",
+    "body": "Choose your material"
+   }
+  },
+  {
+   "where": "sidebar/4",
+   "type": "selectbox",
+   "label": "Material",
+   "value": "Silicon",
+   "options": [
+    "Ideal Anode",
+    "Ideal Cathode",
+    "Graphite",
+    "LCO",
+    "LFP",
+    "NCA",
+    "NMC",
+    "Silicon"
+   ],
+   "help": "",
+   "key": "slider_material",
+   "index": 7,
+   "proto": {
+    "label": "Material",
+    "default": 0,
+    "options": [
+     "Ideal Anode",
+     "Ideal Cathode",
+     "Graphite",
+     "LCO",
+     "LFP",
+     "NCA",
+     "NMC",
+     "Silicon"
+    ],
+    "label_visibility": {},
+    "accept_new_options": false
+   }
+  },
+  {
+   "where": "sidebar/5",
+   "type": "slider",
+   "label": "SoL",
+   "value": 1.0,
+   "min": 0.0,
+   "max": 1.0,
+   "step": 0.01,
+   "format": "%0.2f",
+   "help": "",
+   "key": "slider_sol",
+   "proto": {
+    "label": "SoL",
+    "format": "%0.2f",
+    "data_type": "FLOAT",
+    "default": [
+     0.5
+    ],
+    "max": 1.0,
+    "step": 0.01,
+    "label_visibility": {},
+    "type": "SLIDER"
+   }
+  },
+  {
+   "where": "sidebar/6",
+   "type": "markdown",
+   "value": "---",
+   "help": "",
+   "key": null,
+   "proto": {
+    "body": "---",
+    "element_type": "NATIVE"
+   }
+  },
+  {
+   "where": "sidebar/7",
+   "type": "markdown",
+   "value": "<style>\n.custom-link {\n    display: inline-block;\n    width: 100%;\n    padding: 0.5rem 1rem;\n    text-align: center;\n    text-decoration: none !important;\n    border-radius: 5px;\n    font-weight: 500;\n    color: white !important;\n    background-color: transparent;\n    border: none;\n    margin-bottom: 0.5rem;\n}\n.custom-link:hover {\n    background-color: #003B73;\n    text-decoration: none;\n}\n</style>",
+   "help": "",
+   "key": null,
+   "proto": {
+    "body": "<style>\n.custom-link {\n    display: inline-block;\n    width: 100%;\n    padding: 0.5rem 1rem;\n    text-align: center;\n    text-decoration: none !important;\n    border-radius: 5px;\n    font-weight: 500;\n    color: white !important;\n    background-color: transparent;\n    border: none;\n    margin-bottom: 0.5rem;\n}\n.custom-link:hover {\n    background-color: #003B73;\n    text-decoration: none;\n}\n</style>",
+    "allow_html": true,
+    "element_type": "NATIVE"
+   }
+  },
+  {
+   "where": "sidebar/8",
+   "type": "markdown",
+   "value": "<a class=\"custom-link\" href=\"mailto:lars@chargetanks.com\" target=\"_blank\">\n💌 Send me an Email\n</a>",
+   "help": "",
+   "key": null,
+   "proto": {
+    "body": "<a class=\"custom-link\" href=\"mailto:lars@chargetanks.com\" target=\"_blank\">\n💌 Send me an Email\n</a>",
+    "allow_html": true,
+    "element_type": "NATIVE"
+   }
+  },
+  {
+   "where": "sidebar/9",
+   "type": "markdown",
+   "value": "---",
+   "help": "",
+   "key": null,
+   "proto": {
+    "body": "---",
+    "element_type": "NATIVE"
+   }
+  },
+  {
+   "where": "sidebar/10",
+   "type": "markdown",
+   "value": "<div style=\"text-align:center;font-size:.85rem;color:gray;line-height:1.4\">\n© 2025 Lars von Kolzenberg<br>\nBuilt with Streamlit - v0.7.0<br>\nFor educational use only\n</div>",
+   "help": "",
+   "key": null,
+   "proto": {
+    "body": "<div style=\"text-align:center;font-size:.85rem;color:gray;line-height:1.4\">\n© 2025 Lars von Kolzenberg<br>\nBuilt with Streamlit - v0.7.0<br>\nFor educational use only\n</div>",
+    "allow_html": true,
+    "element_type": "NATIVE"
+   }
+  }
+ ]
+}

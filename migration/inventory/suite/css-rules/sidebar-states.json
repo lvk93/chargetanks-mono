@@ -1,0 +1,762 @@
+{
+ "390-collapsed": [
+  {
+   "selector": "input, button, select, optgroup, textarea",
+   "media": "",
+   "css": "margin: 0px; font-family: inherit; line-height: inherit; font-size: inherit;",
+   "matches": [
+    "input@stSelectbox",
+    "button@stBaseButton-headerNoPadding",
+    "button@stBaseButton-secondary",
+    "button@stExpandSidebarButton",
+    "button@stBaseButton-header"
+   ]
+  },
+  {
+   "selector": "button, input",
+   "media": "",
+   "css": "overflow: visible;",
+   "matches": [
+    "button@stBaseButton-headerNoPadding",
+    "button@stBaseButton-secondary",
+    "button@stExpandSidebarButton",
+    "button@stBaseButton-header",
+    "input@stSelectbox"
+   ]
+  },
+  {
+   "selector": "button, [type=\"button\"], [type=\"reset\"], [type=\"submit\"]",
+   "media": "",
+   "css": "appearance: button;",
+   "matches": [
+    "button@stBaseButton-headerNoPadding",
+    "button@stBaseButton-secondary",
+    "button@stExpandSidebarButton",
+    "button@stBaseButton-header"
+   ]
+  },
+  {
+   "selector": ".st-emotion-cache-4rsbii",
+   "media": "",
+   "css": "display: flex; flex-direction: column; width: 100%; overflow: auto; -webkit-box-align: center; align-items: center; height: 100dvh;",
+   "matches": [
+    "section@stMain"
+   ]
+  },
+  {
+   "selector": ".st-emotion-cache-4rsbii:focus",
+   "media": "",
+   "css": "outline: none;",
+   "matches": [
+    "section@stMain"
+   ]
+  },
+  {
+   "selector": ".st-emotion-cache-4rsbii",
+   "media": "not print and (max-width: 768px)",
+   "css": "position: absolute; inset: 0px; height: 100dvh;",
+   "matches": [
+    "section@stMain"
+   ]
+  },
+  {
+   "selector": ".st-emotion-cache-4rsbii",
+   "media": "print",
+   "css": "overflow: visible;",
+   "matches": [
+    "section@stMain"
+   ]
+  },
+  {
+   "selector": ".st-emotion-cache-1qzukf6",
+   "media": "",
+   "css": "position: absolute; top: 0px; left: 0px; right: 0px; display: flex; -webkit-box-align: center; align-items: center; height: 3.75rem; min-height: 3.75rem; width: 100%; background: rgb(0, 59, 115); outline: none; z-index: 999990; pointer-events: auto; font-size: 0.875rem;",
+   "matches": [
+    "header@stHeader"
+   ]
+  },
+  {
+   "selector": ".st-emotion-cache-1qzukf6",
+   "media": "print",
+   "css": "position: absolute; background: transparent;",
+   "matches": [
+    "header@stHeader"
+   ]
+  },
+  {
+   "selector": ".st-emotion-cache-14vh5up",
+   "media": "",
+   "css": "display: flex; -webkit-box-align: center; align-items: center; height: 100%; width: 100%; padding: 0px; pointer-events: auto; position: relative; z-index: 999990;",
+   "matches": [
+    "div@stToolbar"
+   ]
+  },
+  {
+   "selector": ".st-emotion-cache-1j22a0y",
+   "media": "",
+   "css": "flex-shrink: 0; display: flex; -webkit-box-align: center; align-items: center; -webkit-box-pack: justify; justify-content: space-between; width: 100%; margin: 0px; border: 0px;",
+   "matches": [
+    "div@stToolbar"
+   ]
+  },
+  {
+   "selector": ".st-emotion-cache-70qvj9",
+   "media": "",
+   "css": "display: flex; -webkit-box-align: center; align-items: center;",
+   "matches": [
+    "div@stToolbar"
+   ]
+  },
+  {
+   "selector": ".st-emotion-cache-scp8yw",
+   "media": "",
+   "css": "flex-shrink: 0; display: flex; -webkit-box-align: center; align-items: center; -webkit-box-pack: end; justify-content: flex-end; margin-left: auto; height: 100%; min-width: 12.5rem; margin-right: 1rem;",
+   "matches": [
+    "div@stToolbar"
+   ]
+  },
+  {
+   "selector": ".st-emotion-cache-p4tr0c",
+   "media": "",
+   "css": "display: inline-flex; -webkit-box-align: center; align-items: center; -webkit-box-pack: center; justify-content: center; font-weight: 400; border-radius: 0.5rem; margin: 0px 0.125rem; text-transform: none; font-family: inherit; color: inherit; width: auto; cursor: pointer; user-select: none; background-color: transparent; border: none; font-size: 0.875rem; line-height: 1; min-width: 1.75rem; min-height: 1.75rem; padding: 0px;",
+   "matches": [
+    "button@stBaseButton-headerNoPadding",
+    "button@stExpandSidebarButton"
+   ]
+  },
+  {
+   "selector": ".st-emotion-cache-p4tr0c:focus",
+   "media": "",
+   "css": "outline: none;",
+   "matches": [
+    "button@stBaseButton-headerNoPadding",
+    "button@stExpandSidebarButton"
+   ]
+  },
+  {
+   "selector": ".st-emotion-cache-p4tr0c:focus-visible",
+   "media": "",
+   "css": "box-shadow: rgba(93, 173, 226, 0.5) 0px 0px 0px 0.2rem;",
+   "matches": [
+    "button@stBaseButton-headerNoPadding",
+    "button@stExpandSidebarButton"
+   ]
+  },
+  {
+   "selector": ".st-emotion-cache-p4tr0c:focus",
+   "media": "",
+   "css": "outline: none;",
+   "matches": [
+    "button@stBaseButton-headerNoPadding",
+    "button@stExpandSidebarButton"
+   ]
+  },
+  {
+   "selector": ".st-emotion-cache-p4tr0c:focus-visible",
+   "media": "",
+   "css": "box-shadow: rgba(38, 39, 48, 0.2) 0px 0px 0px 0.2rem;",
+   "matches": [
+    "button@stBaseButton-headerNoPadding",
+    "button@stExpandSidebarButton"
+   ]
+  },
+  {
+   "selector": ".st-emotion-cache-p4tr0c:hover",
+   "media": "",
+   "css": "background-color: rgba(181, 207, 232, 0.15);",
+   "matches": [
+    "button@stBaseButton-headerNoPadding",
+    "button@stExpandSidebarButton"
+   ]
+  },
+  {
+   "selector": ".st-emotion-cache-p4tr0c:active",
+   "media": "",
+   "css": "background-color: rgba(181, 207, 232, 0.25);",
+   "matches": [
+    "button@stBaseButton-headerNoPadding",
+    "button@stExpandSidebarButton"
+   ]
+  },
+  {
+   "selector": ".st-emotion-cache-p4tr0c:disabled, .st-emotion-cache-p4tr0c:disabled:hover, .st-emotion-cache-p4tr0c:disabled:active",
+   "media": "",
+   "css": "background-color: rgb(230, 234, 241); border-color: transparent; color: rgb(163, 168, 184);",
+   "matches": [
+    "button@stBaseButton-headerNoPadding",
+    "button@stExpandSidebarButton"
+   ]
+  },
+  {
+   "selector": ".st-emotion-cache-lvmqt4",
+   "media": "",
+   "css": "position: relative; top: 0px; background-color: rgb(51, 51, 51); color: rgb(255, 255, 255); color-scheme: dark; z-index: 999991; min-width: 0px; max-width: 0px; transform: translateX(-256px); transition: transform 300ms, min-width 300ms, max-width 300ms;",
+   "matches": [
+    "section@stSidebar"
+   ]
+  },
+  {
+   "selector": ".st-emotion-cache-lvmqt4:focus",
+   "media": "",
+   "css": "outline: none;",
+   "matches": [
+    "section@stSidebar"
+   ]
+  },
+  {
+   "selector": ".st-emotion-cache-lvmqt4",
+   "media": "(max-width: 768px)",
+   "css": "box-shadow: transparent -2rem 0px 2rem 2rem;",
+   "matches": [
+    "section@stSidebar"
+   ]
+  },
+  {
+   "selector": ".st-emotion-cache-lvmqt4",
+   "media": "print",
+   "css": "display: none; max-height: 99%; box-shadow: none; height: auto !important;",
+   "matches": [
+    "section@stSidebar"
+   ]
+  },
+  {
+   "selector": ".st-emotion-cache-1ive5df",
+   "media": "",
+   "css": "display: none; transition: left 300ms; color: rgb(255, 255, 255); line-height: 0;",
+   "matches": [
+    "div@stSidebarCollapseButton"
+   ]
+  },
+  {
+   "selector": ".st-emotion-cache-1ive5df",
+   "media": "print",
+   "css": "display: none;",
+   "matches": [
+    "div@stSidebarCollapseButton"
+   ]
+  },
+  {
+   "selector": ".st-emotion-cache-1ive5df",
+   "media": "(max-width: 576px)",
+   "css": "display: inline;",
+   "matches": [
+    "div@stSidebarCollapseButton"
+   ]
+  },
+  {
+   "selector": ".st-emotion-cache-189uypx",
+   "media": "",
+   "css": "fill: currentcolor; display: inline-flex; -webkit-box-align: center; align-items: center; font-size: 1.5rem; width: 1.5rem; height: 1.5rem; flex-shrink: 0;",
+   "matches": [
+    "span@stBaseButton-headerNoPadding",
+    "span@stExpandSidebarButton"
+   ]
+  },
+  {
+   "selector": ".st-emotion-cache-aflloj",
+   "media": "",
+   "css": "position: absolute; width: 8px; height: 100%; cursor: col-resize; z-index: 999995; background-image: none;",
+   "matches": [
+    "div@stSidebar"
+   ]
+  },
+  {
+   "selector": ".st-emotion-cache-aflloj:hover",
+   "media": "",
+   "css": "background-image: linear-gradient(to right, transparent 20%, rgba(255, 255, 255, 0.2) 28%, transparent 44%);",
+   "matches": [
+    "div@stSidebar"
+   ]
+  },
+  {
+   "selector": ".st-emotion-cache-8ezv7j",
+   "media": "",
+   "css": "display: flex; -webkit-box-align: center; align-items: center; -webkit-box-pack: center; justify-content: center; margin-left: 1rem;",
+   "matches": [
+    "div@stToolbar"
+   ]
+  },
+  {
+   "selector": ".st-emotion-cache-8ezv7j",
+   "media": "print",
+   "css": "display: none;",
+   "matches": [
+    "div@stToolbar"
+   ]
+  }
+ ],
+ "390-collapsed:state": {
+  "style": "position: relative; user-select: auto; width: 256px; height: auto; box-sizing: border-box; flex-shrink: 0;",
+  "minW": "0px",
+  "maxW": "0px",
+  "transform": "matrix(1, 0, 0, 1, -256, 0)",
+  "transition": "transform 0.3s, min-width 0.3s, max-width 0.3s",
+  "expandBtn": {
+   "x": 18,
+   "y": 16,
+   "w": 28,
+   "h": 28
+  }
+ },
+ "390-open": [
+  {
+   "selector": ".st-emotion-cache-4rsbii",
+   "media": "",
+   "css": "display: flex; flex-direction: column; width: 100%; overflow: auto; -webkit-box-align: center; align-items: center; height: 100dvh;",
+   "matches": [
+    "section@stMain"
+   ]
+  },
+  {
+   "selector": ".st-emotion-cache-4rsbii:focus",
+   "media": "",
+   "css": "outline: none;",
+   "matches": [
+    "section@stMain"
+   ]
+  },
+  {
+   "selector": ".st-emotion-cache-4rsbii",
+   "media": "not print and (max-width: 768px)",
+   "css": "position: absolute; inset: 0px; height: 100dvh;",
+   "matches": [
+    "section@stMain"
+   ]
+  },
+  {
+   "selector": ".st-emotion-cache-4rsbii",
+   "media": "print",
+   "css": "overflow: visible;",
+   "matches": [
+    "section@stMain"
+   ]
+  },
+  {
+   "selector": ".st-emotion-cache-1qzukf6",
+   "media": "",
+   "css": "position: absolute; top: 0px; left: 0px; right: 0px; display: flex; -webkit-box-align: center; align-items: center; height: 3.75rem; min-height: 3.75rem; width: 100%; background: rgb(0, 59, 115); outline: none; z-index: 999990; pointer-events: auto; font-size: 0.875rem;",
+   "matches": [
+    "header@stHeader"
+   ]
+  },
+  {
+   "selector": ".st-emotion-cache-1qzukf6",
+   "media": "print",
+   "css": "position: absolute; background: transparent;",
+   "matches": [
+    "header@stHeader"
+   ]
+  },
+  {
+   "selector": ".st-emotion-cache-14vh5up",
+   "media": "",
+   "css": "display: flex; -webkit-box-align: center; align-items: center; height: 100%; width: 100%; padding: 0px; pointer-events: auto; position: relative; z-index: 999990;",
+   "matches": [
+    "div@stToolbar"
+   ]
+  },
+  {
+   "selector": ".st-emotion-cache-1j22a0y",
+   "media": "",
+   "css": "flex-shrink: 0; display: flex; -webkit-box-align: center; align-items: center; -webkit-box-pack: justify; justify-content: space-between; width: 100%; margin: 0px; border: 0px;",
+   "matches": [
+    "div@stToolbar"
+   ]
+  },
+  {
+   "selector": ".st-emotion-cache-70qvj9",
+   "media": "",
+   "css": "display: flex; -webkit-box-align: center; align-items: center;",
+   "matches": [
+    "div@stToolbar"
+   ]
+  },
+  {
+   "selector": ".st-emotion-cache-scp8yw",
+   "media": "",
+   "css": "flex-shrink: 0; display: flex; -webkit-box-align: center; align-items: center; -webkit-box-pack: end; justify-content: flex-end; margin-left: auto; height: 100%; min-width: 12.5rem; margin-right: 1rem;",
+   "matches": [
+    "div@stToolbar"
+   ]
+  },
+  {
+   "selector": ".st-emotion-cache-aflloj",
+   "media": "",
+   "css": "position: absolute; width: 8px; height: 100%; cursor: col-resize; z-index: 999995; background-image: none;",
+   "matches": [
+    "div@stSidebar"
+   ]
+  },
+  {
+   "selector": ".st-emotion-cache-aflloj:hover",
+   "media": "",
+   "css": "background-image: linear-gradient(to right, transparent 20%, rgba(255, 255, 255, 0.2) 28%, transparent 44%);",
+   "matches": [
+    "div@stSidebar"
+   ]
+  },
+  {
+   "selector": ".st-emotion-cache-1xiig9e",
+   "media": "",
+   "css": "position: relative; top: 0px; background-color: rgb(51, 51, 51); color: rgb(255, 255, 255); color-scheme: dark; z-index: 999991; min-width: 200px; max-width: 351px; transform: none; transition: transform 300ms, min-width 300ms, max-width 300ms;",
+   "matches": [
+    "section@stSidebar"
+   ]
+  },
+  {
+   "selector": ".st-emotion-cache-1xiig9e:focus",
+   "media": "",
+   "css": "outline: none;",
+   "matches": [
+    "section@stSidebar"
+   ]
+  },
+  {
+   "selector": ".st-emotion-cache-1xiig9e",
+   "media": "(max-width: 768px)",
+   "css": "box-shadow: rgba(0, 0, 0, 0.16) -2rem 0px 2rem 2rem;",
+   "matches": [
+    "section@stSidebar"
+   ]
+  },
+  {
+   "selector": ".st-emotion-cache-1xiig9e",
+   "media": "print",
+   "css": "display: initial; max-height: 99%; box-shadow: none; height: auto !important;",
+   "matches": [
+    "section@stSidebar"
+   ]
+  },
+  {
+   "selector": ".st-emotion-cache-kudhe2",
+   "media": "",
+   "css": "display: inline; transition: left 300ms; color: rgb(255, 255, 255); line-height: 0;",
+   "matches": [
+    "div@stSidebarCollapseButton"
+   ]
+  },
+  {
+   "selector": ".st-emotion-cache-kudhe2",
+   "media": "print",
+   "css": "display: none;",
+   "matches": [
+    "div@stSidebarCollapseButton"
+   ]
+  },
+  {
+   "selector": ".st-emotion-cache-kudhe2",
+   "media": "(max-width: 576px)",
+   "css": "display: inline;",
+   "matches": [
+    "div@stSidebarCollapseButton"
+   ]
+  }
+ ],
+ "390-open:state": {
+  "style": "position: relative; user-select: auto; width: 256px; height: auto; box-sizing: border-box; flex-shrink: 0;",
+  "minW": "200px",
+  "maxW": "351px",
+  "transform": "none",
+  "transition": "transform 0.3s, min-width 0.3s, max-width 0.3s",
+  "expandBtn": null
+ },
+ "1280-collapsed": [
+  {
+   "selector": "input, button, select, optgroup, textarea",
+   "media": "",
+   "css": "margin: 0px; font-family: inherit; line-height: inherit; font-size: inherit;",
+   "matches": [
+    "input@stSelectbox",
+    "button@stBaseButton-headerNoPadding",
+    "button@stBaseButton-secondary",
+    "button@stExpandSidebarButton",
+    "button@stBaseButton-header"
+   ]
+  },
+  {
+   "selector": "button, input",
+   "media": "",
+   "css": "overflow: visible;",
+   "matches": [
+    "button@stBaseButton-headerNoPadding",
+    "button@stBaseButton-secondary",
+    "button@stExpandSidebarButton",
+    "button@stBaseButton-header",
+    "input@stSelectbox"
+   ]
+  },
+  {
+   "selector": "button, [type=\"button\"], [type=\"reset\"], [type=\"submit\"]",
+   "media": "",
+   "css": "appearance: button;",
+   "matches": [
+    "button@stBaseButton-headerNoPadding",
+    "button@stBaseButton-secondary",
+    "button@stExpandSidebarButton",
+    "button@stBaseButton-header"
+   ]
+  },
+  {
+   "selector": ".st-emotion-cache-4rsbii",
+   "media": "",
+   "css": "display: flex; flex-direction: column; width: 100%; overflow: auto; -webkit-box-align: center; align-items: center; height: 100dvh;",
+   "matches": [
+    "section@stMain"
+   ]
+  },
+  {
+   "selector": ".st-emotion-cache-4rsbii:focus",
+   "media": "",
+   "css": "outline: none;",
+   "matches": [
+    "section@stMain"
+   ]
+  },
+  {
+   "selector": ".st-emotion-cache-4rsbii",
+   "media": "not print and (max-width: 768px)",
+   "css": "position: absolute; inset: 0px; height: 100dvh;",
+   "matches": [
+    "section@stMain"
+   ]
+  },
+  {
+   "selector": ".st-emotion-cache-4rsbii",
+   "media": "print",
+   "css": "overflow: visible;",
+   "matches": [
+    "section@stMain"
+   ]
+  },
+  {
+   "selector": ".st-emotion-cache-1qzukf6",
+   "media": "",
+   "css": "position: absolute; top: 0px; left: 0px; right: 0px; display: flex; -webkit-box-align: center; align-items: center; height: 3.75rem; min-height: 3.75rem; width: 100%; background: rgb(0, 59, 115); outline: none; z-index: 999990; pointer-events: auto; font-size: 0.875rem;",
+   "matches": [
+    "header@stHeader"
+   ]
+  },
+  {
+   "selector": ".st-emotion-cache-1qzukf6",
+   "media": "print",
+   "css": "position: absolute; background: transparent;",
+   "matches": [
+    "header@stHeader"
+   ]
+  },
+  {
+   "selector": ".st-emotion-cache-14vh5up",
+   "media": "",
+   "css": "display: flex; -webkit-box-align: center; align-items: center; height: 100%; width: 100%; padding: 0px; pointer-events: auto; position: relative; z-index: 999990;",
+   "matches": [
+    "div@stToolbar"
+   ]
+  },
+  {
+   "selector": ".st-emotion-cache-1j22a0y",
+   "media": "",
+   "css": "flex-shrink: 0; display: flex; -webkit-box-align: center; align-items: center; -webkit-box-pack: justify; justify-content: space-between; width: 100%; margin: 0px; border: 0px;",
+   "matches": [
+    "div@stToolbar"
+   ]
+  },
+  {
+   "selector": ".st-emotion-cache-70qvj9",
+   "media": "",
+   "css": "display: flex; -webkit-box-align: center; align-items: center;",
+   "matches": [
+    "div@stToolbar"
+   ]
+  },
+  {
+   "selector": ".st-emotion-cache-scp8yw",
+   "media": "",
+   "css": "flex-shrink: 0; display: flex; -webkit-box-align: center; align-items: center; -webkit-box-pack: end; justify-content: flex-end; margin-left: auto; height: 100%; min-width: 12.5rem; margin-right: 1rem;",
+   "matches": [
+    "div@stToolbar"
+   ]
+  },
+  {
+   "selector": ".st-emotion-cache-p4tr0c",
+   "media": "",
+   "css": "display: inline-flex; -webkit-box-align: center; align-items: center; -webkit-box-pack: center; justify-content: center; font-weight: 400; border-radius: 0.5rem; margin: 0px 0.125rem; text-transform: none; font-family: inherit; color: inherit; width: auto; cursor: pointer; user-select: none; background-color: transparent; border: none; font-size: 0.875rem; line-height: 1; min-width: 1.75rem; min-height: 1.75rem; padding: 0px;",
+   "matches": [
+    "button@stBaseButton-headerNoPadding",
+    "button@stExpandSidebarButton"
+   ]
+  },
+  {
+   "selector": ".st-emotion-cache-p4tr0c:focus",
+   "media": "",
+   "css": "outline: none;",
+   "matches": [
+    "button@stBaseButton-headerNoPadding",
+    "button@stExpandSidebarButton"
+   ]
+  },
+  {
+   "selector": ".st-emotion-cache-p4tr0c:focus-visible",
+   "media": "",
+   "css": "box-shadow: rgba(93, 173, 226, 0.5) 0px 0px 0px 0.2rem;",
+   "matches": [
+    "button@stBaseButton-headerNoPadding",
+    "button@stExpandSidebarButton"
+   ]
+  },
+  {
+   "selector": ".st-emotion-cache-p4tr0c:focus",
+   "media": "",
+   "css": "outline: none;",
+   "matches": [
+    "button@stBaseButton-headerNoPadding",
+    "button@stExpandSidebarButton"
+   ]
+  },
+  {
+   "selector": ".st-emotion-cache-p4tr0c:focus-visible",
+   "media": "",
+   "css": "box-shadow: rgba(38, 39, 48, 0.2) 0px 0px 0px 0.2rem;",
+   "matches": [
+    "button@stBaseButton-headerNoPadding",
+    "button@stExpandSidebarButton"
+   ]
+  },
+  {
+   "selector": ".st-emotion-cache-p4tr0c:hover",
+   "media": "",
+   "css": "background-color: rgba(181, 207, 232, 0.15);",
+   "matches": [
+    "button@stBaseButton-headerNoPadding",
+    "button@stExpandSidebarButton"
+   ]
+  },
+  {
+   "selector": ".st-emotion-cache-p4tr0c:active",
+   "media": "",
+   "css": "background-color: rgba(181, 207, 232, 0.25);",
+   "matches": [
+    "button@stBaseButton-headerNoPadding",
+    "button@stExpandSidebarButton"
+   ]
+  },
+  {
+   "selector": ".st-emotion-cache-p4tr0c:disabled, .st-emotion-cache-p4tr0c:disabled:hover, .st-emotion-cache-p4tr0c:disabled:active",
+   "media": "",
+   "css": "background-color: rgb(230, 234, 241); border-color: transparent; color: rgb(163, 168, 184);",
+   "matches": [
+    "button@stBaseButton-headerNoPadding",
+    "button@stExpandSidebarButton"
+   ]
+  },
+  {
+   "selector": ".st-emotion-cache-1ive5df",
+   "media": "",
+   "css": "display: none; transition: left 300ms; color: rgb(255, 255, 255); line-height: 0;",
+   "matches": [
+    "div@stSidebarCollapseButton"
+   ]
+  },
+  {
+   "selector": ".st-emotion-cache-1ive5df",
+   "media": "print",
+   "css": "display: none;",
+   "matches": [
+    "div@stSidebarCollapseButton"
+   ]
+  },
+  {
+   "selector": ".st-emotion-cache-1ive5df",
+   "media": "(max-width: 576px)",
+   "css": "display: inline;",
+   "matches": [
+    "div@stSidebarCollapseButton"
+   ]
+  },
+  {
+   "selector": ".st-emotion-cache-189uypx",
+   "media": "",
+   "css": "fill: currentcolor; display: inline-flex; -webkit-box-align: center; align-items: center; font-size: 1.5rem; width: 1.5rem; height: 1.5rem; flex-shrink: 0;",
+   "matches": [
+    "span@stBaseButton-headerNoPadding",
+    "span@stExpandSidebarButton"
+   ]
+  },
+  {
+   "selector": ".st-emotion-cache-aflloj",
+   "media": "",
+   "css": "position: absolute; width: 8px; height: 100%; cursor: col-resize; z-index: 999995; background-image: none;",
+   "matches": [
+    "div@stSidebar"
+   ]
+  },
+  {
+   "selector": ".st-emotion-cache-aflloj:hover",
+   "media": "",
+   "css": "background-image: linear-gradient(to right, transparent 20%, rgba(255, 255, 255, 0.2) 28%, transparent 44%);",
+   "matches": [
+    "div@stSidebar"
+   ]
+  },
+  {
+   "selector": ".st-emotion-cache-lvmqt4",
+   "media": "",
+   "css": "position: relative; top: 0px; background-color: rgb(51, 51, 51); color: rgb(255, 255, 255); color-scheme: dark; z-index: 999991; min-width: 0px; max-width: 0px; transform: translateX(-256px); transition: transform 300ms, min-width 300ms, max-width 300ms;",
+   "matches": [
+    "section@stSidebar"
+   ]
+  },
+  {
+   "selector": ".st-emotion-cache-lvmqt4:focus",
+   "media": "",
+   "css": "outline: none;",
+   "matches": [
+    "section@stSidebar"
+   ]
+  },
+  {
+   "selector": ".st-emotion-cache-lvmqt4",
+   "media": "(max-width: 768px)",
+   "css": "box-shadow: transparent -2rem 0px 2rem 2rem;",
+   "matches": [
+    "section@stSidebar"
+   ]
+  },
+  {
+   "selector": ".st-emotion-cache-lvmqt4",
+   "media": "print",
+   "css": "display: none; max-height: 99%; box-shadow: none; height: auto !important;",
+   "matches": [
+    "section@stSidebar"
+   ]
+  },
+  {
+   "selector": ".st-emotion-cache-8ezv7j",
+   "media": "",
+   "css": "display: flex; -webkit-box-align: center; align-items: center; -webkit-box-pack: center; justify-content: center; margin-left: 1rem;",
+   "matches": [
+    "div@stToolbar"
+   ]
+  },
+  {
+   "selector": ".st-emotion-cache-8ezv7j",
+   "media": "print",
+   "css": "display: none;",
+   "matches": [
+    "div@stToolbar"
+   ]
+  }
+ ],
+ "1280-collapsed:state": {
+  "style": "position: relative; user-select: auto; width: 256px; height: auto; box-sizing: border-box; flex-shrink: 0;",
+  "minW": "0px",
+  "maxW": "0px",
+  "transform": "matrix(1, 0, 0, 1, -256, 0)",
+  "transition": "transform 0.3s, min-width 0.3s, max-width 0.3s",
+  "expandBtn": {
+   "x": 18,
+   "y": 16,
+   "w": 28,
+   "h": 28
+  }
+ }
+}

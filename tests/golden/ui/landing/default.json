@@ -1,0 +1,433 @@
+{
+ "tool": "landing",
+ "case": "default",
+ "steps": [],
+ "exceptions": [],
+ "elements": [
+  {
+   "where": "main",
+   "block": "main",
+   "proto": {}
+  },
+  {
+   "where": "main/0",
+   "type": "markdown",
+   "value": "<style>\n.block-container { padding-top: 0rem !important; padding-bottom: 0.5rem !important; }\n.block-container h1 { margin-top: 1.5rem !important; margin-bottom: 0.5rem !important; }\n</style>",
+   "help": "",
+   "key": null,
+   "proto": {
+    "body": "<style>\n.block-container { padding-top: 0rem !important; padding-bottom: 0.5rem !important; }\n.block-container h1 { margin-top: 1.5rem !important; margin-bottom: 0.5rem !important; }\n</style>",
+    "allow_html": true,
+    "element_type": "NATIVE"
+   }
+  },
+  {
+   "where": "main/1",
+   "type": "markdown",
+   "value": "<style>\n/* App Hintergrund hell machen, damit Text nicht erzwungen weiß ist */\n.stApp {\n    background-color: #333333;\n    color: #ffffff; /* Standard-Textfarbe */\n}\n\n/* Allgemeine Card-Styles */\n.card {\n    background-color: #333333;\n    color: #ffffff !important;   /* Text in normalen Cards schwarz */\n    padding: 24px;\n    border-radius: 12px;\n    margin: 20px 0;\n    box-shadow: 0 4px 12px rgba(0,0,0,0.08);\n}\n\n/* Dark Variant */\n.card-dark {\n    background-color: #003B73;\n    color: #ffffff !important;   /* Text in dunklen Cards weiß */\n    padding: 24px;\n    border-radius: 12px;\n    margin: 20px 0;\n    box-shadow: 0 4px 12px rgba(0,0,0,0.08);\n}\n\n/* Headings */\n.card h2 {\n    margin-top: 0;\n    font-size: 1.5rem;\n}\n\n/* Footer Text */\n.footer {\n    text-align: center;\n    font-size: .85rem;\n    color: white;\n    line-height: 1.4;\n}\n\n/* Button Styling */\ndiv.stButton > button {\n    background-color: #003B73;\n    color: white;\n    border-radius: 8px;\n    border: none;\n    padding: 0.6rem 1.2rem;\n    font-weight: 600;\n    cursor: pointer;\n}\ndiv.stButton > button:hover {\n    background-color: #003B73;\n}\n</style>",
+   "help": "",
+   "key": null,
+   "proto": {
+    "body": "<style>\n/* App Hintergrund hell machen, damit Text nicht erzwungen weiß ist */\n.stApp {\n    background-color: #333333;\n    color: #ffffff; /* Standard-Textfarbe */\n}\n\n/* Allgemeine Card-Styles */\n.card {\n    background-color: #333333;\n    color: #ffffff !important;   /* Text in normalen Cards schwarz */\n    padding: 24px;\n    border-radius: 12px;\n    margin: 20px 0;\n    box-shadow: 0 4px 12px rgba(0,0,0,0.08);\n}\n\n/* Dark Variant */\n.card-dark {\n    background-color: #003B73;\n    color: #ffffff !important;   /* Text in dunklen Cards weiß */\n    padding: 24px;\n    border-radius: 12px;\n    margin: 20px 0;\n    box-shadow: 0 4px 12px rgba(0,0,0,0.08);\n}\n\n/* Headings */\n.card h2 {\n    margin-top: 0;\n    font-size: 1.5rem;\n}\n\n/* Footer Text */\n.footer {\n    text-align: center;\n    font-size: .85rem;\n    color: white;\n    line-height: 1.4;\n}\n\n/* Button Styling */\ndiv.stButton > button {\n    background-color: #003B73;\n    color: white;\n    border-radius: 8px;\n    border: none;\n    padding: 0.6rem 1.2rem;\n    font-weight: 600;\n    cursor: pointer;\n}\ndiv.stButton > button:hover {\n    background-color: #003B73;\n}\n</style>",
+    "allow_html": true,
+    "element_type": "NATIVE"
+   }
+  },
+  {
+   "where": "main/2",
+   "type": "markdown",
+   "value": "<div style=\"\n    text-align: center; \n    padding: 2rem 1rem;\n\">\n    <h1 style=\"\n        font-size: 3rem; \n        margin-bottom: 1rem;\n    \">\n        🪣 Charge Tanks Suite\n    </h1>\n    <h2 style=\"\n        font-size: 1.5rem; \n        font-weight: 400;\n        line-height: 1.5;\n        max-width: 800px;\n        margin: 0 auto;\n        color: #ddd;\n    \">\n        Interactive tools to build intuition for <b>battery design, OCV, blending & aging</b>.<br>\n    </h2>\n</div>",
+   "help": "",
+   "key": null,
+   "proto": {
+    "body": "<div style=\"\n    text-align: center; \n    padding: 2rem 1rem;\n\">\n    <h1 style=\"\n        font-size: 3rem; \n        margin-bottom: 1rem;\n    \">\n        🪣 Charge Tanks Suite\n    </h1>\n    <h2 style=\"\n        font-size: 1.5rem; \n        font-weight: 400;\n        line-height: 1.5;\n        max-width: 800px;\n        margin: 0 auto;\n        color: #ddd;\n    \">\n        Interactive tools to build intuition for <b>battery design, OCV, blending & aging</b>.<br>\n    </h2>\n</div>",
+    "allow_html": true,
+    "element_type": "NATIVE"
+   }
+  },
+  {
+   "where": "main/3",
+   "block": "flex_container",
+   "proto": {
+    "flex_container": {
+     "gap_config": {
+      "gap_size": "SMALL"
+     },
+     "scale": 1.0,
+     "direction": "HORIZONTAL",
+     "wrap": true
+    }
+   }
+  },
+  {
+   "where": "main/3/0",
+   "block": "column",
+   "proto": {
+    "weight": 0.3333333333333333,
+    "gap_config": {
+     "gap_size": "SMALL"
+    }
+   }
+  },
+  {
+   "where": "main/3/0/0",
+   "type": "markdown",
+   "value": "<div class=\"card\">\n    <h2>🪣 Materials</h2>\n    <p>Explore half-cell curves and metadata.</p>\n</div>",
+   "help": "",
+   "key": null,
+   "proto": {
+    "body": "<div class=\"card\">\n    <h2>🪣 Materials</h2>\n    <p>Explore half-cell curves and metadata.</p>\n</div>",
+    "allow_html": true,
+    "element_type": "NATIVE"
+   }
+  },
+  {
+   "where": "main/3/0/1",
+   "type": "button",
+   "label": "Open Materials",
+   "value": false,
+   "help": "",
+   "key": null,
+   "proto": {
+    "label": "Open Materials",
+    "type": "secondary",
+    "use_container_width": true
+   }
+  },
+  {
+   "where": "main/3/0/2",
+   "type": "imgs",
+   "key": null,
+   "proto": {
+    "imgs": [
+     {
+      "url": "/mock/media/3bf56e779e6555a89d8db99ac88646fd4cf8aafb55df6cade08b3055.png"
+     }
+    ],
+    "width": -5
+   }
+  },
+  {
+   "where": "main/3/1",
+   "block": "column",
+   "proto": {
+    "weight": 0.3333333333333333,
+    "gap_config": {
+     "gap_size": "SMALL"
+    }
+   }
+  },
+  {
+   "where": "main/3/1/0",
+   "type": "markdown",
+   "value": "<div class=\"card\">\n    <h2>🪫 Cell Reconstruction</h2>\n    <p>Rebuild full-cell OCV from half-cells.</p>\n</div>",
+   "help": "",
+   "key": null,
+   "proto": {
+    "body": "<div class=\"card\">\n    <h2>🪫 Cell Reconstruction</h2>\n    <p>Rebuild full-cell OCV from half-cells.</p>\n</div>",
+    "allow_html": true,
+    "element_type": "NATIVE"
+   }
+  },
+  {
+   "where": "main/3/1/1",
+   "type": "button",
+   "label": "Open Cell Reconstruction",
+   "value": false,
+   "help": "",
+   "key": null,
+   "proto": {
+    "label": "Open Cell Reconstruction",
+    "type": "secondary",
+    "use_container_width": true
+   }
+  },
+  {
+   "where": "main/3/1/2",
+   "type": "imgs",
+   "key": null,
+   "proto": {
+    "imgs": [
+     {
+      "url": "/mock/media/3854cd9fe14e8871a5c81e2d78ea37aa01fce712d225088b8ac337eb.png"
+     }
+    ],
+    "width": -5
+   }
+  },
+  {
+   "where": "main/3/2",
+   "block": "column",
+   "proto": {
+    "weight": 0.3333333333333333,
+    "gap_config": {
+     "gap_size": "SMALL"
+    }
+   }
+  },
+  {
+   "where": "main/3/2/0",
+   "type": "markdown",
+   "value": "<div class=\"card\">\n    <h2>⚖️ Blending</h2>\n    <p>Blend anode/cathode; inspect OCV & dQ/dV.</p>\n</div>",
+   "help": "",
+   "key": null,
+   "proto": {
+    "body": "<div class=\"card\">\n    <h2>⚖️ Blending</h2>\n    <p>Blend anode/cathode; inspect OCV & dQ/dV.</p>\n</div>",
+    "allow_html": true,
+    "element_type": "NATIVE"
+   }
+  },
+  {
+   "where": "main/3/2/1",
+   "type": "button",
+   "label": "Open Blending",
+   "value": false,
+   "help": "",
+   "key": null,
+   "proto": {
+    "label": "Open Blending",
+    "type": "secondary",
+    "use_container_width": true
+   }
+  },
+  {
+   "where": "main/3/2/2",
+   "type": "imgs",
+   "key": null,
+   "proto": {
+    "imgs": [
+     {
+      "url": "/mock/media/b608d882fc9e4fc064e403040ad346ce1701ebc50aafc1a6198d15f8.png"
+     }
+    ],
+    "width": -5
+   }
+  },
+  {
+   "where": "main/4",
+   "block": "flex_container",
+   "proto": {
+    "flex_container": {
+     "gap_config": {
+      "gap_size": "SMALL"
+     },
+     "scale": 1.0,
+     "direction": "HORIZONTAL",
+     "wrap": true
+    }
+   }
+  },
+  {
+   "where": "main/4/0",
+   "block": "column",
+   "proto": {
+    "weight": 0.3333333333333333,
+    "gap_config": {
+     "gap_size": "SMALL"
+    }
+   }
+  },
+  {
+   "where": "main/4/0/0",
+   "type": "markdown",
+   "value": "<div class=\"card\">\n    <h2>👴 Aging</h2>\n    <p>Overlay BOL vs aged; inspect shifts & losses.</p>\n</div>",
+   "help": "",
+   "key": null,
+   "proto": {
+    "body": "<div class=\"card\">\n    <h2>👴 Aging</h2>\n    <p>Overlay BOL vs aged; inspect shifts & losses.</p>\n</div>",
+    "allow_html": true,
+    "element_type": "NATIVE"
+   }
+  },
+  {
+   "where": "main/4/0/1",
+   "type": "button",
+   "label": "Open Aging",
+   "value": false,
+   "help": "",
+   "key": null,
+   "proto": {
+    "label": "Open Aging",
+    "type": "secondary",
+    "use_container_width": true
+   }
+  },
+  {
+   "where": "main/4/0/2",
+   "type": "imgs",
+   "key": null,
+   "proto": {
+    "imgs": [
+     {
+      "url": "/mock/media/7569ceea56b35c46c6ca27b8149723e59ba377ae34d4403d781a65c7.png"
+     }
+    ],
+    "width": -5
+   }
+  },
+  {
+   "where": "main/4/1",
+   "block": "column",
+   "proto": {
+    "weight": 0.3333333333333333,
+    "gap_config": {
+     "gap_size": "SMALL"
+    }
+   }
+  },
+  {
+   "where": "main/4/1/0",
+   "type": "markdown",
+   "value": "<div class=\"card\">\n    <h2>🫁 Swelling</h2>\n    <p>Relate porosity/compression to thickness breathing.</p>\n</div>",
+   "help": "",
+   "key": null,
+   "proto": {
+    "body": "<div class=\"card\">\n    <h2>🫁 Swelling</h2>\n    <p>Relate porosity/compression to thickness breathing.</p>\n</div>",
+    "allow_html": true,
+    "element_type": "NATIVE"
+   }
+  },
+  {
+   "where": "main/4/1/1",
+   "type": "button",
+   "label": "Open Swelling",
+   "value": false,
+   "help": "",
+   "key": null,
+   "proto": {
+    "label": "Open Swelling",
+    "type": "secondary",
+    "use_container_width": true
+   }
+  },
+  {
+   "where": "main/4/1/2",
+   "type": "imgs",
+   "key": null,
+   "proto": {
+    "imgs": [
+     {
+      "url": "/mock/media/0d8f854437987744307d28b6d6819fd5632553f4001ddcd218f985df.png"
+     }
+    ],
+    "width": -5
+   }
+  },
+  {
+   "where": "main/4/2",
+   "block": "column",
+   "proto": {
+    "weight": 0.3333333333333333,
+    "gap_config": {
+     "gap_size": "SMALL"
+    }
+   }
+  },
+  {
+   "where": "main/5",
+   "type": "divider",
+   "value": "---",
+   "help": "",
+   "key": null,
+   "proto": {
+    "body": "---",
+    "element_type": "DIVIDER"
+   }
+  },
+  {
+   "where": "main/6",
+   "block": "flex_container",
+   "proto": {
+    "flex_container": {
+     "gap_config": {
+      "gap_size": "SMALL"
+     },
+     "scale": 1.0,
+     "direction": "HORIZONTAL",
+     "wrap": true
+    }
+   }
+  },
+  {
+   "where": "main/6/0",
+   "block": "column",
+   "proto": {
+    "weight": 0.16666666666666666,
+    "gap_config": {
+     "gap_size": "SMALL"
+    }
+   }
+  },
+  {
+   "where": "main/6/1",
+   "block": "column",
+   "proto": {
+    "weight": 0.3333333333333333,
+    "gap_config": {
+     "gap_size": "SMALL"
+    }
+   }
+  },
+  {
+   "where": "main/6/2",
+   "block": "column",
+   "proto": {
+    "weight": 0.3333333333333333,
+    "gap_config": {
+     "gap_size": "SMALL"
+    }
+   }
+  },
+  {
+   "where": "main/6/3",
+   "block": "column",
+   "proto": {
+    "weight": 0.16666666666666666,
+    "gap_config": {
+     "gap_size": "SMALL"
+    }
+   }
+  },
+  {
+   "where": "main/7",
+   "type": "link_button",
+   "label": "💌  Email",
+   "help": "",
+   "key": null,
+   "proto": {
+    "label": "💌  Email",
+    "url": "mailto:lars@chargetanks.com",
+    "use_container_width": true,
+    "type": "secondary"
+   }
+  },
+  {
+   "where": "main/8",
+   "type": "markdown",
+   "value": "---",
+   "help": "",
+   "key": null,
+   "proto": {
+    "body": "---",
+    "element_type": "NATIVE"
+   }
+  },
+  {
+   "where": "main/9",
+   "type": "markdown",
+   "value": "<div class=\"footer\">\n© 2025 Lars von Kolzenberg<br>\nBuilt with Streamlit - v0.7.0<br>\nFor educational use only\n</div>",
+   "help": "",
+   "key": null,
+   "proto": {
+    "body": "<div class=\"footer\">\n© 2025 Lars von Kolzenberg<br>\nBuilt with Streamlit - v0.7.0<br>\nFor educational use only\n</div>",
+    "allow_html": true,
+    "element_type": "NATIVE"
+   }
+  },
+  {
+   "where": "sidebar",
+   "block": "sidebar",
+   "proto": {}
+  }
+ ]
+}

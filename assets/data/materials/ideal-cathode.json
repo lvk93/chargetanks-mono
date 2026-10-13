@@ -1,0 +1,18 @@
+{
+  "name": "Ideal Cathode",
+  "kind": "Cathode",
+  "q_theo_mAhg": 1.0,
+  "data": [
+    {"SoL": 0.0, "dQ_dV_cha": -1.0, "dQ_dV_dis": -1.0, "Molar Volume Li cm3/mol": 1.0, "Molar Volume cm3/mol": 1.0, "OCV_cha": 4.0, "OCV_dis": 4.0, "SoL_prac": 0.0},
+    {"SoL": 0.1, "dQ_dV_cha": -1.0, "dQ_dV_dis": -1.0, "Molar Volume Li cm3/mol": 1.0, "Molar Volume cm3/mol": 1.0, "OCV_cha": 3.9, "OCV_dis": 3.9, "SoL_prac": 0.1},
+    {"SoL": 0.2, "dQ_dV_cha": -1.0, "dQ_dV_dis": -1.0, "Molar Volume Li cm3/mol": 1.0, "Molar Volume cm3/mol": 1.0, "OCV_cha": 3.8, "OCV_dis": 3.8, "SoL_prac": 0.2},
+    {"SoL": 0.3, "dQ_dV_cha": -1.0, "dQ_dV_dis": -1.0, "Molar Volume Li cm3/mol": 1.0, "Molar Volume cm3/mol": 1.0, "OCV_cha": 3.7, "OCV_dis": 3.7, "SoL_prac": 0.3},
+    {"SoL": 0.4, "dQ_dV_cha": -1.0, "dQ_dV_dis": -1.0, "Molar Volume Li cm3/mol": 1.0, "Molar Volume cm3/mol": 1.0, "OCV_cha": 3.6, "OCV_dis": 3.6, "SoL_prac": 0.4},
+    {"SoL": 0.5, "dQ_dV_cha": -1.0, "dQ_dV_dis": -1.0, "Molar Volume Li cm3/mol": 1.0, "Molar Volume cm3/mol": 1.0, "OCV_cha": 3.5, "OCV_dis": 3.5, "SoL_prac": 0.5},
+    {"SoL": 0.6, "dQ_dV_cha": -1.0, "dQ_dV_dis": -1.0, "Molar Volume Li cm3/mol": 1.0, "Molar Volume cm3/mol": 1.0, "OCV_cha": 3.4, "OCV_dis": 3.4, "SoL_prac": 0.6},
+    {"SoL": 0.7, "dQ_dV_cha": -1.0, "dQ_dV_dis": -1.0, "Molar Volume Li cm3/mol": 1.0, "Molar Volume cm3/mol": 1.0, "OCV_cha": 3.3, "OCV_dis": 3.3, "SoL_prac": 0.7},
+    {"SoL": 0.8, "dQ_dV_cha": -1.0, "dQ_dV_dis": -1.0, "Molar Volume Li cm3/mol": 1.0, "Molar Volume cm3/mol": 1.0, "OCV_cha": 3.2, "OCV_dis": 3.2, "SoL_prac": 0.8},
+    {"SoL": 0.9, "dQ_dV_cha": -1.0, "dQ_dV_dis": -1.0, "Molar Volume Li cm3/mol": 1.0, "Molar Volume cm3/mol": 1.0, "OCV_cha": 3.1, "OCV_dis": 3.1, "SoL_prac": 0.9},
+    {"SoL": 1.0, "dQ_dV_cha": -1.0, "dQ_dV_dis": -1.0, "Molar Volume Li cm3/mol": 1.0, "Molar Volume cm3/mol": 1.0, "OCV_cha": 3.0, "OCV_dis": 3.0, "SoL_prac": 1.0}
+  ]
+}

@@ -1,0 +1,1092 @@
+{
+ "tool": "swelling",
+ "case": "soc-ties",
+ "steps": [
+  {
+   "kind": "slider",
+   "label": "SoC",
+   "value": 0.5
+  }
+ ],
+ "exceptions": [],
+ "elements": [
+  {
+   "where": "main",
+   "block": "main",
+   "proto": {}
+  },
+  {
+   "where": "main/0",
+   "type": "markdown",
+   "value": "<style>\n.block-container { padding-top: 0rem !important; padding-bottom: 0.5rem !important; }\n.block-container h1 { margin-top: 1.5rem !important; margin-bottom: 0.5rem !important; }\n</style>",
+   "help": "",
+   "key": null,
+   "proto": {
+    "body": "<style>\n.block-container { padding-top: 0rem !important; padding-bottom: 0.5rem !important; }\n.block-container h1 { margin-top: 1.5rem !important; margin-bottom: 0.5rem !important; }\n</style>",
+    "allow_html": true,
+    "element_type": "NATIVE"
+   }
+  },
+  {
+   "where": "main/1",
+   "type": "markdown",
+   "value": "<style>\n.block-container { padding-top: 0rem !important; padding-bottom: 0.5rem !important; }\n.block-container h1 { margin-top: 1.5rem !important; margin-bottom: 0.5rem !important; }\n</style>",
+   "help": "",
+   "key": null,
+   "proto": {
+    "body": "<style>\n.block-container { padding-top: 0rem !important; padding-bottom: 0.5rem !important; }\n.block-container h1 { margin-top: 1.5rem !important; margin-bottom: 0.5rem !important; }\n</style>",
+    "allow_html": true,
+    "element_type": "NATIVE"
+   }
+  },
+  {
+   "where": "main/2",
+   "type": "title",
+   "value": "🫁 Understand Swelling",
+   "help": "",
+   "key": null,
+   "proto": {
+    "tag": "h1",
+    "body": "🫁 Understand Swelling"
+   }
+  },
+  {
+   "where": "main/3",
+   "block": "expander",
+   "proto": {
+    "label": "🧠 What does this tool show?",
+    "expanded": false
+   }
+  },
+  {
+   "where": "main/3/0",
+   "type": "markdown",
+   "value": "Why can a battery get thicker? Three simple reasons:\n\n1) **Breathing** When SoC goes up or down, the anode and cathode gently\nexpand and shrink (like lungs).\n2) **Irreversible swelling** Over life a thin **SEI “crust”** grows and\nadds permanent thickness (lower SoH → more swelling).\n3) **Compression** Squeezing the stack pushes back.\n- **Cylindrical**: the metal can fixes thickness; you can't tune the squeeze.\n- **Pouch/Prismatic**: you *can* clamp it (springs/pads). More squeeze = less empty space.\n\n### ⚙️ Knobs\n- **SoC** drives breathing\n- **SoH** lower = more SEI swelling\n- **Cylindrical** toggle fixed-thickness can\n- **Compression** clamp force for pouch/prismatic cells\n\n👉 Move the sliders and watch layers and total thickness respond.",
+   "help": "",
+   "key": null,
+   "proto": {
+    "body": "Why can a battery get thicker? Three simple reasons:\n\n1) **Breathing** When SoC goes up or down, the anode and cathode gently\nexpand and shrink (like lungs).\n2) **Irreversible swelling** Over life a thin **SEI “crust”** grows and\nadds permanent thickness (lower SoH → more swelling).\n3) **Compression** Squeezing the stack pushes back.\n- **Cylindrical**: the metal can fixes thickness; you can't tune the squeeze.\n- **Pouch/Prismatic**: you *can* clamp it (springs/pads). More squeeze = less empty space.\n\n### ⚙️ Knobs\n- **SoC** drives breathing\n- **SoH** lower = more SEI swelling\n- **Cylindrical** toggle fixed-thickness can\n- **Compression** clamp force for pouch/prismatic cells\n\n👉 Move the sliders and watch layers and total thickness respond.",
+    "element_type": "NATIVE"
+   }
+  },
+  {
+   "where": "main/4",
+   "block": "flex_container",
+   "proto": {
+    "flex_container": {
+     "gap_config": {
+      "gap_size": "LARGE"
+     },
+     "scale": 1.0,
+     "direction": "HORIZONTAL",
+     "wrap": true
+    }
+   }
+  },
+  {
+   "where": "main/4/0",
+   "block": "column",
+   "proto": {
+    "weight": 0.5,
+    "gap_config": {
+     "gap_size": "LARGE"
+    }
+   }
+  },
+  {
+   "where": "main/4/0/0",
+   "type": "subheader",
+   "value": "Electrode Stack Geometry",
+   "help": "",
+   "key": null,
+   "proto": {
+    "tag": "h3",
+    "body": "Electrode Stack Geometry"
+   }
+  },
+  {
+   "where": "main/4/0/1",
+   "type": "plotly_chart",
+   "key": null,
+   "proto": {
+    "use_container_width": true,
+    "theme": "streamlit",
+    "spec": {
+     "data": [],
+     "layout": {
+      "template": {
+       "$template": "413a361ae6e57929"
+      },
+      "font": {
+       "color": "#FFFFFF",
+       "family": "Open Sans",
+       "size": 24
+      },
+      "margin": {
+       "l": 70,
+       "r": 30,
+       "t": 10,
+       "b": 70
+      },
+      "xaxis": {
+       "tickfont": {
+        "size": 16,
+        "color": "#003B73"
+       },
+       "showgrid": false,
+       "gridcolor": "#666666",
+       "gridwidth": 0.5,
+       "griddash": "dot",
+       "zeroline": false,
+       "showline": true,
+       "linecolor": "#FFFFFF",
+       "linewidth": 3,
+       "mirror": true,
+       "title": {
+        "font": {
+         "size": 24
+        },
+        "text": "",
+        "standoff": 22
+       },
+       "ticklabelstandoff": 8,
+       "ticktext": [
+        " 0",
+        " 1"
+       ],
+       "ticks": "outside",
+       "tickvals": [
+        0,
+        1
+       ],
+       "range": [
+        0,
+        1
+       ]
+      },
+      "yaxis": {
+       "tickfont": {
+        "size": 18
+       },
+       "showgrid": false,
+       "gridcolor": "#666666",
+       "gridwidth": 0.5,
+       "griddash": "dot",
+       "showline": true,
+       "linecolor": "#FFFFFF",
+       "linewidth": 3,
+       "mirror": true,
+       "title": {
+        "font": {
+         "size": 24
+        },
+        "text": "Normalized thickness"
+       },
+       "range": [
+        0,
+        1.2
+       ]
+      },
+      "legend": {
+       "font": {
+        "size": 20
+       },
+       "x": 0,
+       "y": 0,
+       "xanchor": "left",
+       "yanchor": "bottom",
+       "bgcolor": "#FFFFFF"
+      },
+      "width": 500,
+      "height": 500,
+      "plot_bgcolor": "#333333",
+      "paper_bgcolor": "#003B73",
+      "shapes": [
+       {
+        "fillcolor": "#CCCCCC",
+        "layer": "below",
+        "line": {
+         "color": "#333333",
+         "width": 1
+        },
+        "type": "rect",
+        "x0": 0,
+        "x1": 1,
+        "y0": 0.0,
+        "y1": 0.09944751381215469
+       },
+       {
+        "fillcolor": "#70AD47",
+        "layer": "below",
+        "line": {
+         "color": "#333333",
+         "width": 1
+        },
+        "type": "rect",
+        "x0": 0,
+        "x1": 1,
+        "y0": 0.09944751381215469,
+        "y1": 0.2364555005974566
+       },
+       {
+        "fillcolor": "#5DADE2",
+        "layer": "below",
+        "line": {
+         "color": "#333333",
+         "width": 1
+        },
+        "type": "rect",
+        "x0": 0,
+        "x1": 1,
+        "y0": 0.2364555005974566,
+        "y1": 0.4574499757355781
+       },
+       {
+        "fillcolor": "#F39C12",
+        "layer": "below",
+        "line": {
+         "color": "#333333",
+         "width": 1
+        },
+        "type": "rect",
+        "x0": 0,
+        "x1": 1,
+        "y0": 0.4574499757355781,
+        "y1": 0.9678008034806967
+       },
+       {
+        "fillcolor": "#CCCCCC",
+        "layer": "below",
+        "line": {
+         "color": "#333333",
+         "width": 1
+        },
+        "type": "rect",
+        "x0": 0,
+        "x1": 1,
+        "y0": 0.9678008034806967,
+        "y1": 1.0506737316574923
+       }
+      ],
+      "annotations": [
+       {
+        "font": {
+         "color": "#333333",
+         "size": 24
+        },
+        "showarrow": false,
+        "text": "Anode CC — 0.099 ",
+        "x": 0.5,
+        "xanchor": "center",
+        "y": 0.049723756906077346,
+        "yanchor": "middle"
+       },
+       {
+        "font": {
+         "color": "#333333",
+         "size": 24
+        },
+        "showarrow": false,
+        "text": "Anode — 0.137 ",
+        "x": 0.5,
+        "xanchor": "center",
+        "y": 0.16795150720480564,
+        "yanchor": "middle"
+       },
+       {
+        "font": {
+         "color": "#333333",
+         "size": 24
+        },
+        "showarrow": false,
+        "text": "Separator — 0.221 ",
+        "x": 0.5,
+        "xanchor": "center",
+        "y": 0.34695273816651734,
+        "yanchor": "middle"
+       },
+       {
+        "font": {
+         "color": "#333333",
+         "size": 24
+        },
+        "showarrow": false,
+        "text": "Cathode — 0.510 ",
+        "x": 0.5,
+        "xanchor": "center",
+        "y": 0.7126253896081374,
+        "yanchor": "middle"
+       },
+       {
+        "font": {
+         "color": "#333333",
+         "size": 24
+        },
+        "showarrow": false,
+        "text": "Cathode CC — 0.083 ",
+        "x": 0.5,
+        "xanchor": "center",
+        "y": 1.0092372675690946,
+        "yanchor": "middle"
+       },
+       {
+        "font": {
+         "color": "#FFFFFF",
+         "size": 24
+        },
+        "showarrow": false,
+        "text": "Total: 1.051",
+        "x": 0.5,
+        "y": 1.1006737316574924
+       }
+      ],
+      "showlegend": false
+     }
+    },
+    "config": {
+     "showLink": false,
+     "linkText": false
+    }
+   }
+  },
+  {
+   "where": "main/4/1",
+   "block": "column",
+   "proto": {
+    "weight": 0.5,
+    "gap_config": {
+     "gap_size": "LARGE"
+    }
+   }
+  },
+  {
+   "where": "main/4/1/0",
+   "type": "subheader",
+   "value": "Stack by categories",
+   "help": "",
+   "key": null,
+   "proto": {
+    "tag": "h3",
+    "body": "Stack by categories"
+   }
+  },
+  {
+   "where": "main/4/1/1",
+   "type": "plotly_chart",
+   "key": null,
+   "proto": {
+    "use_container_width": true,
+    "theme": "streamlit",
+    "spec": {
+     "data": [
+      {
+       "customdata": {
+        "$array": "ac2816f0a0aab25e7c68",
+        "dtype": "f8",
+        "shape": [
+         200,
+         1
+        ],
+        "plotly": "bdata"
+       },
+       "fill": "tozeroy",
+       "fillcolor": "#CCCCCC",
+       "hovertemplate": "%{customdata[0]:.4f}<extra></extra>",
+       "line": {
+        "color": "#FFFFFF",
+        "width": 1.5
+       },
+       "mode": "lines",
+       "name": "Dead volume (CCs + Sep)",
+       "showlegend": false,
+       "x": {
+        "$array": "32e90fe5b1ce141e80a5",
+        "dtype": "f8",
+        "shape": [
+         200
+        ],
+        "plotly": "bdata"
+       },
+       "y": {
+        "$array": "ac2816f0a0aab25e7c68",
+        "dtype": "f8",
+        "shape": [
+         200
+        ],
+        "plotly": "bdata"
+       },
+       "type": "scatter"
+      },
+      {
+       "customdata": {
+        "$array": "51ee44ef5aa681c6bc5d",
+        "dtype": "f8",
+        "shape": [
+         200,
+         1
+        ],
+        "plotly": "bdata"
+       },
+       "fill": "tonexty",
+       "fillcolor": "#44546A",
+       "hovertemplate": "%{customdata[0]:.4f}<extra></extra>",
+       "line": {
+        "color": "#FFFFFF",
+        "width": 1.5
+       },
+       "mode": "lines",
+       "name": "SEI",
+       "showlegend": false,
+       "x": {
+        "$array": "32e90fe5b1ce141e80a5",
+        "dtype": "f8",
+        "shape": [
+         200
+        ],
+        "plotly": "bdata"
+       },
+       "y": {
+        "$array": "ac2816f0a0aab25e7c68",
+        "dtype": "f8",
+        "shape": [
+         200
+        ],
+        "plotly": "bdata"
+       },
+       "type": "scatter"
+      },
+      {
+       "customdata": {
+        "$array": "ef3e6593400e8baa4c8b",
+        "dtype": "f8",
+        "shape": [
+         200,
+         1
+        ],
+        "plotly": "bdata"
+       },
+       "fill": "tonexty",
+       "fillcolor": "#70AD47",
+       "hovertemplate": "%{customdata[0]:.4f}<extra></extra>",
+       "line": {
+        "color": "#FFFFFF",
+        "width": 1.5
+       },
+       "mode": "lines",
+       "name": "Anode Particles",
+       "showlegend": false,
+       "x": {
+        "$array": "32e90fe5b1ce141e80a5",
+        "dtype": "f8",
+        "shape": [
+         200
+        ],
+        "plotly": "bdata"
+       },
+       "y": {
+        "$array": "656c861352e8358d8735",
+        "dtype": "f8",
+        "shape": [
+         200
+        ],
+        "plotly": "bdata"
+       },
+       "type": "scatter"
+      },
+      {
+       "customdata": {
+        "$array": "0c9b0f313c9c000ed2e5",
+        "dtype": "f8",
+        "shape": [
+         200,
+         1
+        ],
+        "plotly": "bdata"
+       },
+       "fill": "tonexty",
+       "fillcolor": "#F39C12",
+       "hovertemplate": "%{customdata[0]:.4f}<extra></extra>",
+       "line": {
+        "color": "#FFFFFF",
+        "width": 1.5
+       },
+       "mode": "lines",
+       "name": "Cathode Particles",
+       "showlegend": false,
+       "x": {
+        "$array": "32e90fe5b1ce141e80a5",
+        "dtype": "f8",
+        "shape": [
+         200
+        ],
+        "plotly": "bdata"
+       },
+       "y": {
+        "$array": "a75d7c04a590f5dc37b6",
+        "dtype": "f8",
+        "shape": [
+         200
+        ],
+        "plotly": "bdata"
+       },
+       "type": "scatter"
+      },
+      {
+       "customdata": {
+        "$array": "5850bc5013e40fead60f",
+        "dtype": "f8",
+        "shape": [
+         200,
+         1
+        ],
+        "plotly": "bdata"
+       },
+       "fill": "tonexty",
+       "fillcolor": "#5DADE2",
+       "hovertemplate": "%{customdata[0]:.4f}<extra></extra>",
+       "line": {
+        "color": "#FFFFFF",
+        "width": 1.5
+       },
+       "mode": "lines",
+       "name": "Pore volume (An+Sep+Cath)",
+       "showlegend": false,
+       "x": {
+        "$array": "32e90fe5b1ce141e80a5",
+        "dtype": "f8",
+        "shape": [
+         200
+        ],
+        "plotly": "bdata"
+       },
+       "y": {
+        "$array": "df66af8956e1bdcdee7b",
+        "dtype": "f8",
+        "shape": [
+         200
+        ],
+        "plotly": "bdata"
+       },
+       "type": "scatter"
+      },
+      {
+       "hovertemplate": "SoC: %{x:.3f}<br>Total: %{y:.4f}<extra></extra>",
+       "marker": {
+        "color": "#FFFFFF",
+        "line": {
+         "color": "#444444",
+         "width": 1.5
+        },
+        "size": 10
+       },
+       "mode": "markers",
+       "name": "",
+       "showlegend": false,
+       "x": [
+        0.5
+       ],
+       "y": [
+        1.0506737316574923
+       ],
+       "type": "scatter"
+      }
+     ],
+     "layout": {
+      "template": {
+       "$template": "413a361ae6e57929"
+      },
+      "font": {
+       "color": "#FFFFFF",
+       "family": "Open Sans",
+       "size": 24
+      },
+      "margin": {
+       "l": 70,
+       "r": 30,
+       "t": 10,
+       "b": 70
+      },
+      "xaxis": {
+       "tickfont": {
+        "size": 18
+       },
+       "showgrid": true,
+       "gridcolor": "#666666",
+       "gridwidth": 0.5,
+       "griddash": "dot",
+       "zeroline": false,
+       "showline": true,
+       "linecolor": "#FFFFFF",
+       "linewidth": 3,
+       "mirror": true,
+       "title": {
+        "font": {
+         "size": 24
+        },
+        "text": "SoC",
+        "standoff": 22
+       },
+       "ticklabelstandoff": 8,
+       "range": [
+        0,
+        1
+       ]
+      },
+      "yaxis": {
+       "tickfont": {
+        "size": 18
+       },
+       "showgrid": true,
+       "gridcolor": "#666666",
+       "gridwidth": 0.5,
+       "griddash": "dot",
+       "showline": true,
+       "linecolor": "#FFFFFF",
+       "linewidth": 3,
+       "mirror": true,
+       "title": {
+        "font": {
+         "size": 24
+        },
+        "text": "Normalized thickness"
+       },
+       "range": [
+        0,
+        1.2
+       ]
+      },
+      "legend": {
+       "font": {
+        "size": 20
+       },
+       "x": 0,
+       "y": 0,
+       "xanchor": "left",
+       "yanchor": "bottom",
+       "bgcolor": "#FFFFFF"
+      },
+      "width": 500,
+      "height": 500,
+      "plot_bgcolor": "#333333",
+      "paper_bgcolor": "#003B73",
+      "hovermode": "x unified",
+      "showlegend": false,
+      "annotations": [
+       {
+        "font": {
+         "color": "#444444",
+         "size": 24
+        },
+        "showarrow": false,
+        "text": "Dead volume (CCs + Sep)",
+        "x": 0.5,
+        "xanchor": "center",
+        "y": 0.1574585635359116,
+        "yanchor": "middle"
+       },
+       {
+        "font": {
+         "color": "#FFFFFF",
+         "size": 24
+        },
+        "showarrow": false,
+        "text": "SEI",
+        "x": 0.5,
+        "xanchor": "center",
+        "y": 0.3149171270718232,
+        "yanchor": "middle"
+       },
+       {
+        "font": {
+         "color": "#333333",
+         "size": 24
+        },
+        "showarrow": false,
+        "text": "Anode Particles",
+        "x": 0.5,
+        "xanchor": "center",
+        "y": 0.37181891051972277,
+        "yanchor": "middle"
+       },
+       {
+        "font": {
+         "color": "#333333",
+         "size": 24
+        },
+        "showarrow": false,
+        "text": "Cathode Particles",
+        "x": 0.5,
+        "xanchor": "center",
+        "y": 0.6189789807683584,
+        "yanchor": "middle"
+       },
+       {
+        "font": {
+         "color": "#333333",
+         "size": 24
+        },
+        "showarrow": false,
+        "text": "Pore volume (An + Sep + Cath)",
+        "x": 0.5,
+        "xanchor": "center",
+        "y": 0.9299554996132935,
+        "yanchor": "middle"
+       }
+      ]
+     }
+    },
+    "config": {
+     "showLink": false,
+     "linkText": false
+    }
+   }
+  },
+  {
+   "where": "main/5",
+   "type": "subheader",
+   "value": "Compression vs. porosity",
+   "help": "",
+   "key": null,
+   "proto": {
+    "tag": "h3",
+    "body": "Compression vs. porosity"
+   }
+  },
+  {
+   "where": "main/6",
+   "type": "plotly_chart",
+   "key": null,
+   "proto": {
+    "use_container_width": true,
+    "theme": "streamlit",
+    "spec": {
+     "data": [
+      {
+       "line": {
+        "color": "#5DADE2",
+        "width": 3
+       },
+       "mode": "lines",
+       "name": "Porosity(compression)",
+       "x": {
+        "$array": "8ab8f6553634608566a3",
+        "dtype": "f8",
+        "shape": [
+         201
+        ],
+        "plotly": "bdata"
+       },
+       "y": {
+        "$array": "7a38ce0fad3831d468cb",
+        "dtype": "f8",
+        "shape": [
+         201
+        ],
+        "plotly": "bdata"
+       },
+       "type": "scatter"
+      },
+      {
+       "hovertemplate": "Porosity: %{x:.4f}<br>Compression: %{y:.2f} MPa<extra></extra>",
+       "marker": {
+        "color": "#FFFFFF",
+        "line": {
+         "color": "#444444",
+         "width": 1.5
+        },
+        "size": 11
+       },
+       "mode": "markers",
+       "name": "Applied",
+       "x": [
+        0.27812949050249064
+       ],
+       "y": [
+        0.0
+       ],
+       "type": "scatter"
+      }
+     ],
+     "layout": {
+      "template": {
+       "$template": "413a361ae6e57929"
+      },
+      "font": {
+       "color": "#FFFFFF",
+       "family": "Open Sans",
+       "size": 24
+      },
+      "margin": {
+       "l": 70,
+       "r": 40,
+       "t": 10,
+       "b": 60
+      },
+      "xaxis": {
+       "tickfont": {
+        "size": 18
+       },
+       "showgrid": true,
+       "gridcolor": "#666666",
+       "gridwidth": 0.5,
+       "griddash": "dot",
+       "zeroline": false,
+       "showline": true,
+       "linecolor": "#FFFFFF",
+       "linewidth": 3,
+       "mirror": true,
+       "title": {
+        "font": {
+         "size": 24
+        },
+        "text": "Porosity [-]"
+       },
+       "range": [
+        0,
+        0.3198489140778642
+       ]
+      },
+      "yaxis": {
+       "tickfont": {
+        "size": 18
+       },
+       "showgrid": true,
+       "gridcolor": "#666666",
+       "gridwidth": 0.5,
+       "griddash": "dot",
+       "showline": true,
+       "linecolor": "#FFFFFF",
+       "linewidth": 3,
+       "mirror": true,
+       "title": {
+        "font": {
+         "size": 24
+        },
+        "text": "Compression [MPa]"
+       },
+       "range": [
+        0,
+        60
+       ],
+       "zeroline": false
+      },
+      "legend": {
+       "font": {
+        "size": 20
+       },
+       "x": 0,
+       "y": 0,
+       "xanchor": "left",
+       "yanchor": "bottom",
+       "bgcolor": "#FFFFFF"
+      },
+      "width": 500,
+      "height": 500,
+      "plot_bgcolor": "#333333",
+      "paper_bgcolor": "#003B73",
+      "hovermode": "closest",
+      "showlegend": false
+     }
+    },
+    "config": {
+     "showLink": false,
+     "linkText": false
+    }
+   }
+  },
+  {
+   "where": "sidebar",
+   "block": "sidebar",
+   "proto": {}
+  },
+  {
+   "where": "sidebar/0",
+   "type": "markdown",
+   "value": "<style>\ndiv.stButton > button:first-child {\n    width: 100%;\n    background-color: #5DADE2;  /* dunkelblau */\n    color: white;               /* Textfarbe */\n    border-radius: 8px;         /* abgerundete Ecken */\n    height: 3em;                /* etwas höher machen */\n    font-weight: bold;\n    font-size:18\n}\ndiv.stButton > button:first-child:hover {\n    background-color: #0059b3;  /* Hover-Effekt */\n    color: #fff;\n}\n</style>",
+   "help": "",
+   "key": null,
+   "proto": {
+    "body": "<style>\ndiv.stButton > button:first-child {\n    width: 100%;\n    background-color: #5DADE2;  /* dunkelblau */\n    color: white;               /* Textfarbe */\n    border-radius: 8px;         /* abgerundete Ecken */\n    height: 3em;                /* etwas höher machen */\n    font-weight: bold;\n    font-size:18\n}\ndiv.stButton > button:first-child:hover {\n    background-color: #0059b3;  /* Hover-Effekt */\n    color: #fff;\n}\n</style>",
+    "allow_html": true,
+    "element_type": "NATIVE"
+   }
+  },
+  {
+   "where": "sidebar/1",
+   "type": "button",
+   "label": "⬅ Back to Landing",
+   "value": false,
+   "help": "",
+   "key": null,
+   "proto": {
+    "label": "⬅ Back to Landing",
+    "type": "secondary"
+   }
+  },
+  {
+   "where": "sidebar/2",
+   "type": "markdown",
+   "value": "---",
+   "help": "",
+   "key": null,
+   "proto": {
+    "body": "---",
+    "element_type": "NATIVE"
+   }
+  },
+  {
+   "where": "sidebar/3",
+   "type": "header",
+   "value": "🔧 Swelling conditions",
+   "help": "",
+   "key": null,
+   "proto": {
+    "tag": "h2",
+    "body": "🔧 Swelling conditions"
+   }
+  },
+  {
+   "where": "sidebar/4",
+   "type": "slider",
+   "label": "SoC",
+   "value": 0.5,
+   "min": 0.0,
+   "max": 1.0,
+   "step": 0.01,
+   "format": "%0.2f",
+   "help": "",
+   "key": "slider_soc",
+   "proto": {
+    "label": "SoC",
+    "format": "%0.2f",
+    "data_type": "FLOAT",
+    "default": [
+     0.5
+    ],
+    "max": 1.0,
+    "step": 0.01,
+    "label_visibility": {},
+    "type": "SLIDER"
+   }
+  },
+  {
+   "where": "sidebar/5",
+   "type": "slider",
+   "label": "State of Health",
+   "value": 1.0,
+   "min": 0.8,
+   "max": 1.0,
+   "step": -0.01,
+   "format": "%0.2f",
+   "help": "",
+   "key": "slider_soh",
+   "proto": {
+    "label": "State of Health",
+    "format": "%0.2f",
+    "data_type": "FLOAT",
+    "default": [
+     1.0
+    ],
+    "min": 0.8,
+    "max": 1.0,
+    "step": -0.01,
+    "label_visibility": {},
+    "type": "SLIDER"
+   }
+  },
+  {
+   "where": "sidebar/6",
+   "type": "checkbox",
+   "label": "Cylindrical?",
+   "value": false,
+   "help": "",
+   "key": null,
+   "proto": {
+    "label": "Cylindrical?",
+    "label_visibility": {}
+   }
+  },
+  {
+   "where": "sidebar/7",
+   "type": "slider",
+   "label": "Compression [MPa]",
+   "value": 0.0,
+   "min": 0.0,
+   "max": 60.0,
+   "step": 1.0,
+   "format": "%0.2f",
+   "help": "",
+   "key": null,
+   "proto": {
+    "label": "Compression [MPa]",
+    "format": "%0.2f",
+    "data_type": "FLOAT",
+    "default": [
+     0.0
+    ],
+    "max": 60.0,
+    "step": 1.0,
+    "label_visibility": {},
+    "type": "SLIDER"
+   }
+  },
+  {
+   "where": "sidebar/8",
+   "type": "markdown",
+   "value": "---",
+   "help": "",
+   "key": null,
+   "proto": {
+    "body": "---",
+    "element_type": "NATIVE"
+   }
+  },
+  {
+   "where": "sidebar/9",
+   "type": "markdown",
+   "value": "<style>\n.custom-link {\n    display: inline-block;\n    width: 100%;\n    padding: 0.5rem 1rem;\n    text-align: center;\n    text-decoration: none !important;\n    border-radius: 5px;\n    font-weight: 500;\n    color: white !important;\n    background-color: transparent;\n    border: none;\n    margin-bottom: 0.5rem;\n}\n.custom-link:hover {\n    background-color: #003B73;\n    text-decoration: none;\n}\n</style>",
+   "help": "",
+   "key": null,
+   "proto": {
+    "body": "<style>\n.custom-link {\n    display: inline-block;\n    width: 100%;\n    padding: 0.5rem 1rem;\n    text-align: center;\n    text-decoration: none !important;\n    border-radius: 5px;\n    font-weight: 500;\n    color: white !important;\n    background-color: transparent;\n    border: none;\n    margin-bottom: 0.5rem;\n}\n.custom-link:hover {\n    background-color: #003B73;\n    text-decoration: none;\n}\n</style>",
+    "allow_html": true,
+    "element_type": "NATIVE"
+   }
+  },
+  {
+   "where": "sidebar/10",
+   "type": "markdown",
+   "value": "<a class=\"custom-link\" href=\"mailto:lars@chargetanks.com\" target=\"_blank\">\n💌 Send me an Email\n</a>",
+   "help": "",
+   "key": null,
+   "proto": {
+    "body": "<a class=\"custom-link\" href=\"mailto:lars@chargetanks.com\" target=\"_blank\">\n💌 Send me an Email\n</a>",
+    "allow_html": true,
+    "element_type": "NATIVE"
+   }
+  },
+  {
+   "where": "sidebar/11",
+   "type": "markdown",
+   "value": "---",
+   "help": "",
+   "key": null,
+   "proto": {
+    "body": "---",
+    "element_type": "NATIVE"
+   }
+  },
+  {
+   "where": "sidebar/12",
+   "type": "markdown",
+   "value": "<div style=\"text-align:center;font-size:.85rem;color:gray;line-height:1.4\">\n© 2025 Lars von Kolzenberg<br>\nBuilt with Streamlit - v0.7.0<br>\nFor educational use only\n</div>",
+   "help": "",
+   "key": null,
+   "proto": {
+    "body": "<div style=\"text-align:center;font-size:.85rem;color:gray;line-height:1.4\">\n© 2025 Lars von Kolzenberg<br>\nBuilt with Streamlit - v0.7.0<br>\nFor educational use only\n</div>",
+    "allow_html": true,
+    "element_type": "NATIVE"
+   }
+  }
+ ]
+}

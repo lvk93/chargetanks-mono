@@ -1,0 +1,66 @@
+[
+  {
+    "name": "Graphite",
+    "kind": "Anode",
+    "file": "graphite.json",
+    "source": "src/ocv_teaching/material_jsons_reduced/Graphite.json",
+    "sha256": "b5273388b680dc41f40cc6c86407431441c9193f9ecf976f539df7c0ceeb79c7",
+    "rows": 400
+  },
+  {
+    "name": "Ideal Anode",
+    "kind": "Anode",
+    "file": "ideal-anode.json",
+    "source": "src/ocv_teaching/material_jsons_reduced/Ideal Anode.json",
+    "sha256": "86d6dd256c85692fd6e4b2bd66e0a61ea38487b0b5a3f068d2db443150d334e9",
+    "rows": 11
+  },
+  {
+    "name": "Ideal Cathode",
+    "kind": "Cathode",
+    "file": "ideal-cathode.json",
+    "source": "src/ocv_teaching/material_jsons_reduced/Ideal Cathode.json",
+    "sha256": "3fc844440a7f6314c65b21c2269b81329e8da54c8ffc1998af31e5a89e22a387",
+    "rows": 11
+  },
+  {
+    "name": "LCO",
+    "kind": "Cathode",
+    "file": "lco.json",
+    "source": "src/ocv_teaching/material_jsons_reduced/LCO.json",
+    "sha256": "79b4ae18553a0d1d50b57a19c492a0e813ec72d044fe6c38e9a1b6bc74502b77",
+    "rows": 400
+  },
+  {
+    "name": "LFP",
+    "kind": "Cathode",
+    "file": "lfp.json",
+    "source": "src/ocv_teaching/material_jsons_reduced/LFP.json",
+    "sha256": "c6e050700ce5877fd010d221bb1fd66786a6b7c0b61c618050c84a48f64288fa",
+    "rows": 400
+  },
+  {
+    "name": "NCA",
+    "kind": "Cathode",
+    "file": "nca.json",
+    "source": "src/ocv_teaching/material_jsons_reduced/NCA.json",
+    "sha256": "3a42abd6c87371254cc64f95539e2fdb00eda26367cddefa811a463c395a3929",
+    "rows": 400
+  },
+  {
+    "name": "NMC",
+    "kind": "Cathode",
+    "file": "nmc.json",
+    "source": "src/ocv_teaching/material_jsons_reduced/NMC.json",
+    "sha256": "9d38a0fb59213cfb2c6ef8e21047068c1cebb3da9265074133230d3d943688a3",
+    "rows": 400
+  },
+  {
+    "name": "Silicon",
+    "kind": "Anode",
+    "file": "silicon.json",
+    "source": "src/ocv_teaching/material_jsons_reduced/Silicon.json",
+    "sha256": "f793e655c9e611f5126c79e8ee9ba6164de854daf392dbd2fa0d7007a5dcb132",
+    "rows": 400
+  }
+]
