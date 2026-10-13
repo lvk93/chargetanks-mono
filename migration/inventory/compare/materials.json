@@ -226,6 +226,13 @@
    "blocked": false
   },
   {
+   "url": "http://localhost:8010/assets/fonts/SourceCodeVF-Upright.woff2",
+   "method": "GET",
+   "type": "font",
+   "foreign": false,
+   "blocked": false
+  },
+  {
    "url": "http://localhost:8010/assets/js/model/materialExplorer.js",
    "method": "GET",
    "type": "script",
@@ -257,13 +264,6 @@
    "url": "http://localhost:8010/assets/js/ui/slider.js",
    "method": "GET",
    "type": "script",
-   "foreign": false,
-   "blocked": false
-  },
-  {
-   "url": "http://localhost:8010/assets/fonts/SourceCodeVF-Upright.woff2",
-   "method": "GET",
-   "type": "font",
    "foreign": false,
    "blocked": false
   },

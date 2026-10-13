@@ -303,6 +303,13 @@
    "blocked": false
   },
   {
+   "url": "http://localhost:8010/assets/js/core/pyformat.js",
+   "method": "GET",
+   "type": "script",
+   "foreign": false,
+   "blocked": false
+  },
+  {
    "url": "http://localhost:8010/assets/js/core/numpy.js",
    "method": "GET",
    "type": "script",
@@ -311,13 +318,6 @@
   },
   {
    "url": "http://localhost:8010/assets/js/core/scipy.js",
-   "method": "GET",
-   "type": "script",
-   "foreign": false,
-   "blocked": false
-  },
-  {
-   "url": "http://localhost:8010/assets/js/core/pyformat.js",
    "method": "GET",
    "type": "script",
    "foreign": false,

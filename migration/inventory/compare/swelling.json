@@ -1,0 +1,518 @@
+{
+ "tool": "swelling",
+ "states": {
+  "default": {
+   "numbers": 3651,
+   "not_bitidentical": 0,
+   "max_rel_deviation": 0.0,
+   "differences": []
+  },
+  "soh-arrows": {
+   "numbers": 3651,
+   "not_bitidentical": 0,
+   "max_rel_deviation": 0.0,
+   "differences": []
+  },
+  "soh-pagedown-j": {
+   "numbers": 3651,
+   "not_bitidentical": 0,
+   "max_rel_deviation": 0.0,
+   "differences": []
+  },
+  "soh-click-mid": {
+   "numbers": 3651,
+   "not_bitidentical": 0,
+   "max_rel_deviation": 0.0,
+   "differences": []
+  },
+  "soh-click-left-then-key": {
+   "numbers": 3651,
+   "not_bitidentical": 0,
+   "max_rel_deviation": 0.0,
+   "differences": []
+  },
+  "soh-click-left": {
+   "numbers": 3651,
+   "not_bitidentical": 0,
+   "max_rel_deviation": 0.0,
+   "differences": []
+  },
+  "soc-click-0.3": {
+   "numbers": 3651,
+   "not_bitidentical": 0,
+   "max_rel_deviation": 0.0,
+   "differences": []
+  },
+  "compression-25": {
+   "numbers": 3651,
+   "not_bitidentical": 0,
+   "max_rel_deviation": 0.0,
+   "differences": []
+  },
+  "cylindrical": {
+   "numbers": 3651,
+   "not_bitidentical": 0,
+   "max_rel_deviation": 0.0,
+   "differences": []
+  },
+  "cylindrical-aged-soc0": {
+   "numbers": 3651,
+   "not_bitidentical": 0,
+   "max_rel_deviation": 0.0,
+   "differences": []
+  },
+  "compression-reset": {
+   "numbers": 3651,
+   "not_bitidentical": 0,
+   "max_rel_deviation": 0.0,
+   "differences": []
+  },
+  "mixed": {
+   "numbers": 3651,
+   "not_bitidentical": 0,
+   "max_rel_deviation": 0.0,
+   "differences": []
+  }
+ },
+ "screenshots": {
+  "default__1280": {
+   "size_old": [
+    1280,
+    1404
+   ],
+   "size_new": [
+    1280,
+    1404
+   ],
+   "changed_pixels": 252,
+   "changed_percent": 0.014,
+   "bbox": [
+    1181,
+    23,
+    1250,
+    37
+   ]
+  },
+  "soh-arrows__1280": {
+   "size_old": [
+    1280,
+    1404
+   ],
+   "size_new": [
+    1280,
+    1404
+   ],
+   "changed_pixels": 252,
+   "changed_percent": 0.014,
+   "bbox": [
+    1181,
+    23,
+    1250,
+    37
+   ]
+  },
+  "soh-pagedown-j__1280": {
+   "size_old": [
+    1280,
+    1404
+   ],
+   "size_new": [
+    1280,
+    1404
+   ],
+   "changed_pixels": 252,
+   "changed_percent": 0.014,
+   "bbox": [
+    1181,
+    23,
+    1250,
+    37
+   ]
+  },
+  "soh-click-mid__1280": {
+   "size_old": [
+    1280,
+    1404
+   ],
+   "size_new": [
+    1280,
+    1404
+   ],
+   "changed_pixels": 252,
+   "changed_percent": 0.014,
+   "bbox": [
+    1181,
+    23,
+    1250,
+    37
+   ]
+  },
+  "soh-click-left-then-key__1280": {
+   "size_old": [
+    1280,
+    1404
+   ],
+   "size_new": [
+    1280,
+    1404
+   ],
+   "changed_pixels": 252,
+   "changed_percent": 0.014,
+   "bbox": [
+    1181,
+    23,
+    1250,
+    37
+   ]
+  },
+  "soh-click-left__1280": {
+   "size_old": [
+    1280,
+    1404
+   ],
+   "size_new": [
+    1280,
+    1404
+   ],
+   "changed_pixels": 252,
+   "changed_percent": 0.014,
+   "bbox": [
+    1181,
+    23,
+    1250,
+    37
+   ]
+  },
+  "soc-click-0.3__1280": {
+   "size_old": [
+    1280,
+    1404
+   ],
+   "size_new": [
+    1280,
+    1404
+   ],
+   "changed_pixels": 252,
+   "changed_percent": 0.014,
+   "bbox": [
+    1181,
+    23,
+    1250,
+    37
+   ]
+  },
+  "compression-25__1280": {
+   "size_old": [
+    1280,
+    1404
+   ],
+   "size_new": [
+    1280,
+    1404
+   ],
+   "changed_pixels": 252,
+   "changed_percent": 0.014,
+   "bbox": [
+    1181,
+    23,
+    1250,
+    37
+   ]
+  },
+  "cylindrical__1280": {
+   "size_old": [
+    1280,
+    1404
+   ],
+   "size_new": [
+    1280,
+    1404
+   ],
+   "changed_pixels": 252,
+   "changed_percent": 0.014,
+   "bbox": [
+    1181,
+    23,
+    1250,
+    37
+   ]
+  },
+  "cylindrical-aged-soc0__1280": {
+   "size_old": [
+    1280,
+    1404
+   ],
+   "size_new": [
+    1280,
+    1404
+   ],
+   "changed_pixels": 252,
+   "changed_percent": 0.014,
+   "bbox": [
+    1181,
+    23,
+    1250,
+    37
+   ]
+  },
+  "compression-reset__1280": {
+   "size_old": [
+    1280,
+    1404
+   ],
+   "size_new": [
+    1280,
+    1404
+   ],
+   "changed_pixels": 252,
+   "changed_percent": 0.014,
+   "bbox": [
+    1181,
+    23,
+    1250,
+    37
+   ]
+  },
+  "mixed__1280": {
+   "size_old": [
+    1280,
+    1404
+   ],
+   "size_new": [
+    1280,
+    1404
+   ],
+   "changed_pixels": 252,
+   "changed_percent": 0.014,
+   "bbox": [
+    1181,
+    23,
+    1250,
+    37
+   ]
+  },
+  "expander-open__1280": {
+   "size_old": [
+    1280,
+    1850
+   ],
+   "size_new": [
+    1280,
+    1850
+   ],
+   "changed_pixels": 252,
+   "changed_percent": 0.011,
+   "bbox": [
+    1181,
+    23,
+    1250,
+    37
+   ]
+  },
+  "expander-open__390": {
+   "size_old": [
+    390,
+    2810
+   ],
+   "size_new": [
+    390,
+    2810
+   ],
+   "changed_pixels": 252,
+   "changed_percent": 0.023,
+   "bbox": [
+    291,
+    23,
+    360,
+    37
+   ]
+  },
+  "sidebar-open__390": {
+   "size_old": [
+    390,
+    2083
+   ],
+   "size_new": [
+    390,
+    2083
+   ],
+   "changed_pixels": 252,
+   "changed_percent": 0.031,
+   "bbox": [
+    291,
+    23,
+    360,
+    37
+   ]
+  },
+  "default__390": {
+   "size_old": [
+    390,
+    2083
+   ],
+   "size_new": [
+    390,
+    2083
+   ],
+   "changed_pixels": 252,
+   "changed_percent": 0.031,
+   "bbox": [
+    291,
+    23,
+    360,
+    37
+   ]
+  }
+ },
+ "network": [
+  {
+   "url": "http://localhost:8010/tools/swelling/",
+   "method": "GET",
+   "type": "document",
+   "foreign": false,
+   "blocked": false
+  },
+  {
+   "url": "http://localhost:8010/assets/css/styles.css",
+   "method": "GET",
+   "type": "stylesheet",
+   "foreign": false,
+   "blocked": false
+  },
+  {
+   "url": "http://localhost:8010/assets/vendor/plotly-3.0.1.min.js",
+   "method": "GET",
+   "type": "script",
+   "foreign": false,
+   "blocked": false
+  },
+  {
+   "url": "http://localhost:8010/assets/js/tools/swelling.js",
+   "method": "GET",
+   "type": "script",
+   "foreign": false,
+   "blocked": false
+  },
+  {
+   "url": "http://localhost:8010/assets/fonts/SourceCodeVF-Upright.woff2",
+   "method": "GET",
+   "type": "font",
+   "foreign": false,
+   "blocked": false
+  },
+  {
+   "url": "http://localhost:8010/assets/js/model/swelling.js",
+   "method": "GET",
+   "type": "script",
+   "foreign": false,
+   "blocked": false
+  },
+  {
+   "url": "http://localhost:8010/assets/js/ui/data.js",
+   "method": "GET",
+   "type": "script",
+   "foreign": false,
+   "blocked": false
+  },
+  {
+   "url": "http://localhost:8010/assets/js/ui/plotly.js",
+   "method": "GET",
+   "type": "script",
+   "foreign": false,
+   "blocked": false
+  },
+  {
+   "url": "http://localhost:8010/assets/js/ui/shell.js",
+   "method": "GET",
+   "type": "script",
+   "foreign": false,
+   "blocked": false
+  },
+  {
+   "url": "http://localhost:8010/assets/js/ui/slider.js",
+   "method": "GET",
+   "type": "script",
+   "foreign": false,
+   "blocked": false
+  },
+  {
+   "url": "http://localhost:8010/assets/js/core/pyformat.js",
+   "method": "GET",
+   "type": "script",
+   "foreign": false,
+   "blocked": false
+  },
+  {
+   "url": "http://localhost:8010/assets/js/core/numpy.js",
+   "method": "GET",
+   "type": "script",
+   "foreign": false,
+   "blocked": false
+  },
+  {
+   "url": "http://localhost:8010/assets/js/core/pandas.js",
+   "method": "GET",
+   "type": "script",
+   "foreign": false,
+   "blocked": false
+  },
+  {
+   "url": "http://localhost:8010/assets/js/model/cellReconstruction.js",
+   "method": "GET",
+   "type": "script",
+   "foreign": false,
+   "blocked": false
+  },
+  {
+   "url": "http://localhost:8010/assets/js/model/figure.js",
+   "method": "GET",
+   "type": "script",
+   "foreign": false,
+   "blocked": false
+  },
+  {
+   "url": "http://localhost:8010/assets/js/model/materials.js",
+   "method": "GET",
+   "type": "script",
+   "foreign": false,
+   "blocked": false
+  },
+  {
+   "url": "http://localhost:8010/assets/js/ui/plotlyTheme.js",
+   "method": "GET",
+   "type": "script",
+   "foreign": false,
+   "blocked": false
+  },
+  {
+   "url": "http://localhost:8010/assets/js/core/scipy.js",
+   "method": "GET",
+   "type": "script",
+   "foreign": false,
+   "blocked": false
+  },
+  {
+   "url": "http://localhost:8010/assets/data/materials/index.json",
+   "method": "GET",
+   "type": "fetch",
+   "foreign": false,
+   "blocked": false
+  },
+  {
+   "url": "http://localhost:8010/assets/data/materials/silicon.json",
+   "method": "GET",
+   "type": "fetch",
+   "foreign": false,
+   "blocked": false
+  },
+  {
+   "url": "http://localhost:8010/assets/data/materials/nmc.json",
+   "method": "GET",
+   "type": "fetch",
+   "foreign": false,
+   "blocked": false
+  }
+ ],
+ "console": [],
+ "foreign_requests": []
+}

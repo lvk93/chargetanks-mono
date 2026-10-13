@@ -38,7 +38,11 @@ SNAPSHOT_JS = r"""
                  u2: Uint16Array, u4: Uint32Array};
   const decode = (v) => {  // plotly.py-Binaerarray {dtype, bdata} wie plotly.js es auswertet
     const bytes = Uint8Array.from(atob(v.bdata), c => c.charCodeAt(0));
-    return new TYPES[v.dtype](bytes.buffer);
+    const flat = new TYPES[v.dtype](bytes.buffer);
+    // shape "rows, cols" (z. B. customdata aus np.c_): plotly.js liefert Zeilen-Arrays
+    const shape = String(v.shape || '').split(',').filter(Boolean).map(Number);
+    if (shape.length !== 2) return flat;
+    return Array.from({length: shape[0]}, (_, r) => flat.subarray(r * shape[1], (r + 1) * shape[1]));
   };
   const plain = (v, depth = 0) => {
     if (depth > 12) return '[depth]';
@@ -85,13 +89,15 @@ TEXTS_JS = r"""
   const vis = (e) => !!(e.offsetWidth || e.offsetHeight || e.getClientRects().length);
   return {
     headings: [...document.querySelectorAll('h1, h2, h3')].filter(vis).map(h => ({tag: h.tagName.toLowerCase(), text: txt(h), id: h.id || null})),
-    sliders: [...document.querySelectorAll('[data-testid="stSlider"], [data-st-slider]')].map(s => ({
+    sliders: [...document.querySelectorAll('[data-testid="stSlider"], [data-st-slider]')].filter(vis).map(s => ({
       label: txt(s.querySelector('[data-testid="stWidgetLabel"], .st-label')),
       value: txt(s.querySelector('[data-testid="stSliderThumbValue"], .st-slider-value')),
       ticks: [...s.querySelectorAll('[data-testid="stSliderTickBarMin"], [data-testid="stSliderTickBarMax"], .st-slider-ticks > div')].map(txt)})),
     selects: [...document.querySelectorAll('[data-testid="stSelectbox"], .st-select-widget')].map(s => ({
       label: txt(s.querySelector('[data-testid="stWidgetLabel"], .st-label')),
       value: s.querySelector('select') ? s.querySelector('select').value : txt(s.querySelector('[data-baseweb="select"] [value]'))})),
+    checkboxes: [...document.querySelectorAll('[data-testid="stCheckbox"], .st-checkbox')].filter(vis).map(c => ({
+      label: txt(c), checked: c.querySelector('input').checked})),
   };
 }
 """
@@ -217,6 +223,16 @@ class OldUI:
         self.page.wait_for_timeout(1200)
         wait_suite_idle(self.page)
 
+    def click_track(self, label, fraction):
+        track = slider_thumb(self.page, label).locator("xpath=..")
+        box = track.bounding_box()
+        self.page.mouse.click(box["x"] + fraction * box["width"], box["y"] + box["height"] / 2)
+        self.settle()
+
+    def checkbox(self, label):
+        self.page.locator('[data-testid="stCheckbox"]').filter(has_text=label).locator("label").click()
+        self.settle()
+
     def open_expander(self):
         self.page.locator('[data-testid="stExpander"] summary').first.click()
         self.page.wait_for_timeout(600)
@@ -256,6 +272,16 @@ class NewUI:
                 break
             self.page.wait_for_timeout(200)
         self.page.wait_for_timeout(300)
+
+    def click_track(self, label, fraction):
+        track = self.page.locator(f"#{self.ids[label]}").locator("xpath=..").locator(".st-slider-track")
+        box = track.bounding_box()
+        self.page.mouse.click(box["x"] + fraction * box["width"], box["y"] + box["height"] / 2)
+        self.settle()
+
+    def checkbox(self, label):
+        self.page.locator(".st-checkbox").filter(has_text=label).locator("label").click()
+        self.settle()
 
     def open_expander(self):
         self.page.locator("details.st-expander summary").first.click()
@@ -335,6 +361,31 @@ TOOLS = {
             "soc-1": [("slider", "SoC", 1.0)],
         },
     },
+    "swelling": {
+        "legacy": SUITE_TOOLS[4],
+        "path": "/tools/swelling/",
+        "ids": {"SoC": "soc", "State of Health": "soh", "Compression [MPa]": "compression"},
+        "defaults": {"SoC": 0.5},
+        "states": {
+            "default": [],
+            "soh-arrows": [("keys", "State of Health", ["ArrowRight", "ArrowRight", "ArrowLeft", "ArrowUp", "k"])],
+            "soh-pagedown-j": [("keys", "State of Health", ["PageUp", "PageDown", "j", "Home", "End"])],
+            "soh-click-mid": [("click", "State of Health", 0.5)],
+            "soh-click-left-then-key": [("click", "State of Health", 0.0), ("keys", "State of Health", ["ArrowRight"])],
+            "soh-click-left": [("click", "State of Health", 0.02)],
+            "soc-click-0.3": [("click", "SoC", 0.3), ("keys", "SoC", ["k", "k", "j"])],
+            "compression-25": [("keys", "Compression [MPa]", ["PageUp", "PageUp", "ArrowRight", "k", "ArrowUp", "ArrowUp",
+                                                              "ArrowUp", "j"])],
+            "cylindrical": [("checkbox", "Cylindrical?")],
+            "cylindrical-aged-soc0": [("checkbox", "Cylindrical?"), ("click", "State of Health", 0.1),
+                                      ("slider", "SoC", 0.0)],
+            "compression-reset": [("keys", "Compression [MPa]", ["PageUp", "PageUp"]), ("checkbox", "Cylindrical?"),
+                                  ("checkbox", "Cylindrical?")],
+            "mixed": [("slider", "SoC", 0.66), ("click", "State of Health", 0.7),
+                      ("keys", "Compression [MPa]", ["PageUp", "PageUp", "PageUp", "PageUp", "PageUp", "PageUp",
+                                                     "PageUp"])],
+        },
+    },
 }
 
 
@@ -342,6 +393,12 @@ def apply(ui, spec, steps):
     for step in steps:
         if step[0] == "select":
             ui.select(step[1], step[2])
+        elif step[0] == "keys":
+            ui.keys(step[1], step[2])
+        elif step[0] == "click":
+            ui.click_track(step[1], step[2])
+        elif step[0] == "checkbox":
+            ui.checkbox(step[1])
         else:
             _, label, value = step
             ui.keys(label, steps_to(value, spec["defaults"][label]))

@@ -36,7 +36,13 @@ export function loadArray(id, dtype) {
 export function decode(value) {
   if (Array.isArray(value)) return value.map(decode);
   if (value && typeof value === 'object') {
-    if ('$array' in value) return loadArray(value.$array, value.dtype);
+    if ('$array' in value) {
+      const flat = loadArray(value.$array, value.dtype);
+      if (!value.shape || value.shape.length < 2) return flat;
+      // 2D (z. B. customdata aus np.c_): Zeilen wie plotly.js beim Dekodieren mit shape
+      const [rows, cols] = value.shape;
+      return Array.from({ length: rows }, (_, r) => flat.slice(r * cols, (r + 1) * cols));
+    }
     if ('$float' in value) return { nan: NaN, inf: Infinity, '-inf': -Infinity }[value.$float];
     return Object.fromEntries(Object.entries(value).map(([k, v]) => [k, decode(v)]));
   }

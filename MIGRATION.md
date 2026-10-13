@@ -35,7 +35,13 @@ Stand: **Phase 1 (Grundgerüst, Golden-Werte, Pilot Aging) abgeschlossen am 2026
 | 1.4 | Rechenkern JS (pyformat, numpy, scipy, pandas) – bitgenau | ✅ erledigt | §17.4 |
 | 1.5 | `styles.css` (Theme-Variablen, alle Streamlit-Elemente der Suite) | ✅ erledigt (Nicht-Aging-Teile in Phase 2 am Tool prüfen) | §17.5 |
 | 1.6 | Pilot Aging (`/tools/aging/`) mit Tests und Browser-Vergleich | ✅ erledigt | §17.6 |
-| 2.x | Phase 2: übrige Tools (Materials, Cell Reconstruction, Blending, Swelling, Landing) und Webseite | ⏳ nicht begonnen | §17.7 |
+| 2.1 | Cell Reconstruction (`/tools/cell-reconstruction/`) | ✅ erledigt | §18.1 |
+| 2.2 | Materials (`/tools/materials/`) | ✅ erledigt | §18.1 |
+| 2.3 | Blending (`/tools/blending/`) | ✅ erledigt | §18.1 |
+| 2.4 | Swelling (`/tools/swelling/`) inkl. SoH-Slider mit negativem Schritt (B2) | ✅ erledigt | §18.2 |
+| 2.5 | Landing `/tools/suite/` | ⏳ offen | §17.7 |
+| 2.6 | Webseite (Home, Blog, Artikel, `/tools/`, 404), Tailwind → `styles.css` Teil C | ⏳ offen | §17.7 |
+| 2.7 | `_redirects`, `_headers`, `sitemap.xml`, `robots.txt`, `llms.txt`, Manifest, Netzwerk-Check, README | ⏳ offen | §17.7 |
 
 ---
 
@@ -633,3 +639,31 @@ Hinweise:
 1. Materials, Cell Reconstruction, Blending, Swelling (SoH-Slider mit negativem Schritt: react-range-Normalisierung nachbauen, B2), Landing `/tools/suite/` – je ein Commit mit Tests und Screenshot-Vergleich.
 2. Webseite (Home, Blog, Artikel, `/tools/`, 404): React-Ansicht als statisches HTML, Tailwind → `styles.css` (Teil C), Vergleich über berechnete Stile und Screenshots.
 3. `_redirects`/`_headers`, `sitemap.xml`, `robots.txt`, `llms.txt`, `site.webmanifest`; Netzwerk-Check aller Seiten; README final.
+
+---
+
+## 18. Phase 2 – Ergebnisse
+
+Ablauf je Tool: Modell-Port → `tests/tools/<tool>.test.js` gegen `tests/golden/ui/<tool>/` → Seite (`tools/<tool>/index.html`, einmalig mit `migration/build_suite_pages.py` erzeugt, danach Quelle) + `assets/js/tools/<tool>.js` → `migration/compare.py <tool>` und `migration/behaviour_compare.py <tool>` (Legacy :8501, neu `node scripts/serve.mjs 8010`, `NEW_URL`) → Screenshots angesehen → Commit.
+
+### 18.1 Cell Reconstruction, Materials, Blending
+
+| Tool | Golden-Fälle / verglichene Zahlen | nicht bitgleich | Browser-Vergleich (Zustände) | Screenshot-Unterschiede |
+|---|---|---|---|---|
+| Cell Reconstruction | 60 / ≈ 678 k | 0 | 5, 0 Abweichungen | nur D8 („Deploy ⋮“, 252 px) + Einzelpixel |
+| Materials | 32 / ≈ 64 k | 0 | 5, 0 Abweichungen | nur D8 + Einzelpixel |
+| Blending | 20 / ≈ 1,93 Mio. | 0 | 5, 0 Abweichungen | nur D8 + Einzelpixel |
+
+- Blending setzt `template="plotly"`: eigenes, im Browser gemessenes Template `PLOTLY_TEMPLATE` (`assets/js/ui/plotlyTheme.js`), Auswahl in `assets/js/ui/plotly.js`.
+- Vollbild jeweils pixelgleich; keine fremden Domains, keine Konsolenmeldungen.
+
+### 18.2 Swelling
+
+- **Modell:** `assets/js/model/swelling.js` (SwellingModel + Figures aus `swelling_demo.py`). `x**2` auf Arrays und Python-Skalaren als `x*x`, `**0.5` als `Math.sqrt` (numpy-Fastpath) – bitgleich. B5 (Kompressions-Chart 5× gebaut) ist ohne sichtbare Wirkung und wird nur einmal gebaut.
+- **Tests:** 29 Golden-Fälle, 102.834 Zahlen, **0 nicht bitgleich**. `customdata` (`np.c_`, shape 200×1) wird als Zeilen-Array gesendet wie plotly.js es dekodiert; `tests/helpers/golden.js` und der Snapshot in `compare.py` dekodieren `shape` entsprechend.
+- **SoH-Slider (B2):** `assets/js/ui/slider.js` enthält `normalizeValue` aus react-range 1.x Zeichen für Zeichen (BIG_NUM 1e11, `%`, `toFixed(getStepDecimals)`). Bei negativem Schritt (`data-st-step="-0.01"`) kommen Tastatur und Zeiger ausschließlich über `normalizeValue`; der Wert darf unter min liegen (0.79), der Thumb wird wie Streamlits `getValueAsArray` auf [min, max] geklemmt. Ergebnis wie im Original: Mitte → 0.89, links → 0.79, Pfeil rechts 1.00 → 0.98 → 0.96 …, Pfeil links ohne Wirkung. Test: `tests/ui/slider.test.js`.
+- **Alle Slider:** Tastatur jetzt ebenfalls über `normalizeValue` mit den react-range-Tasten (Pfeile, **k/j**, Bild auf/ab ×10; Pos1/Ende ohne Wirkung). `k`/`j` fehlten vorher; Ergebnis bei positiven Schritten sonst unverändert: Regressionslauf `compare.py` der vier anderen Tools danach mit 0 Abweichungen, 0 nicht bitgleich, Screenshots wie vorher (nur D8 + ≤ 2 Einzelpixel).
+- **Cylindrical?:** blendet den Compression-Slider aus (`st-element--hidden`); da er im Original keinen `key` hat, kommt er beim Abwählen mit 0.0 zurück (`slider.reset(0)`). Aktivierte Checkbox pixelgleich.
+- **Browser-Vergleich** (12 Zustände: Default, SoH per Pfeilen/k/j/Bild/Pos1/Ende, Klick Mitte/links/links+Taste, SoC per Klick+k/j, Compression 25, Cylindrical, Cylindrical+gealtert+SoC 0, Compression-Reset, gemischt): **0 Abweichungen** in Plotly-Zustand (3.651 Zahlen je Zustand, bitgleich) und Texten (Slider-Werte, Checkbox). Screenshots 1280/390 (Default, Expander, Sidebar offen) angesehen: nur D8. Vollbild pixelgleich, Sidebar eingeklappt nur D8. Netzwerk: nur eigene Domain, keine Konsolenmeldungen.
+- **Gefunden und behoben:** Nach Mausklick zeigte der SoH-Thumb einen Fokusring (programmatisches `focus()` nach `preventDefault`); jetzt bleibt der native Fokus des Klicks erhalten, native Wertänderungen werden bei negativem Schritt verworfen.
+
