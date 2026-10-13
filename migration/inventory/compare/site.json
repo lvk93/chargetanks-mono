@@ -1,0 +1,353 @@
+{
+ "pages": {
+  "home__1280": {
+   "head": [],
+   "elements": [
+    {
+     "path": "elements[74].attrs.href",
+     "old": "https://batterytank.onrender.com/",
+     "new": "/tools/suite/"
+    }
+   ],
+   "screenshot": {
+    "size_old": [
+     1280,
+     4002
+    ],
+    "size_new": [
+     1280,
+     4002
+    ],
+    "changed_pixels": 0,
+    "changed_percent": 0.0,
+    "bbox": null
+   },
+   "foreign": [],
+   "console": [],
+   "requests": 6
+  },
+  "home__390": {
+   "head": [],
+   "elements": [
+    {
+     "path": "elements[74].attrs.href",
+     "old": "https://batterytank.onrender.com/",
+     "new": "/tools/suite/"
+    }
+   ],
+   "screenshot": {
+    "size_old": [
+     390,
+     5222
+    ],
+    "size_new": [
+     390,
+     5222
+    ],
+    "changed_pixels": 0,
+    "changed_percent": 0.0,
+    "bbox": null
+   },
+   "foreign": [],
+   "console": [],
+   "requests": 6
+  },
+  "blog__1280": {
+   "head": [],
+   "elements": [],
+   "screenshot": {
+    "size_old": [
+     1280,
+     1616
+    ],
+    "size_new": [
+     1280,
+     1616
+    ],
+    "changed_pixels": 0,
+    "changed_percent": 0.0,
+    "bbox": null
+   },
+   "foreign": [],
+   "console": [],
+   "requests": 4
+  },
+  "blog__390": {
+   "head": [],
+   "elements": [],
+   "screenshot": {
+    "size_old": [
+     390,
+     1932
+    ],
+    "size_new": [
+     390,
+     1932
+    ],
+    "changed_pixels": 0,
+    "changed_percent": 0.0,
+    "bbox": null
+   },
+   "foreign": [],
+   "console": [],
+   "requests": 4
+  },
+  "post__1280": {
+   "head": [],
+   "elements": [],
+   "screenshot": {
+    "size_old": [
+     1280,
+     8529
+    ],
+    "size_new": [
+     1280,
+     8529
+    ],
+    "changed_pixels": 0,
+    "changed_percent": 0.0,
+    "bbox": null
+   },
+   "foreign": [],
+   "console": [],
+   "requests": 10
+  },
+  "post__390": {
+   "head": [],
+   "elements": [],
+   "screenshot": {
+    "size_old": [
+     390,
+     9481
+    ],
+    "size_new": [
+     390,
+     9481
+    ],
+    "changed_pixels": 0,
+    "changed_percent": 0.0,
+    "bbox": null
+   },
+   "foreign": [],
+   "console": [],
+   "requests": 10
+  },
+  "tools__1280": {
+   "head": [],
+   "elements": [
+    {
+     "path": "elements[28].attrs.href",
+     "old": "https://batterytank.onrender.com/",
+     "new": "/tools/suite/"
+    }
+   ],
+   "screenshot": {
+    "size_old": [
+     1280,
+     2402
+    ],
+    "size_new": [
+     1280,
+     2402
+    ],
+    "changed_pixels": 0,
+    "changed_percent": 0.0,
+    "bbox": null
+   },
+   "foreign": [],
+   "console": [],
+   "requests": 4
+  },
+  "tools__390": {
+   "head": [],
+   "elements": [
+    {
+     "path": "elements[28].attrs.href",
+     "old": "https://batterytank.onrender.com/",
+     "new": "/tools/suite/"
+    }
+   ],
+   "screenshot": {
+    "size_old": [
+     390,
+     3766
+    ],
+    "size_new": [
+     390,
+     3766
+    ],
+    "changed_pixels": 0,
+    "changed_percent": 0.0,
+    "bbox": null
+   },
+   "foreign": [],
+   "console": [],
+   "requests": 4
+  },
+  "404__1280": {
+   "head": [],
+   "elements": [],
+   "screenshot": {
+    "size_old": [
+     1280,
+     900
+    ],
+    "size_new": [
+     1280,
+     900
+    ],
+    "changed_pixels": 0,
+    "changed_percent": 0.0,
+    "bbox": null
+   },
+   "foreign": [],
+   "console": [
+    {
+     "type": "error",
+     "text": "Failed to load resource: the server responded with a status of 404 (Not Found)"
+    }
+   ],
+   "requests": 3
+  },
+  "404__390": {
+   "head": [],
+   "elements": [],
+   "screenshot": {
+    "size_old": [
+     390,
+     1089
+    ],
+    "size_new": [
+     390,
+     1089
+    ],
+    "changed_pixels": 0,
+    "changed_percent": 0.0,
+    "bbox": null
+   },
+   "foreign": [],
+   "console": [
+    {
+     "type": "error",
+     "text": "Failed to load resource: the server responded with a status of 404 (Not Found)"
+    }
+   ],
+   "requests": 3
+  },
+  "post-not-found__1280": {
+   "head": [],
+   "elements": [],
+   "screenshot": {
+    "size_old": [
+     1280,
+     900
+    ],
+    "size_new": [
+     1280,
+     900
+    ],
+    "changed_pixels": 0,
+    "changed_percent": 0.0,
+    "bbox": null
+   },
+   "foreign": [],
+   "console": [
+    {
+     "type": "error",
+     "text": "Failed to load resource: the server responded with a status of 404 (Not Found)"
+    }
+   ],
+   "requests": 3
+  },
+  "post-not-found__390": {
+   "head": [],
+   "elements": [],
+   "screenshot": {
+    "size_old": [
+     390,
+     900
+    ],
+    "size_new": [
+     390,
+     900
+    ],
+    "changed_pixels": 0,
+    "changed_percent": 0.0,
+    "bbox": null
+   },
+   "foreign": [],
+   "console": [
+    {
+     "type": "error",
+     "text": "Failed to load resource: the server responded with a status of 404 (Not Found)"
+    }
+   ],
+   "requests": 3
+  }
+ },
+ "menu": {
+  "home": {
+   "differences": [],
+   "screenshot": {
+    "size_old": [
+     390,
+     900
+    ],
+    "size_new": [
+     390,
+     900
+    ],
+    "changed_pixels": 0,
+    "changed_percent": 0.0,
+    "bbox": null
+   }
+  },
+  "post": {
+   "differences": [],
+   "screenshot": {
+    "size_old": [
+     390,
+     900
+    ],
+    "size_new": [
+     390,
+     900
+    ],
+    "changed_pixels": 0,
+    "changed_percent": 0.0,
+    "bbox": null
+   }
+  }
+ },
+ "states": [
+  [],
+  [],
+  [],
+  [],
+  [],
+  [],
+  [],
+  [],
+  [],
+  [],
+  []
+ ],
+ "about_scroll": {
+  "old": {
+   "early_y": 147,
+   "final_y": 2628,
+   "url": "/#about",
+   "again_y": 2628,
+   "back_y": 0,
+   "back_url": "/"
+  },
+  "new": {
+   "early_y": 107,
+   "final_y": 2628,
+   "url": "/#about",
+   "again_y": 2628,
+   "back_y": 0,
+   "back_url": "/"
+  }
+ }
+}

@@ -1,0 +1,17 @@
+{
+  "name": "Charge Tanks",
+  "short_name": "Charge Tanks",
+  "description": "Battery intuition, tools, and articles built around the two-tank analogy.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#003B73",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ]
+}

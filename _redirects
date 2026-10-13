@@ -1,0 +1,8 @@
+# Netlify-Weiterleitungen (statische Seite, siehe MIGRATION.md).
+# Arbeitsdateien des Repos nicht ausliefern (wie scripts/serve.mjs).
+/migration/*   /404.html   404!
+/tests/*       /404.html   404!
+/scripts/*     /404.html   404!
+# Unbekannte Tool-Pfade (frueher an Render weitergeleitet) -> Landing der Tool-Suite.
+# Ohne "!": greift nur, wenn unter dem Pfad keine Datei liegt.
+/tools/*       /tools/suite/   302

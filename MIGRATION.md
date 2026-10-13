@@ -40,8 +40,9 @@ Stand: **Phase 1 (Grundgerüst, Golden-Werte, Pilot Aging) abgeschlossen am 2026
 | 2.3 | Blending (`/tools/blending/`) | ✅ erledigt | §18.1 |
 | 2.4 | Swelling (`/tools/swelling/`) inkl. SoH-Slider mit negativem Schritt (B2) | ✅ erledigt | §18.2 |
 | 2.5 | Landing `/tools/suite/` | ✅ erledigt | §18.3 |
-| 2.6 | Webseite (Home, Blog, Artikel, `/tools/`, 404), Tailwind → `styles.css` Teil C | ⏳ offen | §17.7 |
-| 2.7 | `_redirects`, `_headers`, `sitemap.xml`, `robots.txt`, `llms.txt`, Manifest, Netzwerk-Check, README | ⏳ offen | §17.7 |
+| 2.6 | Webseite (Home, Blog, Artikel, `/tools/`, 404), Tailwind → `styles.css` Teil C | ✅ erledigt | §18.4 |
+| 2.7 | `_redirects`, `_headers`, `sitemap.xml`, `robots.txt`, `llms.txt`, Manifest, Netzwerk-Check, README | ✅ erledigt | §18.4 |
+| 3.1 | Impressum und Datenschutz (F8, Folgeschritt) | ⏳ vorgemerkt | §15 |
 
 ---
 
@@ -442,11 +443,14 @@ Kern (`src/ocv_teaching/`):
 | A3 | Unbekannte Pfade bekommen `404.html` mit Status 404 statt 200 + SPA-404 | statisch, kein SPA-Router | ✅ freigegeben (F6) |
 | A4 | Pro Webseiten-URL nur die React-Fassung (Crawler-Snapshot-Texte entfallen) | ein HTML je Seite | ✅ freigegeben (F3) |
 | A5 | Streamlit-Chrome entfällt (Deploy, ⋮-Menü, Running-Anzeige, Stale-Dimmen); Header-Fläche bleibt | Auftrag | ✅ laut Auftrag |
-| A6 | Login/Authenticator wird nicht portiert (im Original ohne Funktion) | toter Code | 🟡 vorgeschlagen |
+| A6 | Login/Authenticator wird nicht portiert (im Original ohne Funktion) | toter Code | ✅ freigegeben (2026-10-13: „reject the login“) |
 | D7 | Selectbox als natives `<select>`: geschlossen 1:1 (gemessen: Pfeil, Rahmen, Fokusrahmen nach Auswahl); aufgeklappt die Liste des Browsers/Betriebssystems, kein Tipp-Filter (Anfangsbuchstabe springt) | Grundsatz "native Elemente" | ✅ freigegeben (2026-10-13) |
 | D8 | Kein Header-Inhalt rechts ("Deploy", ⋮). In jedem Suite-Screenshot ≈ 250 Pixel Unterschied genau dort | Teil von A5 | ✅ laut Auftrag |
 | D9 | Sidebar-Breite wird wie im Original in `localStorage` (`sidebarWidth`) gespeichert – jetzt unter der Domain chargetanks.com statt batterytank.onrender.com (früher gespeicherte Breiten gehen verloren) | anderer Ursprung | ℹ️ Hinweis |
 | D10 | Landing-Buttons "Open …" und "⬅ Back to Landing" sind Links (`<a href="/tools/…/">`) statt `<button>` mit Seitenwechsel im Session-State. Aussehen und Zustände (Hover, Active, Fokusring) gemessen gleich; Unterschiede: Leertaste löst einen Link nicht aus (Enter schon), Mittelklick/„In neuem Tab öffnen“ funktioniert jetzt | Folge von A2/F2 | ℹ️ Folge von F2 |
+| D11 | Webseite: „Launch Tool Suite“ (`/tools/`) und „Launch Interactive App“ (Startseite) zeigen auf `/tools/suite/` statt auf https://batterytank.onrender.com/ (weiter in neuem Tab, mit External-Link-Icon) | Render wird geschlossen, Suite liegt jetzt unter `/tools/suite/` (F2) | ℹ️ Folge von F2 |
+| D12 | Webseite: Seitenwechsel sind echte Seitenaufrufe statt React-Router-Navigation (kurzer Neuaufbau). Links innerhalb derselben Seite verhalten sich wie im Original (gleiche Adresse → nichts; `/#about` → sanftes Scrollen; Zurück → wieder oben). Einzige sichtbare Folge: Wird eine Seite direkt mit `#about` geladen, springt der Browser sofort zum Abschnitt statt animiert zu scrollen | statisch, ohne Framework | ℹ️ Hinweis |
+| D13 | `_redirects`: `/migration/*`, `/tests/*`, `/scripts/*` liefern 404 (Publish-Verzeichnis = Repo-Wurzel, diese Ordner gehören nicht zur Seite; `scripts/serve.mjs` ebenso) | Arbeitsdateien nicht veröffentlichen | 🟡 vorgeschlagen |
 
 ## 13. Mitportierte Bugs und Quirks (am laufenden Original gemessen)
 
@@ -465,6 +469,10 @@ Kern (`src/ocv_teaching/`):
 | B11 | Aging: Die Anker-ID der Zeile "Capacities … SoH: …" bleibt beim ersten Wert (`…-so-h-100-00`), auch wenn der Text z. B. 70.85 % zeigt | Browser-Vergleich (`inventory/compare/aging.json`), portiert in `assets/js/ui/heading.js` |
 | B12 | Aging: Die gepunkteten Referenzlinien im Tank-Chart zeigen immer den BOL-Zustand (`add_reference_voltage_lines` ohne Aging-Parameter aufgerufen) | `aging_demo.py:290`, portiert in `assets/js/model/aging.js` |
 | B13 | Landing: Der Vollbild-Button der Vorschaubilder ist per Tab erreichbar, die Werkzeugleiste bleibt dabei aber unsichtbar (opacity 0); der Fokus zeigt sich nur als hellerer Button-Hintergrund. Nach Vollbild an/aus geht der Fokus verloren (Leiste wird neu aufgebaut) | `migration/landing_compare.py` + Fokus-Probe (§18.3), portiert in `styles.css`/`assets/js/ui/image.js` |
+| B14 | Webseite: Im `<head>` stehen zwei JSON-LD-Blöcke – der aus dem Build-Snapshot (`id="chargetanks-structured-data"`) und der von React (`data-chargetanks-structured-data`). Auf 404-Seiten bleibt der Snapshot-Block der Startseite stehen | `inventory/site-react/*.json`, übernommen wie erfasst |
+| B15 | Webseite: Artikeltext hat `prose prose-lg`, das Typography-Plugin ist aber nicht installiert – ohne Wirkung (nur `max-w-none`) | `tailwind.config.js` (`plugins: []`), `.ct-prose` |
+| B16 | Webseite: Datumsangaben (`new Date("2026-03-03")` = UTC-Mitternacht, formatiert in lokaler Zeit) zeigen westlich von UTC einen Tag früher („Mar 2, 2026“) | `Blog.tsx`, `PostDetail.tsx`, `ToolsPage.tsx`; zur Laufzeit gleich formatiert in `assets/js/site/site.js` |
+| B17 | Webseite: Klick auf einen Link zur gerade angezeigten Adresse (z. B. Logo auf der Startseite) scrollt nicht nach oben | React Router + `ScrollToTop`; nachgebildet in `site.js` |
 
 ---
 
@@ -677,4 +685,31 @@ Ablauf je Tool: Modell-Port → `tests/tools/<tool>.test.js` gegen `tests/golden
 - **Tests:** `tests/tools/suite.test.js` gegen den Golden-Fall (Karten, Button-Reihenfolge und Ziele, Linkbutton, Fusszeile) und Bild-Hashes.
 - **Browser-Vergleich** (`migration/landing_compare.py` → `inventory/compare/suite.json`, `screenshots/compare/suite/`): Lage und berechnete Stile von 19 Elementgruppen (Überschriften, Karten, Buttons, Bilder, Werkzeugleiste, Trenner, Spalten, Linkbutton, Fusszeile, Header, App) bei 1280 und 390 px: **0 Abweichungen**; Texte, Anker-IDs und Linkziele gleich. Screenshots ganze Seite 1280/390, Hover, Button-Hover, Vollbild und nach Escape (erstes und fünftes Bild) angesehen: nur D8; **Vollbild pixelgleich**. Hover/Active von Button und Linkbutton gleich. Netzwerk: nur eigene Domain, keine Konsolenmeldungen.
 - **Gefunden und behoben (gilt für alle Suite-Seiten):** `stMain` hat im Original `tabindex="0"` (Tab-Stopp, Tastatur-Scrollen); die Seiten hatten `-1` → korrigiert in allen `tools/*/index.html`. Tab-Reihenfolge der Landing jetzt wie im Original (ohne die Header-Buttons, D8). `<a class="st-button">` zentriert Text wie ein `<button>` (`text-align: center`).
+
+### 18.4 Webseite (Home, `/blog/`, Artikel, `/tools/`, 404)
+
+- **Quelle:** die gerenderte React-Ansicht des Original-Builds (`migration/capture_site_dom.py` → `inventory/site-react/`, Legacy-Build ohne Tracking über `migration/serve-legacy-site.mjs` auf :4173). Texte = React-Fassung (F3), der Crawler-Snapshot entfällt (A4).
+- **Umsetzung:** `migration/build_site_pages.py` (einmalig, danach ist das HTML die Quelle) erzeugt `index.html`, `blog/index.html`, `blog/two-tank-battery-model/index.html`, `tools/index.html`, `404.html` und **Teil C von `styles.css`**:
+  - jede der 190 Tailwind-Klassenlisten → genau eine semantische Klasse `ct-*` (Tabelle `CLASSES`, unbekannte Listen brechen ab);
+  - die CSS-Regeln jeder Klasse stammen aus den Tailwind-Utilities des Original-Builds (Basis, `:hover`/`:focus`, `group-hover`, `space-y`-Kindregeln, Breakpoints in Tailwind-Reihenfolge); der Preflight gilt nur unter `html.ct-page` (`:where`, gleiche Spezifität). Damit sind die berechneten Stile identisch, ohne Build-Schritt.
+  - Artikel: das von ReactMarkdown erzeugte HTML (inkl. Überschriften-IDs, Tabellen-Bildzeilen) steht fertig im HTML; `posts/*.md` wird nicht mehr zur Laufzeit gelesen. Neue Artikel: vorhandene Artikelseite kopieren und Text ersetzen (README).
+- **Dynamik** (`assets/js/site/site.js`): Mobilmenü (Icons, `aria-expanded`/`aria-label`), Footer-Jahr, Datumsformat zur Laufzeit (B16), Links innerhalb der Seite wie React Router + ScrollToTop (B17, D12), Bild-`onError` (About), `404.html` zeigt für `/blog/<slug>/` „Post Not Found“ samt Titel, Meta und Canonical wie `PostDetail.tsx`.
+- **Statische Dateien** bytegleich (`migration/copy_site_assets.py`, Hashes `inventory/site-assets.sha256`): `favicon.svg`, `site.webmanifest`, `robots.txt`, `llms.txt`, `_headers`, `sitemap.xml` (aus dem Original-Build), `images/**` (inkl. `lars.jpg`, 13,7 MB unverändert – für den Verbesserungsschritt vorgemerkt). `_redirects` neu (D13, `/tools/*` → `/tools/suite/` 302 nur für fehlende Pfade). Netlify: 404.html wird automatisch mit Status 404 ausgeliefert (F6, A3).
+- **Tests:** `tests/site/pages.test.js` – alle 11 Seiten: interne Links/Ressourcen vorhanden, keine Ressourcen fremder Domains, Webseite nur mit `ct-*`-Klassen (alle in `styles.css`), keine Render-Links mehr.
+- **Browser-Vergleich** (`migration/site_compare.py` → `inventory/compare/site.json`, `screenshots/compare/site/`), je Seite bei 1280 und 390 px:
+
+| Seite | Kopf (Titel, Meta, Canonical, JSON-LD) | Elemente (Tag, Lage, 47 berechnete Stile, Attribute) | Screenshot ganze Seite |
+|---|---|---|---|
+| Home | gleich | gleich bis auf D11 (Launch-Link) | **pixelgleich** |
+| `/blog/` | gleich | gleich | **pixelgleich** |
+| Artikel | gleich | gleich | **pixelgleich** |
+| `/tools/` | gleich | gleich bis auf D11 | **pixelgleich** |
+| 404 | gleich | gleich | **pixelgleich** |
+| Post not found | gleich | gleich | **pixelgleich** |
+
+  - Mobilmenü offen (Home, Artikel, 390 px): Elemente gleich, pixelgleich; Schließen setzt `aria-label` zurück.
+  - Hover- und Fokuszustände (Navigation, Hero-Buttons, Teaser, Blogkarte inkl. `group-hover`, Footer-Links, „Continue Reading“, Artikel-Links, Breadcrumb): gleich.
+  - `/#about`: gleiche Endposition (2628 px), sanft animiert, zweiter Klick ohne Wirkung, Zurück → oben (`/`).
+  - Netzwerk: nur eigene Domain auf allen Seiten; Konsole leer bis auf die gewollte 404-Antwort des Dokuments selbst auf 404-Seiten.
+  - Screenshots angesehen (u. a. Home 1280, Artikel 390, Menü offen, Post not found).
 

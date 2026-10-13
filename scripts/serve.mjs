@@ -1,6 +1,7 @@
 // Lokaler Server fuer die statische Seite (nur Entwicklung, keine Dependencies).
 // Verhaelt sich wie Netlify mit _redirects: Verzeichnis-Index, 301 auf "/" bei Verzeichnissen,
-// nicht existierende /tools/*-Pfade -> 302 /tools/suite/, sonst 404.html mit Status 404.
+// nicht existierende /tools/*-Pfade -> 302 /tools/suite/, sonst 404.html mit Status 404;
+// migration/, tests/ und scripts/ werden nicht ausgeliefert (wie _redirects).
 // Aufruf: node scripts/serve.mjs [port]   (Standard 8000)
 import { createServer } from 'node:http';
 import { readFile, stat } from 'node:fs/promises';
@@ -47,7 +48,7 @@ createServer(async (req, res) => {
     const url = new URL(req.url, `http://localhost:${port}`);
     const path = decodeURIComponent(url.pathname);
     const local = join(root, normalize(path));
-    if (!local.startsWith(root) || /[\\/](\.git|migration|node_modules)([\\/]|$)/.test(local.slice(root.length))) {
+    if (!local.startsWith(root) || /[\\/](\.git|migration|tests|scripts|node_modules)([\\/]|$)/.test(local.slice(root.length))) {
       await send(res, 404, join(root, '404.html'));
       return;
     }
