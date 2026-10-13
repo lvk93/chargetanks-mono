@@ -3385,3 +3385,33 @@ html.st-page {
   }
 }
 /* === Ende Teil C === */
+
+/* === Teil D - Ergaenzungen nach dem Umzug === */
+
+/* Rechtliches: Links im Footer der Webseite (unter dem Copyright) */
+.ct-footer-legal {
+  margin-top: 0.5rem;
+}
+
+/* Inline-Code in Impressum/Datenschutz (wie Inline-Code im Artikel) */
+.ct-legal-code {
+  border-radius: 0.25rem;
+  background-color: rgb(204 204 204 / 0.3);
+  padding: 0.125rem 0.375rem;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  color: rgb(0 59 115);
+}
+
+/* Platzhalter, die vor der Veroeffentlichung ersetzt werden muessen */
+.ct-todo {
+  background-color: #fde68a;
+  color: #7c2d12;
+}
+
+/* Rechtliche Links in den Fusszeilen der Tool-Suite: Farbe der Fusszeile, unterstrichen */
+.st-sidebar-footer a,
+.footer a {
+  color: inherit;
+}

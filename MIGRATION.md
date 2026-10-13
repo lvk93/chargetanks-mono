@@ -44,7 +44,7 @@ Stand: **Umzug abgeschlossen (Phase 2, 2026-10-13); Arbeitsdateien entfernt.** E
 | 2.5 | Landing `/tools/suite/` | ✅ erledigt | §18.3 |
 | 2.6 | Webseite (Home, Blog, Artikel, `/tools/`, 404), Tailwind → `styles.css` Teil C | ✅ erledigt | §18.4 |
 | 2.7 | `_redirects`, `_headers`, `sitemap.xml`, `robots.txt`, `llms.txt`, Manifest, Netzwerk-Check, README | ✅ erledigt | §18.4 |
-| 3.1 | Impressum und Datenschutz (F8, Folgeschritt) | ⏳ vorgemerkt | §15 |
+| 3.1 | Impressum (`/imprint/`) und Datenschutz (`/privacy/`), verlinkt in allen Fußzeilen (F8) | 🟡 Entwurf im Branch `impressum-datenschutz`, Adresse/Telefon offen (`[[TODO]]`) | §15 |
 | 3.2 | Aufräumen: Migrationsskripte, Tests, Dev-Server entfernt; `netlify.toml` | ✅ erledigt | §19 |
 | 3.3 | Neues Repo anlegen, Netlify umstellen | ⏳ beim Auftraggeber | §19 |
 
