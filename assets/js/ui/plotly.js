@@ -3,7 +3,7 @@
 // - use_container_width: Breite = Containerbreite (mind. 150 px), Hoehe aus der Figure
 // - Modebar-Button "Fullscreen"/"Close fullscreen": Rahmen fuellt den Viewport (Escape beendet)
 import { toPlotlyJson } from '../model/figure.js';
-import { FULLSCREEN_BUTTON, FULLSCREEN_EXIT_BUTTON, STREAMLIT_CONFIG, STREAMLIT_TEMPLATE } from './plotlyTheme.js';
+import { FULLSCREEN_BUTTON, FULLSCREEN_EXIT_BUTTON, PLOTLY_TEMPLATE, STREAMLIT_CONFIG, STREAMLIT_TEMPLATE } from './plotlyTheme.js';
 
 const MIN_WIDTH = 150;
 const DEFAULT_PLOTLY_HEIGHT = 450;
@@ -46,7 +46,9 @@ export function createChart(container) {
     const json = toPlotlyJson(figure);
     const { width, height } = size();
     lastWidth = width;
-    const layout = { ...json.layout, template: STREAMLIT_TEMPLATE, width, height };
+    // Standard ist Streamlits Template; template="plotly" in der Figure (Blending) -> gemessenes Plotly-Template
+    const template = json.layout.template === 'plotly' ? PLOTLY_TEMPLATE : STREAMLIT_TEMPLATE;
+    const layout = { ...json.layout, template, width, height };
     window.Plotly.react(container, json.data, layout, config());
   }
 

@@ -275,6 +275,19 @@ def steps_to(value, default, step=0.01):
 
 
 TOOLS = {
+    "blending": {
+        "legacy": SUITE_TOOLS[2],
+        "path": "/tools/blending/",
+        "ids": {"SoL (Blend)": "sol", "q% (Material A)": "gamma"},
+        "defaults": {"SoL (Blend)": 0.5, "q% (Material A)": 0.7},
+        "states": {
+            "default": [],
+            "sol0-q0": [("slider", "SoL (Blend)", 0.0), ("slider", "q% (Material A)", 0.0)],
+            "sol1-q1": [("slider", "SoL (Blend)", 1.0), ("slider", "q% (Material A)", 1.0)],
+            "sol0.25-q0.4": [("slider", "SoL (Blend)", 0.25), ("slider", "q% (Material A)", 0.4)],
+            "sol0.8-q0.1": [("slider", "SoL (Blend)", 0.8), ("slider", "q% (Material A)", 0.1)],
+        },
+    },
     "materials": {
         "legacy": SUITE_TOOLS[0],
         "path": "/tools/materials/",

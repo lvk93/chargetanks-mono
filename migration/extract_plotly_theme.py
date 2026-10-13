@@ -46,6 +46,10 @@ def main():
         exit_titles = page.evaluate("""() => [...document.querySelectorAll('.js-plotly-plot')[1]
             .querySelectorAll('.modebar-btn')].map(b => b.getAttribute('data-title'))""")
         context.close()
+        # Blending setzt template="plotly" (dark_layout) - dort kommt ein anderes Template im Browser an
+        context, page, _ = open_suite_page(browser, 1280, SUITE_TOOLS[2])
+        plotly_template = page.evaluate("() => JSON.parse(JSON.stringify(document.querySelector('.js-plotly-plot').layout.template))")
+        context.close()
         browser.close()
     assert json.dumps(normal["template"], sort_keys=True) == json.dumps(full["template"], sort_keys=True)
     lines = [
@@ -61,6 +65,9 @@ def main():
         f"export const FULLSCREEN_EXIT_BUTTON = {json.dumps(full['fullscreen'], ensure_ascii=False, indent=1)};",
         "",
         f"// Modebar im Vollbild (gemessen): {json.dumps(exit_titles)}",
+        "",
+        "// Template im Browser fuer Figures mit template=\"plotly\" (Blending, dark_layout)",
+        f"export const PLOTLY_TEMPLATE = {json.dumps(plotly_template, ensure_ascii=False, indent=1)};",
         "",
     ]
     OUT.parent.mkdir(parents=True, exist_ok=True)

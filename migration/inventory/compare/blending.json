@@ -1,0 +1,336 @@
+{
+ "tool": "blending",
+ "states": {
+  "default": {
+   "numbers": 97367,
+   "not_bitidentical": 0,
+   "max_rel_deviation": 0.0,
+   "differences": []
+  },
+  "sol0-q0": {
+   "numbers": 86815,
+   "not_bitidentical": 0,
+   "max_rel_deviation": 0.0,
+   "differences": []
+  },
+  "sol1-q1": {
+   "numbers": 108271,
+   "not_bitidentical": 0,
+   "max_rel_deviation": 0.0,
+   "differences": []
+  },
+  "sol0.25-q0.4": {
+   "numbers": 96671,
+   "not_bitidentical": 0,
+   "max_rel_deviation": 0.0,
+   "differences": []
+  },
+  "sol0.8-q0.1": {
+   "numbers": 97575,
+   "not_bitidentical": 0,
+   "max_rel_deviation": 0.0,
+   "differences": []
+  }
+ },
+ "screenshots": {
+  "default__1280": {
+   "size_old": [
+    1280,
+    1304
+   ],
+   "size_new": [
+    1280,
+    1304
+   ],
+   "changed_pixels": 252,
+   "changed_percent": 0.015,
+   "bbox": [
+    1181,
+    23,
+    1250,
+    37
+   ]
+  },
+  "sol0-q0__1280": {
+   "size_old": [
+    1280,
+    1304
+   ],
+   "size_new": [
+    1280,
+    1304
+   ],
+   "changed_pixels": 252,
+   "changed_percent": 0.015,
+   "bbox": [
+    1181,
+    23,
+    1250,
+    37
+   ]
+  },
+  "sol1-q1__1280": {
+   "size_old": [
+    1280,
+    1304
+   ],
+   "size_new": [
+    1280,
+    1304
+   ],
+   "changed_pixels": 252,
+   "changed_percent": 0.015,
+   "bbox": [
+    1181,
+    23,
+    1250,
+    37
+   ]
+  },
+  "sol0.25-q0.4__1280": {
+   "size_old": [
+    1280,
+    1304
+   ],
+   "size_new": [
+    1280,
+    1304
+   ],
+   "changed_pixels": 252,
+   "changed_percent": 0.015,
+   "bbox": [
+    1181,
+    23,
+    1250,
+    37
+   ]
+  },
+  "sol0.8-q0.1__1280": {
+   "size_old": [
+    1280,
+    1304
+   ],
+   "size_new": [
+    1280,
+    1304
+   ],
+   "changed_pixels": 252,
+   "changed_percent": 0.015,
+   "bbox": [
+    1181,
+    23,
+    1250,
+    37
+   ]
+  },
+  "expander-open__1280": {
+   "size_old": [
+    1280,
+    2684
+   ],
+   "size_new": [
+    1280,
+    2684
+   ],
+   "changed_pixels": 252,
+   "changed_percent": 0.007,
+   "bbox": [
+    1181,
+    23,
+    1250,
+    37
+   ]
+  },
+  "expander-open__390": {
+   "size_old": [
+    390,
+    4470
+   ],
+   "size_new": [
+    390,
+    4470
+   ],
+   "changed_pixels": 252,
+   "changed_percent": 0.014,
+   "bbox": [
+    291,
+    23,
+    360,
+    37
+   ]
+  },
+  "sidebar-open__390": {
+   "size_old": [
+    390,
+    2529
+   ],
+   "size_new": [
+    390,
+    2529
+   ],
+   "changed_pixels": 252,
+   "changed_percent": 0.026,
+   "bbox": [
+    291,
+    23,
+    360,
+    37
+   ]
+  },
+  "default__390": {
+   "size_old": [
+    390,
+    2529
+   ],
+   "size_new": [
+    390,
+    2529
+   ],
+   "changed_pixels": 252,
+   "changed_percent": 0.026,
+   "bbox": [
+    291,
+    23,
+    360,
+    37
+   ]
+  }
+ },
+ "network": [
+  {
+   "url": "http://localhost:8010/tools/blending/",
+   "method": "GET",
+   "type": "document",
+   "foreign": false,
+   "blocked": false
+  },
+  {
+   "url": "http://localhost:8010/assets/css/styles.css",
+   "method": "GET",
+   "type": "stylesheet",
+   "foreign": false,
+   "blocked": false
+  },
+  {
+   "url": "http://localhost:8010/assets/vendor/plotly-3.0.1.min.js",
+   "method": "GET",
+   "type": "script",
+   "foreign": false,
+   "blocked": false
+  },
+  {
+   "url": "http://localhost:8010/assets/js/tools/blending.js",
+   "method": "GET",
+   "type": "script",
+   "foreign": false,
+   "blocked": false
+  },
+  {
+   "url": "http://localhost:8010/assets/fonts/SourceCodeVF-Upright.woff2",
+   "method": "GET",
+   "type": "font",
+   "foreign": false,
+   "blocked": false
+  },
+  {
+   "url": "http://localhost:8010/assets/js/model/blend.js",
+   "method": "GET",
+   "type": "script",
+   "foreign": false,
+   "blocked": false
+  },
+  {
+   "url": "http://localhost:8010/assets/js/ui/data.js",
+   "method": "GET",
+   "type": "script",
+   "foreign": false,
+   "blocked": false
+  },
+  {
+   "url": "http://localhost:8010/assets/js/ui/plotly.js",
+   "method": "GET",
+   "type": "script",
+   "foreign": false,
+   "blocked": false
+  },
+  {
+   "url": "http://localhost:8010/assets/js/ui/shell.js",
+   "method": "GET",
+   "type": "script",
+   "foreign": false,
+   "blocked": false
+  },
+  {
+   "url": "http://localhost:8010/assets/js/ui/slider.js",
+   "method": "GET",
+   "type": "script",
+   "foreign": false,
+   "blocked": false
+  },
+  {
+   "url": "http://localhost:8010/assets/js/core/numpy.js",
+   "method": "GET",
+   "type": "script",
+   "foreign": false,
+   "blocked": false
+  },
+  {
+   "url": "http://localhost:8010/assets/js/core/scipy.js",
+   "method": "GET",
+   "type": "script",
+   "foreign": false,
+   "blocked": false
+  },
+  {
+   "url": "http://localhost:8010/assets/js/model/materials.js",
+   "method": "GET",
+   "type": "script",
+   "foreign": false,
+   "blocked": false
+  },
+  {
+   "url": "http://localhost:8010/assets/js/model/figure.js",
+   "method": "GET",
+   "type": "script",
+   "foreign": false,
+   "blocked": false
+  },
+  {
+   "url": "http://localhost:8010/assets/js/ui/plotlyTheme.js",
+   "method": "GET",
+   "type": "script",
+   "foreign": false,
+   "blocked": false
+  },
+  {
+   "url": "http://localhost:8010/assets/js/core/pyformat.js",
+   "method": "GET",
+   "type": "script",
+   "foreign": false,
+   "blocked": false
+  },
+  {
+   "url": "http://localhost:8010/assets/data/materials/index.json",
+   "method": "GET",
+   "type": "fetch",
+   "foreign": false,
+   "blocked": false
+  },
+  {
+   "url": "http://localhost:8010/assets/data/materials/graphite.json",
+   "method": "GET",
+   "type": "fetch",
+   "foreign": false,
+   "blocked": false
+  },
+  {
+   "url": "http://localhost:8010/assets/data/materials/silicon.json",
+   "method": "GET",
+   "type": "fetch",
+   "foreign": false,
+   "blocked": false
+  }
+ ],
+ "console": [],
+ "foreign_requests": []
+}
