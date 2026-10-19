@@ -1,0 +1,76 @@
+---
+layout: layouts/base.njk
+ogType: article
+ldType: article
+---
+{%- from "partials/icons.njk" import icon -%}
+<article class="container container--article">
+  <nav class="breadcrumb" aria-label="Breadcrumb">
+    <ol>
+      <li><a href="/">Home</a></li>
+      <li aria-hidden="true">/</li>
+      <li><a href="/blog/">Blog</a></li>
+      <li aria-hidden="true">/</li>
+      <li aria-current="page">{{ title }}</li>
+    </ol>
+  </nav>
+  <a class="back-link" href="/blog/">{{ icon("arrow-left") }}<span>Back to Blog</span></a>
+  <header class="article-header">
+    <span class="badge">{{ category }}</span>
+    <h1 class="article-title">{{ title }}</h1>
+    <div class="meta">
+      <span class="meta__item">{{ icon("calendar") }}<time datetime="{{ page.date | isoDate }}">{{ page.date | readableDate("long") }}</time></span>
+      <span class="meta__item">{{ icon("clock") }}<span>{{ readTime }}</span></span>
+      <span class="meta__item">{{ icon("user") }}<span>{{ site.author }}</span></span>
+      {%- if modified %}
+      <span class="meta__item"><strong>Updated:</strong><time datetime="{{ modified | isoDate }}">{{ modified | readableDate("long") }}</time></span>
+      {%- endif %}
+    </div>
+  </header>
+  <figure class="article-figure">
+    <img src="{{ thumbnail }}" alt="{{ thumbnailAlt }}" decoding="async"{% if thumbnailWidth %} width="{{ thumbnailWidth }}" height="{{ thumbnailHeight }}"{% endif %}>
+  </figure>
+  <div class="summary">
+    <section class="summary-box summary-box--tldr">
+      <h2>TL;DR</h2>
+      <p>{{ tldr }}</p>
+    </section>
+    <section class="summary-box">
+      <h2>{{ keyQuestion }}</h2>
+      <p class="summary-box__lead">{{ definition }}</p>
+      <p>{{ keyAnswer }}</p>
+    </section>
+  </div>
+  <div class="prose">
+{{ content | safe }}
+  </div>
+  <section class="continue">
+    <div class="continue__grid">
+      <div>
+        <h2>Continue exploring Charge Tanks</h2>
+        <p>Pair the article with the interactive tools so the model and its trade-offs stay easy to inspect.</p>
+        <div class="actions">
+          <a class="btn btn--primary" href="/blog/">Browse Blog</a>
+          <a class="btn btn--secondary" href="/tools/">Explore Tools</a>
+        </div>
+      </div>
+      <aside class="aside-card">
+        <h2>More Articles</h2>
+        {%- set others = [] -%}
+        {%- for p in collections.postsNewestFirst -%}
+          {%- if p.url != page.url and others.length < 3 %}{% set others = (others.push(p), others) %}{% endif -%}
+        {%- endfor %}
+        {%- if others.length %}
+        <ul>
+          {%- for p in others %}
+          <li><a class="reading-link" href="{{ p.url }}"><strong>{{ p.data.title }}</strong>{{ p.data.description }}</a></li>
+          {%- endfor %}
+        </ul>
+        {%- else %}
+        <p>More articles will appear here automatically as the blog grows.</p>
+        {%- endif %}
+        <a class="more-link" href="/blog/"><span>Browse the blog index</span>{{ icon("arrow-right") }}</a>
+      </aside>
+    </div>
+  </section>
+</article>

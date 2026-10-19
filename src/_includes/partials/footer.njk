@@ -1,0 +1,35 @@
+{%- from "partials/icons.njk" import icon, logo -%}
+<footer class="site-footer">
+  <div class="site-footer__inner">
+    <div class="site-footer__grid">
+      <div>
+        <p class="site-footer__brand">{{ logo("") }}<span>{{ site.name }}</span></p>
+        <p class="site-footer__text">{{ site.tagline }}</p>
+        <div class="social">
+          <a href="{{ site.linkedin }}" target="_blank" rel="noopener noreferrer" aria-label="{{ site.author }} on LinkedIn">{{ icon("linkedin", "icon icon--20") }}</a>
+          <a href="mailto:{{ site.email }}" aria-label="Email {{ site.author }}">{{ icon("mail", "icon icon--20") }}</a>
+        </div>
+      </div>
+      <div>
+        <h2 class="site-footer__heading">Quick Links</h2>
+        <ul class="site-footer__links">
+          <li><a href="/#about">About</a></li>
+          <li><a href="/tools/">Tools</a></li>
+          <li><a href="/blog/">Blog</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2 class="site-footer__heading">Tools</h2>
+        <ul class="site-footer__links">
+          {%- for tool in tools %}
+          <li><a href="/tools/{{ tool.slug }}/">{{ tool.name }}</a></li>
+          {%- endfor %}
+        </ul>
+      </div>
+    </div>
+    <div class="site-footer__bottom">
+      <p>© {{ buildYear }} {{ site.name }}. All rights reserved.</p>
+      <p class="site-footer__legal"><a href="/imprint/">Imprint</a> · <a href="/privacy/">Privacy Policy</a></p>
+    </div>
+  </div>
+</footer>

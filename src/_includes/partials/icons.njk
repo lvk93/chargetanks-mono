@@ -1,0 +1,19 @@
+{#- Icons als Inline-SVG (Lucide, wie im Original) und das Logo -#}
+{%- macro logo(class) -%}
+<svg class="{{ class }}" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M6 8C6 6.89543 6.89543 6 8 6H16C17.1046 6 18 6.89543 18 8V18C18 19.1046 17.1046 20 16 20H8C6.89543 20 6 19.1046 6 18V8Z" stroke="#5DADE2" stroke-width="2"/><rect x="6" y="14" width="12" height="6" fill="#5DADE2" opacity="0.5"/><path d="M9 6V4C9 3.44772 9.44772 3 10 3H14C14.5523 3 15 3.44772 15 4V6" stroke="#5DADE2" stroke-width="2"/></svg>
+{%- endmacro -%}
+
+{%- macro icon(name, class = "icon", attrs = "") -%}
+<svg class="{{ class }}" {{ attrs | safe }} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+{%- if name == "menu" -%}<line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="18" y2="18"/>
+{%- elif name == "close" -%}<path d="M18 6 6 18"/><path d="m6 6 12 12"/>
+{%- elif name == "arrow-right" -%}<path d="M5 12h14"/><path d="m12 5 7 7-7 7"/>
+{%- elif name == "arrow-left" -%}<path d="m12 19-7-7 7-7"/><path d="M19 12H5"/>
+{%- elif name == "calendar" -%}<path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/>
+{%- elif name == "clock" -%}<circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>
+{%- elif name == "user" -%}<path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/>
+{%- elif name == "linkedin" -%}<path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/>
+{%- elif name == "mail" -%}<rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>
+{%- endif -%}
+</svg>
+{%- endmacro -%}

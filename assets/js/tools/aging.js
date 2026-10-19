@@ -1,49 +1,22 @@
-// Aging-Tool (Port von apps/aging_demo.py): Eingaben -> Rechnung -> Diagramme und SoH-Zeile.
-// Jede Eingabeaenderung loest wie in Streamlit einen kompletten "Rerun" aus; Slider mit 200 ms Debounce.
+// Aging-Tool (Port von apps/aging_demo.py): Materialien laden, buildAging rechnen, Diagramme und SoH anzeigen.
+import { formatFixed } from '../core/pyformat.js';
 import { buildAging } from '../model/aging.js';
 import { loadMaterial } from '../ui/data.js';
-import { setHeadingText } from '../ui/heading.js';
-import { createChart } from '../ui/plotly.js';
-import { initShell } from '../ui/shell.js';
-import { initSlider } from '../ui/slider.js';
+import { initTool } from '../ui/tool.js';
 
-initShell();
+const soh = document.querySelector('[data-readout="soh"]');
 
-const $ = (selector) => document.querySelector(selector);
-const anode = $('#anode');
-const cathode = $('#cathode');
-const charts = {
-  caps: createChart($('[data-st-chart="caps"]')),
-  tank: createChart($('[data-st-chart="tank"]')),
-  ocv: createChart($('[data-st-chart="ocv"]')),
-};
-const heading = $('[data-st-capacities]');
-
-let run = 0;
-async function rerun() {
-  const id = ++run;
-  const state = {
-    anodeName: anode.value,
-    cathodeName: cathode.value,
-    soc: sliders.soc.value,
-    lampe: sliders.lampe.value,
-    lamne: sliders.lamne.value,
-    lli: sliders.lli.value,
-  };
-  const [an, ca] = await Promise.all([loadMaterial(state.anodeName), loadMaterial(state.cathodeName)]);
-  if (id !== run) return; // neuere Eingabe ueberholt diese Rechnung
-  const result = buildAging({ ...state, anode: an, cathode: ca });
-  setHeadingText(heading, result.heading);
-  charts.caps.update(result.figCaps);
-  charts.tank.update(result.figTank);
-  charts.ocv.update(result.figOcv);
-}
-
-const sliders = Object.fromEntries(['soc', 'lampe', 'lamne', 'lli'].map((name) => [
-  name,
-  initSlider($(`#${name}`).closest('[data-st-slider]'), rerun),
-]));
-anode.addEventListener('change', rerun);
-cathode.addEventListener('change', rerun);
-
-rerun();
+initTool({
+  async compute(s) {
+    const [anode, cathode] = await Promise.all([loadMaterial(s.anode), loadMaterial(s.cathode)]);
+    return buildAging({ anodeName: s.anode, cathodeName: s.cathode, anode, cathode, soc: s.soc, lampe: s.lampe,
+      lamne: s.lamne, lli: s.lli });
+  },
+  render(r, charts) {
+    charts.tank.update(r.figTank);
+    charts.ocv.update(r.figOcv);
+    charts.caps.update(r.figCaps);
+    // gleiche Formatierung wie die SoH-Zeile des Originals (f"{100*soh:.2f}")
+    soh.textContent = `SoH ${formatFixed(100 * r.caps.soh, 2)}%`;
+  },
+});

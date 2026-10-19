@@ -1,63 +1,68 @@
 # chargetanks.com
 
-Statische Seite aus HTML, einer zentralen `assets/css/styles.css` und Vanilla-JavaScript (ES-Module):
-Webseite (Startseite, Blog, Artikel, `/tools/`) und die Tool-Suite unter `/tools/suite/`.
-Kein Framework, kein Build-Schritt, keine Abhängigkeiten, keine Anfragen an fremde Domains.
+Statische Seite: Webseite (Startseite, Blog, Artikel, `/tools/`) und fuenf interaktive Tools unter `/tools/<tool>/`.
+Die Seiten entstehen mit [Eleventy](https://www.11ty.dev/) aus `src/`; im Browser laeuft nur Vanilla-JavaScript
+(ES-Module) ohne Framework, und alle Inhalte kommen von der eigenen Domain.
 
-Herkunft (React-Webseite und Streamlit-Suite), Entscheidungen, Abweichungen und mitportierte Eigenheiten:
-[MIGRATION.md](MIGRATION.md). Migrationsskripte, Tests und Messdaten wurden nach Abschluss entfernt; sie
-liegen in der Git-Historie (letzter Stand: Commit `1a07547`).
+Herkunft (React-Webseite und Streamlit-Suite) und die Entscheidungen des Umzugs: [MIGRATION.md](MIGRATION.md).
 
 ## Lokal ansehen
 
-Jeder statische Server im Repository-Wurzelverzeichnis, zum Beispiel:
-
 ```bash
-python -m http.server 8000
+npm install
+npm run serve      # baut nach _site/ und startet einen Server mit Live-Reload (http://localhost:8080/)
+npm run build      # nur bauen
+npm test           # Regressionspruefung der Tools und Pruefung der gebauten Seite (_site/)
+node tests/e2e/tools.mjs   # nach dem Build: alle Pruefzustaende der Tools im Browser (braucht Chrome)
 ```
-
-Dann <http://localhost:8000/> öffnen; die Tools liegen unter <http://localhost:8000/tools/suite/>.
-Einfache Server liefern unbekannte Pfade nicht als `404.html` aus und kennen die Weiterleitung aus
-`_redirects` nicht; das genaue Netlify-Verhalten zeigt `netlify dev` (Netlify CLI).
-Die Seiten nicht direkt als Datei (`file://`) öffnen – sie nutzen absolute Pfade (`/assets/...`) und ES-Module.
 
 ## Deployment (Netlify)
 
 Einstellungen stehen in `netlify.toml`:
 
-- Publish-Verzeichnis: Repository-Wurzel (`.`)
-- kein Build-Schritt
-- `_redirects` (unbekannte `/tools/*`-Pfade → `/tools/suite/`) und `_headers` (Sicherheits-Header) liegen in
-  der Wurzel; `404.html` liefert Netlify für unbekannte Pfade automatisch mit Status 404.
+- Build: `npm run build && npm test`, Publish-Verzeichnis `_site/`
+- `_redirects` (`/tools/suite/` → `/tools/`, unbekannte `/tools/*`-Pfade → `/tools/`) und `_headers`
+  (Sicherheits-Header, Cache fuer `/assets/vendor/*`) werden mitkopiert; `404.html` liefert Netlify fuer
+  unbekannte Pfade automatisch mit Status 404.
 
-Andere Hoster: den Inhalt des Repositorys als statische Dateien ausliefern und Weiterleitung und Header
-aus `_redirects` und `_headers` übertragen.
+Andere Hoster: `npm run build` ausfuehren, `_site/` als statische Dateien ausliefern und Weiterleitungen und
+Header aus `_redirects` und `_headers` uebertragen.
 
-## Inhalte ändern
+## Inhalte aendern
 
-- Texte stehen direkt im HTML der jeweiligen Seite (`index.html`, `blog/…`, `tools/…`).
-- Neuer Blogartikel: `blog/two-tank-battery-model/index.html` in einen neuen Ordner `blog/<slug>/` kopieren,
-  Kopf (Titel, Beschreibung, Canonical, Open-Graph-/Twitter-Tags, JSON-LD) und Artikeltext ersetzen, Karten
-  auf Startseite, `/blog/` und `/tools/` („Continue Reading“) ergänzen, `sitemap.xml` und `llms.txt` pflegen.
-  Datumsangaben als `<time datetime="JJJJ-MM-TT" data-ct-date="short|long">` – das Format setzt
-  `assets/js/site/site.js` zur Laufzeit.
-- Stile: `assets/css/styles.css` – Teil A Theme-Variablen, Teil B Tool-Suite (`st-*`), Teil C Webseite
-  (`ct-*`, aus dem Tailwind-Build des Originals übernommen).
+- Seiten: `src/` (Nunjucks-Vorlagen `.njk`, Texte als Markdown `.md`). Kopf und Fuss stehen einmal in
+  `src/_includes/partials/`, das Grundgeruest mit Meta-Tags und JSON-LD in `src/_includes/layouts/base.njk`.
+- Neuer Blogartikel: eine Markdown-Datei in `src/blog/posts/<slug>.md` mit Front Matter wie im vorhandenen
+  Artikel (Titel, Datum, Beschreibung, Vorschaubild, Kategorie, Lesezeit, TL;DR, Definition). Startseite,
+  `/blog/`, Sitemap und `llms.txt` uebernehmen ihn automatisch.
+- Die fuenf Tools (Name, Kurztext, Beschreibung, Vorschaubilder): `src/_data/tools.json`. Eine Tool-Seite ist
+  `src/tools/<tool>.md`: Regler und Diagramme im Front Matter, darunter der Erklaertext als Markdown.
+  Die Verdrahtung steht in `assets/js/tools/<tool>.js` (Material laden, Modell rechnen, Diagramme zeigen).
+- „Try this“ auf den Tool-Seiten: `tryThis` (URL-Parameter, Beschriftung, Satz) und `readMore` im Front Matter.
+  Zahlen in den Saetzen am Modell nachrechnen, wenn sich etwas aendert.
+- Live-Tank auf der Startseite: `assets/js/site/heroTank.js` mit dem Standbild `assets/img/hero-tank.jpg`.
+- Zustand der Tools in der URL, z. B. `/tools/aging/?anode=graphite&cathode=nmc&lli=0.2`
+  (Parameter = Namen der Regler, Materialien als Slug wie in `assets/data/materials/`).
+- Stile: `assets/css/site.css`.
 - Rechenlogik der Tools: `assets/js/model/` und `assets/js/core/` (ohne DOM). Sie ist bitgleich zum
-  Python-Original geprüft; bei Änderungen dort die Tests aus der Git-Historie wiederherstellen
-  (`git checkout 1a07547 -- tests package.json`, dann `node --test "tests/**/*.test.js"`).
+  Python-Original geprueft; `npm test` vergleicht sie mit `tests/regression/reference.json`. Die Referenz nur
+  nach einer bewussten, begruendeten Aenderung der Rechnung neu erzeugen (`node tests/regression/make-reference.js`).
 
 ## Aufbau
 
 | Pfad | Inhalt |
 |---|---|
-| `index.html`, `blog/`, `tools/index.html`, `404.html` | Webseite |
-| `tools/suite/`, `tools/<tool>/` | Tool-Suite: Landing und Materials, Cell Reconstruction, Blending, Aging, Swelling |
-| `assets/css/styles.css` | alle Stile |
-| `assets/js/site/` | Verhalten der Webseite (Menü, Datum, Scrollen, 404) |
+| `src/` | Seiten, Vorlagen (`_includes/`) und Daten (`_data/`) fuer Eleventy; Tool-Seiten in `src/tools/` |
+| `assets/css/site.css` | alle Stile |
+| `assets/js/site/` | Verhalten der Webseite (Mobilmenue) |
 | `assets/js/core/` | Nachbau von numpy/scipy/pandas und Python-Zahlenformat (ohne DOM) |
 | `assets/js/model/` | Rechenlogik der Tools (ohne DOM) |
-| `assets/js/ui/`, `assets/js/tools/` | Bedienelemente und Verdrahtung je Tool |
-| `assets/vendor/`, `assets/fonts/`, `assets/data/`, `assets/img/` | plotly.js 3.0.1, Schriften, Materialdaten, Vorschaubilder (mit Herkunft und Lizenzen) |
-| `images/`, `favicon.svg`, `site.webmanifest`, `robots.txt`, `sitemap.xml`, `llms.txt` | Bilder und Dateien der Webseite |
-| `_redirects`, `_headers`, `netlify.toml` | Netlify |
+| `assets/js/ui/` | Ablauf der Tool-Seiten, Regler, URL-Zustand, Diagramm-Darstellung (plotly.js) |
+| `assets/js/tools/` | Verdrahtung je Tool |
+| `assets/data/`, `assets/img/tools/` | Materialdaten, Vorschau- und OG-Bilder der Tools |
+| `images/`, `favicon.svg`, `site.webmanifest`, `robots.txt` | Bilder und Dateien der Webseite |
+| `config/` | Hilfsfunktionen fuer den Build (JSON-LD) |
+| `tests/regression/` | Regressionspruefung der Rechnung (Fingerabdruecke, `reference.json`) |
+| `tests/site/` | Pruefung der gebauten Seite |
+| `tests/e2e/tools.mjs` | Browser-Pruefung der Tool-Seiten (lokal mit Chrome, `node tests/e2e/tools.mjs`) |
+| `eleventy.config.js`, `_redirects`, `_headers`, `netlify.toml` | Build und Netlify |

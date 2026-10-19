@@ -1,0 +1,17 @@
+{#- Die fuenf Tools als Karten; Ueberschriftsebene per "cardHeading" (Standard h3) -#}
+{%- from "partials/icons.njk" import icon -%}
+{%- set heading = cardHeading or "h3" -%}
+<ul class="tool-grid">
+  {%- for tool in tools %}
+  <li class="card">
+    <a href="/tools/{{ tool.slug }}/">
+      <div class="card__media"><img src="{{ tool.image }}" alt="" loading="lazy" decoding="async"></div>
+      <div class="card__body">
+        <{{ heading }} class="card__title">{{ tool.name }}</{{ heading }}>
+        <p class="card__text">{{ tool.teaser }}</p>
+        <span class="more">Open tool {{ icon("arrow-right") }}</span>
+      </div>
+    </a>
+  </li>
+  {%- endfor %}
+</ul>
