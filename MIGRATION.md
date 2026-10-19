@@ -1,5 +1,11 @@
 # MIGRATION.md – chargetanks.com → statische Seite (1:1-Umzug)
 
+> **Stand nach dem Relaunch (Oktober 2026):** Dieses Dokument beschreibt den 1:1-Umzug und bleibt als Historie.
+> Seitdem ist die Seite umgebaut (Branch `relaunch`): Eleventy-Build aus `src/`, ein Stylesheet `assets/css/site.css`,
+> die Tools im Seitenrahmen ohne Streamlit-Nachbau, `/tools/suite/` entfaellt. Behoben wurden B1, B2, B6, B7, B8,
+> B14 und B16 sowie der neu gefundene B18 (Shapes/Labels ohne Position); B3 und B12 bleiben bewusst. Der Rechenkern
+> (`assets/js/core/`, `assets/js/model/`, `assets/data/`) ist unveraendert. Aktueller Aufbau: [README.md](README.md).
+
 Dieses Dokument ist die Arbeitsgrundlage des Umzugs. Eine neue Session kann allein damit weiterarbeiten.
 
 - **Auftrag:** Webseite und Tools 1:1 in ein self-contained Repo umziehen, bestehend aus HTML, einer `assets/css/styles.css` und Vanilla-JS, ohne Build-Schritt und ohne fremde Domains beim Laden.

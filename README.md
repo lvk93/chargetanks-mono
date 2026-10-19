@@ -13,6 +13,7 @@ npm install
 npm run serve      # baut nach _site/ und startet einen Server mit Live-Reload (http://localhost:8080/)
 npm run build      # nur bauen
 npm test           # Regressionspruefung der Tools und Pruefung der gebauten Seite (_site/)
+node tests/e2e/tools.mjs   # nach dem Build: alle Pruefzustaende der Tools im Browser (braucht Chrome)
 ```
 
 ## Deployment (Netlify)
@@ -37,6 +38,9 @@ Header aus `_redirects` und `_headers` uebertragen.
 - Die fuenf Tools (Name, Kurztext, Beschreibung, Vorschaubilder): `src/_data/tools.json`. Eine Tool-Seite ist
   `src/tools/<tool>.md`: Regler und Diagramme im Front Matter, darunter der Erklaertext als Markdown.
   Die Verdrahtung steht in `assets/js/tools/<tool>.js` (Material laden, Modell rechnen, Diagramme zeigen).
+- „Try this“ auf den Tool-Seiten: `tryThis` (URL-Parameter, Beschriftung, Satz) und `readMore` im Front Matter.
+  Zahlen in den Saetzen am Modell nachrechnen, wenn sich etwas aendert.
+- Live-Tank auf der Startseite: `assets/js/site/heroTank.js` mit dem Standbild `assets/img/hero-tank.jpg`.
 - Zustand der Tools in der URL, z. B. `/tools/aging/?anode=graphite&cathode=nmc&lli=0.2`
   (Parameter = Namen der Regler, Materialien als Slug wie in `assets/data/materials/`).
 - Stile: `assets/css/site.css`.
