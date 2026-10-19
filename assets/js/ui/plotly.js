@@ -7,6 +7,19 @@ import { FULLSCREEN_BUTTON, FULLSCREEN_EXIT_BUTTON, PLOTLY_TEMPLATE, STREAMLIT_C
 
 const MIN_WIDTH = 150;
 const DEFAULT_PLOTLY_HEIGHT = 450;
+// Schrift der Webseite statt "open sans" (Original ohne Fallback -> Serifenschrift, B6)
+const FONT_FAMILY = 'ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"';
+
+// Kopie mit FONT_FAMILY an jeder Schriftangabe (Template und Figure-Layout); Arrays bleiben unangetastet.
+function withFontFamily(value) {
+  if (Array.isArray(value)) return value.map(withFontFamily);
+  if (value === null || typeof value !== 'object' || ArrayBuffer.isView(value)) return value;
+  const out = {};
+  for (const [key, v] of Object.entries(value)) out[key] = key === 'family' ? FONT_FAMILY : withFontFamily(v);
+  return out;
+}
+
+const TEMPLATES = { streamlit: withFontFamily(STREAMLIT_TEMPLATE), plotly: withFontFamily(PLOTLY_TEMPLATE) };
 
 let openChart = null; // hoechstens ein Diagramm im Vollbild
 
@@ -47,8 +60,8 @@ export function createChart(container) {
     const { width, height } = size();
     lastWidth = width;
     // Standard ist Streamlits Template; template="plotly" in der Figure (Blending) -> gemessenes Plotly-Template
-    const template = json.layout.template === 'plotly' ? PLOTLY_TEMPLATE : STREAMLIT_TEMPLATE;
-    const layout = { ...json.layout, template, width, height };
+    const template = json.layout.template === 'plotly' ? TEMPLATES.plotly : TEMPLATES.streamlit;
+    const layout = { ...withFontFamily(json.layout), template, width, height };
     window.Plotly.react(container, json.data, layout, config());
   }
 

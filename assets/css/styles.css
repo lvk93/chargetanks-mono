@@ -40,9 +40,9 @@
   --st-link-button-bg: rgb(0, 66, 128);
   --st-code-bg: rgb(26, 55, 83);
 
-  /* Schriften: "open sans" ist im Original ohne Fallback gesetzt und wird nicht geladen (B6) -
-     es greift die Standardschrift des Browsers. Bewusst 1:1 uebernommen. */
-  --st-font: "open sans";
+  /* Schriften: Systemschrift wie auf der Webseite. Das Original setzte "open sans" ohne Fallback
+     und ohne die Schrift zu laden (B6), wodurch die Serifenschrift des Browsers erschien. */
+  --st-font: ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
   --st-code-font: "Source Code Pro", monospace;
   --st-icon-font: "Material Symbols Rounded";
 

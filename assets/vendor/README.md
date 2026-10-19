@@ -2,6 +2,7 @@
 
 | Datei | Herkunft | Version | Lizenz | sha256 |
 |---|---|---|---|---|
-| `plotly-3.0.1.min.js` | npm `plotly.js-dist-min@3.0.1` (sha512-RReOqr6TfoHaTbVAoHR1UbTCOSRDsQ7Hbthd+3XAxOwaKmxCE3oejMhLG7urQSqWC65DAcSKV23kZd8e+7mG7w==) | 3.0.1 (= Streamlit 1.47.0) | MIT, siehe `LICENSE-plotly.js.txt` | `a32e817bb121e9e89016ce4cee85ee3f1c66f6a6c95c4b53a5f488f77756d7a4` |
+| `plotly-basic-3.0.1.min.js` | npm `plotly.js-basic-dist-min@3.0.1` (sha512-2DNfjn0Xv+IAk6ksaIm8AHSlKCxWQOx9f3v5JGvzFKPwEbJRsLIy4Up0cOPqO53kL4jrdw8LnUTrM9FAzvKMsQ==) | 3.0.1 (wie Streamlit 1.47.0 im Original) | MIT, siehe `LICENSE-plotly.js.txt` | `9750237b42d97af386c25ad644d858ac5b7735dd65e8583e32c9234d551db7f4` |
 
-Erzeugt mit `node migration/fetch_vendor.mjs` (Git-Historie bis Commit 1a07547).
+Das Basis-Bundle enthaelt die Trace-Typen `scatter`, `bar` und `pie`; die Tools nutzen nur `scatter` und `bar`.
+Der Dateiname traegt die Version, damit `_headers` die Datei unbegrenzt cachen lassen kann.

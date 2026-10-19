@@ -3,3 +3,7 @@
   X-Frame-Options: DENY
   Referrer-Policy: strict-origin-when-cross-origin
   Permissions-Policy: camera=(), geolocation=(), microphone=()
+
+# Fremdbibliotheken tragen die Version im Dateinamen und aendern sich nie
+/assets/vendor/*
+  Cache-Control: public, max-age=31536000, immutable
