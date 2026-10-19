@@ -52,6 +52,8 @@ That also explains why voltage changes with state of charge. As soon as lithium 
 
 This operating range is usually called the voltage window.
 
+**Try it:** move the SoC slider in the [Cell Reconstruction tool](/tools/cell-reconstruction/?anode=graphite&cathode=nmc&vmin=2.8&vmax=4.2&np=1.1&lip=0.95) and watch the height difference ΔV change with the fill levels.
+
 ![Cell voltage as the height difference between the two tanks](/images/introduction_post/2026-03-03_twotank_voltage.png)
 
 ## What is cell capacity in the two-tank model?
@@ -62,6 +64,8 @@ That is why capacity is not a universal battery constant. It depends on the volt
 
 In the tank picture, the relevant question is not "How much water exists?" but "How much water can move before one of the voltage limits is reached?"
 
+**Try it:** charge a [graphite/NMC cell to 4.2 V](/tools/cell-reconstruction/?anode=graphite&cathode=nmc&soc=1&vmin=2.8&vmax=4.2&np=1.1&lip=0.95), then lower the upper limit to 4.0 V: the lithium in the anode drops from 0.94 Ah to 0.72 Ah.
+
 ![Voltage limits in the tank analogy](/images/introduction_post/2026-03-03_twotank_voltage_limits.png)
 
 ## What is NP ratio in batteries?
@@ -69,6 +73,8 @@ In the tank picture, the relevant question is not "How much water exists?" but "
 The NP ratio compares anode capacity with cathode capacity. It is a design check for whether the anode is large enough to accept the lithium that arrives during charge.
 
 In the two-tank model, this becomes geometric. If the anode reservoir is too small, the lithium level rises to the top too early. A ratio slightly above 1 gives the anode some headroom instead of designing it exactly at the edge.
+
+**Try it:** set the [NP ratio to 0.9](/tools/cell-reconstruction/?anode=graphite&cathode=nmc&soc=1&vmin=2.8&vmax=4.2&np=0.9&lip=0.95) and see how little headroom the anode tank has left at full charge.
 
 ![NP ratio in the tank analogy](/images/introduction_post/2026-03-03_twotank_npratio.png)
 
@@ -90,6 +96,8 @@ Not every loss mode hurts the cell in the same way. The practical cell capacity 
 
 This is one reason aging interpretation can be misleading when people only look at a single capacity number without asking which physical quantity became limiting.
 
+**Try it:** in the [Aging tool](/tools/aging/?anode=graphite&cathode=nmc&lamne=0.1), 10 % anode loss barely moves the state of health (98.84 %), while [20 % lithium loss](/tools/aging/?anode=graphite&cathode=nmc&lli=0.2) costs about a fifth of the capacity (79.79 %).
+
 ![Aging modes in the tank analogy](/images/introduction_post/2026-03-03_twotank_aging.png)
 
 ## How do blended materials behave?
@@ -98,6 +106,8 @@ The same picture also helps with blended active materials such as graphite plus 
 
 Once you know the tank shape of each material, you can see when one material contributes more strongly than the other and how the balance shifts across the operating range.
 
+**Try it:** the [Blending tool](/tools/blending/) mixes graphite and silicon; change the graphite fraction q% and watch both materials settle at the same voltage.
+
 ![Blended electrode materials in the tank analogy](/images/introduction_post/2026-03-03_twotank_blends.png)
 
 ## What does dQ/dV mean in the two-tank model?
@@ -105,6 +115,8 @@ Once you know the tank shape of each material, you can see when one material con
 The dQ/dV curve can be interpreted as the local cross-sectional area of the tank. Wide tank sections correspond to voltage plateaus because a large amount of lithium moves with only a small voltage change. Narrow sections correspond to steep voltage regions because small lithium movements change the voltage more strongly.
 
 This is the point where the analogy stops being a loose metaphor and becomes a compact way to visualize a real electrochemical relationship.
+
+**Try it:** in the [Materials tool](/tools/materials/?material=nca&sol=0.6), compare the width of the NCA tank with the slope of its voltage curve.
 
 ![Graphite dQ/dV curve as the shape of a tank](/images/introduction_post/2026-03-03_graphite_dqdv.png)
 

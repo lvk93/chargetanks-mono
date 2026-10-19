@@ -17,6 +17,12 @@ controls:
       - { type: slider, name: lampe, label: Cathode LAM (lampe), min: 0, max: 0.5, step: 0.01, value: 0 }
       - { type: slider, name: lamne, label: Anode LAM (lamne), min: 0, max: 0.5, step: 0.01, value: 0 }
       - { type: slider, name: lli, label: LLI (lithium loss), min: 0, max: 0.5, step: 0.01, value: 0 }
+tryThis:
+  - { query: "anode=graphite&cathode=nmc&lli=0.2", label: "Graphite/NMC with 20 % lithium loss:", text: "SoH drops to 79.79 %." }
+  - { query: "anode=graphite&cathode=nmc&lamne=0.1", label: "10 % anode loss:", text: "SoH only drops to 98.84 %, because the anode has headroom (NP ratio 1.1)." }
+  - { query: "anode=graphite&cathode=nmc&lamne=0.3", label: "30 % anode loss:", text: "now the anode costs capacity, SoH falls to 83.66 %." }
+  - { query: "anode=graphite&cathode=nmc&lampe=0.2", label: "20 % cathode loss:", text: "SoH falls to 84.41 %." }
+readMore: { url: "/blog/two-tank-battery-model/#how-do-aging-modes-change-usable-capacity", title: "How do aging modes change usable capacity?" }
 charts:
   - { id: tank, title: Electrode dQ/dV tanks }
   - { id: ocv, title: Voltage vs. SoC }

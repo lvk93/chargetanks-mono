@@ -583,9 +583,7 @@ a:hover .card__title {
   gap: 3rem;
 }
 
-.hero__text {
-  order: 2;
-}
+
 
 .hero__text > * + * {
   margin-top: 1.5rem;
@@ -617,32 +615,11 @@ a:hover .card__title {
 
 .hero__visual {
   position: relative;
-  order: 1;
 }
 
 @media (min-width: 768px) {
   .hero__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .hero__text { order: 1; }
-  .hero__visual { order: 2; }
   .hero__title { font-size: 3.75rem; line-height: 1; }
-}
-
-.core-card {
-  position: relative;
-  z-index: 1;
-  border: 1px solid var(--border);
-  border-radius: 1rem;
-  background: #fff;
-  padding: 2rem;
-  box-shadow: var(--shadow-xl);
-}
-
-.core-card__title {
-  margin-bottom: 2rem;
-  font-size: 1.125rem;
-  line-height: 1.75rem;
-  font-weight: 600;
-  color: var(--navy);
 }
 
 .core-list {
@@ -1461,4 +1438,107 @@ body.has-fullscreen-chart {
 
 .tool-explainer .prose > :first-child {
   margin-top: 0;
+}
+
+.try-this {
+  margin-bottom: 2.5rem;
+  border: 1px solid var(--border-strong);
+  border-radius: 1rem;
+  background-image: var(--tint-blue);
+  padding: 1.5rem;
+}
+
+.try-this h2 {
+  margin-bottom: 0.75rem;
+  font-size: 1.5rem;
+  line-height: 2rem;
+  font-weight: 700;
+  color: var(--navy);
+}
+
+.try-this ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.try-this li + li {
+  margin-top: 0.5rem;
+}
+
+.try-this a {
+  font-weight: 600;
+  color: var(--navy);
+  text-decoration: underline;
+  text-decoration-color: var(--blue);
+}
+
+.try-this a:hover {
+  color: var(--blue);
+}
+
+.try-this__more {
+  margin-top: 1rem;
+}
+
+/* Startseite: Live-Tank im Hero (assets/js/site/heroTank.js) */
+.hero-tank {
+  position: relative;
+  z-index: 1;
+  border-radius: 1rem;
+  background: var(--navy);
+  color: #fff;
+  color-scheme: dark;
+  padding: 1.5rem;
+  box-shadow: var(--shadow-xl);
+}
+
+.hero-tank__title {
+  margin-bottom: 0.75rem;
+  font-size: 1.125rem;
+  line-height: 1.75rem;
+  font-weight: 600;
+}
+
+.hero-tank__chart {
+  position: relative;
+  height: 340px;
+}
+
+.hero-tank__still {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 0.5rem;
+}
+
+.hero-tank__plot-inner {
+  height: 340px;
+}
+
+.hero-tank.is-live .hero-tank__still {
+  display: none;
+}
+
+.hero-tank__control {
+  margin: 1rem 0 1.25rem;
+}
+
+.hero-tank .slider:disabled {
+  cursor: progress;
+  opacity: 0.6;
+}
+
+.hero-tank .core-list p {
+  color: rgb(255 255 255 / 0.8);
+}
+
+.hero-tank .core-list .core-list__name {
+  color: #fff;
+}
+
+.hero-tank__link {
+  margin-top: 1.25rem;
 }

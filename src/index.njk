@@ -20,8 +20,19 @@ mainClass: ""
       </div>
     </div>
     <div class="hero__visual">
-      <div class="core-card">
-        <h2 class="core-card__title">The Core Idea</h2>
+      <div class="hero-tank" data-hero-tank data-plotly="{{ plotlyScript }}">
+        <h2 class="hero-tank__title">The Core Idea</h2>
+        <div class="hero-tank__chart">
+          <img class="hero-tank__still" src="/assets/img/hero-tank.jpg" alt="Anode and cathode tank of a graphite/NMC cell at 50 % state of charge" width="1050" height="680">
+          <div class="hero-tank__plot" data-chart-frame><div class="hero-tank__plot-inner" data-chart-plot></div></div>
+        </div>
+        <form class="hero-tank__control" aria-label="Tank settings">
+          <div class="control__head">
+            <label for="hero-soc">State of charge (graphite/NMC cell)</label>
+            <output for="hero-soc">0.50</output>
+          </div>
+          <input class="slider" type="range" id="hero-soc" name="soc" min="0" max="1" step="0.01" value="0.5" data-decimals="2" autocomplete="off" disabled>
+        </form>
         <ul class="core-list">
           <li>
             <span class="dot dot--anode"></span>
@@ -45,6 +56,7 @@ mainClass: ""
             </div>
           </li>
         </ul>
+        <a class="more hero-tank__link" href="/tools/cell-reconstruction/" data-hero-link>Open in Cell Reconstruction {{ icon("arrow-right") }}</a>
       </div>
       <div class="hero__glow hero__glow--br"></div>
       <div class="hero__glow hero__glow--tl"></div>
@@ -95,3 +107,4 @@ mainClass: ""
     </div>
   </div>
 </section>
+<script type="module" src="/assets/js/site/heroTank.js"></script>

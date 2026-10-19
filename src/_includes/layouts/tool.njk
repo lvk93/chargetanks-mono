@@ -59,8 +59,23 @@ mainClass: tool-main
 </section>
 
 <section class="tool-explainer">
-  <div class="container container--article prose">
+  <div class="container container--article">
+    {%- if tryThis %}
+    <aside class="try-this" aria-labelledby="try-this-title">
+      <h2 id="try-this-title">Try this</h2>
+      <ul>
+        {%- for t in tryThis %}
+        <li><a href="/tools/{{ toolSlug }}/?{{ t.query }}">{{ t.label }}</a> {{ t.text }}</li>
+        {%- endfor %}
+      </ul>
+      {%- if readMore %}
+      <p class="try-this__more">Background: <a href="{{ readMore.url }}">{{ readMore.title }}</a></p>
+      {%- endif %}
+    </aside>
+    {%- endif %}
+    <div class="prose">
 {{ content | safe }}
+    </div>
   </div>
 </section>
 <script src="{{ plotlyScript }}" defer></script>

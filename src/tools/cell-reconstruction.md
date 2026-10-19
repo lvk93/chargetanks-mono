@@ -20,6 +20,11 @@ controls:
     items:
       - { type: slider, name: np, label: NP Ratio, min: 0.8, max: 1.5, step: 0.01, value: 1 }
       - { type: slider, name: lip, label: LiP Ratio, min: 0.5, max: 1.5, step: 0.01, value: 1 }
+tryThis:
+  - { query: "anode=graphite&cathode=nmc&soc=1&vmin=2.8&vmax=4.2&np=1.1&lip=0.95", label: "Graphite/NMC at 100 % SoC:", text: "at 4.2 V the cathode tank is almost empty (Q_cath = 0.01 Ah)." }
+  - { query: "anode=graphite&cathode=nmc&soc=1&vmin=2.8&vmax=4&np=1.1&lip=0.95", label: "Upper limit 4.0 V instead of 4.2 V:", text: "only 0.72 Ah instead of 0.94 Ah reach the anode. Capacity depends on the voltage window." }
+  - { query: "anode=graphite&cathode=nmc&soc=1&vmin=2.8&vmax=4.2&np=0.9&lip=0.95", label: "NP ratio 0.9:", text: "the anode is smaller than the cathode and is almost full at 100 % SoC." }
+readMore: { url: "/blog/two-tank-battery-model/#what-is-cell-capacity-in-the-two-tank-model", title: "What is cell capacity in the two-tank model?" }
 charts:
   - { id: dqdv, title: Electrode dQ/dV tanks }
   - { id: voltage, title: Voltage vs. SoC }

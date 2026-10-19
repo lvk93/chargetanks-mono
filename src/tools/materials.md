@@ -11,6 +11,10 @@ controls:
     items:
       - { type: select, name: material, label: Material, options: all, value: Ideal Anode, primary: true }
       - { type: slider, name: sol, label: SoL, min: 0, max: 1, step: 0.01, value: 0.5, primary: true }
+tryThis:
+  - { query: "material=nca&sol=0.6", label: "NCA at SoL 0.6:", text: "a real cathode. Where the tank is wide, the voltage curve is flat." }
+  - { query: "sol=0.2", label: "Ideal anode at SoL 0.2:", text: "a tank of constant width, so the voltage changes linearly with the fill level." }
+readMore: { url: "/blog/two-tank-battery-model/#what-does-dqdv-mean-in-the-two-tank-model", title: "What does dQ/dV mean in the two-tank model?" }
 charts:
   - { id: dqdv, title: Electrode dQ/dV tank }
   - { id: voltage, title: Voltage vs. SoL }
