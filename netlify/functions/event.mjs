@@ -37,35 +37,20 @@ export default async function handler(request) {
   const row = raw.length <= MAX_BODY && !/bot|crawl|spider|headless/i.test(agent) ? toRow(raw) : null;
   const url = process.env.SUPABASE_URL;
   const key = process.env.SUPABASE_ANON_KEY;
-  // Diagnose (voruebergehend): Ergebnis des Speicherns als Header, ohne Inhalte
-  let store = !row ? 'skipped' : !url || !key ? `no-config(url:${Boolean(url)},key:${Boolean(key)})` : 'pending';
-  if (store === 'pending') {
+  if (row && url && key) {
     try {
       const response = await fetch(`${url.replace(/\/$/, '')}/rest/v1/event_logs`, {
         method: 'POST',
         headers: { apikey: key, 'Content-Type': 'application/json', Prefer: 'return=minimal' },
         body: JSON.stringify(row),
       });
-      store = String(response.status);
-      if (!response.ok) {
-        const detail = await response.text();
-        console.error('event_logs insert failed', response.status, detail);
-        store += ` ${(JSON.parse(detail || '{}').code ?? '')}`.trimEnd();
-      }
+      if (!response.ok) console.error('event_logs insert failed', response.status, await response.text());
     } catch (error) {
       console.error('event_logs insert failed', error);
-      store = `error ${error?.cause?.code ?? error?.name ?? ''}`.trim();
     }
   }
-  // ohne Inhalt antworten: der Browser braucht keine Rueckmeldung
-  let shape = 'none';
-  try {
-    const u = new URL(url);
-    shape = `${u.protocol}//*${u.hostname.endsWith('.supabase.co') ? '.supabase.co' : `(${u.hostname.split('.').slice(-2).join('.')})`}${u.pathname}`;
-  } catch {
-    shape = url ? 'invalid' : 'none';
-  }
-  return new Response(null, { status: 204, headers: { 'x-event-store': store, 'x-event-url-shape': shape } });
+  // immer ohne Inhalt antworten: der Browser braucht keine Rueckmeldung
+  return new Response(null, { status: 204 });
 }
 
 export const config = { path: '/api/event' };
