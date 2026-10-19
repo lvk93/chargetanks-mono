@@ -1,0 +1,23 @@
+---
+permalink: /llms.txt
+eleventyExcludeFromCollections: true
+---
+# {{ site.name }}
+
+{{ site.name }} is a technical battery education site focused on voltage, capacity, OCV, NP ratio, lithium inventory, and aging through the two-tank analogy.
+
+Preferred starting pages:
+- {{ site.url }}/ - Site overview and navigation hub.
+- {{ site.url }}/blog/ - Index of battery articles.
+{%- for post in collections.postsNewestFirst %}
+- {{ site.url }}{{ post.url }} - {{ post.data.llms or post.data.description }}
+{%- endfor %}
+- {{ site.url }}/tools/ - Interactive battery tools that complement the written explanations.
+
+Interactive tools:
+{%- for tool in tools %}
+- {{ site.url }}/tools/{{ tool.slug }}/ - {{ tool.name }}: {{ tool.teaser }}
+{%- endfor %}
+
+Primary author:
+- {{ site.author }} - {{ site.linkedin }}

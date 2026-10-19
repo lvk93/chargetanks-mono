@@ -1,0 +1,20 @@
+{%- from "partials/icons.njk" import icon, logo -%}
+{%- macro navLinks(items, current) -%}
+{%- for item in items -%}
+<a href="{{ item[1] }}"{% if current == item[1] %} class="is-active" aria-current="page"{% elif item[1] != "/#about" and current.startsWith(item[1]) %} class="is-active"{% endif %}>{{ item[0] }}</a>
+{%- endfor -%}
+{%- endmacro -%}
+{%- set navItems = [["Tools", "/tools/"], ["Blog", "/blog/"], ["About", "/#about"]] -%}
+<header class="site-header">
+  <div class="container site-header__bar">
+    <a class="brand" href="/" aria-label="Charge Tanks home">{{ logo("brand__logo") }}<span class="brand__name">Charge Tanks</span></a>
+    <nav class="site-nav" aria-label="Primary">{{ navLinks(navItems, page.url) }}</nav>
+    <button type="button" class="menu-button" data-menu-button aria-expanded="false" aria-controls="mobile-menu" aria-label="Open navigation menu">
+      {{- icon("menu", "icon icon--24", 'data-icon="menu"') -}}
+      {{- icon("close", "icon icon--24", 'data-icon="close" hidden') -}}
+    </button>
+  </div>
+  <div class="mobile-menu" id="mobile-menu" data-menu hidden>
+    <nav aria-label="Mobile">{{ navLinks(navItems, page.url) }}</nav>
+  </div>
+</header>

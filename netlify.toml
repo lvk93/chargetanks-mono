@@ -1,5 +1,8 @@
-# Netlify: statische Seite ohne Build-Schritt; Publish-Verzeichnis ist die Repository-Wurzel.
-# Die Angaben hier gelten vor denen in der Netlify-Oberflaeche (dort evtl. noch "npm run build" vom alten Repo).
+# Netlify: Eleventy baut die Seite nach _site/; danach laufen Regressions- und Seitenpruefung.
+# Die Angaben hier gelten vor denen in der Netlify-Oberflaeche.
 [build]
-  publish = "."
-  command = "echo Kein Build-Schritt"
+  command = "npm run build && npm test"
+  publish = "_site"
+
+[build.environment]
+  NODE_VERSION = "22"

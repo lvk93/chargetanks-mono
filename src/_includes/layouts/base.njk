@@ -1,0 +1,47 @@
+{%- set fullTitle = metaTitle or (title + " | " + site.name) -%}
+{%- set ogImg = ogImage or site.ogImage -%}
+{%- set ogAlt = ogImageAlt or site.ogImageAlt -%}
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{ fullTitle }}</title>
+  <meta name="description" content="{{ description }}">
+  <meta name="author" content="{{ site.author }}">
+  <meta name="robots" content="{{ robots or 'index, follow' }}">
+  <meta name="theme-color" content="{{ site.themeColor }}">
+  {%- if not noCanonical %}
+  <link rel="canonical" href="{{ site.url }}{{ page.url }}">
+  {%- endif %}
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="manifest" href="/site.webmanifest">
+  <meta property="og:site_name" content="{{ site.name }}">
+  <meta property="og:type" content="{{ ogType or 'website' }}">
+  <meta property="og:title" content="{{ fullTitle }}">
+  <meta property="og:description" content="{{ description }}">
+  <meta property="og:url" content="{{ site.url }}{{ page.url }}">
+  <meta property="og:image" content="{{ site.url }}{{ ogImg }}">
+  <meta property="og:image:alt" content="{{ ogAlt }}">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="{{ fullTitle }}">
+  <meta name="twitter:description" content="{{ description }}">
+  <meta name="twitter:image" content="{{ site.url }}{{ ogImg }}">
+  <meta name="twitter:image:alt" content="{{ ogAlt }}">
+  {%- if ogType == "article" %}
+  <meta property="article:published_time" content="{{ page.date | isoDateTime }}">
+  <meta property="article:modified_time" content="{{ (modified or page.date) | isoDateTime }}">
+  {%- endif %}
+  <script type="application/ld+json">{{ { type: ldType, url: page.url, metaTitle: fullTitle, title: title, description: description, image: ogImg, date: page.date, modified: modified, section: category, crumbs: crumbs } | structuredData | safe }}</script>
+  <link rel="stylesheet" href="/assets/css/site.css">
+  <script type="module" src="/assets/js/site/site.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  {% include "partials/header.njk" %}
+  <main id="main"{% if mainClass !== "" %} class="{{ mainClass or 'site-main' }}"{% endif %}>
+{{ content | safe }}
+  </main>
+  {% include "partials/footer.njk" %}
+</body>
+</html>

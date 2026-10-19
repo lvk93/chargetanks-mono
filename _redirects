@@ -1,4 +1,7 @@
-# Netlify-Weiterleitungen (statische Seite, siehe MIGRATION.md).
-# Unbekannte Tool-Pfade (frueher an Render weitergeleitet) -> Landing der Tool-Suite.
+# Netlify-Weiterleitungen
+# Die fruehere Landing der Tool-Suite ist in der Tool-Uebersicht aufgegangen.
+/tools/suite    /tools/   301
+/tools/suite/*  /tools/   301
+# Unbekannte Tool-Pfade (frueher an Render weitergeleitet) -> Tool-Uebersicht.
 # Ohne "!": greift nur, wenn unter dem Pfad keine Datei liegt.
-/tools/*       /tools/suite/   302
+/tools/*        /tools/   302
