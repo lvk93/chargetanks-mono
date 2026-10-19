@@ -26,6 +26,37 @@ function initPanel(form) {
   });
 }
 
+// "Copy link": aktuelle URL samt Zustand; "Reset": alle Eingaben auf ihre HTML-Defaults
+function initActions(form, controls) {
+  const status = form.querySelector('[data-controls-status]');
+  let timer = 0;
+  const say = (text) => {
+    status.textContent = text;
+    clearTimeout(timer);
+    timer = setTimeout(() => { status.textContent = ''; }, 2000);
+  };
+  form.querySelector('[data-copy-link]')?.addEventListener('click', async () => {
+    try {
+      await navigator.clipboard.writeText(location.href);
+      say('Link copied');
+    } catch {
+      say('Copy the address from the browser bar');
+    }
+  });
+  form.querySelector('[data-reset]')?.addEventListener('click', () => {
+    for (const input of form.querySelectorAll('input[name]')) {
+      if (input.type === 'checkbox') input.checked = input.defaultChecked;
+      else input.value = input.defaultValue;
+    }
+    for (const select of form.querySelectorAll('select[name]')) {
+      const fallback = [...select.options].find((o) => o.defaultSelected) ?? select.options[0];
+      select.value = fallback.value;
+    }
+    controls.refresh();
+    form.dispatchEvent(new Event('change', { bubbles: true }));
+  });
+}
+
 export function initTool({ compute, render, onInput }) {
   const form = document.querySelector('[data-controls]');
   const charts = Object.fromEntries([...document.querySelectorAll('[data-chart]')]
@@ -56,6 +87,7 @@ export function initTool({ compute, render, onInput }) {
 
   const controls = initControls(form, schedule);
   initPanel(form);
+  initActions(form, controls);
   // schmale Bildschirme: aktiven Tab der Tool-Leiste in den sichtbaren Bereich schieben
   const tab = document.querySelector('.tool-tabs [aria-current="page"]');
   const tabs = tab?.closest('ul');

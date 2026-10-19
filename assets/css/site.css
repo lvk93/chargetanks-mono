@@ -1536,3 +1536,42 @@ body.has-fullscreen-chart {
 .hero-tank__link {
   margin-top: 1.25rem;
 }
+
+/* Regler-Panel: Link kopieren, zuruecksetzen */
+.controls__actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 1rem;
+  border-top: 1px solid rgb(255 255 255 / 0.12);
+  padding-top: 0.875rem;
+}
+
+.controls__action {
+  border: 1px solid rgb(255 255 255 / 0.3);
+  border-radius: 9999px;
+  padding: 0.25rem 0.75rem;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: #fff;
+  transition: border-color 0.15s var(--ease), color 0.15s var(--ease);
+}
+
+.controls__action:hover {
+  border-color: var(--blue);
+  color: var(--blue);
+}
+
+.controls__status {
+  font-size: 0.8125rem;
+  color: var(--blue);
+}
+
+@media (max-width: 1023.98px) {
+  .controls:not(.is-expanded) .controls__actions {
+    margin-top: 0.5rem;
+    border: 0;
+    padding-top: 0;
+  }
+}
