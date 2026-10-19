@@ -40,6 +40,15 @@ const RUNNERS = {
 
 export const TOOLS = Object.keys(RUNNERS);
 
+// Reihenfolge der Figures je Tool (wie in reference.json) als Diagramm-IDs der Tool-Seiten (data-chart)
+export const FIGURE_IDS = {
+  materials: ['dqdv', 'voltage'],
+  'cell-reconstruction': ['dqdv', 'voltage'],
+  blending: ['tanks1', 'tanks2', 'ocv', 'solmap'],
+  aging: ['caps', 'tank', 'ocv'],
+  swelling: ['layers', 'classes', 'compression'],
+};
+
 export async function fingerprintState(tool, state) {
   const { figures, headings = [] } = RUNNERS[tool](state);
   const out = [];

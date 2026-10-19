@@ -14,10 +14,12 @@ eleventyExcludeFromCollections: true
   </url>
 {%- endif %}
 {%- endfor %}
-{#- Uebergang: Die Tool-Seiten sind noch keine Vorlagen -#}
+{#- Uebergang: Tool-Seiten, die noch keine Vorlage sind -#}
 {%- for tool in tools %}
+{%- if not (collections.all | hasUrl("/tools/" + tool.slug + "/")) %}
   <url>
     <loc>{{ site.url }}/tools/{{ tool.slug }}/</loc>
   </url>
+{%- endif %}
 {%- endfor %}
 </urlset>

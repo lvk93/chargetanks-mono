@@ -1,6 +1,9 @@
+{#- Tool-Seiten: Beschreibung und Vorschaubild aus src/_data/tools.json -#}
+{%- set tool = (tools | bySlug(toolSlug)) if toolSlug else null -%}
 {%- set fullTitle = metaTitle or (title + " | " + site.name) -%}
-{%- set ogImg = ogImage or site.ogImage -%}
-{%- set ogAlt = ogImageAlt or site.ogImageAlt -%}
+{%- set description = description or (tool.description if tool else "") -%}
+{%- set ogImg = ogImage or (tool.image if tool else null) or site.ogImage -%}
+{%- set ogAlt = ogImageAlt or (tool.imageAlt if tool else null) or site.ogImageAlt -%}
 <!doctype html>
 <html lang="en">
 <head>

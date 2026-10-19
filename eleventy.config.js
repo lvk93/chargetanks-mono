@@ -55,7 +55,7 @@ export default function (eleventyConfig) {
     eleventyConfig.addPassthroughCopy(file);
   }
   // Uebergang: die Tool-Seiten werden noch unveraendert ausgeliefert
-  for (const tool of ['materials', 'cell-reconstruction', 'blending', 'aging', 'swelling']) {
+  for (const tool of ['materials', 'cell-reconstruction', 'blending', 'swelling']) {
     eleventyConfig.addPassthroughCopy(`tools/${tool}`);
   }
 
@@ -70,6 +70,10 @@ export default function (eleventyConfig) {
   // "<" maskiert, damit kein Text das umgebende <script> beenden kann
   eleventyConfig.addFilter('structuredData', (options) => JSON.stringify(structuredData(options)).replace(/</g, '\\u003c'));
   eleventyConfig.addFilter('head', (items, n) => items.slice(0, n));
+  eleventyConfig.addFilter('fixed', (value, decimals = 2) => Number(value).toFixed(decimals));
+  eleventyConfig.addFilter('hasUrl', (items, url) => items.some((item) => item.url === url));
+  eleventyConfig.addFilter('bySlug', (items, slug) => items.find((item) => item.slug === slug));
+  eleventyConfig.addFilter('hasSecondaryControls', (groups) => groups.some((g) => g.items.some((c) => !c.primary)));
 
   eleventyConfig.addCollection('postsNewestFirst', (api) => api.getFilteredByTag('posts').sort((a, b) => b.date - a.date));
 

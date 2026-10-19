@@ -1,0 +1,67 @@
+---
+layout: layouts/base.njk
+ldType: tool
+mainClass: tool-main
+---
+{#- Tool-Seite: Tool-Leiste, dunkler Arbeitsbereich (Regler + Diagramme), heller Erklaerbereich (Seiteninhalt).
+    Front Matter der Seite: toolSlug, heading, lead, controls (Gruppen mit Reglern), charts. -#}
+{%- from "partials/controls.njk" import slider, select, checkbox -%}
+<nav class="tool-tabs" aria-label="Tools">
+  <div class="container">
+    <ul>
+      {%- for t in tools %}
+      <li><a href="/tools/{{ t.slug }}/"{% if t.slug == toolSlug %} aria-current="page"{% endif %}>{{ t.name }}</a></li>
+      {%- endfor %}
+    </ul>
+  </div>
+</nav>
+
+<section class="workbench" aria-labelledby="tool-title">
+  <div class="container">
+    <header class="workbench__head">
+      <h1 id="tool-title">{{ heading }}</h1>
+      <p>{{ lead }}</p>
+    </header>
+    <div class="workbench__grid">
+      <form class="controls" data-controls aria-label="Settings">
+        <div class="controls__bar">
+          <span class="controls__title">Settings</span>
+          {%- if controls | hasSecondaryControls %}
+          <button type="button" class="controls__toggle" data-controls-toggle aria-expanded="false" aria-controls="controls-body"><span data-controls-toggle-label>More settings</span></button>
+          {%- endif %}
+        </div>
+        <div class="controls__body" id="controls-body">
+          {%- for group in controls %}
+          <fieldset class="control-group">
+            <legend>{{ group.group }}</legend>
+            {%- for c in group.items %}
+            {% if c.type == "slider" %}{{ slider(c) }}{% elif c.type == "select" %}{{ select(c, materials[c.options]) }}{% else %}{{ checkbox(c) }}{% endif %}
+            {%- endfor %}
+          </fieldset>
+          {%- endfor %}
+        </div>
+      </form>
+      <div class="charts charts--{{ toolSlug }}">
+        {%- for chart in charts %}
+        <figure class="chart{% if chart.wide %} chart--wide{% endif %}{% if chart.short %} chart--short{% endif %}" data-chart="{{ chart.id }}">
+          <figcaption class="chart__title">
+            <span>{{ chart.title }}</span>
+            {%- if chart.readout %}
+            <span class="chart__readout" data-readout="{{ chart.readout }}" aria-live="polite"></span>
+            {%- endif %}
+          </figcaption>
+          <div class="chart__frame" data-chart-frame><div class="chart__plot" data-chart-plot></div></div>
+        </figure>
+        {%- endfor %}
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="tool-explainer">
+  <div class="container container--article prose">
+{{ content | safe }}
+  </div>
+</section>
+<script src="{{ plotlyScript }}" defer></script>
+<script type="module" src="/assets/js/tools/{{ toolSlug }}.js"></script>

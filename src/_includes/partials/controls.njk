@@ -1,0 +1,30 @@
+{#- Bedienelemente der Tools; Beschreibung je Element im Front Matter der Tool-Seite (controls) -#}
+{%- macro slider(c) -%}
+{%- set decimals = c.decimals if c.decimals !== undefined else 2 -%}
+<div class="control{% if c.primary %} control--primary{% endif %}" data-control="{{ c.name }}">
+  <div class="control__head">
+    <label for="{{ c.name }}">{{ c.label }}</label>
+    <output for="{{ c.name }}">{{ c.value | fixed(decimals) }}</output>
+  </div>
+  <input class="slider" type="range" id="{{ c.name }}" name="{{ c.name }}" min="{{ c.min }}" max="{{ c.max }}" step="{{ c.step }}" value="{{ c.value }}" data-decimals="{{ decimals }}" autocomplete="off">
+  <div class="control__range" aria-hidden="true"><span>{{ c.min | fixed(decimals) }}</span><span>{{ c.max | fixed(decimals) }}</span></div>
+</div>
+{%- endmacro -%}
+
+{%- macro select(c, options) -%}
+<div class="control{% if c.primary %} control--primary{% endif %}" data-control="{{ c.name }}">
+  <div class="control__head"><label for="{{ c.name }}">{{ c.label }}</label></div>
+  <select class="select" id="{{ c.name }}" name="{{ c.name }}" autocomplete="off">
+    {%- for option in options %}
+    <option value="{{ option.name }}" data-slug="{{ option.slug }}"{% if option.name == c.value %} selected{% endif %}>{{ option.name }}</option>
+    {%- endfor %}
+  </select>
+</div>
+{%- endmacro -%}
+
+{%- macro checkbox(c) -%}
+<div class="control control--checkbox{% if c.primary %} control--primary{% endif %}" data-control="{{ c.name }}">
+  <input type="checkbox" id="{{ c.name }}" name="{{ c.name }}"{% if c.value %} checked{% endif %} autocomplete="off">
+  <label for="{{ c.name }}">{{ c.label }}</label>
+</div>
+{%- endmacro -%}
