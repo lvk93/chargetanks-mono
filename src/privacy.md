@@ -29,19 +29,25 @@ This website is hosted by Netlify, Inc., 101 2nd Street, San Francisco, CA 94105
 
 The legal basis is Art. 6 (1) (f) GDPR. The legitimate interest lies in delivering the website reliably and securely. Netlify processes this data on my behalf on the basis of a data processing agreement (Art. 28 GDPR), which is part of Netlify's terms of service. Data may be transferred to the USA. Netlify, Inc. participates in the EU-U.S. Data Privacy Framework (adequacy decision of the European Commission, Art. 45 GDPR) and additionally uses the EU standard contractual clauses (Art. 46 (2) (c) GDPR). I do not evaluate these log files myself. Further information: [Netlify privacy policy](https://www.netlify.com/privacy/).
 
-<h2 id="no-tracking">3. No cookies, no tracking, no third-party content</h2>
+<h2 id="no-tracking">3. No cookies, no third-party content</h2>
 
-This website does not use cookies, local storage, analytics or tracking tools, advertising, social media plugins or embedded third-party content. Scripts, charts and images are served from this domain; no data is sent to other providers when pages load. Settings of the tools appear in the page address (URL) so that a state can be shared; they are not stored.
+This website does not use cookies or any other storage on your device, advertising, social media plugins or embedded third-party content, and it does not track you across websites. Scripts, charts and images are served from this domain; no data is sent to other providers when pages load. Settings of the tools appear in the page address (URL) so that a state can be shared.
 
-<h2 id="contact">4. Contact by email</h2>
+<h2 id="statistics">4. Anonymous usage statistics</h2>
+
+To learn which articles and tools are useful, the website sends a short message to this domain when you open a page, when you use a tool for the first time on a page, and when you click one of the "Try this" examples. The message contains only the event, the page path, the name of the tool or example and where you came from (for other websites only their domain). It contains no identifier, and neither your IP address nor details of your browser or device are stored. Nothing is sent if your browser signals "Do Not Track" or "Global Privacy Control".
+
+The message is received by a function at Netlify (see section 2) and stored in a database at Supabase, Inc., which processes the data on my behalf (Art. 28 GDPR). Data may be transferred to countries outside the EU; Supabase uses the EU standard contractual clauses (Art. 46 (2) (c) GDPR). The legal basis is Art. 6 (1) (f) GDPR; the legitimate interest lies in improving the content of this website. The entries are deleted once they are no longer needed for this purpose, at the latest after 24 months.
+
+<h2 id="contact">5. Contact by email</h2>
 
 If you contact me by email, I process your email address and the content of your message in order to answer your inquiry. The legal basis is Art. 6 (1) (f) GDPR, or Art. 6 (1) (b) GDPR if your inquiry relates to a contract. The data is deleted once it is no longer needed for this purpose, unless statutory retention obligations apply.
 
-<h2 id="external-links">5. External links</h2>
+<h2 id="external-links">6. External links</h2>
 
 This website links to external websites, for example LinkedIn. Data is only transmitted to the respective provider when you click such a link; from then on, the privacy policy of that provider applies.
 
-<h2 id="your-rights">6. Your rights</h2>
+<h2 id="your-rights">7. Your rights</h2>
 
 You have the right to access (Art. 15 GDPR), rectification (Art. 16 GDPR), erasure (Art. 17 GDPR), restriction of processing (Art. 18 GDPR), data portability (Art. 20 GDPR) and to object to processing based on Art. 6 (1) (f) GDPR (Art. 21 GDPR). To exercise these rights, simply send an email to the address above. You also have the right to lodge a complaint with a data protection supervisory authority (Art. 77 GDPR).
 

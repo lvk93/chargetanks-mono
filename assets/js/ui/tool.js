@@ -5,6 +5,7 @@
 // - Handy/Tablet: Regler-Panel unten; zugeklappt nur der Hauptregler, "More settings" klappt alles auf
 import { initControls } from './controls.js';
 import { createChart } from './plotly.js';
+import { track } from '../site/track.js';
 import { applyUrlState, writeUrlState } from './urlState.js';
 
 function initPanel(form) {
@@ -75,7 +76,14 @@ export function initTool({ compute, render, onInput }) {
     writeUrlState(form);
   }
 
+  const tool = location.pathname.split('/').filter(Boolean).pop();
+  let used = false;
+
   function schedule(event) {
+    if (event?.isTrusted && !used) {
+      used = true;
+      track('tool_used', { tool });
+    }
     if (event && onInput) onInput(event, controls);
     if (!frame) {
       frame = requestAnimationFrame(() => {
@@ -88,6 +96,9 @@ export function initTool({ compute, render, onInput }) {
   const controls = initControls(form, schedule);
   initPanel(form);
   initActions(form, controls);
+  for (const link of document.querySelectorAll('.try-this li a')) {
+    link.addEventListener('click', () => track('try_this', { tool, query: new URL(link.href).search.slice(1) }));
+  }
   // schmale Bildschirme: aktiven Tab der Tool-Leiste in den sichtbaren Bereich schieben
   const tab = document.querySelector('.tool-tabs [aria-current="page"]');
   const tabs = tab?.closest('ul');

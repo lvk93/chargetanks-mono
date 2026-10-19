@@ -6,3 +6,8 @@
 
 [build.environment]
   NODE_VERSION = "22"
+
+# Anonyme Nutzungsstatistik: /api/event (netlify/functions/event.mjs) -> Supabase
+# (Umgebungsvariablen SUPABASE_URL und SUPABASE_ANON_KEY in der Netlify-Oberflaeche)
+[functions]
+  directory = "netlify/functions"
