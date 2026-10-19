@@ -58,7 +58,14 @@ export default async function handler(request) {
     }
   }
   // ohne Inhalt antworten: der Browser braucht keine Rueckmeldung
-  return new Response(null, { status: 204, headers: { 'x-event-store': store } });
+  let shape = 'none';
+  try {
+    const u = new URL(url);
+    shape = `${u.protocol}//*${u.hostname.endsWith('.supabase.co') ? '.supabase.co' : `(${u.hostname.split('.').slice(-2).join('.')})`}${u.pathname}`;
+  } catch {
+    shape = url ? 'invalid' : 'none';
+  }
+  return new Response(null, { status: 204, headers: { 'x-event-store': store, 'x-event-url-shape': shape } });
 }
 
 export const config = { path: '/api/event' };
