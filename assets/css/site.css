@@ -958,12 +958,6 @@ a:hover .card__title {
   color: var(--navy);
 }
 
-/* Platzhalter, die vor der Veroeffentlichung ersetzt werden muessen */
-.prose mark.todo {
-  background: #fde68a;
-  color: #7c2d12;
-}
-
 .continue {
   margin-top: 4rem;
   border-top: 1px solid var(--border-strong);

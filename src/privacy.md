@@ -14,8 +14,6 @@ This privacy policy explains which personal data is processed when you visit cha
 The controller within the meaning of the General Data Protection Regulation (GDPR) is:
 
 Lars von Kolzenberg<br>
-<mark class="todo">[[TODO: street and number]]</mark><br>
-<mark class="todo">[[TODO: postal code and city]]</mark><br>
 Germany<br>
 Email: [lars@chargetanks.com](mailto:lars@chargetanks.com)
 

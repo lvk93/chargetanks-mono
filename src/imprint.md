@@ -10,18 +10,15 @@ sitemap: false
 Information pursuant to § 5 DDG (German Digital Services Act)
 
 Lars von Kolzenberg<br>
-<mark class="todo">[[TODO: street and number]]</mark><br>
-<mark class="todo">[[TODO: postal code and city]]</mark><br>
 Germany
 
 ## Contact
 
-Email: [lars@chargetanks.com](mailto:lars@chargetanks.com)<br>
-Phone: <mark class="todo">[[TODO: phone number]]</mark>
+Email: [lars@chargetanks.com](mailto:lars@chargetanks.com)
 
 ## Responsible for content
 
-Responsible for journalistic and editorial content pursuant to § 18 (2) MStV (German Interstate Media Treaty): Lars von Kolzenberg, address as above.
+Responsible for journalistic and editorial content pursuant to § 18 (2) MStV (German Interstate Media Treaty): Lars von Kolzenberg.
 
 ## Privacy
 
