@@ -1,7 +1,7 @@
 // Browser-Pruefung der Tool-Seiten (nicht Teil von npm test; braucht Chrome und einen Build in _site/):
 //   npm run build && node tests/e2e/tools.mjs [tool ...]
-// Oeffnet jeden Zustand aus tests/regression/states.js per URL-Parameter, liest die Trace-Daten aller
-// Diagramme aus der Seite und vergleicht ihren Fingerabdruck mit tests/regression/reference.json.
+// Oeffnet jeden Zustand aus tests/regression/states.js per URL-Parameter, liest die Diagramme aus der Seite
+// (Trace-Daten, Shapes, Annotationen) und vergleicht ihren Fingerabdruck mit tests/regression/reference.json.
 // Damit sind Verdrahtung, URL-Zustand und Rechnung im Browser gegen den geprueften Stand belegt.
 // Chrome: Umgebungsvariable CHROME_PATH oder Standardpfad je Betriebssystem.
 import { spawn } from 'node:child_process';
@@ -110,23 +110,31 @@ for (const tool of tools) {
     let ready = false;
     for (let i = 0; i < 100 && !ready; i += 1) {
       await sleep(100);
+      // gezeichnet = Plotly hat das Layout aufgebaut (das Schichtdiagramm von Swelling hat nur Shapes, keine Traces)
       ready = await evaluate(`document.readyState === 'complete' && ${JSON.stringify(ids)}.every((id) =>
-        document.querySelector('[data-chart="' + id + '"] [data-chart-plot]')?.data?.length > 0)`).catch(() => false);
+        document.querySelector('[data-chart="' + id + '"] [data-chart-plot]')?._fullLayout !== undefined)`).catch(() => false);
     }
     await sleep(150);
     const result = ready ? await evaluate(`(async () => {
-      const { fingerprintTraces } = await import('/__regression/fingerprint.js');
+      const { fingerprintFigure } = await import('/__regression/fingerprint.js');
       const ids = ${JSON.stringify(ids)};
-      const traces = await Promise.all(ids.map((id) => fingerprintTraces(document.querySelector('[data-chart="' + id + '"] [data-chart-plot]').data)));
+      // Figure, wie sie an die Darstellungsschicht ging (gd.layout veraendert Plotly selbst, B18)
+      const plots = ids.map((id) => document.querySelector('[data-chart="' + id + '"] [data-chart-plot]'));
+      const figures = await Promise.all(plots.map((gd) => fingerprintFigure(gd.chargetanksFigure)));
       const soh = document.querySelector('[data-readout="soh"]')?.textContent ?? null;
-      return { traces, soh };
+      return { figures, soh };
     })()`) : null;
     const expected = reference[tool][name];
     const problems = [];
     if (!result) problems.push('Diagramme nicht gezeichnet');
     else {
-      result.traces.forEach((hash, i) => {
-        if (hash !== expected.figures[i].traces) problems.push(`Diagramm ${ids[i]}: Daten weichen ab`);
+      result.figures.forEach((figure, i) => {
+        const ref = expected.figures[i];
+        if (figure.traces !== ref.traces) problems.push(`Diagramm ${ids[i]}: Daten weichen ab`);
+        // Shapes/Annotationen: ausser bei Swelling "classes", dort entfernt die Tool-Schicht das leere SEI-Label (B7)
+        if (!(tool === 'swelling' && ids[i] === 'classes') && figure.marks !== ref.marks) {
+          problems.push(`Diagramm ${ids[i]}: Shapes/Annotationen weichen ab`);
+        }
       });
       if (tool === 'aging') {
         const sohRef = expected.headings[0].match(/SoH: ([-\d.]+%)/)[1];

@@ -54,10 +54,6 @@ export default function (eleventyConfig) {
   for (const file of ['favicon.svg', 'site.webmanifest', 'robots.txt', '_headers', '_redirects']) {
     eleventyConfig.addPassthroughCopy(file);
   }
-  // Uebergang: die Tool-Seiten werden noch unveraendert ausgeliefert
-  for (const tool of ['materials', 'cell-reconstruction', 'blending', 'swelling']) {
-    eleventyConfig.addPassthroughCopy(`tools/${tool}`);
-  }
 
   eleventyConfig.addGlobalData('plotlyScript', plotlyScript);
   eleventyConfig.addGlobalData('buildYear', new Date().getUTCFullYear());

@@ -950,6 +950,12 @@ a:hover .card__title {
   list-style: disc inside;
 }
 
+.prose ol {
+  margin: 0 0 1rem;
+  padding: 0;
+  list-style: decimal inside;
+}
+
 .prose li + li {
   margin-top: 0.5rem;
 }

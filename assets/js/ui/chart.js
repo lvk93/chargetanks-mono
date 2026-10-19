@@ -15,6 +15,8 @@ document.addEventListener('keydown', (event) => {
   if (event.key === 'Escape' && openChart) openChart.collapse();
 });
 
+const placed = (...values) => values.every((v) => v !== null && v !== undefined);
+
 // Kopie des Layouts: Schriftgroessen skaliert, Schriftfamilie der Webseite; Arrays bleiben, wie sie sind
 function present(value, scale, key = null) {
   if (Array.isArray(value)) return value.map((item) => present(item, scale));
@@ -53,11 +55,16 @@ export function createChart(plot) {
     if (!width || !height) return;
     lastSize = `${width}x${height}`;
     const json = toPlotlyJson(figure);
+    plot.chargetanksFigure = json; // Figure vor der Darstellungsschicht (Pruefung im Browser, Fehlersuche)
     // Fuellflaechen ohne mode zeigen bei weniger als 20 Punkten Marker (B8) - nur Linie, keine Punkte
-    for (const trace of json.data) if (trace.fill && trace.mode === undefined) trace.mode = 'lines';
+    const data = json.data.map((trace) => (trace.fill && trace.mode === undefined ? { ...trace, mode: 'lines' } : trace));
     const scale = Math.min(1, Math.max(MIN_SCALE, width / REFERENCE_WIDTH));
     const layout = { ...present({ ...json.layout, template: undefined }, scale), template: CHART_TEMPLATE, width, height };
-    window.Plotly.react(plot, json.data, layout, config());
+    // Shapes und Annotationen ohne gueltige Position (NaN aus der Rechnung, z. B. PCHIP ausserhalb des Bereichs)
+    // setzt Plotly an Ersatzpositionen: im Original ein schraeger Strich und ein verrutschtes Label (B18)
+    if (layout.shapes) layout.shapes = layout.shapes.filter((s) => placed(s.x0, s.x1, s.y0, s.y1));
+    if (layout.annotations) layout.annotations = layout.annotations.filter((a) => placed(a.x, a.y) && a.ax !== null && a.ay !== null);
+    window.Plotly.react(plot, data, layout, config());
   }
 
   new ResizeObserver(() => {
