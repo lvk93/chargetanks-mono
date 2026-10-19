@@ -67,7 +67,6 @@ export default function (eleventyConfig) {
   eleventyConfig.addFilter('structuredData', (options) => JSON.stringify(structuredData(options)).replace(/</g, '\\u003c'));
   eleventyConfig.addFilter('head', (items, n) => items.slice(0, n));
   eleventyConfig.addFilter('fixed', (value, decimals = 2) => Number(value).toFixed(decimals));
-  eleventyConfig.addFilter('hasUrl', (items, url) => items.some((item) => item.url === url));
   eleventyConfig.addFilter('bySlug', (items, slug) => items.find((item) => item.slug === slug));
   eleventyConfig.addFilter('hasSecondaryControls', (groups) => groups.some((g) => g.items.some((c) => !c.primary)));
 

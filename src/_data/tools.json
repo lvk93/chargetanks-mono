@@ -4,39 +4,44 @@
     "name": "Materials",
     "teaser": "Look at one electrode material as a tank and see how its dQ/dV shape turns into the voltage curve.",
     "description": "Interactive tool: explore graphite, silicon, LCO, LFP, NCA and NMC as tanks and see how dQ/dV peaks become voltage plateaus.",
-    "image": "/assets/img/suite/material_thumbnail.png",
-    "imageAlt": "Tank view of a cathode material with its lithium fill level"
+    "image": "/assets/img/tools/materials.jpg",
+    "imageAlt": "Tank view and voltage curve of NCA in the Materials tool",
+    "ogImage": "/assets/img/tools/materials-og.jpg"
   },
   {
     "slug": "cell-reconstruction",
     "name": "Cell Reconstruction",
     "teaser": "Combine anode and cathode into a full cell and see how voltage limits, NP ratio and lithium inventory shape the OCV.",
     "description": "Interactive tool: rebuild a full-cell OCV from two electrode tanks and test voltage limits, NP ratio and lithium inventory.",
-    "image": "/assets/img/suite/cell_thumbnail.png",
-    "imageAlt": "Anode and cathode tanks of a full cell with the cell voltage between them"
+    "image": "/assets/img/tools/cell-reconstruction.jpg",
+    "imageAlt": "Anode and cathode tanks of a graphite/NMC cell next to its voltage curve",
+    "ogImage": "/assets/img/tools/cell-reconstruction-og.jpg"
   },
   {
     "slug": "blending",
     "name": "Blending",
     "teaser": "Mix graphite and silicon in one electrode and see how the blended tank and its voltage curve form.",
     "description": "Interactive tool: blend graphite and silicon and see how the combined tank, the blend OCV and the material states of lithiation relate.",
-    "image": "/assets/img/suite/blend_thumbnail.png",
-    "imageAlt": "Tanks of two blended electrode materials"
+    "image": "/assets/img/tools/blending.jpg",
+    "imageAlt": "Tanks of graphite and silicon next to the voltage of the blend",
+    "ogImage": "/assets/img/tools/blending-og.jpg"
   },
   {
     "slug": "aging",
     "name": "Aging",
     "teaser": "Shrink a tank or lose lithium and see which reservoir limits capacity and how the voltage curve shifts.",
     "description": "Interactive tool: apply loss of anode or cathode material and lithium loss and see how capacity, state of health and OCV change.",
-    "image": "/assets/img/suite/aging_thumbnail.png",
-    "imageAlt": "Aged electrode tanks compared with their beginning-of-life shape"
+    "image": "/assets/img/tools/aging.jpg",
+    "imageAlt": "Aged graphite/NMC tanks next to the aged and fresh voltage curve",
+    "ogImage": "/assets/img/tools/aging-og.jpg"
   },
   {
     "slug": "swelling",
     "name": "Swelling",
     "teaser": "See how electrode breathing, SEI growth and compression change the thickness of a cell stack.",
     "description": "Interactive tool: see how state of charge, SEI growth and stack compression change electrode thickness and porosity.",
-    "image": "/assets/img/suite/swelling_thumbnail.png",
-    "imageAlt": "Stacked thickness contributions of a cell over state of charge"
+    "image": "/assets/img/tools/swelling.jpg",
+    "imageAlt": "Electrode stack thickness and its contributions over state of charge",
+    "ogImage": "/assets/img/tools/swelling-og.jpg"
   }
 ]

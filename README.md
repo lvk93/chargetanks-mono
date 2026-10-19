@@ -1,6 +1,6 @@
 # chargetanks.com
 
-Statische Seite: Webseite (Startseite, Blog, Artikel, `/tools/`) und die Tools unter `/tools/<tool>/`.
+Statische Seite: Webseite (Startseite, Blog, Artikel, `/tools/`) und fuenf interaktive Tools unter `/tools/<tool>/`.
 Die Seiten entstehen mit [Eleventy](https://www.11ty.dev/) aus `src/`; im Browser laeuft nur Vanilla-JavaScript
 (ES-Module) ohne Framework, und alle Inhalte kommen von der eigenen Domain.
 
@@ -34,8 +34,12 @@ Header aus `_redirects` und `_headers` uebertragen.
 - Neuer Blogartikel: eine Markdown-Datei in `src/blog/posts/<slug>.md` mit Front Matter wie im vorhandenen
   Artikel (Titel, Datum, Beschreibung, Vorschaubild, Kategorie, Lesezeit, TL;DR, Definition). Startseite,
   `/blog/`, Sitemap und `llms.txt` uebernehmen ihn automatisch.
-- Die fuenf Tools (Name, Kurztext, Beschreibung, Vorschaubild): `src/_data/tools.json`.
-- Stile: `assets/css/site.css` (Webseite) und `assets/css/styles.css` (Tool-Seiten).
+- Die fuenf Tools (Name, Kurztext, Beschreibung, Vorschaubilder): `src/_data/tools.json`. Eine Tool-Seite ist
+  `src/tools/<tool>.md`: Regler und Diagramme im Front Matter, darunter der Erklaertext als Markdown.
+  Die Verdrahtung steht in `assets/js/tools/<tool>.js` (Material laden, Modell rechnen, Diagramme zeigen).
+- Zustand der Tools in der URL, z. B. `/tools/aging/?anode=graphite&cathode=nmc&lli=0.2`
+  (Parameter = Namen der Regler, Materialien als Slug wie in `assets/data/materials/`).
+- Stile: `assets/css/site.css`.
 - Rechenlogik der Tools: `assets/js/model/` und `assets/js/core/` (ohne DOM). Sie ist bitgleich zum
   Python-Original geprueft; `npm test` vergleicht sie mit `tests/regression/reference.json`. Die Referenz nur
   nach einer bewussten, begruendeten Aenderung der Rechnung neu erzeugen (`node tests/regression/make-reference.js`).
@@ -44,15 +48,17 @@ Header aus `_redirects` und `_headers` uebertragen.
 
 | Pfad | Inhalt |
 |---|---|
-| `src/` | Seiten, Vorlagen (`_includes/`) und Daten (`_data/`) fuer Eleventy |
-| `tools/<tool>/index.html` | Tool-Seiten (werden unveraendert mitkopiert) |
-| `assets/css/` | `site.css` (Webseite), `styles.css` (Tool-Seiten) |
+| `src/` | Seiten, Vorlagen (`_includes/`) und Daten (`_data/`) fuer Eleventy; Tool-Seiten in `src/tools/` |
+| `assets/css/site.css` | alle Stile |
 | `assets/js/site/` | Verhalten der Webseite (Mobilmenue) |
 | `assets/js/core/` | Nachbau von numpy/scipy/pandas und Python-Zahlenformat (ohne DOM) |
 | `assets/js/model/` | Rechenlogik der Tools (ohne DOM) |
-| `assets/js/ui/`, `assets/js/tools/` | Bedienelemente und Verdrahtung je Tool |
-| `assets/fonts/`, `assets/data/`, `assets/img/` | Schriften der Tools, Materialdaten, Vorschaubilder |
+| `assets/js/ui/` | Ablauf der Tool-Seiten, Regler, URL-Zustand, Diagramm-Darstellung (plotly.js) |
+| `assets/js/tools/` | Verdrahtung je Tool |
+| `assets/data/`, `assets/img/tools/` | Materialdaten, Vorschau- und OG-Bilder der Tools |
 | `images/`, `favicon.svg`, `site.webmanifest`, `robots.txt` | Bilder und Dateien der Webseite |
 | `config/` | Hilfsfunktionen fuer den Build (JSON-LD) |
-| `tests/` | Regressionspruefung der Tools, Pruefung der gebauten Seite |
+| `tests/regression/` | Regressionspruefung der Rechnung (Fingerabdruecke, `reference.json`) |
+| `tests/site/` | Pruefung der gebauten Seite |
+| `tests/e2e/tools.mjs` | Browser-Pruefung der Tool-Seiten (lokal mit Chrome, `node tests/e2e/tools.mjs`) |
 | `eleventy.config.js`, `_redirects`, `_headers`, `netlify.toml` | Build und Netlify |

@@ -1,7 +1,8 @@
 // Fingerabdruck der Diagramme eines Tool-Laufs. Laeuft in Node und im Browser (crypto.subtle).
 // Je Diagramm:
 // - traces: SHA-256 ueber type, name, x, y, customdata und text aller Traces in Reihenfolge
-// - marks:  SHA-256 ueber Shapes (type, x0, x1, y0, y1) und Annotationen (text, x, y, ax, ay)
+// - marks:  SHA-256 ueber Shapes (type, x0, x1, y0, y1), Annotationen (text, x, y, ax, ay) und die
+//           Achsbereiche (range aller x-/y-Achsen; in Materials und Swelling aus den Daten berechnet)
 // - texts:  alle Annotationstexte im Klartext
 // Eingabe ist die Figure, wie sie an Plotly geht (toPlotlyJson bzw. gd.data/gd.layout im Browser).
 // Zahlen gehen als float64 ein, NaN in einheitlicher Bitfolge; Float64Array und Liste sind gleichwertig.
@@ -95,6 +96,12 @@ export async function fingerprintFigure({ data, layout }) {
   const marks = new Writer();
   writeObjects(marks, layout.shapes ?? [], SHAPE_KEYS);
   writeObjects(marks, layout.annotations ?? [], ANNOTATION_KEYS);
+  const axes = Object.keys(layout).filter((key) => /^[xy]axis\d*$/.test(key)).sort();
+  marks.u32(axes.length);
+  for (const key of axes) {
+    marks.string(key);
+    marks.value(layout[key].range);
+  }
   return {
     traces: await fingerprintTraces(data),
     marks: await sha256(marks),

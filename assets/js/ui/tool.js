@@ -4,7 +4,7 @@
 // - Zustand aus der URL beim Laden, danach laufend in die URL (urlState.js)
 // - Handy/Tablet: Regler-Panel unten; zugeklappt nur der Hauptregler, "More settings" klappt alles auf
 import { initControls } from './controls.js';
-import { createChart } from './chart.js';
+import { createChart } from './plotly.js';
 import { applyUrlState, writeUrlState } from './urlState.js';
 
 function initPanel(form) {

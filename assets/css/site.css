@@ -548,7 +548,7 @@ a:hover .card__title {
   line-height: 1.625;
 }
 
-/* Karten fuer Tools: Vorschaubild auf dem Blau der Diagramme */
+/* Karten fuer Tools: Vorschaubild der Diagramme auf ihrem Blau */
 .tool-grid {
   display: flex;
   flex-wrap: wrap;
@@ -565,14 +565,7 @@ a:hover .card__title {
 }
 
 .tool-grid .card__media {
-  display: flex;
-  align-items: center;
-  justify-content: center;
   background: var(--navy);
-}
-
-.tool-grid .card__media img {
-  object-fit: contain;
 }
 
 /* 6 Seiten ------------------------------------------------------------------------------------ */

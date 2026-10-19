@@ -33,21 +33,17 @@ The legal basis is Art. 6 (1) (f) GDPR. The legitimate interest lies in deliveri
 
 <h2 id="no-tracking">3. No cookies, no tracking, no third-party content</h2>
 
-This website does not use cookies, analytics or tracking tools, advertising, social media plugins or embedded third-party content. Fonts, scripts, charts and images are served from this domain; no data is sent to other providers when pages load.
+This website does not use cookies, local storage, analytics or tracking tools, advertising, social media plugins or embedded third-party content. Scripts, charts and images are served from this domain; no data is sent to other providers when pages load. Settings of the tools appear in the page address (URL) so that a state can be shared; they are not stored.
 
-<h2 id="local-storage">4. Local storage in your browser</h2>
-
-On the tool pages, the width you set for the sidebar is stored in your browser's local storage (key `sidebarWidth`) so that it is kept the next time you open a tool. This value stays on your device, is not transmitted to me or anyone else, and can be deleted at any time via your browser settings. Storing it is strictly necessary to provide the function you requested (§ 25 (2) no. 2 TDDDG).
-
-<h2 id="contact">5. Contact by email</h2>
+<h2 id="contact">4. Contact by email</h2>
 
 If you contact me by email, I process your email address and the content of your message in order to answer your inquiry. The legal basis is Art. 6 (1) (f) GDPR, or Art. 6 (1) (b) GDPR if your inquiry relates to a contract. The data is deleted once it is no longer needed for this purpose, unless statutory retention obligations apply.
 
-<h2 id="external-links">6. External links</h2>
+<h2 id="external-links">5. External links</h2>
 
 This website links to external websites, for example LinkedIn. Data is only transmitted to the respective provider when you click such a link; from then on, the privacy policy of that provider applies.
 
-<h2 id="your-rights">7. Your rights</h2>
+<h2 id="your-rights">6. Your rights</h2>
 
 You have the right to access (Art. 15 GDPR), rectification (Art. 16 GDPR), erasure (Art. 17 GDPR), restriction of processing (Art. 18 GDPR), data portability (Art. 20 GDPR) and to object to processing based on Art. 6 (1) (f) GDPR (Art. 21 GDPR). To exercise these rights, simply send an email to the address above. You also have the right to lodge a complaint with a data protection supervisory authority (Art. 77 GDPR).
 
