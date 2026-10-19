@@ -1,4 +1,9 @@
-// Webseite: Mobilmenue im Seitenkopf (oeffnen/schliessen, Escape und Klick auf einen Link schliessen).
+// Webseite: Mobilmenue im Seitenkopf (oeffnen/schliessen, Escape und Klick auf einen Link schliessen) und
+// anonymer Seitenaufruf fuer die Statistik (track.js).
+import { referrer, track } from './track.js';
+
+track('page_view', { path: location.pathname, ref: referrer() });
+
 const button = document.querySelector('[data-menu-button]');
 const menu = document.querySelector('[data-menu]');
 

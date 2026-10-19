@@ -40,6 +40,11 @@ mainClass: tool-main
           </fieldset>
           {%- endfor %}
         </div>
+        <div class="controls__actions">
+          <button type="button" class="controls__action" data-copy-link>Copy link</button>
+          <button type="button" class="controls__action" data-reset>Reset</button>
+          <span class="controls__status" data-controls-status role="status" aria-live="polite"></span>
+        </div>
       </form>
       <div class="charts charts--{{ toolSlug }}">
         {%- for chart in charts %}

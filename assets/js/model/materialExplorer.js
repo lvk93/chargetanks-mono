@@ -57,7 +57,9 @@ export function buildMaterialExplorer({ materialName, material, sol }) {
   const low = Math.max(0.0, voltageMin - voltagePad);
   const high = voltageMax + voltagePad;
   const dqdvPeak = nanmax(Array.from(dQdVAxis, Math.abs));
-  const xlim = Math.max(1.5, Math.ceil(dqdvPeak * 1.25));
+  // B19: Auf flachen Plateaus ist dQ/dV in den Daten gedeckelt (Graphite, NMC, LFP ~1000, LCO 1e5); als Maximum
+  // trieb das die Achse auf +-1250 bzw. +-125000 und der Tank wurde zum Strich. Hoechstens +-5 wie im Cell-Tool.
+  const xlim = Math.min(5, Math.max(1.5, Math.ceil(dqdvPeak * 1.25)));
 
   const figDqdv = setupTankCanvas();
   const figVoltage = setupVoltageCanvas();
