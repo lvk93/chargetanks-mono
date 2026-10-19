@@ -1,0 +1,9 @@
+{
+  "name": "chargetanks",
+  "private": true,
+  "type": "module",
+  "description": "chargetanks.com: Webseite und Tools rund um das Zwei-Tank-Modell.",
+  "scripts": {
+    "test": "node --test \"tests/**/*.test.js\""
+  }
+}
