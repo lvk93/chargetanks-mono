@@ -37,20 +37,28 @@ export default async function handler(request) {
   const row = raw.length <= MAX_BODY && !/bot|crawl|spider|headless/i.test(agent) ? toRow(raw) : null;
   const url = process.env.SUPABASE_URL;
   const key = process.env.SUPABASE_ANON_KEY;
-  if (row && url && key) {
+  // Diagnose (voruebergehend): Ergebnis des Speicherns als Header, ohne Inhalte
+  let store = !row ? 'skipped' : !url || !key ? `no-config(url:${Boolean(url)},key:${Boolean(key)})` : 'pending';
+  if (store === 'pending') {
     try {
       const response = await fetch(`${url.replace(/\/$/, '')}/rest/v1/event_logs`, {
         method: 'POST',
         headers: { apikey: key, 'Content-Type': 'application/json', Prefer: 'return=minimal' },
         body: JSON.stringify(row),
       });
-      if (!response.ok) console.error('event_logs insert failed', response.status, await response.text());
+      store = String(response.status);
+      if (!response.ok) {
+        const detail = await response.text();
+        console.error('event_logs insert failed', response.status, detail);
+        store += ` ${(JSON.parse(detail || '{}').code ?? '')}`.trimEnd();
+      }
     } catch (error) {
       console.error('event_logs insert failed', error);
+      store = `error ${error?.cause?.code ?? error?.name ?? ''}`.trim();
     }
   }
-  // immer ohne Inhalt antworten: der Browser braucht keine Rueckmeldung
-  return new Response(null, { status: 204 });
+  // ohne Inhalt antworten: der Browser braucht keine Rueckmeldung
+  return new Response(null, { status: 204, headers: { 'x-event-store': store } });
 }
 
 export const config = { path: '/api/event' };
