@@ -7,7 +7,7 @@ permalink: /privacy/
 sitemap: false
 ---
 
-This privacy policy explains which personal data is processed when you visit chargetanks.com and use the tools on this website. In short: there is no tracking, no analytics, no advertising and no cookies, and all content is loaded from this domain only.
+This privacy policy explains which personal data is processed when you visit chargetanks.com and use the tools on this website. In short: there are no cookies, no advertising and no tracking across websites, all content is loaded from this domain only, and anonymous usage statistics without any identifier help me improve the content (section 4).
 
 <h2 id="controller">1. Controller</h2>
 
