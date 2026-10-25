@@ -1855,3 +1855,34 @@ body.has-fullscreen-chart {
   letter-spacing: 0.02em;
   color: #5c4b00;
 }
+
+/* Feste Abbildungen zwischen den Texten (gleiche Zeichnungen wie die Tools) */
+.ch-fig {
+  margin: 1.5rem auto 1.75rem;
+}
+
+.ch-fig__parts {
+  display: grid;
+  gap: 1rem;
+  border-radius: 1rem;
+  background: var(--navy);
+  padding: 1rem;
+}
+
+.ch-fig--tanks,
+.ch-fig--account { max-width: 28rem; }
+
+@media (min-width: 640px) {
+  .ch-fig--tanks-electrodes .ch-fig__parts,
+  .ch-fig--electrodes-cell .ch-fig__parts {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    align-items: center;
+  }
+}
+
+.ch-fig figcaption {
+  margin-top: 0.5rem;
+  font-size: 0.875rem;
+  line-height: 1.5;
+  color: var(--gray-medium);
+}

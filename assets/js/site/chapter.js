@@ -1,7 +1,8 @@
 // Kapitel "Lithium balance" (/learn/lithium-balance/): Reiter, Quiz und die drei schlanken Tools
 // (Einleitung, N/P, N/Li). Gezeichnet wird als SVG ohne Plotly, damit die Seite leicht bleibt.
 // Rechnung: assets/js/model/idealCell.js (ideale Tanks, alles Geraden).
-import { IDEAL_ANODE, IDEAL_CATHODE, idealCell, lithiumAccount } from '../model/idealCell.js';
+import { IDEAL_ANODE, IDEAL_CATHODE, idealCell, lithiumAccount, realElectrode } from '../model/idealCell.js';
+import { loadMaterial } from '../ui/data.js';
 import { initControls } from '../ui/controls.js';
 import { track } from './track.js';
 
@@ -93,57 +94,120 @@ function initQuiz() {
 }
 
 /* Tankbild ------------------------------------------------------------------------------------- */
-// Decke = Li/Li+ oben; Tiefe unter der Decke = Spannung. Flaeche eines Tanks ~ Kapazitaet.
-function drawTanks(container, cell, x, { maxAnode = 16 } = {}) {
+// Decke = Li/Li+ oben; Tiefe unter der Decke = Spannung. Breite eines Tanks ~ dQ/dU, Flaeche ~ Kapazitaet.
+// Ideale Tanks sind Rechtecke; echte Kurven (Graphit, NMC) ergeben Stufen bzw. Trichter. Sehr flache
+// Plateaus wuerden unendlich breit - die Breite ist deshalb je Tank gedeckelt.
+const PX_PER_V = 60;
+const K_WIDTH = 150 / (16 / (IDEAL_ANODE.empty - IDEAL_ANODE.full)); // ideale Anode mit 16 Ah = 150 px
+
+function tankProfile(U, q, { uMin = -Infinity, cap }) {
+  const n = 220;
+  const pts = [];
+  for (let i = 0; i <= n; i += 1) {
+    const f = i / n;
+    const u = U(f);
+    if (u >= uMin) pts.push({ f, u });
+  }
+  // Breite aus dem Anstieg df/du ueber ein Spannungsfenster (glaettet Rauschen, haelt Geraden konstant)
+  const h = 0.025;
+  for (const p of pts) {
+    let fLo = Infinity;
+    let fHi = -Infinity;
+    let uLo = Infinity;
+    let uHi = -Infinity;
+    for (const o of pts) {
+      if (Math.abs(o.u - p.u) > h) continue;
+      fLo = Math.min(fLo, o.f); fHi = Math.max(fHi, o.f);
+      uLo = Math.min(uLo, o.u); uHi = Math.max(uHi, o.u);
+    }
+    p.w = Math.min(cap, (K_WIDTH * q * (fHi - fLo)) / Math.max(uHi - uLo, 0.004));
+  }
+  return pts; // f steigt, u faellt (Richtung Decke)
+}
+
+function drawTanks(container, cell, x, { only } = {}) {
   const W = 360;
-  const S = 60; // px pro Volt
   const top = 30;
-  const H = top + 4.45 * S + 26;
-  const y = (u) => top + u * S;
-  const k = 150 / ((maxAnode) / (IDEAL_ANODE.empty - IDEAL_ANODE.full)); // breiteste Anode = 150 px
-  const svg = svgRoot(container, W, H, 'Anode and cathode tanks hanging from the Li/Li+ ceiling');
+  const H = top + 4.45 * PX_PER_V + 26;
+  const y = (u) => top + u * PX_PER_V;
+  const svg = svgRoot(container, W, H, only === 'cathode'
+    ? 'One cathode tank hanging from the Li/Li+ ceiling' : 'Anode and cathode tanks hanging from the Li/Li+ ceiling');
 
   // Decke
   svg.append(el('rect', { x: 8, y: top - 8, width: W - 16, height: 8, fill: C.metal, opacity: 0.5 }));
   svg.append(el('line', { x1: 8, x2: W - 8, y1: top, y2: top, stroke: C.metal, 'stroke-width': 1.5 }));
   svg.append(el('text', { x: W / 2, y: top - 12, fill: C.muted, 'font-size': 11, 'text-anchor': 'middle' }, 'ceiling = Li/Li⁺ (0 V)'));
 
-  function tank({ x0, spec, q, fill, color, name }) {
-    const yTop = y(spec.full);
-    const yBot = y(spec.empty);
-    const w = (k * q) / (spec.empty - spec.full);
+  function tank({ x0, pts, fill, color, name }) {
+    const bottom = pts[0];
+    const last = pts[pts.length - 1];
     const level = Math.min(1, Math.max(0, fill));
-    const ySurf = yBot - level * (yBot - yTop);
-    svg.append(el('rect', { x: x0, y: ySurf, width: w, height: yBot - ySurf, fill: C.water, opacity: 0.85 }));
-    svg.append(el('path', { d: `M${x0} ${yTop - 3}V${yBot}H${x0 + w}V${yTop - 3}`, fill: 'none', stroke: color, 'stroke-width': 2.5 }));
-    svg.append(el('text', { x: x0 + w / 2, y: yBot + 16, fill: color, 'font-size': 12, 'font-weight': 600, 'text-anchor': 'middle' }, `${name} ${pct(level)}`));
-    return { w, ySurf, yTop, xMid: x0 + w / 2 };
+    const yBot = y(bottom.u);
+    // Wasser: alles unterhalb der Oberflaeche (Fuellgrad <= fill)
+    const wet = pts.filter((p) => p.f <= level);
+    const surfU = level >= last.f ? last.u : interpU(pts, level);
+    const surfW = wet.length ? wet[wet.length - 1].w : bottom.w;
+    if (level > 0) {
+      const water = [`M${x0} ${yBot}`, ...wet.map((p) => `L${(x0 + p.w).toFixed(1)} ${y(p.u).toFixed(1)}`),
+        `L${(x0 + surfW).toFixed(1)} ${y(surfU).toFixed(1)}`, `L${x0} ${y(surfU).toFixed(1)}`, 'Z'];
+      svg.append(el('path', { d: water.join(''), fill: C.water, opacity: 0.85 }));
+    }
+    const wall = [`M${x0} ${(y(last.u) - 3).toFixed(1)}`, `L${x0} ${yBot}`,
+      ...pts.map((p) => `L${(x0 + p.w).toFixed(1)} ${y(p.u).toFixed(1)}`), `L${(x0 + last.w).toFixed(1)} ${(y(last.u) - 3).toFixed(1)}`];
+    svg.append(el('path', { d: wall.join(''), fill: 'none', stroke: color, 'stroke-width': 2.5, 'stroke-linejoin': 'round' }));
+    const maxW = Math.max(...pts.map((p) => p.w));
+    svg.append(el('text', { x: x0 + maxW / 2, y: yBot + 16, fill: color, 'font-size': 12, 'font-weight': 600, 'text-anchor': 'middle' }, `${name} ${pct(level)}`));
+    return { maxW, ySurf: y(surfU), yTop: y(last.u), x0, yBot };
   }
 
-  const fa = cell.fillAnode(x);
-  const fc = cell.fillCath(x);
-  const an = tank({ x0: 16, spec: IDEAL_ANODE, q: cell.qAnode, fill: fa, color: C.anode, name: 'Anode' });
-  const wc = (k * cell.qCath) / (IDEAL_CATHODE.empty - IDEAL_CATHODE.full);
-  const ca = tank({ x0: W - 16 - wc, spec: IDEAL_CATHODE, q: cell.qCath, fill: fc, color: C.cathode, name: 'Cathode' });
+  const cathPts = tankProfile(cell.cathodeU, cell.qCath, { uMin: cell.real ? 3.3 : -Infinity, cap: 12 * cell.qCath });
+  const cathW = Math.max(...cathPts.map((p) => p.w));
+  const ca = tank({ x0: only === 'cathode' ? (W - cathW) / 2 : W - 16 - cathW, pts: cathPts, fill: cell.fillCath(x), color: C.cathode, name: 'Cathode' });
+
+  if (only === 'cathode') {
+    // Halbzelle: Spannung = Abstand von der Decke bis zur Wasseroberflaeche
+    const xv = ca.x0 - 22;
+    svg.append(el('line', { x1: xv, x2: xv, y1: top, y2: ca.ySurf, stroke: C.cell, 'stroke-width': 1.5 }));
+    svg.append(el('path', { d: `M${xv - 4} ${top + 6}L${xv} ${top}L${xv + 4} ${top + 6}M${xv - 4} ${ca.ySurf - 6}L${xv} ${ca.ySurf}L${xv + 4} ${ca.ySurf - 6}`, stroke: C.cell, fill: 'none', 'stroke-width': 1.5 }));
+    svg.append(el('line', { x1: xv, x2: ca.x0, y1: ca.ySurf, y2: ca.ySurf, stroke: C.muted, 'stroke-dasharray': '3 3' }));
+    svg.append(el('text', { x: xv - 8, y: (top + ca.ySurf) / 2, fill: C.cell, 'font-size': 13, 'font-weight': 700, 'text-anchor': 'end', 'dominant-baseline': 'middle' }, `${fmt(cell.uCath(x))} V`));
+    svg.append(el('text', { x: xv - 8, y: (top + ca.ySurf) / 2 + 16, fill: C.muted, 'font-size': 11, 'text-anchor': 'end', 'dominant-baseline': 'middle' }, 'vs Li/Li⁺'));
+    return;
+  }
+
+  const anPts = tankProfile(cell.anodeU, cell.qAnode, { cap: 10 * cell.qAnode });
+  const an = tank({ x0: 16, pts: anPts, fill: cell.fillAnode(x), color: C.anode, name: 'Anode' });
 
   // Plating: was nicht mehr in den Anodentank passt, wird selbst zur Decke
   const plated = cell.plated(x);
   let anodeSurface = an.ySurf;
   if (plated > 1e-6) {
     anodeSurface = top;
-    svg.append(el('rect', { x: 16, y: top, width: an.w, height: an.yTop - top, fill: C.metal }));
-    svg.append(el('text', { x: 16, y: y(IDEAL_ANODE.empty) + 32, fill: C.warn, 'font-size': 11, 'font-weight': 600 }, `plating: ${fmt(plated)} Ah Li metal`));
+    svg.append(el('rect', { x: 16, y: top, width: an.maxW, height: Math.max(3, an.yTop - top), fill: C.metal }));
+    svg.append(el('text', { x: 16, y: an.yBot + 32, fill: C.warn, 'font-size': 11, 'font-weight': 600 }, `plating: ${fmt(plated)} Ah Li metal`));
   }
 
   // Zellspannung = Hoehenunterschied der beiden Wasseroberflaechen
-  const xv = Math.max(an.xMid + an.w / 2 + 34, (16 + an.w + W - 16 - wc) / 2);
+  const xv = Math.max(16 + an.maxW + 30, (16 + an.maxW + ca.x0) / 2);
   const v = cell.vCell(x);
-  svg.append(el('line', { x1: 16 + an.w, x2: xv + 8, y1: anodeSurface, y2: anodeSurface, stroke: C.muted, 'stroke-dasharray': '3 3' }));
-  svg.append(el('line', { x1: xv - 8, x2: W - 16 - wc, y1: ca.ySurf, y2: ca.ySurf, stroke: C.muted, 'stroke-dasharray': '3 3' }));
-  svg.append(el('line', { x1: xv, x2: xv, y1: anodeSurface, y2: ca.ySurf, stroke: C.cell, 'stroke-width': 1.5, 'marker-start': '', 'marker-end': '' }));
+  svg.append(el('line', { x1: 16 + an.maxW / 2, x2: xv + 8, y1: anodeSurface, y2: anodeSurface, stroke: C.muted, 'stroke-dasharray': '3 3' }));
+  svg.append(el('line', { x1: xv - 8, x2: ca.x0 + 6, y1: ca.ySurf, y2: ca.ySurf, stroke: C.muted, 'stroke-dasharray': '3 3' }));
+  svg.append(el('line', { x1: xv, x2: xv, y1: anodeSurface, y2: ca.ySurf, stroke: C.cell, 'stroke-width': 1.5 }));
   svg.append(el('path', { d: `M${xv - 4} ${anodeSurface + 6}L${xv} ${anodeSurface}L${xv + 4} ${anodeSurface + 6}M${xv - 4} ${ca.ySurf - 6}L${xv} ${ca.ySurf}L${xv + 4} ${ca.ySurf - 6}`, stroke: C.cell, fill: 'none', 'stroke-width': 1.5 }));
   svg.append(el('text', { x: xv + 8, y: (anodeSurface + ca.ySurf) / 2, fill: C.cell, 'font-size': 13, 'font-weight': 700, 'dominant-baseline': 'middle' }, `${fmt(v)} V`));
   svg.append(el('text', { x: xv + 8, y: (anodeSurface + ca.ySurf) / 2 + 16, fill: C.muted, 'font-size': 11, 'dominant-baseline': 'middle' }, 'cell voltage'));
+}
+
+// Spannung zum Fuellgrad f aus den Stuetzstellen des Profils
+function interpU(pts, f) {
+  for (let i = 1; i < pts.length; i += 1) {
+    if (pts[i].f >= f) {
+      const a = pts[i - 1];
+      const b = pts[i];
+      return a.u + ((f - a.f) / (b.f - a.f || 1)) * (b.u - a.u);
+    }
+  }
+  return pts[pts.length - 1].u;
 }
 
 /* Diagramme ------------------------------------------------------------------------------------ */
@@ -220,16 +284,16 @@ function drawElectrodes(container, cell, x, xMax) {
     draw(p) {
       p.hline(0, 'ceiling Li/Li⁺', C.metal, '2 3');
       p.band(cell.xMin, cell.xMax, 'rgb(93 173 226 / 0.10)');
-      p.line([[cell.xLo, cell.uCath(cell.xLo)], [cell.xHi, cell.uCath(cell.xHi)]], { stroke: C.cathode });
+      p.line(sample(cell.uCath, cell.xLo, cell.xHi, 240), { stroke: C.cathode });
       const xFull = Math.min(cell.xHi, cell.qAnode);
-      const anode = [[0, cell.uAnode(0)], [xFull, cell.uAnode(xFull)]];
+      const anode = sample(cell.uAnode, 0, xFull, 240);
       if (cell.xHi > cell.qAnode) anode.push([cell.qAnode + 1e-9, 0], [cell.xHi, 0]);
       p.line(anode, { stroke: C.anode });
       p.vline(x, cell.uAnode(x), cell.uCath(x), C.cell);
       p.dot(x, cell.uCath(x), C.cathode);
       p.dot(x, cell.uAnode(x), C.anode);
       p.label(0.2, 4.15, 'cathode', C.cathode);
-      p.label(0.2, 0.75, 'anode', C.anode);
+      p.label(0.2, 1.05, 'anode', C.anode);
     },
   });
 }
@@ -242,7 +306,7 @@ function drawCell(container, cell, x, xMax) {
       p.band(cell.xMin, cell.xMax, 'rgb(93 173 226 / 0.18)');
       p.hline(cell.vMax, `Vmax ${fmt(cell.vMax)} V`, C.warn);
       p.hline(cell.vMin, `Vmin ${fmt(cell.vMin)} V`, C.warn);
-      p.line(sample(cell.vCell, cell.xLo, cell.xHi), { stroke: C.cell });
+      p.line(sample(cell.vCell, cell.xLo, cell.xHi, 240), { stroke: C.cell });
       p.dot(x, cell.vCell(x), C.water);
     },
   });
@@ -289,32 +353,55 @@ function drawAccount(container, acc) {
 }
 
 /* Tools ---------------------------------------------------------------------------------------- */
-const Q_CATH = 10; // Ah, reversible Kathodenkapazitaet in allen drei Tools
+const Q_CATH = 10; // Ah, reversible Kapazitaet der Kathode in allen drei Tools
+
+// Echte Kurven (Graphit gegen NMC) aus den Materialdaten der Webseite, einmal geladen
+let realPromise = null;
+let REAL = null;
+function loadReal() {
+  realPromise ||= Promise.all([loadMaterial('Graphite'), loadMaterial('NMC')])
+    .then(([graphite, nmc]) => {
+      REAL = { anode: realElectrode(graphite), cathode: realElectrode(nmc) };
+      return REAL;
+    });
+  return realPromise;
+}
+
+function electrodes(v) {
+  return v.curves === 'real' && REAL ? REAL : { anode: IDEAL_ANODE, cathode: IDEAL_CATHODE };
+}
 
 function realLink(np, lip, soc) {
-  const clamp = (v, lo, hi) => Math.min(hi, Math.max(lo, v));
+  const clamp = (val, lo, hi) => Math.min(hi, Math.max(lo, val));
   return `/tools/cell-reconstruction/?anode=graphite&cathode=nmc&soc=${fmt(soc)}&vmin=2.8&vmax=4.2`
     + `&np=${fmt(clamp(np, 0.8, 1.5))}&lip=${fmt(clamp(lip, 0.5, 1.5))}`;
 }
 
+// Startwerte wie die Regler im Template (fuer die festen Abbildungen zwischen den Texten)
+const DEFAULTS = {
+  intro: { soc: 0.5, vmin: 3.2, vmax: 4.0, curves: 'ideal' },
+  np: { np: 1.1, soc: 1, vmin: 3.0, vmax: 4.2, curves: 'ideal' },
+  nli: { np: 1.2, bonus: 6, sei: 10, soc: 0, vmin: 3.0, vmax: 4.2, curves: 'ideal' },
+};
+
 const TOOLS = {
   intro(v) {
-    const cell = idealCell({ qCath: Q_CATH, qAnode: 1.2 * Q_CATH, li: Q_CATH, vMin: v.vmin, vMax: v.vmax });
+    const cell = idealCell({ qCath: Q_CATH, qAnode: 1.2 * Q_CATH, li: Q_CATH, vMin: v.vmin, vMax: v.vmax, ...electrodes(v) });
     return {
-      cell, xAxis: 12, maxAnode: 12,
+      cell, xAxis: 12,
       readouts: {
         voltage: `${fmt(cell.vCell(cell.xMin + v.soc * cell.capacity))} V`,
         capacity: `${fmt(cell.capacity)} Ah of ${fmt(Q_CATH)} Ah`,
       },
-      link: realLink(1.1, 0.95, v.soc),
+      link: realLink(1.2, 1.0, v.soc),
     };
   },
   np(v) {
-    const cell = idealCell({ qCath: Q_CATH, qAnode: v.np * Q_CATH, li: Q_CATH, vMin: v.vmin, vMax: v.vmax });
+    const cell = idealCell({ qCath: Q_CATH, qAnode: v.np * Q_CATH, li: Q_CATH, vMin: v.vmin, vMax: v.vmax, ...electrodes(v) });
     const status = cell.platedAtVmax > 1e-6 ? `plating! ${fmt(cell.platedAtVmax)} Ah`
       : cell.ceilingAtVmax ? 'anode hits the ceiling' : `${fmt(cell.qAnode - cell.xMax)} Ah room left`;
     return {
-      cell, xAxis: 16, maxAnode: 16,
+      cell, xAxis: 16,
       readouts: {
         npcap: fmt(cell.npCap), npfill: fmt(cell.npFill), anodeVmax: pct(cell.fillAnode(cell.xMax)), status,
         capacity: `${fmt(cell.capacity)} Ah`,
@@ -325,9 +412,9 @@ const TOOLS = {
   },
   nli(v) {
     const acc = lithiumAccount({ qCathRev: Q_CATH, npRatio: v.np, bonus: v.bonus / 100, seiRate: v.sei / 100 });
-    const cell = idealCell({ qCath: Q_CATH, qAnode: acc.qAnode, li: acc.li, vMin: v.vmin, vMax: v.vmax });
+    const cell = idealCell({ qCath: Q_CATH, qAnode: acc.qAnode, li: acc.li, vMin: v.vmin, vMax: v.vmax, ...electrodes(v) });
     return {
-      cell, acc, xAxis: 16, maxAnode: 16,
+      cell, acc, xAxis: 16,
       readouts: {
         li: `${fmt(acc.li)} Ah`, nli: fmt(acc.nLi), gap: `${fmt(cell.cathodeGap)} Ah`,
         limit: acc.lithiumLimits ? 'lithium' : 'cathode (bonus > SEI)',
@@ -337,6 +424,35 @@ const TOOLS = {
     };
   },
 };
+
+function drawParts(parts, out, x, opts = {}) {
+  const { cell } = out;
+  if (parts.tanks) drawTanks(parts.tanks, cell, x, opts);
+  if (parts.electrodes) drawElectrodes(parts.electrodes, cell, x, out.xAxis);
+  if (parts.cell) drawCell(parts.cell, cell, x, out.xAxis);
+  if (parts.account && out.acc) drawAccount(parts.account, out.acc);
+}
+
+// Feste Abbildung zwischen den Texten: dieselben Zeichnungen wie die Tools, mit festen Werten
+// <figure data-chapter-figure data-tool="np" data-show="tanks,electrodes" data-np="0.8" ...>
+async function initFigure(fig) {
+  const tool = fig.dataset.tool;
+  const values = { ...DEFAULTS[tool] };
+  for (const key of Object.keys(values)) {
+    if (fig.dataset[key] === undefined) continue;
+    values[key] = key === 'curves' ? fig.dataset[key] : Number(fig.dataset[key]);
+  }
+  if (values.curves === 'real') await loadReal();
+  const out = TOOLS[tool](values);
+  const x = out.cell.xMin + values.soc * out.cell.capacity;
+  const holder = fig.querySelector('[data-figure-parts]');
+  const parts = {};
+  for (const name of fig.dataset.show.split(',')) {
+    parts[name] = document.createElement('div');
+    holder.append(parts[name]);
+  }
+  drawParts(parts, out, x, { only: fig.dataset.only });
+}
 
 function initTool(root) {
   const form = root.querySelector('form');
@@ -354,13 +470,15 @@ function initTool(root) {
   function render() {
     frame = 0;
     const values = controls.values();
+    if (values.curves === 'real' && !REAL) {
+      loadReal().then(render).catch(() => {});
+      return;
+    }
     const out = compute(values);
     const { cell } = out;
     const x = cell.xMin + values.soc * cell.capacity;
-    if (parts.tanks) drawTanks(parts.tanks, cell, x, { maxAnode: out.maxAnode });
-    if (parts.electrodes) drawElectrodes(parts.electrodes, cell, x, out.xAxis);
-    if (parts.cell) drawCell(parts.cell, cell, x, out.xAxis);
-    if (parts.account && out.acc) drawAccount(parts.account, out.acc);
+    drawParts(parts, out, x);
+    root.classList.toggle('is-real', values.curves === 'real');
     for (const [key, text] of Object.entries(out.readouts)) {
       const node = root.querySelector(`[data-readout="${key}"]`);
       if (node) node.textContent = text;
@@ -388,6 +506,7 @@ function initTool(root) {
 initTabs();
 initQuiz();
 for (const root of document.querySelectorAll('[data-chapter-tool]')) initTool(root);
+for (const fig of document.querySelectorAll('[data-chapter-figure]')) initFigure(fig).catch(() => {});
 
 // Fuer Pruefungen ohne Browser (Zeichnen in eine Attrappe des DOM)
-export { drawAccount, drawCell, drawElectrodes, drawTanks, TOOLS };
+export { DEFAULTS, drawAccount, drawCell, drawElectrodes, drawTanks, TOOLS, REAL, loadReal };

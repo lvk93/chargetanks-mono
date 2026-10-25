@@ -25,6 +25,21 @@ sitemap: false
   <input class="slider" type="range" id="{{ p }}-{{ name }}" name="{{ name }}" min="{{ min }}" max="{{ max }}" step="{{ step }}" value="{{ value }}" data-decimals="{{ d }}" autocomplete="off">
 </div>
 {%- endmacro -%}
+{%- macro curves(p) -%}
+<div class="control" data-control="curves">
+  <div class="control__head"><label for="{{ p }}-curves">Curves</label></div>
+  <select class="select" id="{{ p }}-curves" name="curves" autocomplete="off">
+    <option value="ideal" selected>Ideal tanks (straight lines)</option>
+    <option value="real">Graphite vs NMC (real curves)</option>
+  </select>
+</div>
+{%- endmacro -%}
+{%- macro fig(tool, show, caption, attrs = "") -%}
+<figure class="ch-fig ch-fig--{{ show | replace(',', '-') }}" data-chapter-figure data-tool="{{ tool }}" data-show="{{ show }}" {{ attrs | safe }}>
+  <div class="ch-fig__parts" data-figure-parts></div>
+  <figcaption>{{ caption | safe }}</figcaption>
+</figure>
+{%- endmacro -%}
 {%- macro note(on, text) -%}{% if on %}<aside class="draft-note"><strong>Entwurf:</strong> {{ text | safe }}</aside>{% endif %}{%- endmacro -%}
 {%- macro draftTag(on) -%}{% if on %} <span class="draft-tag">Vorschlag</span>{% endif %}{%- endmacro -%}
 
@@ -71,6 +86,7 @@ sitemap: false
     <p>From here on we only keep an eye on the lithium, because it's the only thing in the cell that really moves. Think of the lithium as water and the cathode as a tank. Water flows downhill. So does lithium. In equilibrium that's not a cute analogy, it's the actual physics.</p>
     <p>But what's up and what's down? We need something like sea level, a zero line to measure heights against. Only our zero hangs at the top: a ceiling, and we measure downwards from it. That ceiling is the Li/Li⁺ reference potential, and the voltage is the distance from the ceiling down to the water surface.</p>
     <p>By the way, one tank against the ceiling is exactly what you measure in the lab as a half cell against lithium metal.</p>
+    {{ fig("intro", "tanks", "One tank against the ceiling: the voltage is the distance from the ceiling down to the water surface.", 'data-only="cathode"') }}
     <p><strong>First plot:</strong> fill the tank and the level rises, the distance to the ceiling shrinks, the voltage drops. Plot that against the amount of lithium and you've got a half-cell curve. For an ideal tank, meaning a constant cross-section, it's a straight line.</p>
     {{ note(draft, "Kein eigenes Ein-Tank-Tool. Das Tool unten zeigt direkt beide Tanks.") }}
 
@@ -78,9 +94,11 @@ sitemap: false
     <p>If you just let the cathode drain, that would be a one-way trip. And where would the lithium go when you charge? You need a second tank: the anode. It hangs from the same ceiling but sits just below it, so low voltage. The cathode sits way down, so high voltage. Lithium, cathode, anode: that's all you need for equilibrium.</p>
     <p>And the cell voltage you measure from the outside? That's simply the height difference between the two water surfaces.</p>
     <p><strong>Charging</strong> means pumping water from the deep cathode tank up into the anode tank. That costs energy. <strong>Discharging</strong> means the water runs back down on its own, and the energy comes back as current.</p>
+    {{ fig("intro", "tanks", "Two tanks on one ceiling. Charged: most of the water sits up in the anode, and the height difference is large.", 'data-soc="0.85"') }}
 
     <h3>Step 4: Both tanks in one plot</h3>
     <p>Now both curves go into one plot. As the anode fills, its level moves toward the ceiling and its voltage drops, just like in any OCV curve on a datasheet. The cell voltage is the vertical distance between the two curves. For ideal tanks that's a straight line again.</p>
+    {{ fig("intro", "electrodes,cell", "Top: both electrodes against the ceiling. Bottom: their distance is the cell voltage. Vmin and Vmax cut out the usable window (shaded).") }}
     <p>Now Vmin and Vmax come in: two horizontal lines. Where they cut the cell voltage, that's your usable capacity.</p>
 
     <section class="ch-tool" data-chapter-tool="intro" aria-label="Tool: two tanks and the voltage window">
@@ -89,6 +107,7 @@ sitemap: false
         {{ sl("t1", "soc", "Charge (Vmin → Vmax)", 0, 1, 0.01, 0.5) }}
         {{ sl("t1", "vmin", "Vmin [V]", 2.8, 3.6, 0.01, 3.2) }}
         {{ sl("t1", "vmax", "Vmax [V]", 3.8, 4.4, 0.01, 4.0) }}
+        {{ curves("t1") }}
         <button type="button" class="controls__action" data-reset>Reset</button>
       </form>
       <div class="ch-tool__figs">
@@ -106,7 +125,7 @@ sitemap: false
 
     <h3>Step 5: The real cell</h3>
     <p>The same thing with real curves, NMC against graphite, immediately looks wilder. But the balance stays the same. All the complexity sits in the shape of the material curves, not in the logic behind them.</p>
-    <p><a href="/tools/cell-reconstruction/?anode=graphite&amp;cathode=nmc&amp;soc=0.5&amp;vmin=2.8&amp;vmax=4.2&amp;np=1.10&amp;lip=0.95" data-real-link-static>See the same balance with real graphite/NMC curves</a>.</p>
+    {{ fig("intro", "tanks,electrodes", "The same balance with graphite against NMC. Graphite is a wide, flat tank with steps just below the ceiling, NMC a bulgy funnel. The bookkeeping doesn't change. Switch the tool above to real curves to play with it.", 'data-curves="real" data-vmin="2.8" data-vmax="4.2" data-soc="0.5"') }}
     <p>So far we've looked at the perfect picture: everything goes in, everything comes back out. Small spoiler: it's not quite that simple. But if we just follow the lithium, it stays as simple as it can possibly be. And next up: the two tanks aren't simply the same size. They have to be designed against each other.</p>
 
     <details class="math-box">
@@ -127,7 +146,9 @@ sitemap: false
 
     <p>So far we've simply assumed everything fits: the cathode gives up its lithium and the anode takes it in. But that doesn't happen by itself. The cathode brings all the lithium, so it sets how much water is in play. How big the anode tank has to be so that all of it fits is something you have to actively design.</p>
     <p>What happens if the anode tank is too small? During charging the level rises, and at some point it hits the ceiling. Then the anode sits at zero volts against lithium, and the lithium no longer goes into the anode but deposits as metal on its surface. That's called lithium plating. And this is where the ceiling pays off: it <em>is</em> lithium metal. So the overflowing water ends up right there, and the lithium becomes part of the ceiling itself. That's also why the anode can't drop below zero volts: its level is stuck to the ceiling. And it costs you capacity, because part of the plated lithium reacts with the electrolyte or loses contact and never comes back.</p>
+    {{ fig("np", "tanks", "Anode too small (N/P = 0.8): the anode is full before the cell reaches Vmax. What doesn't fit plates onto the ceiling.", 'data-np="0.8"') }}
     <p>And if the anode tank is too big? Then it never fills up. Empty space stays at the top, which you build, pay for and carry around without ever using it. And that's not even all: a bigger anode also costs more lithium during formation, but that's for the next chapter.</p>
+    {{ fig("np", "tanks", "Anode too big (N/P = 1.5): at Vmax a good part of the anode tank is still empty.", 'data-np="1.5"') }}
     <p>That's why the anode is designed a bit bigger, typically by around 10 %. For one, no coating is equally thick everywhere. For another, a real cell isn't in equilibrium when you charge it fast. Those 10 % are your safety distance to the ceiling.</p>
 
     <section class="ch-tool" data-chapter-tool="np" aria-label="Tool: N/P ratio">
@@ -137,6 +158,7 @@ sitemap: false
         {{ sl("t2", "soc", "Charge (Vmin → Vmax)", 0, 1, 0.01, 1) }}
         {{ sl("t2", "vmin", "Vmin [V]", 2.8, 3.6, 0.01, 3.0) }}
         {{ sl("t2", "vmax", "Vmax [V]", 3.8, 4.4, 0.01, 4.2) }}
+        {{ curves("t2") }}
         <button type="button" class="controls__action" data-reset>Reset</button>
       </form>
       <div class="ch-tool__figs">
@@ -153,12 +175,13 @@ sitemap: false
         <div><dt>Ceiling</dt><dd data-readout="status">–</dd></div>
         <div><dt>Usable capacity</dt><dd data-readout="capacity">–</dd></div>
       </dl>
-      <p class="ch-tool__more"><a class="more" href="/tools/cell-reconstruction/" data-real-link>Same N/P with real graphite/NMC curves →</a></p>
+      <p class="ch-tool__more"><a class="more" href="/tools/cell-reconstruction/" data-real-link>Other materials in the Cell Reconstruction tool →</a></p>
     </section>
     {{ note(draft, "Ideale Tanks hier: Kathode 3,6–4,3 V, Anode 0,6–0,08 V. So gewählt, dass N/P knapp unter 1 bei Vmax 4,2 V die Decke erreicht. Bei N/P = 1,1 begrenzt oben die leere Kathode, nicht Vmax.") }}
 
     <p>Try it: push the N/P ratio below 1 and watch the anode reach the ceiling before the cell gets to Vmax. Push it well above 1, and you see how much of the anode tank stays empty.</p>
     <p>With real curves, NMC against graphite, exactly the same applies. Only now you see how tight it is: fully charged graphite sits only about 0.1 V below the ceiling. There isn't much room up there.</p>
+    {{ fig("np", "tanks,electrodes", "Graphite against NMC at Vmax with N/P = 1.1: the anode curve runs flat, just above the ceiling.", 'data-curves="real" data-vmin="2.8"') }}
     <p>By the way, there are two definitions of N/P. One just compares the tank sizes. The other asks: how much room does the anode have left to the ceiling at Vmax? The second one is the more honest one for plating. And it depends on a quantity we've ignored so far: how much lithium actually takes part. That's what the next chapter is about.</p>
 
     <details class="math-box">
@@ -183,6 +206,7 @@ sitemap: false
     <h3>The cathode is overfull</h3>
     <p>For this, a quick look inside the cathode. Picture it as a mine, and the lithium as the support beams. So lithium isn't just charge, it's part of the structure. Pull the beams out during the first charge and the structure sags a little in places, and on discharge not everything fits back in.</p>
     <p>That sounds like a loss, but it isn't. The cathode simply leaves the factory overfull: it brings more lithium than it can take back afterwards. In the tank picture: on the first charge, more water flows over than fits back into the cathode later. So what happens to the surplus?</p>
+    {{ fig("nli", "tanks", "Before the SEI takes its cut: the cathode brings 6 % more water than fits back in. With nothing withdrawn, the anode can't fully empty on discharge.", 'data-sei="0"') }}
     {{ note(draft, "Bergwerk: Passt „sackt zusammen“ zu „die Kathode verliert keine Kapazität“? Aufgelöst über „klingt nach Verlust, ist es aber nicht“.") }}
 
     <h3>The SEI takes its cut</h3>
@@ -209,10 +233,12 @@ sitemap: false
 
     <h3>Let's do the books</h3>
     <p>On the account sits what the cathode can take back, plus the bonus it brings from the factory by being overfull. The SEI makes a one-off withdrawal, and that's the real loss. The bonus covers part of it, but practically never all of it. So in the end you're short of lithium, not of room.</p>
+    {{ fig("nli", "account", "The lithium account: reversible cathode capacity plus the formation bonus, minus the SEI. The dashed line is the room in the cathode.") }}
     <p>And how do you know how much gets withdrawn? You can measure it: build anode and cathode each against lithium metal, so against the ceiling, and see how much doesn't come back in the first cycle. For the cathode, this looks like a formation loss in the half cell. In the full cell, though, it isn't a loss but formation lithium, exactly the bonus that covers part of the SEI withdrawal. It just practically never covers all of it.</p>
 
     <h3>What this does to the plot{{ draftTag(draft) }}</h3>
     <p>In the plot, the two lines shift against each other. On discharge the anode runs empty before the cathode is full again, and a gap stays in the cathode. On charge the anode doesn't get as close to the ceiling anymore. The usable capacity is no longer set by the size of the tanks but by the lithium that's still in play.</p>
+    {{ fig("nli", "tanks", "Discharged after formation: the anode is empty, and a gap stays in the cathode.") }}
     <p>And this closes the loop to the last chapter: how much room the anode has left to the ceiling at Vmax doesn't just depend on the tank size, but on the lithium. That's exactly why the second N/P definition is the more honest one.</p>
 
     <section class="ch-tool" data-chapter-tool="nli" aria-label="Tool: lithium account and N/Li ratio">
@@ -224,6 +250,7 @@ sitemap: false
         {{ sl("t3", "soc", "Charge (Vmin → Vmax)", 0, 1, 0.01, 0) }}
         {{ sl("t3", "vmin", "Vmin [V]", 2.8, 3.6, 0.01, 3.0) }}
         {{ sl("t3", "vmax", "Vmax [V]", 3.8, 4.4, 0.01, 4.2) }}
+        {{ curves("t3") }}
         <button type="button" class="controls__action" data-reset>Reset</button>
       </form>
       <div class="ch-tool__figs">
@@ -239,12 +266,13 @@ sitemap: false
         <div><dt>Limited by</dt><dd data-readout="limit">–</dd></div>
         <div><dt>Usable capacity</dt><dd data-readout="capacity">–</dd></div>
       </dl>
-      <p class="ch-tool__more"><a class="more" href="/tools/cell-reconstruction/" data-real-link>Same balance with real graphite/NMC curves →</a></p>
+      <p class="ch-tool__more"><a class="more" href="/tools/cell-reconstruction/" data-real-link>Other materials in the Cell Reconstruction tool →</a></p>
     </section>
     {{ note(draft, "Ein Tool statt zwei: Wasserfall und idealer Plot hängen an denselben Reglern. Gestrichelte Linie im Wasserfall = Platz in der Kathode. Ist der Bonus größer als die SEI, limitiert die Kathode (Randfall, laut Entscheidung vom 24.10. nicht im Text).") }}
 
     <h3>The real cell{{ draftTag(draft) }}</h3>
     <p>With NMC against graphite, the same shift immediately looks crooked: the graphite steps land in a different place relative to the NMC curve, and the cell curve changes shape. That's exactly why people despair when they fit stoichiometry windows, even though underneath it's just a shift.</p>
+    {{ fig("nli", "electrodes,cell", "Graphite against NMC after formation, same lithium account as above.", 'data-curves="real" data-vmin="2.8"') }}
     {{ note(draft, "Echte Kurven: qualitativ lassen oder mit Zahlen?") }}
 
     <h3>Outlook: prelithiation{{ draftTag(draft) }}</h3>

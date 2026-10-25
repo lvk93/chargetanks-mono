@@ -27,15 +27,44 @@ function bisect(f, lo, hi, target) {
   return (a + b) / 2;
 }
 
+// Elektrode als Funktion Fuellgrad -> Spannung: ideale Gerade (Objekt mit empty/full) oder echte Kurve ({ U })
+export function electrodeU(electrode) {
+  return typeof electrode.U === 'function' ? electrode.U : (fill) => potential(electrode, fill);
+}
+
+// Echte Halbzellkurve aus den Materialdaten (SoL_prac -> OCV, linear interpoliert, am Rand festgehalten)
+export function realElectrode(material, direction = 'cha') {
+  const pairs = Array.from(material.data.SoL_prac, (s, i) => [s, material.data[`OCV_${direction}`][i]])
+    .sort((a, b) => a[0] - b[0]);
+  const xs = pairs.map((p) => p[0]);
+  const ys = pairs.map((p) => p[1]);
+  const U = (f) => {
+    if (f <= xs[0]) return ys[0];
+    if (f >= xs[xs.length - 1]) return ys[ys.length - 1];
+    let lo = 0;
+    let hi = xs.length - 1;
+    while (hi - lo > 1) {
+      const mid = (lo + hi) >> 1;
+      if (xs[mid] <= f) lo = mid;
+      else hi = mid;
+    }
+    const t = (f - xs[lo]) / (xs[hi] - xs[lo] || 1);
+    return ys[lo] + t * (ys[hi] - ys[lo]);
+  };
+  return { name: material.name, U };
+}
+
 export function idealCell({ qCath, qAnode, li, vMin, vMax, cathode = IDEAL_CATHODE, anode = IDEAL_ANODE }) {
+  const cathodeU = electrodeU(cathode);
+  const anodeU = electrodeU(anode);
   // Physikalischer Bereich: Kathode kann hoechstens qCath aufnehmen, Anode kann hoechstens li bekommen
   const xLo = Math.max(0, li - qCath);
   const xHi = li;
   const fillCath = (x) => (li - x) / qCath;
   const fillAnode = (x) => x / qAnode;
-  const uCath = (x) => potential(cathode, fillCath(x));
+  const uCath = (x) => cathodeU(fillCath(x));
   // Ueber dem Rand des Anodentanks klebt der Pegel an der Decke (0 V): Lithium-Plating
-  const uAnode = (x) => (fillAnode(x) > 1 + 1e-12 ? 0 : potential(anode, fillAnode(x)));
+  const uAnode = (x) => (fillAnode(x) > 1 + 1e-12 ? 0 : Math.max(0, anodeU(fillAnode(x))));
   const vCell = (x) => uCath(x) - uAnode(x);
   const plated = (x) => Math.max(0, x - qAnode);
 
@@ -50,7 +79,8 @@ export function idealCell({ qCath, qAnode, li, vMin, vMax, cathode = IDEAL_CATHO
 
   return {
     qCath, qAnode, li, vMin, vMax, xLo, xHi, xMin, xMax, capacity, lowLimit, highLimit,
-    fillCath, fillAnode, uCath, uAnode, vCell, plated,
+    fillCath, fillAnode, uCath, uAnode, vCell, plated, cathodeU, anodeU,
+    real: typeof cathode.U === 'function',
     npCap: qAnode / qCath,
     // Anode bei Vmax: wie viel Platz bleibt bis zur Decke?
     npFill: xMax > 0 ? qAnode / xMax : Infinity,
