@@ -1924,8 +1924,12 @@ body.has-fullscreen-chart {
   margin: 0.25rem 0 1rem;
   overflow-x: auto;
   overflow-y: hidden;
-  font-size: 1.15rem;
+  font-size: 1.05rem;
   color: var(--navy);
+}
+
+@media (min-width: 640px) {
+  .math-box .katex math[display="block"] { font-size: 1.2rem; }
 }
 .math-box p .katex { display: inline; }
 .math-box p .katex math { font-size: 1.05em; color: var(--navy); }

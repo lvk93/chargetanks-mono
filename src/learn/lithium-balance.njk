@@ -133,20 +133,38 @@ sitemap: false
 
     <details class="math-box">
       <summary>The math behind it</summary>
-      <p class="math-legend">{% mi %}x{% endmi %} lithium in the anode, {% mi %}Q{% endmi %} tank size, {% mi %}\theta{% endmi %} fill level, {% mi %}U{% endmi %} potential vs Li/Li⁺. Without losses {% mi %}Q_\mathrm{Li} = Q_c{% endmi %}.</p>
-      <p class="math-step">Fill levels and ideal tanks</p>
+      <p class="math-legend">{% mi %}x{% endmi %} lithium in the anode, {% mi %}Q{% endmi %} tank size, {% mi %}\theta{% endmi %} fill level, {% mi %}U{% endmi %} potential vs Li/Li⁺, {% mi %}U^0{% endmi %} empty tank.</p>
+      <p class="math-step">Fill levels</p>
       {% math %}
       \begin{aligned}
-      \theta_a &= \frac{x}{Q_a} & \theta_c &= \frac{Q_\mathrm{Li} - x}{Q_c} \\[6pt]
-      U_a &= U_a^\mathrm{empty} - \Delta U_a\,\theta_a & U_c &= U_c^\mathrm{empty} - \Delta U_c\,\theta_c
+      \theta_a &= \frac{x}{Q_a} \\[4pt]
+      \theta_c &= \frac{Q_c - x}{Q_c}
       \end{aligned}
       {% endmath %}
-      <p class="math-step">Slope of a straight tank</p>
-      {% math %}\left|\frac{\mathrm{d}U}{\mathrm{d}Q}\right| = \frac{\Delta U}{Q} = \frac{1}{\text{cross-section}}{% endmath %}
+      <p class="math-step">Ideal tanks</p>
+      {% math %}
+      \begin{aligned}
+      U_a &= U_a^0 - \Delta U_a\,\theta_a \\[4pt]
+      U_c &= U_c^0 - \Delta U_c\,\theta_c
+      \end{aligned}
+      {% endmath %}
+      <p class="math-step">Slope = 1 / cross-section</p>
+      {% math %}\left|\frac{\mathrm{d}U}{\mathrm{d}Q}\right| = \frac{\Delta U}{Q}{% endmath %}
       <p class="math-step">Cell voltage and energy</p>
-      {% math %}V(x) = U_c(x) - U_a(x) \qquad W = \int V \,\mathrm{d}Q{% endmath %}
+      {% math %}
+      \begin{aligned}
+      V &= U_c - U_a \\[4pt]
+      W &= \int V\,\mathrm{d}Q
+      \end{aligned}
+      {% endmath %}
       <p class="math-step">Voltage window</p>
-      {% math %}V(x_{\min}) = V_{\min} ,\quad V(x_{\max}) = V_{\max} \quad\Rightarrow\quad Q_\mathrm{use} = x_{\max} - x_{\min}{% endmath %}
+      {% math %}
+      \begin{aligned}
+      V(x_{\min}) &= V_{\min} \\[4pt]
+      V(x_{\max}) &= V_{\max} \\[4pt]
+      Q_\mathrm{use} &= x_{\max} - x_{\min}
+      \end{aligned}
+      {% endmath %}
     </details>
     <p class="chapter-next"><a href="#np-ratio">Next: the N/P ratio →</a></p>
   </section>
@@ -195,13 +213,17 @@ sitemap: false
       <p class="math-step">Two definitions</p>
       {% math %}
       \begin{aligned}
-      \mathrm{N/P}_\mathrm{cap} &= \frac{Q_a}{Q_c} \\[6pt]
-      \mathrm{N/P}_\mathrm{fill} &= \frac{Q_a}{x_{\max}} = \frac{1}{\theta_a(V_{\max})} = \mathrm{N/P}_\mathrm{cap}\cdot\frac{Q_c}{x_{\max}}
+      \mathrm{N/P}_\mathrm{cap} &= \frac{Q_a}{Q_c} \\[4pt]
+      \mathrm{N/P}_\mathrm{fill} &= \frac{Q_a}{x_{\max}} \\[4pt]
+      &= \frac{1}{\theta_a(V_{\max})}
       \end{aligned}
       {% endmath %}
-      <p class="math-legend">Equal only if the cathode is completely empty at Vmax ({% mi %}x_{\max} = Q_c{% endmi %}). Finding {% mi %}x_{\max}{% endmi %} is one intersection of straight lines here; with real curves it needs a proper algorithm.</p>
+      <p class="math-step">How they relate</p>
+      {% math %}\mathrm{N/P}_\mathrm{fill} = \mathrm{N/P}_\mathrm{cap}\,\frac{Q_c}{x_{\max}}{% endmath %}
+      <p class="math-legend">Equal only if the cathode is empty at Vmax. Here {% mi %}x_{\max}{% endmi %} is one intersection of straight lines; with real curves it needs a proper algorithm.</p>
       <p class="math-step">Who limits at the top</p>
-      {% math %}x_{\max} = \min\Big(Q_\mathrm{Li},\; x\big|_{V = V_{\max}}\Big){% endmath %}
+      {% math %}x_{\max} = \min\big(Q_c,\ x_V\big){% endmath %}
+      <p class="math-legend">{% mi %}x_V{% endmi %}: where the cell reaches Vmax.</p>
       <p class="math-step">Plating</p>
       {% math %}x > Q_a \;\Rightarrow\; U_a = 0{% endmath %}
     </details>
@@ -294,15 +316,23 @@ sitemap: false
       <p class="math-step">The lithium account</p>
       {% math %}
       \begin{aligned}
-      Q_\mathrm{Li} &= \underbrace{Q_c\,(1 + b)}_{\text{first charge}} - \underbrace{s\,Q_a}_{\text{SEI}} \\[6pt]
+      Q_\mathrm{first} &= Q_c\,(1 + b) \\[4pt]
+      Q_\mathrm{SEI} &= s\,Q_a \\[4pt]
+      Q_\mathrm{Li} &= Q_\mathrm{first} - Q_\mathrm{SEI} \\[4pt]
       \mathrm{N/Li} &= \frac{Q_a}{Q_\mathrm{Li}}
       \end{aligned}
       {% endmath %}
       <p class="math-step">Gap in the cathode at Vmin</p>
-      {% math %}Q_c - Q_\mathrm{Li} = s\,Q_a - b\,Q_c > 0 \quad\Leftrightarrow\quad s\,Q_a > b\,Q_c{% endmath %}
-      <p class="math-legend">Practically always true, so lithium limits.</p>
+      {% math %}Q_c - Q_\mathrm{Li} = s\,Q_a - b\,Q_c{% endmath %}
+      <p class="math-legend">Positive as soon as {% mi %}s\,Q_a > b\,Q_c{% endmi %}, which is practically always. So lithium limits.</p>
       <p class="math-step">Example (tool defaults)</p>
-      {% math %}Q_\mathrm{Li} = 10\,\mathrm{Ah}\cdot 1.06 - 0.10\cdot 12\,\mathrm{Ah} = 9.4\,\mathrm{Ah}{% endmath %}
+      {% math %}
+      \begin{aligned}
+      Q_\mathrm{first} &= 10.6\ \mathrm{Ah} \\[4pt]
+      Q_\mathrm{SEI} &= 1.2\ \mathrm{Ah} \\[4pt]
+      Q_\mathrm{Li} &= 9.4\ \mathrm{Ah}
+      \end{aligned}
+      {% endmath %}
     </details>
     {{ note(draft, "Namen in der Mathe-Box zusammen mit N/P<sub>cap</sub> und N/P<sub>fill</sub> festlegen.") }}
     <p class="chapter-next"><a href="#np-ratio">← N/P ratio</a></p>
