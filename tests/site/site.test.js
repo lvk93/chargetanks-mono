@@ -31,11 +31,12 @@ const pages = built ? files(SITE, '.html') : [];
 
 test('Seite gebaut (npm run build)', { skip: !built && 'kein _site/ - erst "npm run build"' }, () => {
   const names = pages.map((p) => relative(SITE, p).replaceAll('\\', '/'));
-  for (const page of ['index.html', '404.html', 'blog/index.html', 'blog/two-tank-battery-model/index.html', 'tools/index.html',
+  for (const page of ['index.html', '404.html', 'about/index.html', 'learn/lithium-balance/index.html', 'tools/index.html',
     'imprint/index.html', 'privacy/index.html', ...TOOLS.map((t) => `tools/${t}/index.html`)]) {
     assert.ok(names.includes(page), page);
   }
   assert.ok(!names.some((n) => n.startsWith('tools/suite/')), 'tools/suite/ ist entfallen');
+  assert.ok(!names.some((n) => n.startsWith('blog/')), 'Blog ist entfallen (Umleitung in _redirects)');
 });
 
 for (const file of pages) {
@@ -67,6 +68,7 @@ for (const file of pages) {
     assert.equal(html.match(/<h1[\s>]/g)?.length, 1, 'genau eine h1');
     assert.ok(!html.includes('onrender.com'), 'kein Verweis auf Render');
     assert.ok(!html.includes('/tools/suite/'), 'kein Verweis auf /tools/suite/');
+    assert.ok(!html.includes('href="/blog/'), 'kein Verweis auf den entfallenen Blog');
   });
 }
 

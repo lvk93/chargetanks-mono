@@ -1,0 +1,80 @@
+---
+layout: layouts/base.njk
+title: About
+metaTitle: "About Lars von Kolzenberg | Charge Tanks"
+description: "Lars von Kolzenberg, battery modeling engineer at Breathe: CV, publications and links to Google Scholar, ORCID and LinkedIn."
+permalink: /about/
+ldType: website
+# Entwurf, bis der Lebenslauf von Lars da ist: Notizen sichtbar, nicht indexiert, nicht in der Sitemap.
+draft: true
+robots: "noindex, follow"
+sitemap: false
+---
+{%- macro note(on, text) -%}{% if on %}<aside class="draft-note"><strong>Entwurf:</strong> {{ text | safe }}</aside>{% endif %}{%- endmacro -%}
+{%- macro todo(on) -%}{% if on %} <span class="draft-tag">fehlt</span>{% endif %}{%- endmacro -%}
+<article class="container container--article">
+  <img class="cv-photo" src="/images/lars.jpg" alt="Lars von Kolzenberg" width="768" height="512" decoding="async">
+  <h1 class="article-title">Lars von Kolzenberg</h1>
+  <div class="prose">
+    <p>I build physics-based battery models: cell models for design, diagnostics and aging, and the software that puts them to work. My PhD was on how operating conditions drive SEI growth. Since then I have worked on aging analysis, cell design and swelling prediction in industry, and today on battery modeling at Breathe.</p>
+    <p>Charge Tanks is where I write down, from scratch, how I think about cells. It is a notebook, not a product.</p>
+  </div>
+  <ul class="cv-links">
+    <li><a href="{{ site.scholar }}">Google Scholar</a></li>
+    <li><a href="{{ site.orcid }}">ORCID</a></li>
+    <li><a href="{{ site.linkedin }}">LinkedIn</a></li>
+    <li><a href="mailto:{{ site.email }}">{{ site.email }}</a></li>
+  </ul>
+
+  {%- if draft %}
+  <aside class="draft-note draft-note--banner"><strong>Entwurfsvorschau.</strong> Gerüst für den Lebenslauf. Jahre, Rollen und die übrigen Paper kommen aus Lars' CV; „fehlt“-Marken und gelbe Kästen verschwinden mit <code>draft: false</code>.</aside>
+  {%- endif %}
+
+  <section class="prose" aria-labelledby="cv-experience">
+    <h2 id="cv-experience">Experience</h2>
+  </section>
+  <ol class="cv-list">
+    <li>
+      <span class="cv-list__when">{{ todo(draft) }}– today</span>
+      <div class="cv-list__what">
+        <strong>Senior battery modeling engineer, Breathe Battery Technologies</strong>
+        <p>Physics-based and reduced-order cell models, parametrization from impedance and electrode data. Breathe's model products: <a href="https://docs.breathebatteries.com/breathe-simulate-documentation/product_overview/">Breathe Simulate</a>, Breathe Discover.</p>
+        {{ note(draft, "Link zu Discover, sobald es eine öffentliche Seite gibt. Beschreibung der eigenen Rolle bitte aus dem CV.") }}
+      </div>
+    </li>
+    <li>
+      <span class="cv-list__when">{{ todo(draft) }}</span>
+      <div class="cv-list__what">
+        <strong>Cellforce Group</strong>{{ todo(draft) }}
+        <p>Aging analysis, cell design and swelling prediction for a battery cell manufacturer.</p>
+      </div>
+    </li>
+    <li>
+      <span class="cv-list__when">2023</span>
+      <div class="cv-list__what">
+        <strong>PhD, Ulm University, Institute of Electrochemistry</strong>
+        <p>Thesis: <a href="https://doi.org/10.18725/OPARU-49704">Prolonging lithium-ion battery lifetime: How operating conditions affect solid electrolyte interphase growth</a>. Continuum models of SEI growth from nonequilibrium thermodynamics, from dense and porous films to SEI on expanding silicon particles.</p>
+        {{ note(draft, "Zeitraum der Promotion und Arbeitsgruppe ergänzen.") }}
+      </div>
+    </li>
+    <li>
+      <span class="cv-list__when">{{ todo(draft) }}</span>
+      <div class="cv-list__what">
+        <strong>M.Sc. Process engineering</strong>{{ todo(draft) }}
+      </div>
+    </li>
+  </ol>
+
+  <section class="prose" aria-labelledby="cv-publications">
+    <h2 id="cv-publications">Publications</h2>
+    {{ note(draft, "Unvollständig: nur die Paper, die öffentlich ohne Scholar auffindbar waren. Rest aus Scholar oder CV.") }}
+    <ol class="pubs" reversed>
+      <li><span class="pubs__title">Inhomogeneous carbon binder distribution: implications for tortuosity determination from electrochemical impedance spectroscopy.</span> C. Bieneck, L. von Kolzenberg, C. G. Staacke, J. Lammel, J. Zausch, A. Latz, T. Danner. <em>J. Electrochem. Soc.</em> 172, 070507 (2025). <a href="https://doi.org/10.1149/1945-7111/adde17">doi</a></li>
+      <li><span class="pubs__title">Transition between growth of dense and porous films: theory of dual-layer SEI.</span> L. von Kolzenberg, M. Werres, J. Tetzloff, B. Horstmann. <em>Phys. Chem. Chem. Phys.</em> 24, 18469 (2022). <a href="https://doi.org/10.1039/D2CP00188H">doi</a></li>
+      <li><span class="pubs__title">A four parameter model for the solid-electrolyte interphase to predict battery aging during operation.</span> L. von Kolzenberg, J. Stadler, J. Fath, M. Ecker, B. Horstmann, A. Latz. <em>J. Power Sources</em> 539, 231560 (2022). <a href="https://doi.org/10.1016/j.jpowsour.2022.231560">doi</a></li>
+      <li><span class="pubs__title">Chemo-mechanical model of SEI growth on silicon electrode particles.</span> L. von Kolzenberg, A. Latz, B. Horstmann. <em>Batteries &amp; Supercaps</em> 5, e202100216 (2022). <a href="https://doi.org/10.1002/batt.202100216">doi</a></li>
+      <li><span class="pubs__title">Efficient simulation of chemical-mechanical coupling in battery active particles.</span> G. F. Castelli, L. von Kolzenberg, B. Horstmann, A. Latz, W. Dörfler. <em>Energy Technol.</em> 9, 2000835 (2021). <a href="https://doi.org/10.1002/ente.202000835">doi</a></li>
+      <li><span class="pubs__title">Solid-electrolyte interphase during battery cycling: theory of growth regimes.</span> L. von Kolzenberg, A. Latz, B. Horstmann. <em>ChemSusChem</em> 13, 3901 (2020). <a href="https://doi.org/10.1002/cssc.202000867">doi</a></li>
+    </ol>
+  </section>
+</article>

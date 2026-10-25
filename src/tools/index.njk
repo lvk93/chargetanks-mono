@@ -1,24 +1,17 @@
 ---
 layout: layouts/base.njk
-title: Battery Tools
+title: Tools
+metaTitle: "Battery tools: voltage window, N/P ratio, aging and blends | Charge Tanks"
 description: "Interactive Charge Tanks tools for exploring battery voltage limits, OCV behavior, capacity balance, and aging through the two-tank analogy."
 ogImage: /assets/img/tools/cell-reconstruction-og.jpg
 ogImageAlt: "Anode and cathode tanks of a full cell with the cell voltage between them"
 ldType: collection
 crumbs: [["Tools", "/tools/"]]
 ---
-<section class="page-hero">
-  <div class="container container--hero">
-    <p class="eyebrow">Charge Tanks Tools</p>
-    <h1 class="page-title">Interactive battery tools for engineers</h1>
-    <p class="page-hero__lead">Explore voltage limits, OCV behavior, lithium inventory, and aging with five tools built around the two-tank model. Each one makes a physical trade-off visible instead of acting as a black-box calculator.</p>
-    <p class="page-hero__note">New to the tank picture? Start with the article <a href="/blog/two-tank-battery-model/">Two-tank battery model</a> and then reproduce its effects here.</p>
-  </div>
-</section>
-
-<section class="section">
-  <div class="container">
-    {%- set cardHeading = "h2" %}
-    {% include "partials/tool-grid.njk" %}
+<section class="home-intro home-intro--page">
+  <div class="container container--article">
+    <h1 class="page-title">Tools</h1>
+    <p class="home-lead">Five models built around the two-tank picture, with real material curves. Each one makes a physical trade-off visible instead of acting as a black-box calculator. New to the tanks? Start with <a href="/learn/lithium-balance/">the lithium balance</a>.</p>
+    {% include "partials/tool-list.njk" %}
   </div>
 </section>

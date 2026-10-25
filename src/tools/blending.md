@@ -15,7 +15,6 @@ tryThis:
   - { query: "gamma=1", label: "q% = 1:", text: "pure graphite. The blend tank equals the graphite tank." }
   - { query: "gamma=0", label: "q% = 0:", text: "pure silicon." }
   - { query: "sol=0.25&gamma=0.5", label: "Half and half at SoL 0.25:", text: "both materials sit at the same voltage but at different states of lithiation." }
-readMore: { url: "/blog/two-tank-battery-model/#how-do-blended-materials-behave", title: "How do blended materials behave?" }
 charts:
   - { id: tanks1, title: Tanks of each material }
   - { id: ocv, title: Voltage from water level }

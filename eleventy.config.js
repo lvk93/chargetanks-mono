@@ -76,8 +76,6 @@ export default function (eleventyConfig) {
   eleventyConfig.addPairedShortcode('math', (content) => tex(content, true));
   eleventyConfig.addPairedShortcode('mi', (content) => tex(content, false));
 
-  eleventyConfig.addCollection('postsNewestFirst', (api) => api.getFilteredByTag('posts').sort((a, b) => b.date - a.date));
-
   return {
     dir: { input: 'src', output: '_site', includes: '_includes', data: '_data' },
     markdownTemplateEngine: 'njk',

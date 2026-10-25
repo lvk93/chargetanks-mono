@@ -1,110 +1,53 @@
 ---
 layout: layouts/base.njk
-metaTitle: "Charge Tanks | Battery intuition through the two-tank analogy"
-description: "Battery intuition, interactive tools, and articles that explain voltage, capacity, OCV, and aging through the two-tank analogy."
+metaTitle: "Charge Tanks | A battery is lithium, two tanks and bookkeeping"
+description: "Battery cell design from first principles: follow the lithium through anode and cathode as two tanks, with small tools that compute along. By Lars von Kolzenberg."
 ldType: website
 mainClass: ""
 ---
 {%- from "partials/icons.njk" import icon -%}
-<section class="hero">
-  <div class="container hero__grid">
-    <div class="hero__text">
-      <h1 class="hero__title">Understanding Batteries Through Two Tanks</h1>
-      <div class="hero__lead">
-        <p>Batteries are complex systems, and key ideas like voltage limits, capacity balance, and aging are hard to build intuition for from equations alone.</p>
-        <p>The two-tank model gives those relationships a physical picture. The tools and articles below turn that picture into something you can inspect, test, and use.</p>
-      </div>
-      <div class="actions">
-        <a class="btn btn--primary btn--lg" href="/tools/">Explore Tools</a>
-        <a class="btn btn--secondary btn--lg" href="/blog/">Read the Blog</a>
-      </div>
-    </div>
-    <div class="hero__visual">
-      <div class="hero-tank" data-hero-tank data-plotly="{{ plotlyScript }}">
-        <h2 class="hero-tank__title">The Core Idea</h2>
-        <div class="hero-tank__chart">
-          <img class="hero-tank__still" src="/assets/img/hero-tank.jpg" alt="Anode and cathode tank of a graphite/NMC cell at 50 % state of charge" width="1050" height="680">
-          <div class="hero-tank__plot" data-chart-frame><div class="hero-tank__plot-inner" data-chart-plot></div></div>
-        </div>
-        <form class="hero-tank__control" aria-label="Tank settings">
-          <div class="control__head">
-            <label for="hero-soc">State of charge (graphite/NMC cell)</label>
-            <output for="hero-soc">0.50</output>
-          </div>
-          <input class="slider" type="range" id="hero-soc" name="soc" min="0" max="1" step="0.01" value="0.5" data-decimals="2" autocomplete="off" disabled>
-        </form>
-        <ul class="core-list">
-          <li>
-            <span class="dot dot--anode"></span>
-            <div>
-              <p class="core-list__name">Anode Tank</p>
-              <p>The uphill reservoir. Its size determines how much lithium you can safely store without plating.</p>
-            </div>
-          </li>
-          <li>
-            <span class="dot dot--cathode"></span>
-            <div>
-              <p class="core-list__name">Cathode Tank</p>
-              <p>The downhill reservoir. It defines how much lithium is available in the first place.</p>
-            </div>
-          </li>
-          <li>
-            <span class="dot dot--lithium"></span>
-            <div>
-              <p class="core-list__name">Lithium</p>
-              <p>The only thing that actually moves. Often the true limiting factor.</p>
-            </div>
-          </li>
-        </ul>
-        <a class="more hero-tank__link" href="/tools/cell-reconstruction/" data-hero-link>Open in Cell Reconstruction {{ icon("arrow-right") }}</a>
-      </div>
-      <div class="hero__glow hero__glow--br"></div>
-      <div class="hero__glow hero__glow--tl"></div>
-    </div>
+{#- Startseite: These zuerst, dann das Kapitel als Hauptinhalt, Tools als schlichte Liste. Kein Landing-Page-Muster. -#}
+<section class="home-intro">
+  <div class="container container--article">
+    <h1 class="home-thesis">A battery is lithium, two tanks and bookkeeping. <span>The complexity is in the curves, not in the logic.</span></h1>
+    <p class="home-lead">Charge Tanks follows the lithium through a cell from scratch: anode and cathode as two tanks hanging from one ceiling, with small tools that compute along and the math folded away for whoever wants it.</p>
+    <figure class="ch-fig ch-fig--tanks-electrodes home-fig" data-chapter-figure data-tool="intro" data-show="tanks,electrodes" data-curves="real" data-vmin="2.8" data-vmax="4.2" data-soc="0.5">
+      <div class="ch-fig__parts" data-figure-parts></div>
+      <figcaption>Graphite against NMC at half charge: the two tanks, shaped by their dQ/dV curves, and the same state as two potential curves. The cell voltage is the distance between them.</figcaption>
+    </figure>
+    <p class="home-byline">Written by <a href="/about/">Lars von Kolzenberg</a>, battery modeling engineer at Breathe, PhD on SEI growth at Ulm University.</p>
   </div>
 </section>
 
-<section id="tools" class="section section--tint">
-  <div class="container">
-    <div class="section-head">
-      <h2>Charge Tank Tools</h2>
-      <p>Explore how geometry, lithium inventory, and voltage limits shape real battery behavior.</p>
-    </div>
-    {% include "partials/tool-grid.njk" %}
+<section class="home-section" aria-labelledby="home-chapter">
+  <div class="container container--article">
+    <p class="eyebrow">Start here</p>
+    <h2 id="home-chapter" class="home-section__title"><a href="/learn/lithium-balance/">The lithium balance: designing a cell forwards</a></h2>
+    <p class="home-section__lead">Most of us take cells apart backwards, from the OCV to the electrodes. Built forwards, the balance gets simple.</p>
+    <ol class="home-parts">
+      <li>
+        <a href="/learn/lithium-balance/#voltage-window"><span class="home-parts__no">1</span><span class="home-parts__name">Voltage window</span></a>
+        <p>Why the cell voltage is a height difference, and what Vmin and Vmax cut out of the tanks.</p>
+      </li>
+      <li>
+        <a href="/learn/lithium-balance/#np-ratio"><span class="home-parts__no">2</span><span class="home-parts__name">N/P ratio</span></a>
+        <p>Why the anode is built bigger, and the more honest way to measure the margin to plating.</p>
+      </li>
+      <li>
+        <a href="/learn/lithium-balance/#n-li-ratio"><span class="home-parts__no">3</span><span class="home-parts__name">N/Li ratio</span></a>
+        <p>Why the cathode's first-cycle loss is no loss in the full cell, and why every cell ends up short of lithium, not of room.</p>
+      </li>
+    </ol>
+    <p class="home-next">Next up: aging modes and blended electrodes.</p>
   </div>
 </section>
 
-<section id="blog" class="section">
-  <div class="container">
-    <div class="section-head">
-      <h2>Latest Articles</h2>
-      <p>Explaining battery concepts, design trade-offs and aging behavior in more depth.</p>
-      <div class="section-head__action">
-        <a class="btn btn--secondary" href="/blog/"><span>Browse the Blog</span>{{ icon("arrow-right") }}</a>
-      </div>
-    </div>
-    <ul class="post-grid">
-      {%- for post in collections.postsNewestFirst | head(3) %}
-      {% include "partials/post-card.njk" %}
-      {%- endfor %}
-    </ul>
+<section class="home-section home-section--tools" aria-labelledby="home-tools">
+  <div class="container container--article">
+    <p class="eyebrow">The lab</p>
+    <h2 id="home-tools" class="home-section__title"><a href="/tools/">Tools</a></h2>
+    <p class="home-section__lead">The full models behind the chapters, with real material curves. Every setting lives in the link, so you can share exactly what you see.</p>
+    {% include "partials/tool-list.njk" %}
   </div>
 </section>
-
-<section id="about" class="section about">
-  <div class="container container--narrow">
-    <h2>About Me</h2>
-    <div class="about__photo">
-      <img src="/images/lars.jpg" alt="Lars von Kolzenberg" width="768" height="512" loading="lazy" decoding="async">
-    </div>
-    <div class="about__text">
-      <p class="about__lead">Hi, I'm Lars. I spend a lot of time trying to make sense of batteries.</p>
-      <p>Most of my work revolves around battery models and diagnostics, building tools that help us look inside a cell and understand how it is built, how it behaves, and how it ages.</p>
-      <p>Over the years I've seen how difficult it can be to build a real intuition for batteries. They are complex systems, and most explanations focus on isolated effects rather than the bigger picture.</p>
-      <p>This site is built around a simple idea: if you look at batteries through the right mental models, many things suddenly become much clearer. One example is thinking about a battery as a system of connected tanks: a simple picture that turns out to explain surprisingly many things.</p>
-      <p>My background is in physical battery modeling. I started with a PhD in thermodynamics-based aging models and later expanded into aging analysis, cell design and swelling prediction in industry. Today I work on battery software at Breathe, translating physical insight into practical tools.</p>
-      <p>Charge Tanks is where I collect the models, examples, and visual explanations that make these topics easier to reason about.</p>
-    </div>
-  </div>
-</section>
-<script type="module" src="/assets/js/site/heroTank.js"></script>
+<script type="module" src="/assets/js/site/chapter.js"></script>
