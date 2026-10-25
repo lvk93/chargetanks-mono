@@ -138,25 +138,31 @@ function drawTanks(container, cell, x, { only } = {}) {
   svg.append(el('line', { x1: 8, x2: W - 8, y1: top, y2: top, stroke: C.metal, 'stroke-width': 1.5 }));
   svg.append(el('text', { x: W / 2, y: top - 12, fill: C.muted, 'font-size': 11, 'text-anchor': 'middle' }, 'ceiling = Li/Li⁺ (0 V)'));
 
+  // Symmetrischer Tank: dQ/dU nach links und rechts je zur Haelfte um die Mittelachse
   function tank({ x0, pts, fill, color, name }) {
     const bottom = pts[0];
     const last = pts[pts.length - 1];
     const level = Math.min(1, Math.max(0, fill));
     const yBot = y(bottom.u);
+    const maxW = Math.max(...pts.map((p) => p.w));
+    const cx = x0 + maxW / 2;
+    const L = (p) => (cx - p.w / 2).toFixed(1);
+    const R = (p) => (cx + p.w / 2).toFixed(1);
+    const Y = (p) => y(p.u).toFixed(1);
     // Wasser: alles unterhalb der Oberflaeche (Fuellgrad <= fill)
     const wet = pts.filter((p) => p.f <= level);
     const surfU = level >= last.f ? last.u : interpU(pts, level);
-    const surfW = wet.length ? wet[wet.length - 1].w : bottom.w;
-    if (level > 0) {
-      const water = [`M${x0} ${yBot}`, ...wet.map((p) => `L${(x0 + p.w).toFixed(1)} ${y(p.u).toFixed(1)}`),
-        `L${(x0 + surfW).toFixed(1)} ${y(surfU).toFixed(1)}`, `L${x0} ${y(surfU).toFixed(1)}`, 'Z'];
+    const surf = { u: surfU, w: wet.length ? wet[wet.length - 1].w : bottom.w };
+    if (level > 0 && wet.length) {
+      const water = [`M${R(wet[0])} ${Y(wet[0])}`, ...wet.map((p) => `L${R(p)} ${Y(p)}`), `L${R(surf)} ${Y(surf)}`,
+        `L${L(surf)} ${Y(surf)}`, ...[...wet].reverse().map((p) => `L${L(p)} ${Y(p)}`), 'Z'];
       svg.append(el('path', { d: water.join(''), fill: C.water, opacity: 0.85 }));
     }
-    const wall = [`M${x0} ${(y(last.u) - 3).toFixed(1)}`, `L${x0} ${yBot}`,
-      ...pts.map((p) => `L${(x0 + p.w).toFixed(1)} ${y(p.u).toFixed(1)}`), `L${(x0 + last.w).toFixed(1)} ${(y(last.u) - 3).toFixed(1)}`];
+    const rim = y(last.u) - 3;
+    const wall = [`M${L(last)} ${rim.toFixed(1)}`, ...[...pts].reverse().map((p) => `L${L(p)} ${Y(p)}`),
+      ...pts.map((p) => `L${R(p)} ${Y(p)}`), `L${R(last)} ${rim.toFixed(1)}`];
     svg.append(el('path', { d: wall.join(''), fill: 'none', stroke: color, 'stroke-width': 2.5, 'stroke-linejoin': 'round' }));
-    const maxW = Math.max(...pts.map((p) => p.w));
-    svg.append(el('text', { x: x0 + maxW / 2, y: yBot + 16, fill: color, 'font-size': 12, 'font-weight': 600, 'text-anchor': 'middle' }, `${name} ${pct(level)}`));
+    svg.append(el('text', { x: cx, y: yBot + 16, fill: color, 'font-size': 12, 'font-weight': 600, 'text-anchor': 'middle' }, `${name} ${pct(level)}`));
     return { maxW, ySurf: y(surfU), yTop: y(last.u), x0, yBot };
   }
 
