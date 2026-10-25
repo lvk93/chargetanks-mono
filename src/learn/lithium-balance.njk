@@ -133,12 +133,20 @@ sitemap: false
 
     <details class="math-box">
       <summary>The math behind it</summary>
-      <ul>
-        <li><strong>Work</strong> = amount of water × height difference = charge × voltage.</li>
-        <li><strong>Ideal tank:</strong> the potential is a straight line in the lithium content, slope = 1 / cross-section (here: voltage span of the tank divided by its capacity).</li>
-        <li><strong>Cell voltage</strong> = U<sub>cathode</sub>(x) − U<sub>anode</sub>(x), with x the lithium in the anode. Two straight lines, so their difference is a straight line too.</li>
-        <li><strong>Usable capacity:</strong> solve U<sub>cell</sub>(x) = Vmin and U<sub>cell</sub>(x) = Vmax for x. Capacity = x<sub>Vmax</sub> − x<sub>Vmin</sub>.</li>
-      </ul>
+      <p class="math-legend">{% mi %}x{% endmi %} lithium in the anode, {% mi %}Q{% endmi %} tank size, {% mi %}\theta{% endmi %} fill level, {% mi %}U{% endmi %} potential vs Li/Li⁺. Without losses {% mi %}Q_\mathrm{Li} = Q_c{% endmi %}.</p>
+      <p class="math-step">Fill levels and ideal tanks</p>
+      {% math %}
+      \begin{aligned}
+      \theta_a &= \frac{x}{Q_a} & \theta_c &= \frac{Q_\mathrm{Li} - x}{Q_c} \\[6pt]
+      U_a &= U_a^\mathrm{empty} - \Delta U_a\,\theta_a & U_c &= U_c^\mathrm{empty} - \Delta U_c\,\theta_c
+      \end{aligned}
+      {% endmath %}
+      <p class="math-step">Slope of a straight tank</p>
+      {% math %}\left|\frac{\mathrm{d}U}{\mathrm{d}Q}\right| = \frac{\Delta U}{Q} = \frac{1}{\text{cross-section}}{% endmath %}
+      <p class="math-step">Cell voltage and energy</p>
+      {% math %}V(x) = U_c(x) - U_a(x) \qquad W = \int V \,\mathrm{d}Q{% endmath %}
+      <p class="math-step">Voltage window</p>
+      {% math %}V(x_{\min}) = V_{\min} ,\quad V(x_{\max}) = V_{\max} \quad\Rightarrow\quad Q_\mathrm{use} = x_{\max} - x_{\min}{% endmath %}
     </details>
     <p class="chapter-next"><a href="#np-ratio">Next: the N/P ratio →</a></p>
   </section>
@@ -184,12 +192,18 @@ sitemap: false
 
     <details class="math-box">
       <summary>The math behind it</summary>
-      <ul>
-        <li><strong>N/P<sub>cap</sub></strong> = Q<sub>anode</sub> / Q<sub>cathode</sub>: ratio of the tank sizes, from half-cell capacities.</li>
-        <li><strong>N/P<sub>fill</sub></strong> = Q<sub>anode</sub> / lithium in the anode at Vmax = 1 / anode fill at Vmax: how much room is left to the ceiling.</li>
-        <li>These are two different definitions, and how they relate depends strongly on Vmax and Vmin. You can only convert one into the other in the linear case. With real curves it gets trickier and needs a clever algorithm.</li>
-        <li>Each limit is one intersection of two straight lines. Play through the cases: cathode empty, anode not quite full, anode at the ceiling, Vmax reached. Who limits first?</li>
-      </ul>
+      <p class="math-step">Two definitions</p>
+      {% math %}
+      \begin{aligned}
+      \mathrm{N/P}_\mathrm{cap} &= \frac{Q_a}{Q_c} \\[6pt]
+      \mathrm{N/P}_\mathrm{fill} &= \frac{Q_a}{x_{\max}} = \frac{1}{\theta_a(V_{\max})} = \mathrm{N/P}_\mathrm{cap}\cdot\frac{Q_c}{x_{\max}}
+      \end{aligned}
+      {% endmath %}
+      <p class="math-legend">Equal only if the cathode is completely empty at Vmax ({% mi %}x_{\max} = Q_c{% endmi %}). Finding {% mi %}x_{\max}{% endmi %} is one intersection of straight lines here; with real curves it needs a proper algorithm.</p>
+      <p class="math-step">Who limits at the top</p>
+      {% math %}x_{\max} = \min\Big(Q_\mathrm{Li},\; x\big|_{V = V_{\max}}\Big){% endmath %}
+      <p class="math-step">Plating</p>
+      {% math %}x > Q_a \;\Rightarrow\; U_a = 0{% endmath %}
     </details>
     {{ note(draft, "Namen N/P<sub>cap</sub> und N/P<sub>fill</sub> noch bestätigen.") }}
     <p class="chapter-next"><a href="#voltage-window">← Voltage window</a> <a href="#n-li-ratio">Next: the N/Li ratio →</a></p>
@@ -276,14 +290,19 @@ sitemap: false
 
     <details class="math-box">
       <summary>The math behind it{{ draftTag(draft) }}</summary>
-      <ul>
-        <li><strong>Starting balance</strong> = first charge of the cathode half cell = Q<sub>cathode,rev</sub> + bonus.</li>
-        <li><strong>Bonus</strong> = first charge − Q<sub>cathode,rev</sub> (from the first cycle of the cathode half cell).</li>
-        <li><strong>SEI</strong> = first-cycle loss of the anode half cell, scales with the anode size.</li>
-        <li><strong>Cyclable lithium</strong> Li<sub>cyc</sub> = starting balance − SEI. Lithium limits as long as SEI &gt; bonus, which is practically always.</li>
-        <li><strong>N/Li</strong> = Q<sub>anode</sub> / Li<sub>cyc</sub>.</li>
-        <li><strong>Ideal tanks:</strong> the anode line shifts against the cathode line by the missing lithium Q<sub>cathode,rev</sub> − Li<sub>cyc</sub>, which is exactly the gap in the cathode at Vmin.</li>
-      </ul>
+      <p class="math-legend">{% mi %}b{% endmi %} formation bonus of the cathode, {% mi %}s{% endmi %} SEI loss per anode capacity.</p>
+      <p class="math-step">The lithium account</p>
+      {% math %}
+      \begin{aligned}
+      Q_\mathrm{Li} &= \underbrace{Q_c\,(1 + b)}_{\text{first charge}} - \underbrace{s\,Q_a}_{\text{SEI}} \\[6pt]
+      \mathrm{N/Li} &= \frac{Q_a}{Q_\mathrm{Li}}
+      \end{aligned}
+      {% endmath %}
+      <p class="math-step">Gap in the cathode at Vmin</p>
+      {% math %}Q_c - Q_\mathrm{Li} = s\,Q_a - b\,Q_c > 0 \quad\Leftrightarrow\quad s\,Q_a > b\,Q_c{% endmath %}
+      <p class="math-legend">Practically always true, so lithium limits.</p>
+      <p class="math-step">Example (tool defaults)</p>
+      {% math %}Q_\mathrm{Li} = 10\,\mathrm{Ah}\cdot 1.06 - 0.10\cdot 12\,\mathrm{Ah} = 9.4\,\mathrm{Ah}{% endmath %}
     </details>
     {{ note(draft, "Namen in der Mathe-Box zusammen mit N/P<sub>cap</sub> und N/P<sub>fill</sub> festlegen.") }}
     <p class="chapter-next"><a href="#np-ratio">← N/P ratio</a></p>

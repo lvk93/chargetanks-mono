@@ -2,6 +2,7 @@
 // unveraendert kopiert (Passthrough), Plotly kommt aus node_modules (Version im Dateinamen).
 import { readFileSync } from 'node:fs';
 import { structuredData } from './config/structuredData.js';
+import katex from './config/vendor/katex/katex.mjs';
 
 const plotlyVersion = JSON.parse(readFileSync('node_modules/plotly.js-basic-dist-min/package.json', 'utf8')).version;
 const plotlyScript = `/assets/vendor/plotly-basic-${plotlyVersion}.min.js`;
@@ -69,6 +70,11 @@ export default function (eleventyConfig) {
   eleventyConfig.addFilter('fixed', (value, decimals = 2) => Number(value).toFixed(decimals));
   eleventyConfig.addFilter('bySlug', (items, slug) => items.find((item) => item.slug === slug));
   eleventyConfig.addFilter('hasSecondaryControls', (groups) => groups.some((g) => g.items.some((c) => !c.primary)));
+
+  // LaTeX -> MathML beim Build (KaTeX, siehe config/vendor/katex/README.md). Fehler brechen den Build ab.
+  const tex = (source, displayMode) => katex.renderToString(source.trim(), { displayMode, output: 'mathml', throwOnError: true });
+  eleventyConfig.addPairedShortcode('math', (content) => tex(content, true));
+  eleventyConfig.addPairedShortcode('mi', (content) => tex(content, false));
 
   eleventyConfig.addCollection('postsNewestFirst', (api) => api.getFilteredByTag('posts').sort((a, b) => b.date - a.date));
 

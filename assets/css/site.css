@@ -1917,3 +1917,30 @@ body.has-fullscreen-chart {
 }
 
 .ch-tool__controls [data-control="curves"] { grid-column: 1 / -1; max-width: 20rem; }
+
+/* Formeln in der Klappbox: MathML aus dem Build (KaTeX), gezeichnet vom Browser */
+.math-box .katex { display: block; }
+.math-box .katex math[display="block"] {
+  margin: 0.25rem 0 1rem;
+  overflow-x: auto;
+  overflow-y: hidden;
+  font-size: 1.15rem;
+  color: var(--navy);
+}
+.math-box p .katex { display: inline; }
+.math-box p .katex math { font-size: 1.05em; color: var(--navy); }
+
+.prose .math-step {
+  margin: 1rem 0 0.25rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--slate);
+}
+
+.prose .math-legend {
+  margin: 0 0 0.75rem;
+  font-size: 0.875rem;
+  color: var(--gray-medium);
+}
