@@ -506,6 +506,18 @@ function initTool(root) {
     }
     if (!frame) frame = requestAnimationFrame(render);
   });
+  // Szenario-Knoepfe: setzen einige Regler auf feste Werte (statt eines "Try this"-Kastens)
+  const chips = [...form.querySelectorAll('[data-preset]')];
+  for (const chip of chips) {
+    chip.addEventListener('click', () => {
+      const preset = JSON.parse(chip.dataset.preset);
+      for (const [name, value] of Object.entries(preset)) controls.set(name, value);
+      for (const c of chips) c.classList.toggle('is-active', c === chip);
+      track('try_this', { tool: `lithium-balance-${root.dataset.chapterTool}`, query: new URLSearchParams(preset).toString() });
+      render();
+    });
+  }
+  form.addEventListener('input', () => chips.forEach((c) => c.classList.remove('is-active')));
   form.querySelector('[data-reset]')?.addEventListener('click', () => {
     form.reset();
     controls.refresh();
