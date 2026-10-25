@@ -1744,13 +1744,13 @@ body.has-fullscreen-chart {
   gap: 1.25rem;
 }
 
-@media (min-width: 768px) {
-  .ch-tool__figs { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+/* Tanks und Elektroden-Plot als Paar nebeneinander, Zellspannung darunter ueber die volle Breite */
+@media (min-width: 640px) {
+  .ch-tool__figs { grid-template-columns: repeat(2, minmax(0, 1fr)); align-items: end; }
+  .ch-tool__figs .ch-span { grid-column: 1 / -1; width: 100%; max-width: 32rem; justify-self: center; }
 }
 
 .ch-tool__figs figure { margin: 0; }
-.ch-tool__figs figure + figure { margin-top: 1rem; }
-.ch-tool__figs > figure + figure { margin-top: 0; }
 
 .ch-tool__figs figcaption {
   margin-bottom: 0.375rem;
@@ -1876,7 +1876,7 @@ body.has-fullscreen-chart {
   .ch-fig--tanks-electrodes .ch-fig__parts,
   .ch-fig--electrodes-cell .ch-fig__parts {
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    align-items: center;
+    align-items: end;
   }
 }
 

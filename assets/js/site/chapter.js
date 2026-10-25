@@ -286,7 +286,8 @@ function sample(f, x0, x1, n = 160) {
 function drawElectrodes(container, cell, x, xMax) {
   chart(container, {
     label: 'Electrode potentials against Li/Li+ over the lithium in the anode',
-    xMax, yMin: 0, yMax: 4.5, xTitle: 'lithium in the anode [Ah]', yTitle: 'potential vs Li/Li⁺ [V]',
+    // gleiche Hoehe wie das Tankbild, damit beide nebeneinander gleich gross stehen
+    xMax, yMin: 0, yMax: 4.5, xTitle: 'lithium in the anode [Ah]', yTitle: 'potential vs Li/Li⁺ [V]', height: 30 + 4.45 * PX_PER_V + 26,
     draw(p) {
       p.hline(0, 'ceiling Li/Li⁺', C.metal, '2 3');
       p.band(cell.xMin, cell.xMax, 'rgb(93 173 226 / 0.10)');

@@ -92,7 +92,7 @@ sitemap: false
     <p>If you just let the cathode drain, that would be a one-way trip. And where would the lithium go when you charge? You need a second tank: the anode. It hangs from the same ceiling but sits just below it, so low voltage. The cathode sits way down, so high voltage. Lithium, cathode, anode: that's all you need for equilibrium.</p>
     <p>And the cell voltage you measure from the outside? That's simply the height difference between the two water surfaces.</p>
     <p><strong>Charging</strong> means pumping water from the deep cathode tank up into the anode tank. That costs energy. <strong>Discharging</strong> means the water runs back down on its own, and the energy comes back as current.</p>
-    {{ fig("intro", "tanks", "Two tanks on one ceiling. Charged: most of the water sits up in the anode, and the height difference is large.", 'data-soc="0.85"') }}
+    {{ fig("intro", "tanks,electrodes", "Two tanks on one ceiling, charged: most of the water sits up in the anode, and the height difference is large. Right: the same state as two curves.", 'data-soc="0.85"') }}
 
     <h3>Step 4: Both tanks in one plot</h3>
     <p>Now both curves go into one plot. As the anode fills, its level moves toward the ceiling and its voltage drops, just like in any OCV curve on a datasheet. The cell voltage is the vertical distance between the two curves. For ideal tanks that's a straight line again.</p>
@@ -110,10 +110,8 @@ sitemap: false
       </form>
       <div class="ch-tool__figs">
         <figure><figcaption>The tanks</figcaption><div data-tanks></div></figure>
-        <div>
-          <figure><figcaption>Both electrodes against the ceiling</figcaption><div data-electrodes></div></figure>
-          <figure><figcaption>Cell voltage = distance between the lines</figcaption><div data-cell></div></figure>
-        </div>
+        <figure><figcaption>Both electrodes against the ceiling</figcaption><div data-electrodes></div></figure>
+        <figure class="ch-span"><figcaption>Cell voltage = distance between the lines</figcaption><div data-cell></div></figure>
       </div>
       <dl class="ch-tool__readouts">
         <div><dt>Cell voltage</dt><dd data-readout="voltage">–</dd></div>
@@ -144,9 +142,9 @@ sitemap: false
 
     <p>So far we've simply assumed everything fits: the cathode gives up its lithium and the anode takes it in. But that doesn't happen by itself. The cathode brings all the lithium, so it sets how much water is in play. How big the anode tank has to be so that all of it fits is something you have to actively design.</p>
     <p>What happens if the anode tank is too small? During charging the level rises, and at some point it hits the ceiling. Then the anode sits at zero volts against lithium, and the lithium no longer goes into the anode but deposits as metal on its surface. That's called lithium plating. And this is where the ceiling pays off: it <em>is</em> lithium metal. So the overflowing water ends up right there, and the lithium becomes part of the ceiling itself. That's also why the anode can't drop below zero volts: its level is stuck to the ceiling. And it costs you capacity, because part of the plated lithium reacts with the electrolyte or loses contact and never comes back.</p>
-    {{ fig("np", "tanks", "Anode too small (N/P = 0.8): the anode is full before the cell reaches Vmax. What doesn't fit plates onto the ceiling.", 'data-np="0.8"') }}
+    {{ fig("np", "tanks,electrodes", "Anode too small (N/P = 0.8): the anode is full before the cell reaches Vmax. What doesn't fit plates onto the ceiling, and the anode curve sits flat on zero.", 'data-np="0.8"') }}
     <p>And if the anode tank is too big? Then it never fills up. Empty space stays at the top, which you build, pay for and carry around without ever using it. And that's not even all: a bigger anode also costs more lithium during formation, but that's for the next chapter.</p>
-    {{ fig("np", "tanks", "Anode too big (N/P = 1.5): at Vmax a good part of the anode tank is still empty.", 'data-np="1.5"') }}
+    {{ fig("np", "tanks,electrodes", "Anode too big (N/P = 1.5): at Vmax a good part of the anode tank is still empty, and its curve stops well above the ceiling.", 'data-np="1.5"') }}
     <p>That's why the anode is designed a bit bigger, typically by around 10 %. For one, no coating is equally thick everywhere. For another, a real cell isn't in equilibrium when you charge it fast. Those 10 % are your safety distance to the ceiling.</p>
 
     <section class="ch-tool" data-chapter-tool="np" aria-label="Tool: N/P ratio">
@@ -161,10 +159,8 @@ sitemap: false
       </form>
       <div class="ch-tool__figs">
         <figure><figcaption>The tanks</figcaption><div data-tanks></div></figure>
-        <div>
-          <figure><figcaption>Both electrodes against the ceiling</figcaption><div data-electrodes></div></figure>
-          <figure><figcaption>Cell voltage</figcaption><div data-cell></div></figure>
-        </div>
+        <figure><figcaption>Both electrodes against the ceiling</figcaption><div data-electrodes></div></figure>
+        <figure class="ch-span"><figcaption>Cell voltage</figcaption><div data-cell></div></figure>
       </div>
       <dl class="ch-tool__readouts">
         <div><dt>N/P<sub>cap</sub></dt><dd data-readout="npcap">–</dd></div>
@@ -252,9 +248,9 @@ sitemap: false
         <button type="button" class="controls__action" data-reset>Reset</button>
       </form>
       <div class="ch-tool__figs">
-        <figure><figcaption>The lithium account (cathode 10 Ah)</figcaption><div data-account></div></figure>
         <figure><figcaption>The tanks</figcaption><div data-tanks></div></figure>
         <figure><figcaption>Both electrodes against the ceiling</figcaption><div data-electrodes></div></figure>
+        <figure><figcaption>The lithium account (cathode 10 Ah)</figcaption><div data-account></div></figure>
         <figure><figcaption>Cell voltage</figcaption><div data-cell></div></figure>
       </div>
       <dl class="ch-tool__readouts">
