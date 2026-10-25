@@ -52,7 +52,9 @@ function initTabs() {
       if (active) a.setAttribute('aria-current', 'true');
       else a.removeAttribute('aria-current');
     }
-    if (scroll) nav.scrollIntoView({ block: 'start' });
+    // Beim Umschalten an den Anfang des Kapitels, falls man schon tiefer gescrollt war
+    const panel = panels.find((p) => p.id === target);
+    if (scroll && panel.getBoundingClientRect().top < 0) panel.scrollIntoView({ block: 'start' });
   }
 
   // Alle Links auf Reiter (Navigation oben, "Weiter"-Links unten) schalten um, statt zu springen
@@ -61,7 +63,7 @@ function initTabs() {
     if (!a || !panels.some((p) => `#${p.id}` === a.hash)) return;
     event.preventDefault();
     history.pushState(null, '', a.hash);
-    show(a.hash.slice(1), a.closest('[data-chapter-tabs]') === null);
+    show(a.hash.slice(1), true);
   });
   window.addEventListener('popstate', () => show(location.hash.slice(1), false));
   show(location.hash.slice(1), false);

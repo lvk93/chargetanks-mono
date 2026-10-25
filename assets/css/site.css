@@ -1641,6 +1641,9 @@ body.has-fullscreen-chart {
 
 .chapter-panel > h2:first-child { margin-top: 0; }
 
+/* Platz fuer Seitenkopf und klebende Reiterleiste beim Springen */
+.chapter-panel { scroll-margin-top: calc(var(--header-height) + 4rem); }
+
 .chapter-next {
   display: flex;
   justify-content: space-between;
