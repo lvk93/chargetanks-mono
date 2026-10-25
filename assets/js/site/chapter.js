@@ -289,12 +289,17 @@ function drawElectrodes(container, cell, x, xMax) {
     // gleiche Hoehe wie das Tankbild, damit beide nebeneinander gleich gross stehen
     xMax, yMin: 0, yMax: 4.5, xTitle: 'lithium in the anode [Ah]', yTitle: 'potential vs Li/Li⁺ [V]', height: 30 + 4.45 * PX_PER_V + 26,
     draw(p) {
-      p.hline(0, 'ceiling Li/Li⁺', C.metal, '2 3');
+      p.hline(0, null, C.metal, '2 3');
+      p.label(0.2, 0.12, 'ceiling Li/Li⁺', C.metal);
       p.band(cell.xMin, cell.xMax, 'rgb(93 173 226 / 0.10)');
       p.line(sample(cell.uCath, cell.xLo, cell.xHi, 240), { stroke: C.cathode });
       const xFull = Math.min(cell.xHi, cell.qAnode);
       const anode = sample(cell.uAnode, 0, xFull, 240);
       if (cell.xHi > cell.qAnode) anode.push([cell.qAnode + 1e-9, 0], [cell.xHi, 0]);
+      // Rest des Anodentanks, den das Lithium nie erreicht (Anode zu gross): gestrichelt weiter bis voll
+      if (cell.qAnode > cell.xHi + 1e-9) {
+        p.line(sample(cell.uAnode, cell.xHi, cell.qAnode, 120), { stroke: C.anode, 'stroke-dasharray': '6 5', opacity: 0.7 });
+      }
       p.line(anode, { stroke: C.anode });
       p.vline(x, cell.uAnode(x), cell.uCath(x), C.cell);
       p.dot(x, cell.uCath(x), C.cathode);
