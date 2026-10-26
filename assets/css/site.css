@@ -8,6 +8,7 @@
 :root {
   --navy: #003b73;
   --blue: #5dade2;
+  --blue-text: #1d6fa5; /* Blau fuer Text auf Weiss (Kontrast >= 4.5) */
   --green: #70ad47;
   --orange: #f39c12;
   --slate: #44546a;
@@ -383,7 +384,7 @@ button {
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.2em;
-  color: var(--blue);
+  color: var(--blue-text);
 }
 
 .more {
@@ -465,6 +466,13 @@ a:hover .more .icon {
 }
 
 .home-fig { margin-top: 2.5rem; }
+
+/* Platz fuer das Tank-Bild reservieren, bevor chapter.js zeichnet (kein Springen beim Laden) */
+.home-fig .ch-fig__parts { aspect-ratio: 288 / 507; }
+
+@media (min-width: 640px) {
+  .home-fig .ch-fig__parts { aspect-ratio: 832 / 384; }
+}
 
 .home-byline {
   margin-top: 1.5rem;
@@ -739,7 +747,7 @@ a:hover .more .icon {
 }
 
 .prose a {
-  color: var(--blue);
+  color: var(--blue-text);
   text-decoration: underline;
 }
 
