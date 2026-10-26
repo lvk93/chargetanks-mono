@@ -1,7 +1,7 @@
-// Kapitel "Lithium balance" (/learn/lithium-balance/): Reiter, Quiz und die drei schlanken Tools
-// (Einleitung, N/P, N/Li). Gezeichnet wird als SVG ohne Plotly, damit die Seite leicht bleibt.
+// Kapitel "Lithium balance" (/learn/lithium-balance/): Reiter, Quiz und die schlanken Tools
+// (Einleitung, N/P, N/Li, Alterung) plus der feste Vergleich NMC/LFP gegen Graphit. Gezeichnet wird als SVG ohne Plotly, damit die Seite leicht bleibt.
 // Rechnung: assets/js/model/idealCell.js (ideale Tanks, alles Geraden).
-import { IDEAL_ANODE, IDEAL_CATHODE, idealCell, lithiumAccount, realElectrode } from '../model/idealCell.js';
+import { agedBalance, IDEAL_ANODE, IDEAL_CATHODE, idealCell, lithiumAccount, realElectrode } from '../model/idealCell.js';
 import { loadMaterial } from '../ui/data.js';
 import { initControls } from '../ui/controls.js';
 import { track } from './track.js';
@@ -310,12 +310,17 @@ function drawElectrodes(container, cell, x, xMax) {
   });
 }
 
-function drawCell(container, cell, x, xMax) {
+function drawCell(container, cell, x, xMax, ref = null) {
   chart(container, {
     label: 'Cell voltage over the lithium in the anode with Vmin and Vmax',
     xMax, yMin: 2.8, yMax: 4.5, xTitle: 'lithium in the anode [Ah]', yTitle: 'cell voltage [V]', height: 200,
     draw(p) {
       p.band(cell.xMin, cell.xMax, 'rgb(93 173 226 / 0.18)');
+      // frische Zelle zum Vergleich (Alterung), auf denselben Startpunkt geschoben
+      if (ref) {
+        const dx = ref.xMin - cell.xMin;
+        p.line(sample((xx) => ref.vCell(xx + dx), ref.xLo - dx, ref.xHi - dx, 240), { stroke: C.muted, 'stroke-dasharray': '5 4', 'stroke-width': 1.75 });
+      }
       p.hline(cell.vMax, `Vmax ${fmt(cell.vMax)} V`, C.warn);
       p.hline(cell.vMin, `Vmin ${fmt(cell.vMin)} V`, C.warn);
       p.line(sample(cell.vCell, cell.xLo, cell.xHi, 240), { stroke: C.cell });
@@ -324,12 +329,14 @@ function drawCell(container, cell, x, xMax) {
   });
 }
 
-// Lithiumkonto als Wasserfall: reversible Kathode + Bonus = erste Ladung, minus SEI = zyklisierbares Lithium
+// Lithiumkonto als Wasserfall (senkrechte Balken): Kathode im Betrieb, + Bonus, (+ Praelithiierung), - SEI,
+// = Lithium im Betrieb. Die gestrichelte Linie ist der Platz in der Kathode.
 function drawAccount(container, acc) {
   const W = 360;
-  const H = 230;
-  const m = { l: 40, r: 10, t: 16, b: 46 };
-  const yMax = Math.ceil(acc.firstCharge + 0.6);
+  const H = 240;
+  const m = { l: 40, r: 10, t: 24, b: 46 };
+  const top = acc.firstCharge + acc.prelith;
+  const yMax = Math.ceil(top + 0.6);
   // Achse beginnt knapp unter dem kleinsten Balkenende, damit Bonus und SEI sichtbar bleiben
   const yMin = Math.max(0, Math.floor(Math.min(acc.li, acc.qCathRev)) - 2);
   const svg = svgRoot(container, W, H, 'Lithium account of the formation as a waterfall chart');
@@ -340,11 +347,12 @@ function drawAccount(container, acc) {
   }
   svg.append(el('text', { x: 12, y: (m.t + H - m.b) / 2, fill: C.text, 'font-size': 11, 'text-anchor': 'middle', transform: `rotate(-90 12 ${(m.t + H - m.b) / 2})` }, 'lithium [Ah]'));
   const bars = [
-    { name: ['cathode', 'reversible'], from: 0, to: acc.qCathRev, color: C.cathode },
+    { name: ['cathode', 'in operation'], from: 0, to: acc.qCathRev, color: C.cathode, total: true },
     { name: ['formation', 'bonus'], from: acc.qCathRev, to: acc.firstCharge, color: C.anode },
-    { name: ['SEI'], from: acc.firstCharge, to: acc.li, color: C.warn },
-    { name: ['cyclable', 'lithium'], from: 0, to: acc.li, color: C.water },
   ];
+  if (acc.prelith > 1e-9) bars.push({ name: ['prelithi-', 'ation'], from: acc.firstCharge, to: top, color: C.metal });
+  bars.push({ name: ['SEI'], from: top, to: acc.li, color: C.warn });
+  bars.push({ name: ['lithium', 'in operation'], from: 0, to: acc.li, color: C.water, total: true });
   const slot = (W - m.l - m.r) / bars.length;
   bars.forEach((b, i) => {
     const x0 = m.l + i * slot + slot * 0.18;
@@ -353,7 +361,7 @@ function drawAccount(container, acc) {
     const hi = Math.max(b.from, b.to);
     svg.append(el('rect', { x: x0, y: py(hi), width: w, height: Math.max(1, py(lo) - py(hi)), fill: b.color, rx: 2 }));
     const delta = b.to - b.from;
-    const text = i === 1 ? `+${fmt(delta)}` : i === 2 ? `−${fmt(-delta)}` : fmt(b.to);
+    const text = b.total ? fmt(b.to) : delta >= 0 ? `+${fmt(delta)}` : `−${fmt(-delta)}`;
     svg.append(el('text', { x: x0 + w / 2, y: py(hi) - 5, fill: C.text, 'font-size': 11, 'font-weight': 600, 'text-anchor': 'middle' }, text));
     b.name.forEach((line, j) => svg.append(el('text', { x: x0 + w / 2, y: H - m.b + 14 + j * 12, fill: C.muted, 'font-size': 10, 'text-anchor': 'middle' }, line)));
     if (i < bars.length - 1) {
@@ -362,18 +370,23 @@ function drawAccount(container, acc) {
   });
   // Platz in der Kathode zum Vergleich: Lithium unter der Linie heisst Luecke in der Kathode
   svg.append(el('line', { x1: m.l, x2: W - m.r, y1: py(acc.qCathRev), y2: py(acc.qCathRev), stroke: C.cathode, 'stroke-dasharray': '5 4', opacity: 0.7 }));
+  // Legende oben links, wo keine Balken stehen
+  svg.append(el('line', { x1: m.l + 6, x2: m.l + 26, y1: 10, y2: 10, stroke: C.cathode, 'stroke-dasharray': '5 4', opacity: 0.85 }));
+  svg.append(el('text', { x: m.l + 30, y: 10, fill: C.cathode, 'font-size': 10, 'dominant-baseline': 'middle', opacity: 0.9 }, 'room in the cathode'));
 }
 
 /* Tools ---------------------------------------------------------------------------------------- */
 const Q_CATH = 10; // Ah, reversible Kapazitaet der Kathode in allen drei Tools
 
-// Echte Kurven (Graphit gegen NMC) aus den Materialdaten der Webseite, einmal geladen
+// Echte Kurven (Graphit gegen NMC, fuer den Vergleich auch LFP) aus den Materialdaten der Webseite, einmal geladen
 let realPromise = null;
 let REAL = null;
+let LFP = null;
 function loadReal() {
-  realPromise ||= Promise.all([loadMaterial('Graphite'), loadMaterial('NMC')])
-    .then(([graphite, nmc]) => {
+  realPromise ||= Promise.all([loadMaterial('Graphite'), loadMaterial('NMC'), loadMaterial('LFP')])
+    .then(([graphite, nmc, lfp]) => {
       REAL = { anode: realElectrode(graphite), cathode: realElectrode(nmc) };
+      LFP = realElectrode(lfp);
       return REAL;
     });
   return realPromise;
@@ -393,7 +406,23 @@ function realLink(np, lip, soc) {
 const DEFAULTS = {
   intro: { soc: 0.5, vmin: 3.2, vmax: 4.0, curves: 'ideal' },
   np: { np: 1.1, soc: 1, vmin: 3.0, vmax: 4.2, curves: 'ideal' },
-  nli: { np: 1.2, bonus: 6, sei: 10, soc: 0, vmin: 3.0, vmax: 4.2, curves: 'ideal' },
+  nli: { np: 1.2, bonus: 6, sei: 10, prelith: 0, soc: 0, vmin: 3.0, vmax: 4.2, curves: 'ideal' },
+  aging: { lama: 0, lamc: 0, lli: 0, soc: 1, vmin: 3.0, vmax: 4.2, curves: 'ideal' },
+};
+
+// Ausgangszelle fuer die Alterung (Tab 4): N/P = 1.1 und N/Li = 1.2 wie im Quiz
+const AGING_BASE = { qCath: 10, qAnode: 11, li: 11 / 1.2 };
+const LIMITER = { lithium: 'lithium', cathode: 'cathode tank', anode: 'anode tank' };
+
+// Vergleich NMC und LFP gegen Graphit bei gleichem N/P (Tab 3, fester Vergleich; auch Bild zum Launch-Post).
+// Formierung: die SEI bucht bei beiden gleich viel ab; NMC bringt einen grossen Bonus mit, LFP kaum einen.
+export const COMPARE = {
+  np: 1.1,
+  sei: 0.08,
+  cells: [
+    { key: 'nmc', name: 'NMC vs graphite', bonus: 0.09, vMin: 2.8, vMax: 4.2 },
+    { key: 'lfp', name: 'LFP vs graphite', bonus: 0.02, vMin: 2.5, vMax: 3.65 },
+  ],
 };
 
 const TOOLS = {
@@ -423,16 +452,37 @@ const TOOLS = {
     };
   },
   nli(v) {
-    const acc = lithiumAccount({ qCathRev: Q_CATH, npRatio: v.np, bonus: v.bonus / 100, seiRate: v.sei / 100 });
+    const acc = lithiumAccount({ qCathRev: Q_CATH, npRatio: v.np, bonus: v.bonus / 100, seiRate: v.sei / 100, prelith: v.prelith ?? 0 });
     const cell = idealCell({ qCath: Q_CATH, qAnode: acc.qAnode, li: acc.li, vMin: v.vmin, vMax: v.vmax, ...electrodes(v) });
+    const status = cell.platedAtVmax > 1e-6 ? `plating! ${fmt(cell.platedAtVmax)} Ah`
+      : cell.ceilingAtVmax ? 'at the ceiling!' : pct(cell.fillAnode(cell.xMax));
     return {
       cell, acc, xAxis: 16,
       readouts: {
         li: `${fmt(acc.li)} Ah`, nli: fmt(acc.nLi), gap: `${fmt(cell.cathodeGap)} Ah`,
-        limit: acc.lithiumLimits ? 'lithium' : 'cathode (bonus > SEI)',
+        anodeVmax: status,
+        limit: acc.lithiumLimits ? 'lithium' : 'cathode tank',
         capacity: `${fmt(cell.capacity)} Ah`,
       },
+      warn: cell.ceilingAtVmax,
       link: realLink(v.np, acc.li / Q_CATH, v.soc),
+    };
+  },
+  aging(v) {
+    const fresh = idealCell({ ...AGING_BASE, vMin: v.vmin, vMax: v.vmax, ...electrodes(v) });
+    const aged = agedBalance({ ...AGING_BASE, lamAnode: v.lama / 100, lamCath: v.lamc / 100, lli: v.lli / 100 });
+    const cell = idealCell({ qCath: aged.qCath, qAnode: aged.qAnode, li: aged.li, vMin: v.vmin, vMax: v.vmax, ...electrodes(v) });
+    return {
+      cell, ref: fresh, xAxis: 12,
+      readouts: {
+        capacity: `${fmt(cell.capacity)} Ah of ${fmt(fresh.capacity)} Ah`,
+        loss: pct(1 - cell.capacity / fresh.capacity),
+        limit: LIMITER[aged.scarcest],
+        np: fmt(aged.np),
+        nli: fmt(aged.nLi),
+      },
+      warn: cell.platedAtVmax > 1e-6,
+      link: realLink(aged.np, aged.li / aged.qCath, v.soc),
     };
   },
 };
@@ -441,7 +491,7 @@ function drawParts(parts, out, x, opts = {}) {
   const { cell } = out;
   if (parts.tanks) drawTanks(parts.tanks, cell, x, opts);
   if (parts.electrodes) drawElectrodes(parts.electrodes, cell, x, out.xAxis);
-  if (parts.cell) drawCell(parts.cell, cell, x, out.xAxis);
+  if (parts.cell) drawCell(parts.cell, cell, x, out.xAxis, out.ref);
   if (parts.account && out.acc) drawAccount(parts.account, out.acc);
 }
 
@@ -481,7 +531,8 @@ function initTool(root) {
 
   function render() {
     frame = 0;
-    const values = controls.values();
+    // Regler, die ein Tool nicht hat (z. B. Vmin/Vmax bei der Alterung), kommen aus den Startwerten
+    const values = { ...DEFAULTS[root.dataset.chapterTool], ...controls.values() };
     if (values.curves === 'real' && !REAL) {
       loadReal().then(render).catch(() => {});
       return;
@@ -527,10 +578,41 @@ function initTool(root) {
   render();
 }
 
+// Fester Vergleich NMC und LFP gegen Graphit (gleiches N/P, Zelle bei Vmax): Tanks nebeneinander
+export function compareCells() {
+  return COMPARE.cells.map((c) => {
+    const acc = lithiumAccount({ qCathRev: Q_CATH, npRatio: COMPARE.np, bonus: c.bonus, seiRate: COMPARE.sei });
+    const cathode = c.key === 'lfp' ? LFP : REAL.cathode;
+    const cell = idealCell({ qCath: Q_CATH, qAnode: acc.qAnode, li: acc.li, vMin: c.vMin, vMax: c.vMax, anode: REAL.anode, cathode });
+    return { ...c, acc, cell, fill: cell.fillAnode(cell.xMax) };
+  });
+}
+
+async function initCompare(fig) {
+  await loadReal();
+  const holder = fig.querySelector('[data-figure-parts]');
+  holder.replaceChildren();
+  for (const c of compareCells()) {
+    const part = document.createElement('div');
+    part.className = 'ch-compare__cell';
+    const head = document.createElement('p');
+    head.className = 'ch-compare__name';
+    head.textContent = c.name;
+    const tanks = document.createElement('div');
+    drawTanks(tanks, c.cell, c.cell.xMax);
+    const facts = document.createElement('p');
+    facts.className = 'ch-compare__facts';
+    facts.textContent = `N/P ${fmt(COMPARE.np)} · N/Li ${fmt(c.acc.nLi)} · anode at Vmax ${pct(c.fill)}`;
+    part.append(head, tanks, facts);
+    holder.append(part);
+  }
+}
+
 initTabs();
 initQuiz();
 for (const root of document.querySelectorAll('[data-chapter-tool]')) initTool(root);
 for (const fig of document.querySelectorAll('[data-chapter-figure]')) initFigure(fig).catch(() => {});
+for (const fig of document.querySelectorAll('[data-chapter-compare]')) initCompare(fig).catch(() => {});
 
 // Fuer Pruefungen ohne Browser (Zeichnen in eine Attrappe des DOM)
 export { DEFAULTS, drawAccount, drawCell, drawElectrodes, drawTanks, TOOLS, REAL, loadReal };

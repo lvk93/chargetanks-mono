@@ -1,7 +1,7 @@
 // Ideale Tanks des Kapitels "Lithium balance": Grenzfaelle, die in den Texten beschrieben sind.
 import assert from 'node:assert/strict';
 import { test } from 'node:test';
-import { idealCell, lithiumAccount } from '../../assets/js/model/idealCell.js';
+import { agedBalance, idealCell, lithiumAccount } from '../../assets/js/model/idealCell.js';
 
 const near = (a, b, eps = 1e-6) => assert.ok(Math.abs(a - b) < eps, `${a} != ${b}`);
 
@@ -40,4 +40,30 @@ test('Lithiumkonto: SEI groesser als Bonus -> Lithium limitiert, Luecke in der K
   near(c.cathodeGap, 0.6);
   // groessere Anode frisst mehr SEI
   assert.ok(lithiumAccount({ qCathRev: 10, npRatio: 1.5, bonus: 0.06, seiRate: 0.1 }).li < acc.li);
+});
+
+test('Praelithiierung: Rechenbeispiel aus dem Text (N/P 1.1, N/Li 1.16 -> 1.04)', () => {
+  const plain = lithiumAccount({ qCathRev: 10, npRatio: 1.1, bonus: 0.06, seiRate: 0.1 });
+  near(plain.li, 9.5);
+  assert.equal(plain.nLi.toFixed(2), '1.16');
+  const pre = lithiumAccount({ qCathRev: 10, npRatio: 1.1, bonus: 0.06, seiRate: 0.1, prelith: 1.1 });
+  near(pre.li, 10.6);
+  assert.equal(pre.nLi.toFixed(2), '1.04');
+  assert.ok(!pre.lithiumLimits, 'mit Praelithiierung ist Lithium nicht mehr knapp');
+  // Puffer zur Decke (bezogen aufs Lithium): 16 % -> 4 %
+  assert.equal(Math.round((plain.nLi - 1) * 100), 16);
+  assert.equal(Math.round((pre.nLi - 1) * 100), 4);
+});
+
+test('Alterung: Quiz (N/P 1.1, N/Li 1.2, 5/3/2 %) verliert 2 % Kapazitaet, Verluste addieren sich nicht', () => {
+  const base = { qCath: 10, qAnode: 11, li: 11 / 1.2 };
+  const fresh = idealCell({ ...base, vMin: 3.0, vMax: 4.2 });
+  const aged = agedBalance({ ...base, lamAnode: 0.05, lamCath: 0.03, lli: 0.02 });
+  assert.equal(aged.scarcest, 'lithium');
+  const cell = idealCell({ qCath: aged.qCath, qAnode: aged.qAnode, li: aged.li, vMin: 3.0, vMax: 4.2 });
+  near(1 - cell.capacity / fresh.capacity, 0.02, 1e-9);
+  // gleiche Verluste: Verhaeltnisse bleiben gleich
+  const same = agedBalance({ ...base, lamAnode: 0.2, lamCath: 0.2, lli: 0.2 });
+  near(same.np, 1.1);
+  near(same.nLi, 1.2);
 });

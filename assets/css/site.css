@@ -612,34 +612,6 @@ a:hover .more .icon {
 
 .cv-links a { color: var(--navy); }
 
-.cv-list {
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-
-.cv-list > li {
-  display: grid;
-  gap: 0.25rem 1.5rem;
-  border-top: 1px solid var(--border);
-  padding-block: 1rem;
-}
-
-@media (min-width: 640px) {
-  .cv-list > li { grid-template-columns: 8rem minmax(0, 1fr); }
-}
-
-.cv-list__when {
-  font-weight: 600;
-  color: var(--slate);
-  font-variant-numeric: tabular-nums;
-}
-
-.cv-list__what strong { color: var(--navy); }
-
-.cv-list__what p { margin-top: 0.25rem; }
-
-.cv-list__what a,
 .pubs a {
   color: var(--navy);
   text-decoration: underline;
@@ -1320,14 +1292,19 @@ body.has-fullscreen-chart {
 
 .chapter-tabs a:hover { color: var(--navy); }
 
-/* Handy: alle drei Reiter ohne Querscrollen */
-@media (max-width: 479px) {
+/* Reiternamen: lang, auf dem Handy kurz (alle vier Reiter ohne Querscrollen) */
+.chapter-tabs b { font-weight: inherit; }
+.chapter-tabs .tab-short { display: none; }
+
+@media (max-width: 559px) {
   .chapter-tabs { gap: 0; }
-  .chapter-tabs a { gap: 0.3125rem; padding-inline: 0.375rem; font-size: 0.875rem; }
-  .chapter-tabs a span { width: 1.125rem; height: 1.125rem; font-size: 0.6875rem; }
+  .chapter-tabs a { gap: 0.3125rem; padding-inline: 0.5rem; font-size: 0.9375rem; }
+  .chapter-tabs a span { width: 1.25rem; height: 1.25rem; font-size: 0.75rem; }
+  .chapter-tabs .tab-long { display: none; }
+  .chapter-tabs .tab-short { display: inline; }
 }
 
-@media (max-width: 379px) {
+@media (max-width: 359px) {
   .chapter-tabs a span { display: none; }
 }
 
@@ -1514,13 +1491,34 @@ body.has-fullscreen-chart {
 
 /* Selbst erstellte Abbildungen */
 .sei-figure { margin: 1rem 0 1.5rem; }
-.sei-figure svg { display: block; width: 100%; max-width: 30rem; height: auto; margin-inline: auto; }
+.sei-figure svg { display: block; width: 100%; max-width: 40rem; height: auto; margin-inline: auto; border-radius: 1rem; }
 
 .sei-figure figcaption {
-  max-width: 30rem;
+  max-width: 40rem;
   margin: 0.5rem auto 0;
   font-size: 0.875rem;
   color: var(--gray-medium);
+}
+
+/* Vergleich NMC/LFP gegen Graphit: zwei Tankbilder nebeneinander */
+.ch-compare .ch-fig__parts { grid-template-columns: 1fr; }
+
+@media (min-width: 640px) {
+  .ch-compare .ch-fig__parts { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+.ch-compare__name {
+  margin: 0 0 0.25rem;
+  font-weight: 700;
+  color: #fff;
+  text-align: center;
+}
+
+.ch-compare__facts {
+  margin: 0.25rem 0 0;
+  font-size: 0.875rem;
+  color: rgb(255 255 255 / 0.8);
+  text-align: center;
 }
 
 /* Entwurfsnotizen (nur mit draft: true im Front Matter) */

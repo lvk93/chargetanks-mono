@@ -14,6 +14,12 @@
   .og .ch-fig__parts{padding:0;background:transparent}
   .og .photo{width:300px;height:300px;border-radius:50%;object-fit:cover;justify-self:center;border:6px solid #5dade2}
   .ch-fig figcaption{display:none}
+  .og--post{grid-template-columns:330px 1fr;gap:28px;padding:44px 48px 64px}
+  .og--post h1{font-size:44px}
+  .og--post h1 span{font-size:26px}
+  .og--post .ch-compare .ch-fig__parts{grid-template-columns:1fr 1fr;padding:0;background:transparent;gap:16px}
+  .og--post .ch-compare__name{font-size:20px}
+  .og--post .ch-compare__facts{font-size:15px}
 </style></head><body>
 <div class="og" id="og"></div>
 <script type="module">
@@ -25,7 +31,9 @@ const T = {
   home: '<h1>A battery is lithium, two tanks and bookkeeping.<span>The complexity is in the curves, not in the logic.</span></h1>' + fig,
   chapter: '<h1>The lithium balance<span>Designing a cell forwards: voltage window, N/P ratio and N/Li ratio, with tools that compute along.</span></h1>' + fig,
   about: '<h1>Dr. Lars von Kolzenberg<span>Principal battery model developer at Breathe. PhD on SEI growth, Ulm University.</span></h1><img class="photo" src="/images/lars.jpg" alt="">',
+  post: '<h1>N/P isn\'t N/P.<span>Same N/P of 1.1, same SEI. NMC\'s formation bonus fills the anode, LFP\'s doesn\'t. N/Li tells the difference.</span></h1><figure class="ch-fig ch-compare" data-chapter-compare><div class="ch-fig__parts" data-figure-parts></div><figcaption>x</figcaption></figure>',
 };
+if (v === 'post') og.classList.add('og--post');
 og.innerHTML = T[v] + brand;
 og.style.position='relative';
 await import('/assets/js/site/chapter.js');

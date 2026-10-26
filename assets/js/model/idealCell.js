@@ -92,13 +92,32 @@ export function idealCell({ qCath, qAnode, li, vMin, vMax, cathode = IDEAL_CATHO
   };
 }
 
-// Lithiumkonto der Formierung (Tab N/Li). bonus und seiRate als Anteile (0..1).
-//   Erste Ladung der Kathode = qCathRev * (1 + bonus); die SEI bucht seiRate * qAnode ab.
-export function lithiumAccount({ qCathRev, npRatio, bonus, seiRate }) {
+// Lithiumkonto der Formierung (Tab N/Li). bonus und seiRate als Anteile (0..1), prelith in Ah.
+//   Erste Ladung der Kathode = qCathRev * (1 + bonus); die SEI bucht seiRate * qAnode ab;
+//   Praelithiierung zahlt prelith Ah zusaetzlich ein.
+export function lithiumAccount({ qCathRev, npRatio, bonus, seiRate, prelith = 0 }) {
   const qAnode = npRatio * qCathRev;
   const bonusAh = qCathRev * bonus;
   const firstCharge = qCathRev + bonusAh;
   const sei = seiRate * qAnode;
-  const li = firstCharge - sei;
-  return { qCathRev, qAnode, bonusAh, firstCharge, sei, li, nLi: qAnode / li, lithiumLimits: sei >= bonusAh };
+  const li = firstCharge + prelith - sei;
+  return {
+    qCathRev, qAnode, bonusAh, firstCharge, prelith, sei, li, nLi: qAnode / li,
+    // Lithium ist der knappste Posten, solange die SEI mehr abbucht, als Bonus und Praelithiierung einzahlen
+    lithiumLimits: sei >= bonusAh + prelith,
+  };
+}
+
+// Alterungsmodi (Tab 4): Verluste als Anteile (0..1). Gealterte Groessen und der knappste Posten.
+export function agedBalance({ qCath, qAnode, li, lamCath = 0, lamAnode = 0, lli = 0 }) {
+  const out = {
+    qCath: (1 - lamCath) * qCath,
+    qAnode: (1 - lamAnode) * qAnode,
+    li: (1 - lli) * li,
+  };
+  const items = [['lithium', out.li], ['cathode', out.qCath], ['anode', out.qAnode]];
+  out.scarcest = items.reduce((a, b) => (b[1] < a[1] - 1e-9 ? b : a))[0];
+  out.np = out.qAnode / out.qCath;
+  out.nLi = out.qAnode / out.li;
+  return out;
 }

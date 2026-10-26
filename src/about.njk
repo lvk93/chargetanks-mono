@@ -2,12 +2,12 @@
 layout: layouts/base.njk
 title: About
 metaTitle: "About Lars von Kolzenberg | Charge Tanks"
-description: "Lars von Kolzenberg, principal battery model developer at Breathe: CV, publications and links to Google Scholar, ORCID and LinkedIn."
+description: "Lars von Kolzenberg, principal battery model developer at Breathe: publications and links to Google Scholar, ORCID and LinkedIn."
 permalink: /about/
 ldType: website
 ogImage: /assets/img/og/about.jpg
 ogImageAlt: "Lars von Kolzenberg, principal battery model developer at Breathe."
-# Entwurf, bis Lars gegengelesen hat: Notizen sichtbar, nicht indexiert, nicht in der Sitemap.
+# Entwurf bis zum Launch: Notizen sichtbar, nicht indexiert, nicht in der Sitemap.
 draft: true
 robots: "noindex, follow"
 sitemap: false
@@ -19,8 +19,8 @@ sitemap: false
   <img class="cv-photo" src="/images/lars.jpg" alt="Lars von Kolzenberg" width="768" height="512" decoding="async">
   <h1 class="article-title">Dr. Lars von Kolzenberg</h1>
   <div class="prose">
-    <p>I build physics-based battery models and the methods to parametrize them: electrochemical-thermal cell models, reduced-order models, impedance analysis. My PhD was on how operating conditions drive SEI growth. Since then I have worked on aging analysis, cell design and swelling at a cell manufacturer, and today I develop battery models at Breathe.</p>
-    <p>Charge Tanks is where I write down, from scratch, how I think about cells. It is a notebook, not a product.</p>
+    <p>I build physics-based battery models and parametrize them, mostly with impedance spectroscopy. My PhD was on SEI growth. Since then I have been working on everything at the intersection of batteries and software, including aging analysis, cell design and swelling. Today I work at Breathe as Principal Battery Model Developer.</p>
+    <p>Charge Tanks is where I write down, from scratch, how I think about cells.</p>
   </div>
   <ul class="cv-links">
     <li><a href="{{ site.scholar }}">Google Scholar</a></li>
@@ -28,79 +28,6 @@ sitemap: false
     <li><a href="{{ site.linkedin }}">LinkedIn</a></li>
     <li><a href="mailto:{{ site.email }}">{{ site.email }}</a></li>
   </ul>
-
-  {%- if draft %}
-  <aside class="draft-note draft-note--banner"><strong>Entwurfsvorschau.</strong> Aus dem CV vom 07.08.2026 übernommen und für die Webseite gekürzt. Bitte gegenlesen; gelbe Kästen und „fehlt“-Marken verschwinden mit <code>draft: false</code>.</aside>
-  {%- endif %}
-
-  <section class="prose" aria-labelledby="cv-experience">
-    <h2 id="cv-experience">Experience</h2>
-  </section>
-  <ol class="cv-list">
-    <li>
-      <span class="cv-list__when">2025 – today</span>
-      <div class="cv-list__what">
-        <strong>Principal Battery Model Developer, Breathe Battery Technologies</strong>
-        <p>New models and parametrization methods for electrochemical-thermal cell description, unified across teams. Coordinated new product development from customer requirements through measurement protocols and data pipelines to model structure. Set up an EIS pipeline for parameter extraction and drove the validation of a reduced-order, bottom-up model. Breathe's model products: <a href="https://docs.breathebatteries.com/breathe-simulate-documentation/product_overview/">Breathe Simulate</a> and Breathe Discover.</p>
-        {{ note(draft, "Discover ohne Link, bis es eine öffentliche Seite gibt. Die Validierungszahlen aus dem CV (10 % Widerstand, 30 mV RMSE) bewusst weggelassen, weil Discover-Interna. Rein, wenn das okay ist.") }}
-      </div>
-    </li>
-    <li>
-      <span class="cv-list__when">2024 – 2025</span>
-      <div class="cv-list__what">
-        <strong>Senior Battery Model Developer, Breathe Battery Technologies</strong>
-        <p>Built a software platform for battery design, automated data pipelines and a model database. Planned the testing protocols and lab equipment to parametrize and validate the models.</p>
-      </div>
-    </li>
-    <li>
-      <span class="cv-list__when">2021 – 2024</span>
-      <div class="cv-list__what">
-        <strong>Development Engineer, Cellforce Group, Tübingen</strong>
-        <p>Digital development for a cell manufacturer: cell design software, aging analysis with physical and machine-learning models, micro- and mesoscale models, swelling of cells, and the test protocols to validate all of it.</p>
-      </div>
-    </li>
-    <li>
-      <span class="cv-list__when">2018 – 2021</span>
-      <div class="cv-list__what">
-        <strong>Research Assistant, German Aerospace Center (DLR), Institute of Engineering Thermodynamics</strong>
-        <p>Continuum models of lithium-ion battery aging with a focus on SEI growth, the basis of my PhD.</p>
-      </div>
-    </li>
-    <li>
-      <span class="cv-list__when">2012 – 2017</span>
-      <div class="cv-list__what">
-        <strong>Dual student, GEDIA Automotive Group</strong>
-        <p>Pre-development: CAD models, technical drawings and FEM analysis.</p>
-      </div>
-    </li>
-  </ol>
-
-  <section class="prose" aria-labelledby="cv-education">
-    <h2 id="cv-education">Education</h2>
-  </section>
-  <ol class="cv-list">
-    <li>
-      <span class="cv-list__when">2018 – 2023</span>
-      <div class="cv-list__what">
-        <strong>Dr. rer. nat. in Chemistry, Ulm University</strong>
-        <p>Magna cum laude. Thesis: <a href="https://doi.org/10.18725/OPARU-49704">Prolonging lithium-ion battery lifetime: How operating conditions affect solid electrolyte interphase growth</a>. Supervised by Prof. Birger Horstmann and Prof. Arnulf Latz.</p>
-      </div>
-    </li>
-    <li>
-      <span class="cv-list__when">2016 – 2017</span>
-      <div class="cv-list__what">
-        <strong>M.Sc. Chemical Engineering, RWTH Aachen University</strong>
-        <p>With distinction. Thesis on neural-network-aided modelling of layer-by-layer nanofiltration membranes.</p>
-      </div>
-    </li>
-    <li>
-      <span class="cv-list__when">2012 – 2016</span>
-      <div class="cv-list__what">
-        <strong>B.Sc. Mechanical Engineering, RWTH Aachen University</strong>
-        <p>Major in chemical engineering.</p>
-      </div>
-    </li>
-  </ol>
 
   <section class="prose" aria-labelledby="cv-publications">
     <h2 id="cv-publications">Publications</h2>

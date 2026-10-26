@@ -44,6 +44,10 @@ Header aus `_redirects` und `_headers` uebertragen.
 - Vorschaubilder (Open Graph, 1200x630): `assets/img/og/` fuer Startseite, Kapitel und About, gerendert mit der
   Vorlage `config/og/render.html` aus denselben Zeichnungen wie das Kapitel. Tool-Seiten nutzen `assets/img/tools/*-og.jpg`.
 - Der fruehere Blog ist entfallen; `/blog/*` leitet in `_redirects` aufs Kapitel um.
+- Bild zum Launch-Post (NMC/LFP gegen Graphit): `assets/img/og/post-nmc-lfp.png`, Vorlage `config/og/render.html?v=post`.
+- Materialdaten: LFP ist geglaettet (Okt. 2026). Das Plateau der Originaldaten war exakt waagerecht
+  (dQ/dV unendlich); jetzt leicht geneigt mit weichen Enden, dQ/dV daraus neu berechnet. Damit weicht `lfp.json`
+  bewusst vom Python-Original ab; `tests/regression/reference.json` ist fuer die vier LFP-Zustaende neu erzeugt.
 - Die fuenf Tools (Name, Kurztext, Beschreibung, Vorschaubilder): `src/_data/tools.json`. Eine Tool-Seite ist
   `src/tools/<tool>.md`: Regler und Diagramme im Front Matter, darunter der Erklaertext als Markdown.
   Die Verdrahtung steht in `assets/js/tools/<tool>.js` (Material laden, Modell rechnen, Diagramme zeigen).
