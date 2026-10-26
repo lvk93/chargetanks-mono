@@ -1,6 +1,7 @@
 # chargetanks.com
 
-Statische Seite: Webseite (Startseite, Blog, Artikel, `/tools/`) und fuenf interaktive Tools unter `/tools/<tool>/`.
+Statische Seite: Startseite, Kapitel unter `/learn/<kapitel>/`, `/about/` (Lebenslauf), `/tools/` und fuenf interaktive
+Tools unter `/tools/<tool>/`.
 Die Seiten entstehen mit [Eleventy](https://www.11ty.dev/) aus `src/`; im Browser laeuft nur Vanilla-JavaScript
 (ES-Module) ohne Framework, und alle Inhalte kommen von der eigenen Domain.
 
@@ -32,15 +33,22 @@ Header aus `_redirects` und `_headers` uebertragen.
 
 - Seiten: `src/` (Nunjucks-Vorlagen `.njk`, Texte als Markdown `.md`). Kopf und Fuss stehen einmal in
   `src/_includes/partials/`, das Grundgeruest mit Meta-Tags und JSON-LD in `src/_includes/layouts/base.njk`.
-- Neuer Blogartikel: eine Markdown-Datei in `src/blog/posts/<slug>.md` mit Front Matter wie im vorhandenen
-  Artikel (Titel, Datum, Beschreibung, Vorschaubild, Kategorie, Lesezeit, TL;DR, Definition). Startseite,
-  `/blog/`, Sitemap und `llms.txt` uebernehmen ihn automatisch.
+- Navigation (Kopf): `src/_includes/partials/header.njk`, Fuss: `footer.njk`. Eine Hierarchieebene:
+  Lithium balance, Tools, About; Imprint und Privacy nur im Fuss.
+- Kapitel: `src/learn/<kapitel>.njk` (Reiter, Abbildungen per Makro `fig`, Tools im Text, Mathe-Box mit
+  `{% math %}`/`{% mi %}`, beim Build per KaTeX zu MathML). Zeichnungen und Kapitel-Tools: `assets/js/site/chapter.js`,
+  Rechnung: `assets/js/model/idealCell.js`. Mit `draft: true` im Front Matter sind gelbe Notizen sichtbar und die Seite
+  ist nicht indexiert und nicht in der Sitemap; zum Veroeffentlichen `draft`, `robots` und `sitemap` entfernen.
+- Lebenslauf: `src/about.njk` (gleicher Entwurfsmechanismus). Links auf Scholar, ORCID und LinkedIn in `src/_data/site.json`.
+- Vorschaubilder (Open Graph, 1200x630): `assets/img/og/` fuer Startseite, Kapitel und About, gerendert mit der
+  Vorlage `config/og/render.html` aus denselben Zeichnungen wie das Kapitel. Tool-Seiten nutzen `assets/img/tools/*-og.jpg`.
+- Der fruehere Blog ist entfallen; `/blog/*` leitet in `_redirects` aufs Kapitel um.
 - Die fuenf Tools (Name, Kurztext, Beschreibung, Vorschaubilder): `src/_data/tools.json`. Eine Tool-Seite ist
   `src/tools/<tool>.md`: Regler und Diagramme im Front Matter, darunter der Erklaertext als Markdown.
   Die Verdrahtung steht in `assets/js/tools/<tool>.js` (Material laden, Modell rechnen, Diagramme zeigen).
 - „Try this“ auf den Tool-Seiten: `tryThis` (URL-Parameter, Beschriftung, Satz) und `readMore` im Front Matter.
   Zahlen in den Saetzen am Modell nachrechnen, wenn sich etwas aendert.
-- Live-Tank auf der Startseite: `assets/js/site/heroTank.js` mit dem Standbild `assets/img/hero-tank.jpg`.
+- Tank-Bild auf der Startseite: gleiche Abbildung wie im Kapitel (`data-chapter-figure`, `assets/js/site/chapter.js`).
 - Zustand der Tools in der URL, z. B. `/tools/aging/?anode=graphite&cathode=nmc&lli=0.2`
   (Parameter = Namen der Regler, Materialien als Slug wie in `assets/data/materials/`).
 - Stile: `assets/css/site.css`.
@@ -54,14 +62,14 @@ Header aus `_redirects` und `_headers` uebertragen.
 |---|---|
 | `src/` | Seiten, Vorlagen (`_includes/`) und Daten (`_data/`) fuer Eleventy; Tool-Seiten in `src/tools/` |
 | `assets/css/site.css` | alle Stile |
-| `assets/js/site/` | Verhalten der Webseite (Mobilmenue) |
+| `assets/js/site/` | Verhalten der Webseite (Mobilmenue, Kapitel mit Zeichnungen und Tools, Statistik) |
 | `assets/js/core/` | Nachbau von numpy/scipy/pandas und Python-Zahlenformat (ohne DOM) |
 | `assets/js/model/` | Rechenlogik der Tools (ohne DOM) |
 | `assets/js/ui/` | Ablauf der Tool-Seiten, Regler, URL-Zustand, Diagramm-Darstellung (plotly.js) |
 | `assets/js/tools/` | Verdrahtung je Tool |
 | `assets/data/`, `assets/img/tools/` | Materialdaten, Vorschau- und OG-Bilder der Tools |
-| `images/`, `favicon.svg`, `site.webmanifest`, `robots.txt` | Bilder und Dateien der Webseite |
-| `config/` | Hilfsfunktionen fuer den Build (JSON-LD) |
+| `images/`, `assets/img/og/`, `favicon.svg`, `site.webmanifest`, `robots.txt` | Bilder und Dateien der Webseite |
+| `config/` | Hilfsfunktionen fuer den Build (JSON-LD, KaTeX, Vorlage der Vorschaubilder) |
 | `tests/regression/` | Regressionspruefung der Rechnung (Fingerabdruecke, `reference.json`) |
 | `tests/site/` | Pruefung der gebauten Seite |
 | `tests/e2e/tools.mjs` | Browser-Pruefung der Tool-Seiten (lokal mit Chrome, `node tests/e2e/tools.mjs`) |

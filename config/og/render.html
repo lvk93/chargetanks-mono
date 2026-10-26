@@ -1,0 +1,33 @@
+<!-- Vorlage fuer die Vorschaubilder in assets/img/og/ (1200x630). Nach "npm run build" nach _site/ kopieren,
+     per Browser http://localhost:8080/og-render.html?v=home|chapter|about aufrufen, Screenshot 1200x630 als JPG speichern. -->
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<link rel="stylesheet" href="/assets/css/site.css">
+<style>
+  html,body{margin:0;width:1200px;height:630px;overflow:hidden;background:#003b73}
+  .og{box-sizing:border-box;width:1200px;height:630px;display:grid;grid-template-columns:1fr 520px;gap:40px;align-items:center;padding:64px 64px 56px;color:#fff;font-family:var(--font)}
+  .og h1{margin:0;font-size:52px;line-height:1.1;font-weight:700;color:#fff;letter-spacing:-0.01em}
+  .og h1 span{display:block;margin-top:14px;font-size:34px;font-weight:500;color:#a9cbe8}
+  .og .brand{position:absolute;left:64px;bottom:48px;display:flex;align-items:center;gap:12px;font-size:24px;font-weight:600;color:#fff}
+  .og .brand small{font-weight:400;color:#a9cbe8;font-size:20px}
+  .og .ch-fig{margin:0}
+  .og .ch-fig__parts{padding:0;background:transparent}
+  .og .photo{width:300px;height:300px;border-radius:50%;object-fit:cover;justify-self:center;border:6px solid #5dade2}
+  .ch-fig figcaption{display:none}
+</style></head><body>
+<div class="og" id="og"></div>
+<script type="module">
+const v = new URLSearchParams(location.search).get('v');
+const og = document.getElementById('og');
+const brand = '<div class="brand">Charge Tanks <small>chargetanks.com</small></div>';
+const fig = '<figure class="ch-fig" data-chapter-figure data-tool="intro" data-show="tanks" data-curves="real" data-vmin="2.8" data-vmax="4.2" data-soc="0.6"><div class="ch-fig__parts" data-figure-parts></div><figcaption>x</figcaption></figure>';
+const T = {
+  home: '<h1>A battery is lithium, two tanks and bookkeeping.<span>The complexity is in the curves, not in the logic.</span></h1>' + fig,
+  chapter: '<h1>The lithium balance<span>Designing a cell forwards: voltage window, N/P ratio and N/Li ratio, with tools that compute along.</span></h1>' + fig,
+  about: '<h1>Dr. Lars von Kolzenberg<span>Principal battery model developer at Breathe. PhD on SEI growth, Ulm University.</span></h1><img class="photo" src="/images/lars.jpg" alt="">',
+};
+og.innerHTML = T[v] + brand;
+og.style.position='relative';
+await import('/assets/js/site/chapter.js');
+</script>
+</body></html>

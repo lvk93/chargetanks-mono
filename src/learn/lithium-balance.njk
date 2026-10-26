@@ -6,6 +6,8 @@ description: "Follow the lithium through a cell: why voltage is a height differe
 permalink: /learn/lithium-balance/
 ldType: article
 ogType: article
+ogImage: /assets/img/og/chapter.jpg
+ogImageAlt: "The lithium balance: anode and cathode of a graphite/NMC cell as two tanks hanging from one ceiling."
 date: 2026-10-25
 category: Cell design
 crumbs: [["Learn", "/learn/lithium-balance/"]]
@@ -99,11 +101,11 @@ sitemap: false
     <p>If you just let the cathode drain, that would be a one-way trip. And where would the lithium go when you charge? You need a second tank: the anode. It hangs from the same ceiling but sits just below it, so low voltage. The cathode sits way down, so high voltage. Lithium, cathode, anode: that's all you need for equilibrium.</p>
     <p>And the cell voltage you measure from the outside? That's simply the height difference between the two water surfaces.</p>
     <p><strong>Charging</strong> means pumping water from the deep cathode tank up into the anode tank. That costs energy. <strong>Discharging</strong> means the water runs back down on its own, and the energy comes back as current.</p>
-    {{ fig("intro", "tanks,electrodes", "Two tanks on one ceiling, charged: most of the water sits up in the anode, and the height difference is large. Right: the same state as two curves.", 'data-soc="0.85"') }}
+    {{ fig("intro", "tanks,electrodes", "Two tanks on one ceiling, charged: most of the water sits up in the anode, and the height difference is large. Next to the tanks: the same state as two curves.", 'data-soc="0.85"') }}
 
     <h3>Step 4: Both tanks in one plot</h3>
     <p>Now both curves go into one plot. As the anode fills, its level moves toward the ceiling and its voltage drops, just like in any OCV curve on a datasheet. The cell voltage is the vertical distance between the two curves. For ideal tanks that's a straight line again.</p>
-    {{ fig("intro", "electrodes,cell", "Top: both electrodes against the ceiling. Bottom: their distance is the cell voltage. Vmin and Vmax cut out the usable window (shaded).") }}
+    {{ fig("intro", "electrodes,cell", "Both electrodes against the ceiling, and their distance as the cell voltage. Vmin and Vmax cut out the usable window (shaded).") }}
     <p>Now Vmin and Vmax come in: two horizontal lines. Where they cut the cell voltage, that's your usable capacity.</p>
 
     <section class="ch-tool" data-chapter-tool="intro" aria-label="Tool: two tanks and the voltage window">

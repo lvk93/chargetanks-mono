@@ -10,6 +10,6 @@
   "description": "Battery cell design from first principles: follow the lithium through anode and cathode as two tanks, with small tools that compute along.",
   "tagline": "A battery is lithium, two tanks and bookkeeping.",
   "themeColor": "#003B73",
-  "ogImage": "/images/introduction_post/2026-03-03_twotank_charge.png",
-  "ogImageAlt": "Two connected tanks illustrating lithium movement during battery charging."
+  "ogImage": "/assets/img/og/home.jpg",
+  "ogImageAlt": "A battery is lithium, two tanks and bookkeeping: anode and cathode of a graphite/NMC cell drawn as two tanks."
 }
