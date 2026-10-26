@@ -15,6 +15,7 @@ npm run serve      # baut nach _site/ und startet einen Server mit Live-Reload (
 npm run build      # nur bauen
 npm test           # Regressionspruefung der Tools und Pruefung der gebauten Seite (_site/)
 node tests/e2e/tools.mjs   # nach dem Build: alle Pruefzustaende der Tools im Browser (braucht Chrome)
+node tests/e2e/pages.mjs   # nach dem Build: Startseite, Kapitel und About im Browser, Desktop und Handy
 ```
 
 ## Deployment (Netlify)
@@ -72,5 +73,6 @@ Header aus `_redirects` und `_headers` uebertragen.
 | `config/` | Hilfsfunktionen fuer den Build (JSON-LD, KaTeX, Vorlage der Vorschaubilder) |
 | `tests/regression/` | Regressionspruefung der Rechnung (Fingerabdruecke, `reference.json`) |
 | `tests/site/` | Pruefung der gebauten Seite |
-| `tests/e2e/tools.mjs` | Browser-Pruefung der Tool-Seiten (lokal mit Chrome, `node tests/e2e/tools.mjs`) |
+| `tests/e2e/` | Browser-Pruefungen mit Chrome: Tool-Seiten (`tools.mjs`), Startseite/Kapitel/About (`pages.mjs`) |
+| `tests/model/` | Rechnung der Kapitel-Tools (ideale Tanks, Lithiumkonto) |
 | `eleventy.config.js`, `_redirects`, `_headers`, `netlify.toml` | Build und Netlify |

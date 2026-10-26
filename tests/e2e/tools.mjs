@@ -53,7 +53,9 @@ const origin = `http://127.0.0.1:${server.address().port}`;
 // Chrome per DevTools-Protokoll
 const profile = mkdtempSync(join(tmpdir(), 'ct-e2e-'));
 const debugPort = 9300 + Math.floor(Math.random() * 500);
-const chrome = spawn(CHROME, ['--headless=new', '--disable-gpu', `--remote-debugging-port=${debugPort}`, `--user-data-dir=${profile}`,
+// als root (z. B. in Containern) startet Chrome nur ohne Sandbox
+const sandbox = process.getuid?.() === 0 ? ['--no-sandbox'] : [];
+const chrome = spawn(CHROME, ['--headless=new', '--disable-gpu', ...sandbox, `--remote-debugging-port=${debugPort}`, `--user-data-dir=${profile}`,
   '--window-size=1280,900', 'about:blank'], { stdio: 'ignore' });
 const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 let target = null;
