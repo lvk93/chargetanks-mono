@@ -2,21 +2,22 @@
 layout: layouts/base.njk
 title: About
 metaTitle: "About Lars von Kolzenberg | Charge Tanks"
-description: "Lars von Kolzenberg, battery modeling engineer at Breathe: CV, publications and links to Google Scholar, ORCID and LinkedIn."
+description: "Lars von Kolzenberg, principal battery model developer at Breathe: CV, publications and links to Google Scholar, ORCID and LinkedIn."
 permalink: /about/
 ldType: website
-# Entwurf, bis der Lebenslauf von Lars da ist: Notizen sichtbar, nicht indexiert, nicht in der Sitemap.
+# Entwurf, bis Lars gegengelesen hat: Notizen sichtbar, nicht indexiert, nicht in der Sitemap.
 draft: true
 robots: "noindex, follow"
 sitemap: false
 ---
 {%- macro note(on, text) -%}{% if on %}<aside class="draft-note"><strong>Entwurf:</strong> {{ text | safe }}</aside>{% endif %}{%- endmacro -%}
 {%- macro todo(on) -%}{% if on %} <span class="draft-tag">fehlt</span>{% endif %}{%- endmacro -%}
+{%- macro doi(id) -%}<a href="https://doi.org/{{ id }}">doi</a>{%- endmacro -%}
 <article class="container container--article">
   <img class="cv-photo" src="/images/lars.jpg" alt="Lars von Kolzenberg" width="768" height="512" decoding="async">
-  <h1 class="article-title">Lars von Kolzenberg</h1>
+  <h1 class="article-title">Dr. Lars von Kolzenberg</h1>
   <div class="prose">
-    <p>I build physics-based battery models: cell models for design, diagnostics and aging, and the software that puts them to work. My PhD was on how operating conditions drive SEI growth. Since then I have worked on aging analysis, cell design and swelling prediction in industry, and today on battery modeling at Breathe.</p>
+    <p>I build physics-based battery models and the methods to parametrize them: electrochemical-thermal cell models, reduced-order models, impedance analysis. My PhD was on how operating conditions drive SEI growth. Since then I have worked on aging analysis, cell design and swelling at a cell manufacturer, and today I develop battery models at Breathe.</p>
     <p>Charge Tanks is where I write down, from scratch, how I think about cells. It is a notebook, not a product.</p>
   </div>
   <ul class="cv-links">
@@ -27,7 +28,7 @@ sitemap: false
   </ul>
 
   {%- if draft %}
-  <aside class="draft-note draft-note--banner"><strong>Entwurfsvorschau.</strong> Gerüst für den Lebenslauf. Jahre, Rollen und die übrigen Paper kommen aus Lars' CV; „fehlt“-Marken und gelbe Kästen verschwinden mit <code>draft: false</code>.</aside>
+  <aside class="draft-note draft-note--banner"><strong>Entwurfsvorschau.</strong> Aus dem CV vom 07.08.2026 übernommen und für die Webseite gekürzt. Bitte gegenlesen; gelbe Kästen und „fehlt“-Marken verschwinden mit <code>draft: false</code>.</aside>
   {%- endif %}
 
   <section class="prose" aria-labelledby="cv-experience">
@@ -35,46 +36,83 @@ sitemap: false
   </section>
   <ol class="cv-list">
     <li>
-      <span class="cv-list__when">{{ todo(draft) }}– today</span>
+      <span class="cv-list__when">2025 – today</span>
       <div class="cv-list__what">
-        <strong>Senior battery modeling engineer, Breathe Battery Technologies</strong>
-        <p>Physics-based and reduced-order cell models, parametrization from impedance and electrode data. Breathe's model products: <a href="https://docs.breathebatteries.com/breathe-simulate-documentation/product_overview/">Breathe Simulate</a>, Breathe Discover.</p>
-        {{ note(draft, "Link zu Discover, sobald es eine öffentliche Seite gibt. Beschreibung der eigenen Rolle bitte aus dem CV.") }}
+        <strong>Principal Battery Model Developer, Breathe Battery Technologies</strong>
+        <p>New models and parametrization methods for electrochemical-thermal cell description, unified across teams. Coordinated new product development from customer requirements through measurement protocols and data pipelines to model structure. Set up an EIS pipeline for parameter extraction and drove the validation of a reduced-order, bottom-up model. Breathe's model products: <a href="https://docs.breathebatteries.com/breathe-simulate-documentation/product_overview/">Breathe Simulate</a> and Breathe Discover.</p>
+        {{ note(draft, "Discover ohne Link, bis es eine öffentliche Seite gibt. Die Validierungszahlen aus dem CV (10 % Widerstand, 30 mV RMSE) bewusst weggelassen, weil Discover-Interna. Rein, wenn das okay ist.") }}
       </div>
     </li>
     <li>
-      <span class="cv-list__when">{{ todo(draft) }}</span>
+      <span class="cv-list__when">2024 – 2025</span>
       <div class="cv-list__what">
-        <strong>Cellforce Group</strong>{{ todo(draft) }}
-        <p>Aging analysis, cell design and swelling prediction for a battery cell manufacturer.</p>
+        <strong>Senior Battery Model Developer, Breathe Battery Technologies</strong>
+        <p>Built a software platform for battery design, automated data pipelines and a model database. Planned the testing protocols and lab equipment to parametrize and validate the models.</p>
       </div>
     </li>
     <li>
-      <span class="cv-list__when">2023</span>
+      <span class="cv-list__when">2021 – 2024</span>
       <div class="cv-list__what">
-        <strong>PhD, Ulm University, Institute of Electrochemistry</strong>
-        <p>Thesis: <a href="https://doi.org/10.18725/OPARU-49704">Prolonging lithium-ion battery lifetime: How operating conditions affect solid electrolyte interphase growth</a>. Continuum models of SEI growth from nonequilibrium thermodynamics, from dense and porous films to SEI on expanding silicon particles.</p>
-        {{ note(draft, "Zeitraum der Promotion und Arbeitsgruppe ergänzen.") }}
+        <strong>Development Engineer, Cellforce Group, Tübingen</strong>
+        <p>Digital development for a cell manufacturer: cell design software, aging analysis with physical and machine-learning models, micro- and mesoscale models, swelling of cells, and the test protocols to validate all of it.</p>
       </div>
     </li>
     <li>
-      <span class="cv-list__when">{{ todo(draft) }}</span>
+      <span class="cv-list__when">2018 – 2021</span>
       <div class="cv-list__what">
-        <strong>M.Sc. Process engineering</strong>{{ todo(draft) }}
+        <strong>Research Assistant, German Aerospace Center (DLR), Institute of Engineering Thermodynamics</strong>
+        <p>Continuum models of lithium-ion battery aging with a focus on SEI growth, the basis of my PhD.</p>
+      </div>
+    </li>
+    <li>
+      <span class="cv-list__when">2012 – 2017</span>
+      <div class="cv-list__what">
+        <strong>Dual student, GEDIA Automotive Group</strong>
+        <p>Pre-development: CAD models, technical drawings and FEM analysis.</p>
+      </div>
+    </li>
+  </ol>
+
+  <section class="prose" aria-labelledby="cv-education">
+    <h2 id="cv-education">Education</h2>
+  </section>
+  <ol class="cv-list">
+    <li>
+      <span class="cv-list__when">2018 – 2023</span>
+      <div class="cv-list__what">
+        <strong>Dr. rer. nat. in Chemistry, Ulm University</strong>
+        <p>Magna cum laude. Thesis: <a href="https://doi.org/10.18725/OPARU-49704">Prolonging lithium-ion battery lifetime: How operating conditions affect solid electrolyte interphase growth</a>. Supervised by Prof. Birger Horstmann and Prof. Arnulf Latz.</p>
+      </div>
+    </li>
+    <li>
+      <span class="cv-list__when">2016 – 2017</span>
+      <div class="cv-list__what">
+        <strong>M.Sc. Chemical Engineering, RWTH Aachen University</strong>
+        <p>With distinction. Thesis on neural-network-aided modelling of layer-by-layer nanofiltration membranes.</p>
+      </div>
+    </li>
+    <li>
+      <span class="cv-list__when">2012 – 2016</span>
+      <div class="cv-list__what">
+        <strong>B.Sc. Mechanical Engineering, RWTH Aachen University</strong>
+        <p>Major in chemical engineering.</p>
       </div>
     </li>
   </ol>
 
   <section class="prose" aria-labelledby="cv-publications">
     <h2 id="cv-publications">Publications</h2>
-    {{ note(draft, "Unvollständig: nur die Paper, die öffentlich ohne Scholar auffindbar waren. Rest aus Scholar oder CV.") }}
     <ol class="pubs" reversed>
-      <li><span class="pubs__title">Inhomogeneous carbon binder distribution: implications for tortuosity determination from electrochemical impedance spectroscopy.</span> C. Bieneck, L. von Kolzenberg, C. G. Staacke, J. Lammel, J. Zausch, A. Latz, T. Danner. <em>J. Electrochem. Soc.</em> 172, 070507 (2025). <a href="https://doi.org/10.1149/1945-7111/adde17">doi</a></li>
-      <li><span class="pubs__title">Transition between growth of dense and porous films: theory of dual-layer SEI.</span> L. von Kolzenberg, M. Werres, J. Tetzloff, B. Horstmann. <em>Phys. Chem. Chem. Phys.</em> 24, 18469 (2022). <a href="https://doi.org/10.1039/D2CP00188H">doi</a></li>
-      <li><span class="pubs__title">A four parameter model for the solid-electrolyte interphase to predict battery aging during operation.</span> L. von Kolzenberg, J. Stadler, J. Fath, M. Ecker, B. Horstmann, A. Latz. <em>J. Power Sources</em> 539, 231560 (2022). <a href="https://doi.org/10.1016/j.jpowsour.2022.231560">doi</a></li>
-      <li><span class="pubs__title">Chemo-mechanical model of SEI growth on silicon electrode particles.</span> L. von Kolzenberg, A. Latz, B. Horstmann. <em>Batteries &amp; Supercaps</em> 5, e202100216 (2022). <a href="https://doi.org/10.1002/batt.202100216">doi</a></li>
-      <li><span class="pubs__title">Efficient simulation of chemical-mechanical coupling in battery active particles.</span> G. F. Castelli, L. von Kolzenberg, B. Horstmann, A. Latz, W. Dörfler. <em>Energy Technol.</em> 9, 2000835 (2021). <a href="https://doi.org/10.1002/ente.202000835">doi</a></li>
-      <li><span class="pubs__title">Solid-electrolyte interphase during battery cycling: theory of growth regimes.</span> L. von Kolzenberg, A. Latz, B. Horstmann. <em>ChemSusChem</em> 13, 3901 (2020). <a href="https://doi.org/10.1002/cssc.202000867">doi</a></li>
+      <li><span class="pubs__title">Electrolyte parameter identification by high-frequency impedance measurement during current pulses.</span>{{ todo(draft) }} <em>J. Electrochem. Soc.</em> (2026). {{ doi("10.1149/1945-7111/ae67ae") }}</li>
+      <li><span class="pubs__title">Electrode properties from blocking condition impedance spectra: influence of manufacturing parameters.</span>{{ todo(draft) }} <em>J. Electrochem. Soc.</em> (2026). {{ doi("10.1149/1945-7111/ae3864") }}</li>
+      <li><span class="pubs__title">Inhomogeneous carbon binder distribution: implications for tortuosity determination from electrochemical impedance spectroscopy.</span> C. Bieneck, L. von Kolzenberg, C. G. Staacke, J. Lammel, J. Zausch, A. Latz, T. Danner. <em>J. Electrochem. Soc.</em> 172, 070507 (2025). {{ doi("10.1149/1945-7111/adde17") }}</li>
+      <li><span class="pubs__title">Transition between growth of dense and porous films: theory of dual-layer SEI.</span> L. von Kolzenberg, M. Werres, J. Tetzloff, B. Horstmann. <em>Phys. Chem. Chem. Phys.</em> 24, 18469 (2022). {{ doi("10.1039/D2CP00188H") }}</li>
+      <li><span class="pubs__title">A four parameter model for the solid-electrolyte interphase to predict battery aging during operation.</span> L. von Kolzenberg, J. Stadler, J. Fath, M. Ecker, B. Horstmann, A. Latz. <em>J. Power Sources</em> 539, 231560 (2022). {{ doi("10.1016/j.jpowsour.2022.231560") }}</li>
+      <li><span class="pubs__title">Chemo-mechanical model of SEI growth on silicon electrode particles.</span> L. von Kolzenberg, A. Latz, B. Horstmann. <em>Batteries &amp; Supercaps</em> 5, e202100216 (2022). {{ doi("10.1002/batt.202100216") }}</li>
+      <li><span class="pubs__title">Efficient simulation of chemical-mechanical coupling in battery active particles.</span> G. F. Castelli, L. von Kolzenberg, B. Horstmann, A. Latz, W. Dörfler. <em>Energy Technol.</em> 9, 2000835 (2021). {{ doi("10.1002/ente.202000835") }}</li>
+      <li><span class="pubs__title">Solid-electrolyte interphase during battery cycling: theory of growth regimes.</span> L. von Kolzenberg, A. Latz, B. Horstmann. <em>ChemSusChem</em> 13, 3901 (2020). {{ doi("10.1002/cssc.202000867") }}</li>
+      <li><span class="pubs__title">Rational design of ion separation membranes.</span> D. Rall, D. Menne, A. M. Schweidtmann, J. Kamp, L. von Kolzenberg, A. Mitsos, M. Wessling. <em>J. Membr. Sci.</em> 569, 209 (2019). {{ doi("10.1016/j.memsci.2018.10.013") }}</li>
     </ol>
+    {{ note(draft, "Autorenlisten der beiden JES-Paper von 2026 bitte ergänzen (bei mir nicht abrufbar).") }}
   </section>
 </article>

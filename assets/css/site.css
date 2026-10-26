@@ -670,6 +670,13 @@ a:hover .more .icon {
 
 .cv-list__what p { margin-top: 0.25rem; }
 
+.cv-list__what a,
+.pubs a {
+  color: var(--navy);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
 .pubs {
   margin: 0;
   padding-left: 1.25rem;
