@@ -67,3 +67,23 @@ test('Alterung: Quiz (N/P 1.1, N/Li 1.2, 5/3/2 %) verliert 2 % Kapazitaet, Verlu
   near(same.np, 1.1);
   near(same.nLi, 1.2);
 });
+
+test('Blend: Silizium fuellt sich zuerst, Knick am Boden des Graphittanks, danach flachere Steigung', async () => {
+  const { blendElectrode, dqdv, IDEAL_GRAPHITE, IDEAL_SILICON, lineU } = await import('../../assets/js/model/blendTanks.js');
+  const si = 0.25;
+  const b = blendElectrode([{ share: si, U: lineU(IDEAL_SILICON) }, { share: 1 - si, U: lineU(IDEAL_GRAPHITE) }]);
+  // Knick: Silizium allein bis 0.25 V, das sind si * (0.6 - 0.25) / (0.6 - 0.05) der Gesamtkapazitaet
+  const qKink = (si * (0.6 - 0.25)) / (0.6 - 0.05);
+  near(b.U(qKink), 0.25, 2e-3);
+  assert.ok(b.split(qKink * 0.5)[1] < 1e-9, 'vor dem Knick bekommt Graphit nichts');
+  // Steigungen (Betrag) vor und nach dem Knick: 1/b vs. 1/(1/b1 + 1/b2)
+  const b1 = (0.6 - 0.05) / si;
+  const b2 = (0.25 - 0.08) / (1 - si);
+  const slope = (q0, q1) => (b.U(q0) - b.U(q1)) / (q1 - q0);
+  near(slope(0.02, qKink - 0.02), b1, 2e-2);
+  near(slope(qKink + 0.05, qKink + 0.25), 1 / (1 / b1 + 1 / b2), 1e-2);
+  // dQ/dV einer Geraden: Kapazitaet / Spannungsbereich
+  const grid = Array.from({ length: 701 }, (_, i) => i * 0.001);
+  const d = dqdv(lineU(IDEAL_SILICON), 2.5, grid);
+  near(d[300], 2.5 / 0.55, 0.05);
+});

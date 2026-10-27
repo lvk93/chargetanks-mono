@@ -1304,7 +1304,7 @@ body.has-fullscreen-chart {
   .chapter-tabs .tab-short { display: inline; }
 }
 
-@media (max-width: 359px) {
+@media (max-width: 479px) {
   .chapter-tabs a span { display: none; }
 }
 
@@ -1602,6 +1602,7 @@ body.has-fullscreen-chart {
 }
 
 .ch-fig--tanks,
+.ch-fig--blendtanks,
 .ch-fig--account { max-width: 28rem; }
 
 @media (min-width: 640px) {

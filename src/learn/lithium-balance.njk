@@ -11,7 +11,7 @@ ogImageAlt: "The lithium balance: anode and cathode of a graphite/NMC cell as tw
 date: 2026-10-25
 category: Cell design
 crumbs: [["Learn", "/learn/lithium-balance/"]]
-llms: "Four-part chapter on the lithium balance of a cell in equilibrium: voltage window, N/P ratio, N/Li ratio including formation and prelithiation, and aging modes, each with a small interactive tool."
+llms: "Five-part chapter on the lithium balance of a cell in equilibrium: voltage window, N/P ratio, N/Li ratio including formation and prelithiation, aging modes and blended electrodes, each with a small interactive tool."
 # Entwurf: Notizen (gelbe Kaesten) sichtbar, nicht indexiert, nicht in der Sitemap. Fuer die Veroeffentlichung
 # draft auf false setzen und robots/sitemap entfernen.
 draft: true
@@ -27,12 +27,12 @@ sitemap: false
   <input class="slider" type="range" id="{{ p }}-{{ name }}" name="{{ name }}" min="{{ min }}" max="{{ max }}" step="{{ step }}" value="{{ value }}" data-decimals="{{ d }}" autocomplete="off">
 </div>
 {%- endmacro -%}
-{%- macro curves(p) -%}
+{%- macro curves(p, real = "Graphite vs NMC (real curves)") -%}
 <div class="control" data-control="curves">
   <div class="control__head"><label for="{{ p }}-curves">Curves</label></div>
   <select class="select" id="{{ p }}-curves" name="curves" autocomplete="off">
     <option value="ideal" selected>Ideal tanks (straight lines)</option>
-    <option value="real">Graphite vs NMC (real curves)</option>
+    <option value="real">{{ real }}</option>
   </select>
 </div>
 {%- endmacro -%}
@@ -56,7 +56,7 @@ sitemap: false
   <header class="article-header">
     <span class="badge">Cell design</span>
     <h1 class="article-title">The lithium balance: designing a cell forwards</h1>
-    <p class="chapter__lead">Four short chapters on how anode, cathode and lithium are designed against each other, and how they age. Equilibrium only, tanks and straight lines, and a small tool in every chapter.</p>
+    <p class="chapter__lead">Five short chapters on how anode, cathode and lithium are designed against each other, how they age, and what happens when you blend materials. Equilibrium only, tanks and straight lines, and a small tool in every chapter.</p>
   </header>
 
   {%- if draft %}
@@ -68,6 +68,7 @@ sitemap: false
     <a href="#np-ratio"><span>2</span> <b class="tab-long">N/P ratio</b><b class="tab-short" aria-hidden="true">N/P</b></a>
     <a href="#n-li-ratio"><span>3</span> <b class="tab-long">N/Li ratio</b><b class="tab-short" aria-hidden="true">N/Li</b></a>
     <a href="#aging"><span>4</span> <b class="tab-long">Aging</b><b class="tab-short" aria-hidden="true">Aging</b></a>
+    <a href="#blends"><span>5</span> <b class="tab-long">Blends</b><b class="tab-short" aria-hidden="true">Blends</b></a>
   </nav>
 
   {# ------------------------------------------------------------------ 1 Einleitung ---- #}
@@ -547,7 +548,80 @@ sitemap: false
       <p class="math-step">Equal losses</p>
       {% math %}\mathrm{LAM}_a = \mathrm{LAM}_c = \mathrm{LLI} \;\Rightarrow\; \mathrm{N/P}' = \mathrm{N/P},\ \ \mathrm{N/Li}' = \mathrm{N/Li}{% endmath %}
     </details>
-    <p class="chapter-next"><a href="#n-li-ratio">← N/Li ratio</a></p>
+    <p class="chapter-next"><a href="#n-li-ratio">← N/Li ratio</a> <a href="#blends">Next: blends →</a></p>
+  </section>
+  {# ------------------------------------------------------------------ 5 Blends ---- #}
+  <section class="chapter-panel prose" id="blends" data-chapter-panel aria-labelledby="t5">
+    <h2 id="t5">5 · Two tanks, one level: blended electrodes</h2>
+
+    <p>So far every electrode had exactly one material. In reality that's less and less the case: in almost every high-performance cell today, the anode has some silicon blended in. How does that fit into the tank picture?</p>
+
+    <p>Picture a blended anode as two different tanks, connected at the bottom by a pipe. So the level is always the same in both, because both materials sit at the same potential.</p>
+    <p>Remember the ceiling? That's what we measure every material against. Silicon starts taking up lithium much earlier, so its tank hangs lower, further away from the ceiling. The graphite tank hangs higher.</p>
+    {{ fig("blend", "blendtanks", "Two ideal tanks connected at the bottom. The silicon tank hangs lower, so it fills first.", 'data-soc="0.1"') }}
+    <p>On charge, at first only the silicon tank fills, until the level reaches the bottom of the graphite tank. From then on both fill together: two tanks share the water, the level rises more slowly, and right there the voltage curve has a kink.</p>
+
+    <section class="ch-tool" data-chapter-tool="blend" aria-label="Tool: blended anode">
+      <form class="ch-tool__controls">
+        {{ curves("t5", "Graphite + silicon (real curves)") }}
+        {{ presets([["Graphite only", '{"si":0}'], ["Typical", '{"si":25}'], ["Silicon-rich", '{"si":50}']]) }}
+        {{ sl("t5", "si", "Silicon share of the capacity [%]", 0, 60, 1, 25, 0) }}
+        {{ sl("t5", "soc", "Lithium in the anode", 0, 1, 0.01, 0.5) }}
+        <button type="button" class="controls__action" data-reset>Reset</button>
+      </form>
+      <div class="ch-tool__figs">
+        <figure><figcaption>The connected tanks</figcaption><div data-blendtanks></div></figure>
+        <figure><figcaption>Potential of the blend</figcaption><div data-potential></div></figure>
+        <figure class="ch-span"><figcaption>Where the lithium goes</figcaption><div data-split></div></figure>
+      </div>
+      <dl class="ch-tool__readouts">
+        <div><dt>Potential vs Li/Li⁺</dt><dd data-readout="potential">–</dd></div>
+        <div><dt>Lithium in silicon</dt><dd data-readout="silicon">–</dd></div>
+        <div><dt>Lithium in graphite</dt><dd data-readout="graphite">–</dd></div>
+      </dl>
+    </section>
+
+    <p>Graphite takes up lithium in clear steps, hence the plateaus. Silicon has no fixed bottom, its tank is more like a slanted funnel.</p>
+    <p>Connect the two and the sharp kink becomes a smooth transition, and graphite and silicon share the lithium depending on where the level is.</p>
+
+    <p>If you know dQ/dV: that's exactly the width of the tanks. Graphite shows sharp peaks, silicon a broad hump. In the blend, the graphite peaks simply sit on top of the silicon hump. And because the widths simply add up, you can turn it around: from a measured dQ/dV curve you can read off how much graphite and how much silicon contribute.</p>
+
+    <section class="ch-tool" data-chapter-tool="dqdv" aria-label="Tool: taking a blend apart with dQ/dV">
+      <form class="ch-tool__controls">
+        {{ curves("t5b", "Graphite + silicon (real curves)") }}
+        {{ presets([["Too little graphite", '{"guess":70}'], ["Just right", '{"guess":80}'], ["Too much graphite", '{"guess":90}']]) }}
+        {{ sl("t5b", "guess", "Your guess: graphite share [%]", 50, 100, 1, 70, 0) }}
+        <button type="button" class="controls__action" data-reset>Reset</button>
+      </form>
+      <div class="ch-tool__figs">
+        <figure class="ch-span"><figcaption>Blend minus your graphite = what's left for silicon</figcaption><div data-dqdv></div></figure>
+      </div>
+      <dl class="ch-tool__readouts">
+        <div><dt>Graphite share (guess)</dt><dd data-readout="guess">–</dd></div>
+        <div><dt>Remainder</dt><dd data-readout="status">–</dd></div>
+      </dl>
+    </section>
+
+    <p>On the cathode side it works the same way, for example NMC with LFP.</p>
+
+    <details class="math-box">
+      <summary>The math behind it{{ draftTag(draft) }}</summary>
+      <p class="math-legend">{% mi %}q_i{% endmi %} lithium in material {% mi %}i{% endmi %}, {% mi %}a_i, b_i{% endmi %} start and slope of its ideal tank, {% mi %}w{% endmi %} graphite share.</p>
+      <p class="math-step">Each tank</p>
+      {% math %}
+      \begin{aligned}
+      U &= a_i + b_i\,q_i \\[4pt]
+      q_i(U) &= \max\!\Big(0,\ \frac{U - a_i}{b_i}\Big)
+      \end{aligned}
+      {% endmath %}
+      <p class="math-step">Blend at one potential</p>
+      {% math %}q(U) = \sum_i q_i(U){% endmath %}
+      <p class="math-step">Slope after the kink</p>
+      {% math %}\frac{\mathrm{d}U}{\mathrm{d}q} = \frac{1}{1/b_1 + 1/b_2}{% endmath %}
+      <p class="math-step">dQ/dV of the blend</p>
+      {% math %}\frac{\mathrm{d}Q}{\mathrm{d}V}\Big|_\mathrm{blend} = w\,\frac{\mathrm{d}Q}{\mathrm{d}V}\Big|_\mathrm{Gr} + (1 - w)\,\frac{\mathrm{d}Q}{\mathrm{d}V}\Big|_\mathrm{Si}{% endmath %}
+    </details>
+    <p class="chapter-next"><a href="#aging">← Aging</a></p>
   </section>
 </article>
 <script type="module" src="/assets/js/site/chapter.js"></script>

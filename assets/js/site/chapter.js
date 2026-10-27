@@ -2,6 +2,7 @@
 // (Einleitung, N/P, N/Li, Alterung) plus der feste Vergleich NMC/LFP gegen Graphit. Gezeichnet wird als SVG ohne Plotly, damit die Seite leicht bleibt.
 // Rechnung: assets/js/model/idealCell.js (ideale Tanks, alles Geraden).
 import { agedBalance, IDEAL_ANODE, IDEAL_CATHODE, idealCell, lithiumAccount, realElectrode } from '../model/idealCell.js';
+import { blendElectrode, dqdv, IDEAL_GRAPHITE, IDEAL_SILICON, lineU } from '../model/blendTanks.js';
 import { loadMaterial } from '../ui/data.js';
 import { initControls } from '../ui/controls.js';
 import { track } from './track.js';
@@ -375,6 +376,124 @@ function drawAccount(container, acc) {
   svg.append(el('text', { x: m.l + 30, y: 10, fill: C.cathode, 'font-size': 10, 'dominant-baseline': 'middle', opacity: 0.9 }, 'room in the cathode'));
 }
 
+/* Blend (Tab 5) ------------------------------------------------------------------------------- */
+const BLEND_PX_PER_V = 380;
+
+// Tankprofil einer Blend-Komponente: Breite ~ dQ/dU, ueber ein kleines Spannungsfenster geglaettet und gedeckelt
+function blendProfile(U, q, cap) {
+  const n = 200;
+  const pts = [];
+  for (let i = 0; i <= n; i += 1) pts.push({ f: i / n, u: U(i / n) });
+  const h = 0.008;
+  for (const p of pts) {
+    let fLo = Infinity;
+    let fHi = -Infinity;
+    let uLo = Infinity;
+    let uHi = -Infinity;
+    for (const o of pts) {
+      if (Math.abs(o.u - p.u) > h) continue;
+      fLo = Math.min(fLo, o.f); fHi = Math.max(fHi, o.f);
+      uLo = Math.min(uLo, o.u); uHi = Math.max(uHi, o.u);
+    }
+    p.w = Math.max(14, Math.min(cap, (2.6 * q * (fHi - fLo)) / Math.max(uHi - uLo, 0.002)));
+  }
+  return pts.filter((p) => p.u <= U_RANGE && p.u >= 0);
+}
+
+function drawBlendTanks(container, blend, q) {
+  const W = 360;
+  const top = 30;
+  const y = (u) => top + u * BLEND_PX_PER_V;
+  const H = top + U_RANGE * BLEND_PX_PER_V + 34;
+  const svg = svgRoot(container, W, H, 'Silicon and graphite tanks of a blended anode, connected at the bottom');
+  svg.append(el('rect', { x: 8, y: top - 8, width: W - 16, height: 8, fill: C.metal, opacity: 0.5 }));
+  svg.append(el('line', { x1: 8, x2: W - 8, y1: top, y2: top, stroke: C.metal, 'stroke-width': 1.5 }));
+  svg.append(el('text', { x: W / 2, y: top - 12, fill: C.muted, 'font-size': 11, 'text-anchor': 'middle' }, 'ceiling = Li/Li⁺ (0 V)'));
+  const uS = blend.U(q);
+  const fills = blend.split(q);
+  const centers = [100, 250];
+  const bottoms = [];
+  blend.parts.forEach((part, i) => {
+    if (part.share <= 1e-6) return;
+    const pts = blendProfile(part.U, part.share * Q_BLEND, 150);
+    const cx = centers[i];
+    const L = (p) => (cx - p.w / 2).toFixed(1);
+    const R = (p) => (cx + p.w / 2).toFixed(1);
+    const Y = (p) => y(p.u).toFixed(1);
+    const wet = pts.filter((p) => p.u >= uS);
+    if (fills[i] > 0 && wet.length) {
+      const sw = wet[wet.length - 1].w;
+      const water = [`M${R(wet[0])} ${Y(wet[0])}`, ...wet.map((p) => `L${R(p)} ${Y(p)}`), `L${(cx + sw / 2).toFixed(1)} ${y(uS).toFixed(1)}`,
+        `L${(cx - sw / 2).toFixed(1)} ${y(uS).toFixed(1)}`, ...[...wet].reverse().map((p) => `L${L(p)} ${Y(p)}`), 'Z'];
+      svg.append(el('path', { d: water.join(''), fill: C.water, opacity: 0.85 }));
+    }
+    const last = pts[pts.length - 1];
+    const wall = [`M${L(last)} ${(y(last.u) - 3).toFixed(1)}`, ...[...pts].reverse().map((p) => `L${L(p)} ${Y(p)}`),
+      ...pts.map((p) => `L${R(p)} ${Y(p)}`), `L${R(last)} ${(y(last.u) - 3).toFixed(1)}`];
+    svg.append(el('path', { d: wall.join(''), fill: 'none', stroke: part.color, 'stroke-width': 2.5, 'stroke-linejoin': 'round' }));
+    bottoms.push({ cx, y: y(pts[0].u) });
+    // Beschriftung neben dem Rohr, damit sie nicht darauf liegt
+    svg.append(el('text', { x: i === 0 ? cx - 12 : cx + 12, y: Math.min(H - 4, y(pts[0].u) + 18), fill: part.color, 'font-size': 12, 'font-weight': 600, 'text-anchor': i === 0 ? 'end' : 'start' }, `${part.name} ${pct(fills[i])}`));
+  });
+  // Rohr am Boden: verbindet die Tanks, deshalb ist der Pegel in beiden gleich hoch
+  if (bottoms.length === 2) {
+    const yp = Math.max(bottoms[0].y, bottoms[1].y) + 12;
+    const d = `M${bottoms[0].cx} ${bottoms[0].y}L${bottoms[0].cx} ${yp}L${bottoms[1].cx} ${yp}L${bottoms[1].cx} ${bottoms[1].y}`;
+    svg.append(el('path', { d, fill: 'none', stroke: C.tank, 'stroke-width': 9, 'stroke-linejoin': 'round', opacity: 0.5 }));
+    svg.append(el('path', { d, fill: 'none', stroke: C.water, 'stroke-width': 5, 'stroke-linejoin': 'round', opacity: q > 0 ? 0.9 : 0 }));
+  }
+  // gemeinsamer Pegel und Potenzial
+  svg.append(el('line', { x1: 16, x2: W - 16, y1: y(uS), y2: y(uS), stroke: C.muted, 'stroke-dasharray': '3 3' }));
+  const xv = 150;
+  svg.append(el('line', { x1: xv, x2: xv, y1: top, y2: y(uS), stroke: C.cell, 'stroke-width': 1.5 }));
+  svg.append(el('text', { x: xv + 6, y: Math.max(top + 14, (top + y(uS)) / 2), fill: C.cell, 'font-size': 12, 'font-weight': 700, 'dominant-baseline': 'middle' }, `${fmt(uS, 2)} V`));
+}
+
+function drawBlendPotential(container, blend, q) {
+  chart(container, {
+    label: 'Potential of the blended anode over its lithium content',
+    xMax: Q_BLEND, yMin: 0, yMax: U_RANGE, xTitle: 'lithium in the anode [Ah]', yTitle: 'potential vs Li/Li⁺ [V]', height: 240,
+    draw(p) {
+      p.line(sample((x) => blend.U(x / Q_BLEND), 0, Q_BLEND * 0.999, 300), { stroke: C.cell });
+      p.dot(q * Q_BLEND, blend.U(q), C.water);
+    },
+  });
+}
+
+function drawBlendSplit(container, blend, q) {
+  chart(container, {
+    label: 'How the lithium splits between silicon and graphite',
+    xMax: Q_BLEND, yMin: 0, yMax: Q_BLEND, xTitle: 'lithium in the anode [Ah]', yTitle: 'lithium per material [Ah]', height: 240,
+    draw(p) {
+      blend.parts.forEach((part, i) => {
+        p.line(sample((x) => part.share * Q_BLEND * blend.split(x / Q_BLEND)[i], 0, Q_BLEND * 0.999, 200), { stroke: part.color });
+        p.dot(q * Q_BLEND, part.share * Q_BLEND * blend.split(q)[i], part.color);
+      });
+      p.label(0.3, Q_BLEND * 0.9, 'graphite', C.anode);
+      p.label(0.3, Q_BLEND * 0.8, 'silicon', '#c39bd3');
+    },
+  });
+}
+
+function drawDqdv(container, d) {
+  const yMax = Math.ceil(Math.max(...d.si) * 3);
+  chart(container, {
+    label: 'dQ/dV of the blend, the subtracted graphite and the remainder',
+    xMax: U_RANGE, yMin: -yMax / 2, yMax, xTitle: 'potential vs Li/Li⁺ [V]', yTitle: 'dQ/dV [Ah/V]', height: 260,
+    draw(p) {
+      p.hline(0, null, C.muted, '2 3');
+      const pts = (arr) => d.grid.map((u, i) => [u, arr[i]]);
+      p.line(pts(d.blendCurve), { stroke: C.cell, opacity: 0.5, 'stroke-width': 2 });
+      p.line(pts(d.graphite), { stroke: C.anode, 'stroke-dasharray': '5 4', 'stroke-width': 2 });
+      p.line(pts(d.rest), { stroke: C.water, 'stroke-width': 3 });
+      p.label(0.42, yMax * 0.88, 'blend', C.cell);
+      p.label(0.42, yMax * 0.76, 'your graphite', C.anode);
+      p.label(0.42, yMax * 0.64, 'remainder', C.water);
+      p.label(0.42, -yMax * 0.4, 'graphite peaks cut off', C.muted);
+    },
+  });
+}
+
 /* Tools ---------------------------------------------------------------------------------------- */
 const Q_CATH = 10; // Ah, reversible Kapazitaet der Kathode in allen drei Tools
 
@@ -382,11 +501,13 @@ const Q_CATH = 10; // Ah, reversible Kapazitaet der Kathode in allen drei Tools
 let realPromise = null;
 let REAL = null;
 let LFP = null;
+let SILICON = null;
 function loadReal() {
-  realPromise ||= Promise.all([loadMaterial('Graphite'), loadMaterial('NMC'), loadMaterial('LFP')])
-    .then(([graphite, nmc, lfp]) => {
+  realPromise ||= Promise.all([loadMaterial('Graphite'), loadMaterial('NMC'), loadMaterial('LFP'), loadMaterial('Silicon')])
+    .then(([graphite, nmc, lfp, silicon]) => {
       REAL = { anode: realElectrode(graphite), cathode: realElectrode(nmc) };
       LFP = realElectrode(lfp);
+      SILICON = realElectrode(silicon);
       return REAL;
     });
   return realPromise;
@@ -408,7 +529,22 @@ const DEFAULTS = {
   np: { np: 1.1, soc: 1, vmin: 3.0, vmax: 4.2, curves: 'ideal' },
   nli: { np: 1.2, bonus: 6, sei: 10, prelith: 0, soc: 0, vmin: 3.0, vmax: 4.2, curves: 'ideal' },
   aging: { lama: 0, lamc: 0, lli: 0, soc: 1, vmin: 3.0, vmax: 4.2, curves: 'ideal' },
+  blend: { si: 25, soc: 0.5, curves: 'ideal' },
+  dqdv: { guess: 70, curves: 'ideal' },
 };
+
+// Blend-Anode (Tab 5): 10 Ah, Silizium- und Graphitanteil an der Kapazitaet
+const Q_BLEND = 10;
+const DQDV_SILICON = 0.2; // wahrer Siliziumanteil im Zerlegungs-Tool
+const U_RANGE = 0.7;      // Potenzialbereich der Blend-Bilder gegen Li/Li+
+
+function blendParts(v, si) {
+  const real = v.curves === 'real' && REAL;
+  return [
+    { name: 'Silicon', share: si, U: real ? SILICON.U : lineU(IDEAL_SILICON), color: '#c39bd3' },
+    { name: 'Graphite', share: 1 - si, U: real ? REAL.anode.U : lineU(IDEAL_GRAPHITE), color: C.anode },
+  ];
+}
 
 // Ausgangszelle fuer die Alterung (Tab 4): N/P = 1.1 und N/Li = 1.2 wie im Quiz
 const AGING_BASE = { qCath: 10, qAnode: 11, li: 11 / 1.2 };
@@ -468,6 +604,44 @@ const TOOLS = {
       link: realLink(v.np, acc.li / Q_CATH, v.soc),
     };
   },
+  blend(v) {
+    const blend = blendElectrode(blendParts(v, v.si / 100));
+    const q = Math.min(0.999, Math.max(0, v.soc));
+    const fills = blend.split(q);
+    const amounts = blend.parts.map((p, i) => p.share * Q_BLEND * fills[i]);
+    return {
+      blend, q,
+      render(parts) {
+        if (parts.blendtanks) drawBlendTanks(parts.blendtanks, blend, q);
+        if (parts.potential) drawBlendPotential(parts.potential, blend, q);
+        if (parts.split) drawBlendSplit(parts.split, blend, q);
+      },
+      readouts: {
+        potential: `${fmt(blend.U(q), 3)} V`,
+        silicon: `${fmt(amounts[0])} Ah`,
+        graphite: `${fmt(amounts[1])} Ah`,
+      },
+    };
+  },
+  dqdv(v) {
+    const parts = blendParts(v, DQDV_SILICON);
+    const grid = Array.from({ length: 351 }, (_, i) => 0.02 + (i * (U_RANGE - 0.02)) / 350);
+    const si = dqdv(parts[0].U, parts[0].share * Q_BLEND, grid);
+    const gr1 = dqdv(parts[1].U, Q_BLEND, grid); // reiner Graphit, 10 Ah
+    const blendCurve = grid.map((_, i) => si[i] + (1 - DQDV_SILICON) * gr1[i]);
+    const w = v.guess / 100;
+    const rest = grid.map((_, i) => blendCurve[i] - w * gr1[i]);
+    const truth = 1 - DQDV_SILICON;
+    const status = Math.abs(w - truth) < 0.005 ? 'clean: that is the silicon'
+      : w > truth ? 'dips below zero: too much graphite' : 'graphite peaks left over: too little';
+    return {
+      render(p) {
+        if (p.dqdv) drawDqdv(p.dqdv, { grid, blendCurve, graphite: gr1.map((g) => w * g), rest, si });
+      },
+      readouts: { guess: `${Math.round(w * 100)} %`, status },
+      warn: Math.abs(w - truth) >= 0.005,
+    };
+  },
   aging(v) {
     const fresh = idealCell({ ...AGING_BASE, vMin: v.vmin, vMax: v.vmax, ...electrodes(v) });
     const aged = agedBalance({ ...AGING_BASE, lamAnode: v.lama / 100, lamCath: v.lamc / 100, lli: v.lli / 100 });
@@ -506,13 +680,17 @@ async function initFigure(fig) {
   }
   if (values.curves === 'real') await loadReal();
   const out = TOOLS[tool](values);
-  const x = out.cell.xMin + values.soc * out.cell.capacity;
   const holder = fig.querySelector('[data-figure-parts]');
   const parts = {};
   for (const name of fig.dataset.show.split(',')) {
     parts[name] = document.createElement('div');
     holder.append(parts[name]);
   }
+  if (out.render) {
+    out.render(parts);
+    return;
+  }
+  const x = out.cell.xMin + values.soc * out.cell.capacity;
   drawParts(parts, out, x, { only: fig.dataset.only });
 }
 
@@ -524,6 +702,10 @@ function initTool(root) {
     electrodes: root.querySelector('[data-electrodes]'),
     cell: root.querySelector('[data-cell]'),
     account: root.querySelector('[data-account]'),
+    blendtanks: root.querySelector('[data-blendtanks]'),
+    potential: root.querySelector('[data-potential]'),
+    split: root.querySelector('[data-split]'),
+    dqdv: root.querySelector('[data-dqdv]'),
   };
   const link = root.querySelector('[data-real-link]');
   let frame = 0;
@@ -538,9 +720,8 @@ function initTool(root) {
       return;
     }
     const out = compute(values);
-    const { cell } = out;
-    const x = cell.xMin + values.soc * cell.capacity;
-    drawParts(parts, out, x);
+    if (out.render) out.render(parts);
+    else drawParts(parts, out, out.cell.xMin + values.soc * out.cell.capacity);
     root.classList.toggle('is-real', values.curves === 'real');
     for (const [key, text] of Object.entries(out.readouts)) {
       const node = root.querySelector(`[data-readout="${key}"]`);

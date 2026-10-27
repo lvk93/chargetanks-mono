@@ -144,18 +144,20 @@ for (const width of [1280, 390, 320]) {
       for (const tool of panel.querySelectorAll('[data-chapter-tool]')) {
         const name = tool.dataset.chapterTool;
         const before = readouts(tool);
-        const parts = ['tanks', 'electrodes', 'cell', 'account'].filter((k) => tool.querySelector('[data-' + k + ']'))
+        const parts = ['tanks', 'electrodes', 'cell', 'account', 'blendtanks', 'potential', 'split', 'dqdv'].filter((k) => tool.querySelector('[data-' + k + ']'))
           .map((k) => svgIn(tool.querySelector('[data-' + k + ']')));
         const chips = [...tool.querySelectorAll('[data-preset]')];
         let changed = false;
         for (const chip of chips) { chip.click(); await sleep(60); if (readouts(tool).join() !== before.join()) changed = true; }
         tool.querySelector('[data-reset]').click(); await sleep(60);
         const reset = readouts(tool).join() === before.join();
+        const drawnIdeal = tool.querySelector('.ch-tool__figs').innerHTML;
         const select = tool.querySelector('select[name="curves"]');
         select.value = 'real'; select.dispatchEvent(new Event('input', { bubbles: true })); select.dispatchEvent(new Event('change', { bubbles: true }));
         await sleep(600);
-        const real = svgIn(tool.querySelector('[data-tanks]')) && readouts(tool).every((t) => t && t !== '–')
-          && readouts(tool).join() !== before.join(); // Graphit/NMC rechnet andere Zahlen als die idealen Tanks
+        // echte Kurven zeichnen etwas anderes als die idealen Tanks
+        const real = tool.querySelector('.ch-tool__figs svg') !== null && readouts(tool).every((t) => t && t !== '–')
+          && tool.querySelector('.ch-tool__figs').innerHTML !== drawnIdeal;
         tool.querySelector('[data-reset]').click(); await sleep(60);
         out.tools.push({ name, parts, filled: before.every((t) => t && t !== '–'), chips: chips.length, changed, reset, real });
       }
