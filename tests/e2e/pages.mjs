@@ -186,6 +186,23 @@ for (const width of [1280, 390, 320]) {
   const deep = await evaluate(`[...document.querySelectorAll('[data-chapter-panel]')].filter((p) => !p.hidden).map((p) => p.id).join()`);
   check(`[${width}] Kapitel: Link auf #n-li-ratio oeffnet Reiter 3`, deep === 'n-li-ratio', deep);
 
+  // Scroll-Widerstand: Aufloesung verschleiert, Antwort oder Skip deckt sie auf; Formeln passen in die Breite
+  const veil = await evaluate(`(() => {
+    const blocks = [...document.querySelectorAll('[data-quiz-answer]')];
+    // Bloecke, deren Quiz in diesem Dokument noch nicht beantwortet wurde, muessen verschleiert sein
+    const fresh = blocks.filter((b) => !document.querySelector('[data-quiz="' + b.dataset.quizAnswer + '"] .is-picked'));
+    const veiled = fresh.filter((b) => b.classList.contains('is-veiled')).length;
+    document.querySelector('[data-quiz="lithium-source"] button[data-answer="cathode"]').click();
+    document.querySelector('[data-quiz-answer="aging-loss"] .quiz-answer__skip').click();
+    const open = ['lithium-source', 'aging-loss'].every((k) => !document.querySelector('[data-quiz-answer="' + k + '"]').classList.contains('is-veiled'));
+    return { blocks: blocks.length, fresh: fresh.length, veiled, open };
+  })()`);
+  check(`[${width}] Kapitel: Quiz-Aufloesung verschleiert, Antwort und Skip decken auf`, veil.blocks === 3 && veil.fresh > 0 && veil.veiled === veil.fresh && veil.open, JSON.stringify(veil));
+  const wide = await evaluate(`(() => { document.querySelectorAll('details.math-box').forEach((d) => { d.open = true; });
+    return [...document.querySelectorAll('[data-chapter-panel]')].flatMap((p) => { p.hidden = false; return [...p.querySelectorAll('math[display="block"]')]; })
+      .filter((m) => m.scrollWidth - m.clientWidth > 1).length; })()`);
+  check(`[${width}] Kapitel: keine Formel breiter als die Box`, width < 340 || wide === 0, `${wide} Formeln`);
+
   // About
   await open('/about/', width);
   const about = await evaluate(`({ overflow: document.documentElement.scrollWidth - innerWidth,

@@ -2,13 +2,13 @@
 layout: layouts/base.njk
 title: "The lithium balance: designing a cell forwards"
 metaTitle: "The lithium balance: voltage window, N/P and N/Li ratio | Charge Tanks"
-description: "Follow the lithium through a cell: why voltage is a height difference, how N/P ratio prevents plating, why formation leaves the cell short of lithium, and why aging losses don't add up."
+description: "Follow the lithium through a cell: why voltage is a height difference, how N/P prevents plating, why formation leaves the cell short of lithium, why aging losses don't add up, and how blended electrodes share the lithium."
 permalink: /learn/lithium-balance/
 ldType: article
 ogType: article
 ogImage: /assets/img/og/chapter.jpg
 ogImageAlt: "The lithium balance: anode and cathode of a graphite/NMC cell as two tanks hanging from one ceiling."
-date: 2026-10-25
+date: 2026-10-30
 category: Cell design
 crumbs: [["Learn", "/learn/lithium-balance/"]]
 llms: "Five-part chapter on the lithium balance of a cell in equilibrium: voltage window, N/P ratio, N/Li ratio including formation and prelithiation, aging modes and blended electrodes, each with a small interactive tool."
@@ -57,6 +57,7 @@ sitemap: false
     <span class="badge">Cell design</span>
     <h1 class="article-title">The lithium balance: designing a cell forwards</h1>
     <p class="chapter__lead">Five short chapters on how anode, cathode and lithium are designed against each other, how they age, and what happens when you blend materials. Equilibrium only, tanks and straight lines, and a small tool in every chapter.</p>
+    <p class="chapter__byline">By <a href="/about/">Lars von Kolzenberg</a> · October 2026</p>
   </header>
 
   {%- if draft %}
@@ -89,8 +90,10 @@ sitemap: false
       </div>
       <p class="quiz__feedback" data-quiz-feedback role="status" hidden></p>
     </div>
-    <p>If you had to think about that for a second, this section is for you.</p>
-    <p>The obvious answer is the electrolyte, there's lithium in there after all. But no. The conducting salt is only a means of transport. It doesn't change the capacity, no matter how much of it you pour in. The lithium comes out of the factory inside the cathode. So the cell is built discharged: cathode full, anode empty. Strictly speaking, measured against what it takes back later, the cathode is even overfull, but we'll get to that with the N/Li ratio.</p>
+    <div class="quiz-answer" data-quiz-answer="lithium-source">
+      <p>If you had to think about that for a second, this section is for you.</p>
+      <p>The obvious answer is the electrolyte, there's lithium in there after all. But no. The conducting salt is only a means of transport. It doesn't change the capacity, no matter how much of it you pour in. The lithium comes out of the factory inside the cathode. So the cell is built discharged: cathode full, anode empty. Strictly speaking, measured against what it takes back later, the cathode is even overfull, but we'll get to that with the N/Li ratio.</p>
+    </div>
 
     <h3>Step 2: One tank</h3>
     <p>From here on we only keep an eye on the lithium, because it's the only thing in the cell that really moves. Think of the lithium as water and the cathode as a tank. Water flows downhill. So does lithium. In equilibrium that's not a cute analogy, it's the actual physics.</p>
@@ -106,14 +109,14 @@ sitemap: false
 
     <h3>Step 4: Both tanks in one plot</h3>
     <p>Now both curves go into one plot. As the anode fills, its level moves toward the ceiling and its voltage drops, just like in any OCV curve on a datasheet. The cell voltage is the vertical distance between the two curves. For ideal tanks that's a straight line again.</p>
-    {{ fig("intro", "electrodes,cell", "Both electrodes against the ceiling, and their distance as the cell voltage. Vmin and Vmax cut out the usable window (shaded).") }}
     <p>Now Vmin and Vmax come in: two horizontal lines. Where they cut the cell voltage, that's your usable capacity.</p>
+    {{ fig("intro", "electrodes,cell", "Both electrodes against the ceiling, and their distance as the cell voltage. Vmin and Vmax cut out the usable window (shaded).") }}
 
     <section class="ch-tool" data-chapter-tool="intro" aria-label="Tool: two tanks and the voltage window">
       <form class="ch-tool__controls">
         {{ curves("t1") }}
         {{ presets([["Discharged", '{"soc":0}'], ["Half", '{"soc":0.5}'], ["Charged", '{"soc":1}'], ["Narrow window", '{"vmin":3.4,"vmax":3.8,"soc":1}']]) }}
-        {{ sl("t1", "soc", "Charge (Vmin → Vmax)", 0, 1, 0.01, 0.5) }}
+        {{ sl("t1", "soc", "Charge (empty → full)", 0, 1, 0.01, 0.5) }}
         {{ sl("t1", "vmin", "Vmin [V]", 2.8, 3.6, 0.01, 3.2) }}
         {{ sl("t1", "vmax", "Vmax [V]", 3.8, 4.4, 0.01, 4.0) }}
         <button type="button" class="controls__action" data-reset>Reset</button>
@@ -177,21 +180,34 @@ sitemap: false
     <h2 id="t2">2 · Sizing the tanks: the N/P ratio</h2>
 
     <p>So far we've simply assumed everything fits: the cathode gives up its lithium and the anode takes it in. But that doesn't happen by itself. The cathode brings all the lithium, so it sets how much water is in play. How big the anode tank has to be so that all of it fits is something you have to actively design.</p>
+    <h3>Step 1: Anode too small</h3>
     <p>What happens if the anode tank is too small? During charging the level rises, and at some point it hits the ceiling. Then the water overflows, which is also known as lithium plating. And it costs you capacity, because part of the plated lithium reacts with the electrolyte or loses contact and never comes back.</p>
     {{ fig("np", "tanks,electrodes", "Anode too small (N/P = 0.8): the anode is full before the cell reaches Vmax. What doesn't fit plates onto the ceiling, and the anode curve sits flat on zero.", 'data-np="0.8"') }}
+
+    <h3>Step 2: Anode too big</h3>
     <p>And if the anode tank is too big? Then it never fills up. Empty space stays at the top, which you build, pay for and carry around without ever using it. And that's not even all: a bigger anode also costs more lithium during formation, but that's for the next chapter.</p>
-    {{ fig("np", "tanks,electrodes", "Anode too big (N/P = 1.5): at Vmax a good part of the anode tank is still empty. The dashed rest of the anode curve is never reached.", 'data-np="1.5"') }}
+    {{ fig("np", "tanks,electrodes", "Anode too big (N/P = 1.5): fully charged, a good part of the anode tank is still empty. The dashed rest of the anode curve is never reached.", 'data-np="1.5"') }}
+
+    <h3>Step 3: About 10 % more</h3>
     <p>That's why the anode is designed a bit bigger, typically by around 10 %, to allow some headroom for kinetics and manufacturing tolerances.</p>
+
+    <h3>Step 4: Two ways to count N/P</h3>
+    <p>There are two definitions of N/P. One just compares the tank sizes. The other asks: how much room does the anode have left to the ceiling at Vmax? The second one is the more honest one for plating. With the ideal tanks here, both give the same number as long as the cathode runs empty before the cell reaches Vmax. A lower Vmax pulls them apart.</p>
     <p>Switch the tool to graphite against NMC and you see how tight it really is: fully charged graphite sits only about 0.1 V below the ceiling.</p>
 
     <section class="ch-tool" data-chapter-tool="np" aria-label="Tool: N/P ratio">
       <form class="ch-tool__controls">
         {{ curves("t2") }}
-        {{ presets([["Anode too small", '{"np":0.8,"soc":1}'], ["Typical", '{"np":1.1,"soc":1}'], ["Anode too big", '{"np":1.5,"soc":1}']]) }}
+        {{ presets([["Anode too small", '{"np":0.8,"vmax":4.2,"soc":1}'], ["Typical", '{"np":1.1,"vmax":4.2,"soc":1}'], ["Anode too big", '{"np":1.5,"vmax":4.2,"soc":1}'], ["Lower Vmax", '{"np":1.1,"vmax":4.0,"soc":1}']]) }}
         {{ sl("t2", "np", "N/P ratio", 0.7, 1.6, 0.01, 1.1) }}
-        {{ sl("t2", "soc", "Charge (Vmin → Vmax)", 0, 1, 0.01, 1) }}
-        {{ sl("t2", "vmin", "Vmin [V]", 2.8, 3.6, 0.01, 3.0) }}
-        {{ sl("t2", "vmax", "Vmax [V]", 3.8, 4.4, 0.01, 4.2) }}
+        {{ sl("t2", "soc", "Charge (empty → full)", 0, 1, 0.01, 1) }}
+        <details class="ch-tool__more">
+          <summary>More settings</summary>
+          <div class="ch-tool__more-body">
+            {{ sl("t2", "vmin", "Vmin [V]", 2.8, 3.6, 0.01, 3.0) }}
+            {{ sl("t2", "vmax", "Vmax [V]", 3.8, 4.4, 0.01, 4.2) }}
+          </div>
+        </details>
         <button type="button" class="controls__action" data-reset>Reset</button>
       </form>
       <div class="ch-tool__figs">
@@ -209,10 +225,11 @@ sitemap: false
     </section>
     {{ note(draft, "Ideale Tanks hier: Kathode 3,6–4,3 V, Anode 0,6–0,08 V. So gewählt, dass N/P knapp unter 1 bei Vmax 4,2 V die Decke erreicht. Bei N/P = 1,1 begrenzt oben die leere Kathode, nicht Vmax.") }}
 
-    <p>By the way, there are two definitions of N/P. One just compares the tank sizes. The other asks: how much room does the anode have left to the ceiling at Vmax? The second one is the more honest one for plating. And it depends on a quantity we've ignored so far: how much lithium actually takes part. That's what the next chapter is about.</p>
+    <p>And the honest one depends on a quantity we've ignored so far: how much lithium actually takes part. That's what the next chapter is about.</p>
 
     <details class="math-box">
       <summary>The math behind it</summary>
+      <p class="math-legend">{% mi %}x_{\max}{% endmi %} lithium in the anode at the top of the window, {% mi %}x_V{% endmi %} where the cell reaches Vmax, {% mi %}\theta_a{% endmi %} fill level of the anode.</p>
       <p class="math-step">Two definitions</p>
       {% math %}
       \begin{aligned}
@@ -226,7 +243,6 @@ sitemap: false
       {% math %}\mathrm{N/P}_\mathrm{fill} = \mathrm{N/P}_\mathrm{cap} \;\Leftrightarrow\; x_{\max} = Q_c{% endmath %}
       <p class="math-step">Who limits at the top</p>
       {% math %}x_{\max} = \min\big(Q_c,\ x_V\big){% endmath %}
-      <p class="math-legend">{% mi %}x_V{% endmi %}: where the cell reaches Vmax.</p>
       <p class="math-step">Plating</p>
       {% math %}x > Q_a \;\Rightarrow\; U_a = 0{% endmath %}
     </details>
@@ -236,16 +252,26 @@ sitemap: false
   {# ------------------------------------------------------------------ 3 N/Li ---- #}
   <section class="chapter-panel prose" id="n-li-ratio" data-chapter-panel aria-labelledby="t3">
     <h2 id="t3">3 · How much water is really in there: the N/Li ratio</h2>
+    <p class="chapter-hint">New here? The tank picture takes two minutes in <a href="#voltage-window">chapter 1</a>.</p>
+
+    <div class="quiz" data-quiz="nmc-lfp">
+      <p class="quiz__question">Before you read on: two cells against graphite with the same N/P, one with an NMC cathode, one with LFP. Whose anode is fuller at Vmax?</p>
+      <div class="quiz__options">
+        <button type="button" data-answer="nmc" data-correct="true" data-yes="Right. Step 4 shows why.">NMC</button>
+        <button type="button" data-answer="lfp" data-correct="false" data-no="The other way round. Step 4 shows why.">LFP</button>
+        <button type="button" data-answer="same" data-correct="false" data-no="That's what N/P suggests. Step 4 shows why not.">The same</button>
+      </div>
+      <p class="quiz__feedback" data-quiz-feedback role="status" hidden></p>
+    </div>
 
     <p>The tanks we've looked at so far really only hold from the second cycle on. In the first one, something happens that we call formation.</p>
 
-    <h3>The cathode is overfull</h3>
-    <p>For this, a quick look inside the cathode. Picture it as a mine, and the lithium as the support beams. So lithium isn't just charge, it's part of the structure. Pull the beams out during the first charge and the structure sags a little in places, and on discharge not everything fits back in.</p>
+    <h3>Step 1: The cathode is overfull</h3>
+    <p>First, a quick look inside the cathode. Picture it as a mine, and the lithium as the support beams. So lithium isn't just charge, it's part of the structure. Pull the beams out during the first charge and the structure sags a little in places, and on discharge not everything fits back in.</p>
     <figure class="sei-figure mine-figure">
       <svg viewBox="0 0 640 300" role="img" aria-label="The cathode as a mine with lithium as support beams: all beams in place as built, pulled out during the first charge so the roof sags, and on discharge not every beam fits back, leaving a surplus">
         <rect width="640" height="300" rx="16" fill="#003b73"/>
-        <text x="109" y="30" fill="#e6eaf1" font-size="14" font-weight="700" text-anchor="middle">as built</text>
-        <text x="109" y="48" fill="rgb(255 255 255 / 0.65)" font-size="12" text-anchor="middle">every beam in place</text>
+        <text x="109" y="44" fill="#e6eaf1" font-size="24" font-weight="700" text-anchor="middle">as built</text>
         <rect x="24" y="64" width="170" height="18" fill="#6b7a90"/>
         <rect x="24" y="116" width="170" height="18" fill="#6b7a90"/>
         <rect x="24" y="168" width="170" height="18" fill="#6b7a90"/>
@@ -265,8 +291,7 @@ sitemap: false
         <rect x="108" y="186" width="7" height="34" rx="2" fill="#5dade2"/>
         <rect x="142" y="186" width="7" height="34" rx="2" fill="#5dade2"/>
         <rect x="176" y="186" width="7" height="34" rx="2" fill="#5dade2"/>
-        <text x="321" y="30" fill="#e6eaf1" font-size="14" font-weight="700" text-anchor="middle">first charge</text>
-        <text x="321" y="48" fill="rgb(255 255 255 / 0.65)" font-size="12" text-anchor="middle">beams out, the roof sags</text>
+        <text x="321" y="44" fill="#e6eaf1" font-size="24" font-weight="700" text-anchor="middle">first charge</text>
         <rect x="236" y="64" width="170" height="18" fill="#6b7a90"/>
         <rect x="236" y="116" width="170" height="18" fill="#6b7a90"/>
         <path d="M236 168 L298 168 Q326.0 194 354 168 L406 168 L406 186 L354 186 Q326.0 212 298 186 L236 186 Z" fill="#6b7a90"/>
@@ -285,8 +310,7 @@ sitemap: false
         <rect x="286" y="188" width="7" height="30" rx="2" fill="none" stroke="#5dade2" stroke-opacity="0.35" stroke-dasharray="3 3"/>
         <rect x="354" y="188" width="7" height="30" rx="2" fill="none" stroke="#5dade2" stroke-opacity="0.35" stroke-dasharray="3 3"/>
         <rect x="388" y="188" width="7" height="30" rx="2" fill="none" stroke="#5dade2" stroke-opacity="0.35" stroke-dasharray="3 3"/>
-        <text x="533" y="30" fill="#e6eaf1" font-size="14" font-weight="700" text-anchor="middle">discharge</text>
-        <text x="533" y="48" fill="rgb(255 255 255 / 0.65)" font-size="12" text-anchor="middle">not every beam fits back</text>
+        <text x="533" y="44" fill="#e6eaf1" font-size="24" font-weight="700" text-anchor="middle">discharge</text>
         <rect x="448" y="64" width="170" height="18" fill="#6b7a90"/>
         <rect x="448" y="116" width="170" height="18" fill="#6b7a90"/>
         <path d="M448 168 L510 168 Q538.0 194 566 168 L618 168 L618 186 L566 186 Q538.0 212 510 186 L448 186 Z" fill="#6b7a90"/>
@@ -308,15 +332,14 @@ sitemap: false
         <rect x="600" y="186" width="7" height="34" rx="2" fill="#5dade2"/>
         <path d="M200 150 L230 150 M222 143 L230 150 L222 157" stroke="#ffffff" stroke-width="2" fill="none" opacity="0.7"/>
         <path d="M412 150 L442 150 M434 143 L442 150 L434 157" stroke="#ffffff" stroke-width="2" fill="none" opacity="0.7"/>
-        <g><rect x="470" y="258" width="7" height="24" rx="2" fill="#5dade2"/><rect x="484" y="258" width="7" height="24" rx="2" fill="#5dade2"/><text x="500" y="275" fill="#e6eaf1" font-size="12">surplus = the bonus</text></g>
+        <g><rect x="384" y="256" width="9" height="30" rx="2" fill="#5dade2"/><text x="404" y="279" fill="#e6eaf1" font-size="22">surplus = the bonus</text></g>
       </svg>
-      <figcaption>The cathode as a mine, lithium as the support beams. Where the roof has sagged, a beam no longer fits back in. That surplus is the formation bonus.</figcaption>
+      <figcaption>The cathode as a mine, lithium as the support beams: as built every beam is in place, the first charge pulls them out and the roof sags, and on discharge a beam no longer fits back in. That surplus is the formation bonus.</figcaption>
     </figure>
-    <p>For the tank, that's a loss: it gets a bit smaller. As built, the cathode was simply full. But measured against what it takes back in reversible operation, from the second cycle on, it's overfull, and during the first charge that surplus flows over to the anode.</p>
-    <p>You can measure this in a half cell against lithium metal, so against the ceiling. On the first discharge, not everything comes back.</p>
+    <p>For the tank, that's a loss: it gets a bit smaller. As built, the cathode was simply full. Measured against what it takes back from the second cycle on, it's overfull. During the first charge, that surplus flows over to the anode.</p>
 
-    <h3>The SEI takes its cut</h3>
-    <p>The anode grabs it. During the first charge a thin layer forms on its surface, the SEI, which it needs to stay stable in the electrolyte at such low potentials at all. That layer is built from lithium and electrolyte. The lithium in it is gone for good, and the bigger the anode, the more lithium is lost.</p>
+    <h3>Step 2: The SEI takes its cut</h3>
+    <p>The anode grabs that surplus. During the first charge a thin layer forms on its surface: the SEI. The anode needs it to stay stable in the electrolyte at such low potentials. That layer is built from lithium and electrolyte. The lithium in it is gone for good, and the bigger the anode, the more lithium is lost.</p>
     <figure class="sei-figure">
       <svg viewBox="0 0 640 300" role="img" aria-label="A graphite particle with a thin SEI skin, and a zoom into the skin: lithium between graphite layers, lithium locked in the SEI, lithium ions in the electrolyte">
         <defs>
@@ -330,7 +353,7 @@ sitemap: false
           <line x1="96" y1="104" x2="224" y2="104"/><line x1="78" y1="124" x2="242" y2="124"/><line x1="68" y1="144" x2="252" y2="144"/>
           <line x1="68" y1="164" x2="252" y2="164"/><line x1="78" y1="184" x2="242" y2="184"/><line x1="98" y1="204" x2="222" y2="204"/>
         </g>
-        <text x="160" y="268" fill="#e6eaf1" font-size="14" font-weight="600" text-anchor="middle">graphite particle</text>
+        <text x="160" y="270" fill="#e6eaf1" font-size="22" font-weight="600" text-anchor="middle">graphite particle</text>
         <!-- Lupe -->
         <circle cx="236" cy="96" r="22" fill="none" stroke="#ffffff" stroke-width="1.5" opacity="0.8"/>
         <line x1="256" y1="86" x2="355" y2="56" stroke="#ffffff" stroke-width="1" opacity="0.5"/>
@@ -366,26 +389,26 @@ sitemap: false
           </g>
         </g>
         <circle cx="470" cy="150" r="118" fill="none" stroke="#ffffff" stroke-width="2" opacity="0.85"/>
-        <text x="396" y="292" fill="#e6eaf1" font-size="12" text-anchor="middle">graphite</text>
-        <text x="465" y="292" fill="#e8b860" font-size="12" font-weight="700" text-anchor="middle">SEI</text>
-        <text x="540" y="292" fill="#e6eaf1" font-size="12" text-anchor="middle">electrolyte</text>
-        <g font-size="12">
-          <circle cx="306" cy="20" r="5" fill="#5dade2"/><text x="316" y="24" fill="#e6eaf1">lithium that cycles</text>
-          <circle cx="456" cy="20" r="5" fill="#9fb3c8" stroke="#003b73" stroke-width="1.5"/><text x="466" y="24" fill="#e6eaf1">lithium locked in the SEI</text>
+        <text x="392" y="294" fill="#e6eaf1" font-size="18" text-anchor="middle">graphite</text>
+        <text x="465" y="294" fill="#e8b860" font-size="18" font-weight="700" text-anchor="middle">SEI</text>
+        <text x="548" y="294" fill="#e6eaf1" font-size="18" text-anchor="middle">electrolyte</text>
+        <g font-size="18">
+          <circle cx="26" cy="24" r="7" fill="#5dade2"/><text x="40" y="30" fill="#e6eaf1">lithium that cycles</text>
+          <circle cx="26" cy="50" r="7" fill="#9fb3c8" stroke="#003b73" stroke-width="1.5"/><text x="40" y="56" fill="#e6eaf1">lithium locked in the SEI</text>
         </g>
       </svg>
       <figcaption>Not to scale: the SEI is a skin of a few nanometres around every particle, built from lithium and electrolyte. The lithium in it no longer takes part.</figcaption>
     </figure>
-    <p>You see this in the half cell too: in the first cycle, part of it doesn't come back.</p>
+    <p>By the way, you can measure both in the lab, each electrode as a half cell against lithium metal: what doesn't come back in the first cycle is the bonus for the cathode and the SEI for the anode.</p>
 
-    <h3>The lithium account</h3>
+    <h3>Step 3: The lithium account</h3>
     <p>Let's do the books.</p>
     {{ fig("nli", "account", "The lithium account from the cathode in operation to the lithium in operation. The dashed line is the room in the cathode.") }}
     <p>On the account sits what the cathode can take back, plus the bonus it brings from the factory by being overfull. During formation the SEI makes its biggest withdrawal, and that's the real loss. The bonus covers part of it, but usually not all, so in the end you're short of lithium, not of room.</p>
-    <h3>N/P and N/Li</h3>
+    <h3>Step 4: N/P and N/Li</h3>
     <p>Here are the three items side by side, with the cathode set to 1.</p>
     <figure class="sei-figure ratio-figure">
-      <svg viewBox="0 0 430 270" role="img" aria-label="Bar chart: cathode 1.00, anode 1.10, lithium in operation 0.92">
+      <svg viewBox="0 0 430 270" role="img" aria-label="Bar chart: cathode 1.00, anode 1.10, lithium in operation 0.95">
         <rect width="430" height="270" rx="16" fill="#003b73"/>
         <rect x="40" y="70.0" width="90" height="160.0" rx="3" fill="#f39c12"/>
         <text x="85" y="60.0" fill="#e6eaf1" font-size="18" font-weight="700" text-anchor="middle">1.00</text>
@@ -393,36 +416,36 @@ sitemap: false
         <rect x="170" y="54.0" width="90" height="176.0" rx="3" fill="#70ad47"/>
         <text x="215" y="44.0" fill="#e6eaf1" font-size="18" font-weight="700" text-anchor="middle">1.10</text>
         <text x="215" y="256" fill="#e6eaf1" font-size="17" text-anchor="middle">anode</text>
-        <rect x="300" y="82.8" width="90" height="147.2" rx="3" fill="#5dade2"/>
-        <text x="345" y="72.8" fill="#e6eaf1" font-size="18" font-weight="700" text-anchor="middle">0.92</text>
+        <rect x="300" y="78.0" width="90" height="152.0" rx="3" fill="#5dade2"/>
+        <text x="345" y="68.0" fill="#e6eaf1" font-size="18" font-weight="700" text-anchor="middle">0.95</text>
         <text x="345" y="256" fill="#e6eaf1" font-size="17" text-anchor="middle">lithium</text>
         <line x1="24" x2="406" y1="230" y2="230" stroke="rgb(255 255 255 / 0.4)"/>
-        <line x1="24" x2="406" y1="70" y2="70" stroke="#f39c12" stroke-dasharray="5 4" opacity="0.6"/>
+        <line x1="24" x2="286" y1="70" y2="70" stroke="#f39c12" stroke-dasharray="5 4" opacity="0.6"/>
       </svg>
       <dl class="ratio-legend">
         <div><dt>N/P = anode / cathode = 1.10</dt><dd>how big the tanks are</dd></div>
-        <div><dt>N/Li = anode / lithium ≈ 1.20</dt><dd>how much water is really in there</dd></div>
+        <div><dt>N/Li = anode / lithium ≈ 1.16</dt><dd>how much water is really in there</dd></div>
       </dl>
     </figure>
     <p>N/P compares the two tanks, N/Li compares the anode tank with the water that's really in play. Since we always design against plating, N/Li is the more meaningful of the two.</p>
-    <p>Take two cells with the same N/P against graphite, one with an NMC cathode, one with LFP. NMC brings a big formation bonus that roughly covers what the SEI takes. LFP brings very little. Same tanks, but the LFP cell has less water in play, so its anode stays emptier. N/P can't tell the two apart, N/Li can. Which also means an LFP cell can get away with a lower N/P.{{ draftTag(draft) }}</p>
+    <p>Take two cells with the same N/P against graphite, one with an NMC cathode, one with LFP. NMC brings a big formation bonus that roughly covers what the SEI takes. LFP brings very little. N/P can't tell the two apart, N/Li can. So an LFP cell can also get away with a lower N/P.</p>
     <figure class="ch-fig ch-compare" data-chapter-compare>
       <div class="ch-fig__parts" data-figure-parts></div>
       <figcaption>Both cells charged to Vmax, same N/P of 1.1, same SEI. Only the formation bonus of the cathode differs.</figcaption>
     </figure>
 
-    <h3>What this does to the plot</h3>
+    <h3>Step 5: What this does to the plot</h3>
     <p>In the plot, the two lines shift against each other. On discharge the anode runs empty before the cathode is full again, and a gap stays in the cathode. On charge the anode doesn't get as close to the ceiling anymore. Lithium has always been the limit. What's new is that there's now less of it than fits into the cathode.</p>
 
     <section class="ch-tool" data-chapter-tool="nli" aria-label="Tool: lithium account and N/Li ratio">
       <form class="ch-tool__controls">
         {{ curves("t3") }}
-        {{ presets([["Typical", '{"np":1.2,"bonus":6,"sei":10,"prelith":0}'], ["No SEI", '{"sei":0,"prelith":0}'], ["Big anode", '{"np":1.5,"prelith":0}'], ["Prelithiated", '{"np":1.1,"bonus":6,"sei":10,"prelith":1.1,"soc":1}'], ["Too much", '{"np":1.1,"bonus":6,"sei":10,"prelith":2,"soc":1}']]) }}
-        {{ sl("t3", "soc", "Charge (Vmin → Vmax)", 0, 1, 0.01, 0) }}
+        {{ presets([["Typical", '{"np":1.1,"bonus":6,"sei":10,"prelith":0}'], ["No SEI", '{"sei":0,"prelith":0}'], ["Big anode", '{"np":1.5,"prelith":0}'], ["Prelithiated", '{"np":1.1,"bonus":6,"sei":10,"prelith":1.1,"soc":1}'], ["Too much", '{"np":1.1,"bonus":6,"sei":10,"prelith":2,"soc":1}']]) }}
+        {{ sl("t3", "soc", "Charge (empty → full)", 0, 1, 0.01, 0) }}
         <details class="ch-tool__more">
           <summary>More settings</summary>
           <div class="ch-tool__more-body">
-            {{ sl("t3", "np", "N/P ratio", 1.0, 1.6, 0.01, 1.2) }}
+            {{ sl("t3", "np", "N/P ratio", 1.0, 1.6, 0.01, 1.1) }}
             {{ sl("t3", "bonus", "Formation bonus of the cathode [%]", 0, 15, 0.5, 6, 1) }}
             {{ sl("t3", "sei", "SEI loss [% of anode capacity]", 0, 20, 0.5, 10, 1) }}
             {{ sl("t3", "prelith", "Prelithiation [Ah]", 0, 2.5, 0.05, 0) }}
@@ -431,10 +454,9 @@ sitemap: false
         <button type="button" class="controls__action" data-reset>Reset</button>
       </form>
       <div class="ch-tool__figs">
+        <figure class="ch-span"><figcaption>The lithium account (cathode 10 Ah)</figcaption><div data-account></div></figure>
         <figure><figcaption>The tanks</figcaption><div data-tanks></div></figure>
         <figure><figcaption>Both electrodes against the ceiling</figcaption><div data-electrodes></div></figure>
-        <figure><figcaption>The lithium account (cathode 10 Ah)</figcaption><div data-account></div></figure>
-        <figure><figcaption>Cell voltage</figcaption><div data-cell></div></figure>
       </div>
       <dl class="ch-tool__readouts">
         <div><dt>Lithium in operation</dt><dd data-readout="li">–</dd></div>
@@ -454,7 +476,7 @@ sitemap: false
 
     <details class="math-box">
       <summary>The math behind it</summary>
-      <p class="math-legend">{% mi %}B{% endmi %} formation bonus, {% mi %}P{% endmi %} prelithiation, {% mi %}Q_\mathrm{SEI}{% endmi %} SEI loss, {% mi %}\mathrm{Li}{% endmi %} lithium in operation.</p>
+      <p class="math-legend">{% mi %}Q_{c,\mathrm{rev}}{% endmi %} what the cathode takes back from the second cycle on, {% mi %}Q_\mathrm{start}{% endmi %} what it brings from the factory, {% mi %}B{% endmi %} formation bonus, {% mi %}P{% endmi %} prelithiation, {% mi %}Q_\mathrm{SEI}{% endmi %} SEI loss, {% mi %}\mathrm{Li}{% endmi %} lithium in operation.</p>
       <p class="math-step">The lithium account</p>
       {% math %}
       \begin{aligned}
@@ -465,15 +487,6 @@ sitemap: false
       {% endmath %}
       <p class="math-step">Shift of the lines (gap in the cathode at Vmin)</p>
       {% math %}\Delta x = Q_{c,\mathrm{rev}} - \mathrm{Li}{% endmath %}
-      <p class="math-step">Example</p>
-      {% math %}
-      \begin{aligned}
-      \mathrm{Li} &= 10 + 0.6 - 1.1 = 9.5\ \mathrm{Ah} \\[4pt]
-      \mathrm{N/Li} &= 11 / 9.5 \approx 1.16 \\[4pt]
-      \mathrm{Li}_P &= 9.5 + 1.1 = 10.6\ \mathrm{Ah} \\[4pt]
-      \mathrm{N/Li}_P &= 11 / 10.6 \approx 1.04
-      \end{aligned}
-      {% endmath %}
     </details>
     <p class="chapter-next"><a href="#np-ratio">← N/P ratio</a> <a href="#aging">Next: aging →</a></p>
   </section>
@@ -483,6 +496,8 @@ sitemap: false
     <h2 id="t4">4 · Three accounts: aging modes</h2>
 
     <p>Aging is genuinely complicated, there are hundreds of different mechanisms. In equilibrium, though, it gets simple again. A cell is just lithium, two tanks and bookkeeping, so it can only lose three things: water, or room in one of the two tanks, meaning active material.</p>
+
+    <h3>Step 1: You can only measure capacity</h3>
     <p>From the outside, though, you can only measure one thing: capacity. How do the three modes show up in it? An example: a cell with N/P = 1.1 and N/Li = 1.2 loses 5 % of its anode, 3 % of its cathode and 2 % of its lithium. How much capacity does it lose?</p>
     <div class="quiz" data-quiz="aging-loss">
       <p class="quiz__question">How much capacity does the cell lose?</p>
@@ -493,10 +508,15 @@ sitemap: false
       </div>
       <p class="quiz__feedback" data-quiz-feedback role="status" hidden></p>
     </div>
-    <p>The answer is 2 %. Capacity is what the scarcest of the three items still lets through between Vmin and Vmax, and here that's the lithium. Losses don't add up.</p>
+    <div class="quiz-answer" data-quiz-answer="aging-loss">
+      <p>The answer is 2 %. Capacity is what the scarcest of the three items still lets through between Vmin and Vmax, and here that's the lithium. Losses don't add up.</p>
+    </div>
 
+    <h3>Step 2: Two buffers</h3>
     <p>Both tanks have a buffer. At the anode it's designed in, that's the excess from the N/P ratio. At the cathode it comes from formation, as the gap the missing lithium leaves behind. Most of the time lithium is the scarcest item. As long as that's true, losses at the anode or cathode only eat into buffer at first, and from the outside you see nothing.</p>
+    {{ fig("aging", "tanks,cell", "The quiz case: the anode loses 5 %, the cathode 3 % and the lithium 2 %. Both tanks lose a little room, but only the lithium loss shows: 2 % less capacity. Solid: aged, dashed: fresh.", 'data-lama="5" data-lamc="3" data-lli="2"') }}
 
+    <h3>Step 3: Three ways to lose</h3>
     <section class="ch-tool" data-chapter-tool="aging" aria-label="Tool: aging modes">
       <form class="ch-tool__controls">
         {{ curves("t4") }}
@@ -504,7 +524,12 @@ sitemap: false
         {{ sl("t4", "lama", "Anode active material lost [%]", 0, 40, 1, 0, 0) }}
         {{ sl("t4", "lamc", "Cathode active material lost [%]", 0, 40, 1, 0, 0) }}
         {{ sl("t4", "lli", "Lithium lost [%]", 0, 40, 1, 0, 0) }}
-        {{ sl("t4", "soc", "Charge (Vmin → Vmax)", 0, 1, 0.01, 1) }}
+        <details class="ch-tool__more">
+          <summary>More settings</summary>
+          <div class="ch-tool__more-body">
+            {{ sl("t4", "soc", "Charge (empty → full)", 0, 1, 0.01, 1) }}
+          </div>
+        </details>
         <button type="button" class="controls__action" data-reset>Reset</button>
       </form>
       <div class="ch-tool__figs">
@@ -521,12 +546,15 @@ sitemap: false
       </dl>
     </section>
     <p>If the anode loses active material, its tank gets smaller. If lithium is lost, there's less water. If the cathode loses active material, its tank gets smaller.</p>
+    <p>Watch the anode case: once its tank is smaller than the water, N/Li drops below 1, and the full anode sits right at the ceiling. That's the plating limit from chapters 2 and 3, now reached by aging.</p>
 
+    <h3>Step 4: Everything the same</h3>
     <p>If a cell loses the same share of everything, the ratios stay the same. The OCV looks exactly the same, just with less capacity.</p>
+    <p>Next up: what happens when one electrode is really two tanks?</p>
 
     <details class="math-box">
       <summary>The math behind it</summary>
-      <p class="math-legend">{% mi %}\mathrm{LAM}_a, \mathrm{LAM}_c{% endmi %} loss of active material, {% mi %}\mathrm{LLI}{% endmi %} loss of lithium inventory, {% mi %}\Delta x{% endmi %} used window of a tank.</p>
+      <p class="math-legend">{% mi %}\mathrm{LAM}_a, \mathrm{LAM}_c{% endmi %} loss of active material, {% mi %}\mathrm{LLI}{% endmi %} loss of lithium inventory, {% mi %}\Delta\theta{% endmi %} used part of a tank (fill level).</p>
       <p class="math-step">Aged quantities</p>
       {% math %}
       \begin{aligned}
@@ -543,10 +571,16 @@ sitemap: false
       \end{aligned}
       {% endmath %}
       <p class="math-step">Capacity</p>
-      {% math %}Q_\mathrm{cell} = \min\big(\mathrm{Li}',\ Q_c'\,\Delta x_c,\ Q_a'\,\Delta x_a\big){% endmath %}
-      <p class="math-legend">Only in the ideal linear case, since the windows {% mi %}\Delta x{% endmi %} themselves depend on Vmin and Vmax.</p>
+      {% math %}Q_\mathrm{cell} = \min\big(\mathrm{Li}',\ Q_c'\,\Delta\theta_c,\ Q_a'\,\Delta\theta_a\big){% endmath %}
+      <p class="math-legend">Only in the ideal linear case, since the windows {% mi %}\Delta\theta{% endmi %} themselves depend on Vmin and Vmax.</p>
       <p class="math-step">Equal losses</p>
-      {% math %}\mathrm{LAM}_a = \mathrm{LAM}_c = \mathrm{LLI} \;\Rightarrow\; \mathrm{N/P}' = \mathrm{N/P},\ \ \mathrm{N/Li}' = \mathrm{N/Li}{% endmath %}
+      {% math %}
+      \begin{aligned}
+      &\mathrm{LAM}_a = \mathrm{LAM}_c = \mathrm{LLI} \\[4pt]
+      &\Rightarrow\ \mathrm{N/P}' = \mathrm{N/P} \\[4pt]
+      &\Rightarrow\ \mathrm{N/Li}' = \mathrm{N/Li}
+      \end{aligned}
+      {% endmath %}
     </details>
     <p class="chapter-next"><a href="#n-li-ratio">← N/Li ratio</a> <a href="#blends">Next: blends →</a></p>
   </section>
@@ -556,9 +590,23 @@ sitemap: false
 
     <p>So far every electrode had exactly one material. In reality that's less and less the case: in almost every high-performance cell today, the anode has some silicon blended in. How does that fit into the tank picture?</p>
 
+    <h3>Step 1: Two tanks, one pipe</h3>
     <p>Picture a blended anode as two different tanks, connected at the bottom by a pipe. So the level is always the same in both, because both materials sit at the same potential.</p>
-    <p>Remember the ceiling? That's what we measure every material against. Silicon starts taking up lithium much earlier, so its tank hangs lower, further away from the ceiling. The graphite tank hangs higher.</p>
-    {{ fig("blend", "blendtanks", "Two ideal tanks connected at the bottom. The silicon tank hangs lower, so it fills first.", 'data-soc="0.1"') }}
+    <div class="quiz" data-quiz="blend-first">
+      <p class="quiz__question">Before you read on: when you charge a silicon–graphite anode, which material takes up lithium first?</p>
+      <div class="quiz__options">
+        <button type="button" data-answer="graphite" data-correct="false" data-no="Not quite. Read on.">Graphite</button>
+        <button type="button" data-answer="silicon" data-correct="true" data-yes="Right. Its tank hangs lower.">Silicon</button>
+        <button type="button" data-answer="both" data-correct="false" data-no="Not at first. Read on.">Both at once</button>
+      </div>
+      <p class="quiz__feedback" data-quiz-feedback role="status" hidden></p>
+    </div>
+    <div class="quiz-answer" data-quiz-answer="blend-first">
+      <p>Remember the ceiling? That's what we measure every material against. Silicon starts taking up lithium much earlier, so its tank hangs lower, further away from the ceiling. The graphite tank hangs higher.</p>
+      {{ fig("blend", "blendtanks", "Two ideal tanks connected at the bottom. The silicon tank hangs lower, so it fills first.", 'data-soc="0.1"') }}
+    </div>
+
+    <h3>Step 2: The kink</h3>
     <p>On charge, at first only the silicon tank fills, until the level reaches the bottom of the graphite tank. From then on both fill together: two tanks share the water, the level rises more slowly, and right there the voltage curve has a kink.</p>
 
     <section class="ch-tool" data-chapter-tool="blend" aria-label="Tool: blended anode">
@@ -581,15 +629,17 @@ sitemap: false
       </dl>
     </section>
 
+    <h3>Step 3: Real curves</h3>
     <p>Graphite takes up lithium in clear steps, hence the plateaus. Silicon has no fixed bottom, its tank is more like a slanted funnel.</p>
     <p>Connect the two and the sharp kink becomes a smooth transition, and graphite and silicon share the lithium depending on where the level is.</p>
 
-    <p>If you know dQ/dV: that's exactly the width of the tanks. Graphite shows sharp peaks, silicon a broad hump. In the blend, the graphite peaks simply sit on top of the silicon hump. And because the widths simply add up, you can turn it around: from a measured dQ/dV curve you can read off how much graphite and how much silicon contribute.</p>
+    <h3>Step 4: Taking a blend apart</h3>
+    <p>If you know dQ/dV: that's exactly the width of the tanks. With real curves, graphite shows sharp peaks and silicon a broad hump; ideal tanks give two boxes. In the blend, the graphite peaks simply sit on top of the silicon hump. And because the widths simply add up, you can turn it around: from a measured dQ/dV curve you can read off how much graphite and how much silicon contribute.</p>
 
     <section class="ch-tool" data-chapter-tool="dqdv" aria-label="Tool: taking a blend apart with dQ/dV">
       <form class="ch-tool__controls">
         {{ curves("t5b", "Graphite + silicon (real curves)") }}
-        {{ presets([["Too little graphite", '{"guess":70}'], ["Just right", '{"guess":80}'], ["Too much graphite", '{"guess":90}']]) }}
+        {{ presets([["Show the answer", '{"guess":80}']]) }}
         {{ sl("t5b", "guess", "Your guess: graphite share [%]", 50, 100, 1, 70, 0) }}
         <button type="button" class="controls__action" data-reset>Reset</button>
       </form>
@@ -605,22 +655,25 @@ sitemap: false
     <p>On the cathode side it works the same way, for example NMC with LFP.</p>
 
     <details class="math-box">
-      <summary>The math behind it{{ draftTag(draft) }}</summary>
-      <p class="math-legend">{% mi %}q_i{% endmi %} lithium in material {% mi %}i{% endmi %}, {% mi %}a_i, b_i{% endmi %} start and slope of its ideal tank, {% mi %}w{% endmi %} graphite share.</p>
+      <summary>The math behind it</summary>
+      <p class="math-legend">{% mi %}q_i{% endmi %} lithium in material {% mi %}i{% endmi %}, {% mi %}Q_i{% endmi %} its tank size, {% mi %}U_i^0{% endmi %} its empty tank, {% mi %}s_i{% endmi %} its slope, {% mi %}g{% endmi %} dQ/dV, {% mi %}w{% endmi %} graphite share.</p>
       <p class="math-step">Each tank</p>
       {% math %}
       \begin{aligned}
-      U &= a_i + b_i\,q_i \\[4pt]
-      q_i(U) &= \max\!\Big(0,\ \frac{U - a_i}{b_i}\Big)
+      U &= U_i^0 - s_i\,q_i \\[4pt]
+      s_i &= \frac{\Delta U_i}{Q_i} \\[4pt]
+      q_i(U) &= \frac{U_i^0 - U}{s_i}
       \end{aligned}
       {% endmath %}
+      {% math %}0 \le q_i \le Q_i{% endmath %}
       <p class="math-step">Blend at one potential</p>
       {% math %}q(U) = \sum_i q_i(U){% endmath %}
       <p class="math-step">Slope after the kink</p>
-      {% math %}\frac{\mathrm{d}U}{\mathrm{d}q} = \frac{1}{1/b_1 + 1/b_2}{% endmath %}
+      {% math %}\frac{1}{s} = \frac{1}{s_\mathrm{Gr}} + \frac{1}{s_\mathrm{Si}}{% endmath %}
       <p class="math-step">dQ/dV of the blend</p>
-      {% math %}\frac{\mathrm{d}Q}{\mathrm{d}V}\Big|_\mathrm{blend} = w\,\frac{\mathrm{d}Q}{\mathrm{d}V}\Big|_\mathrm{Gr} + (1 - w)\,\frac{\mathrm{d}Q}{\mathrm{d}V}\Big|_\mathrm{Si}{% endmath %}
+      {% math %}g_\mathrm{blend} = w\,g_\mathrm{Gr} + (1 - w)\,g_\mathrm{Si}{% endmath %}
     </details>
+    <p class="chapter-contact">Questions, or a cell where this doesn't fit? <a href="mailto:{{ site.email }}">Write me</a> or find me on <a href="{{ site.linkedin }}" target="_blank" rel="noopener noreferrer">LinkedIn</a>. The full models with real material curves are on the <a href="/tools/">tools page</a>.</p>
     <p class="chapter-next"><a href="#aging">← Aging</a></p>
   </section>
 </article>

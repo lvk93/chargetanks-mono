@@ -1255,6 +1255,28 @@ body.has-fullscreen-chart {
   line-height: 1.75rem;
 }
 
+.chapter__byline {
+  margin-top: 0.75rem;
+  font-size: 0.9375rem;
+  color: var(--gray-medium);
+}
+
+.chapter__byline a { color: inherit; font-weight: 600; }
+
+/* Hinweis fuer Leser, die direkt auf einem spaeteren Reiter landen (z. B. vom LinkedIn-Post) */
+.prose .chapter-hint {
+  margin: -0.25rem 0 1.25rem;
+  font-size: 0.9375rem;
+  color: var(--gray-medium);
+}
+
+.prose .chapter-contact {
+  margin-top: 2rem;
+  border-top: 1px solid var(--border-strong);
+  padding-top: 1rem;
+  font-size: 0.9375rem;
+}
+
 .chapter-tabs {
   position: sticky;
   top: var(--header-height);
@@ -1376,6 +1398,33 @@ body.has-fullscreen-chart {
 .quiz__options button.is-right { border-color: var(--green); background: var(--green); color: #fff; }
 .quiz__options button.is-wrong { border-color: #c0392b; background: #c0392b; color: #fff; }
 
+/* Scroll-Widerstand: Aufloesung verschleiert, bis man antwortet oder ueberspringt */
+.quiz-answer { position: relative; }
+.quiz-answer.is-veiled .quiz-answer__body {
+  max-height: 12rem;
+  overflow: hidden;
+  filter: blur(6px);
+  opacity: 0.55;
+  user-select: none;
+}
+.quiz-answer__skip {
+  position: absolute;
+  top: 3rem;
+  left: 50%;
+  transform: translateX(-50%);
+  border: 1px solid var(--navy);
+  border-radius: 9999px;
+  background: #fff;
+  padding: 0.5rem 1.25rem;
+  font: inherit;
+  font-weight: 600;
+  color: var(--navy);
+  white-space: nowrap;
+  cursor: pointer;
+  box-shadow: 0 2px 10px rgb(0 59 115 / 0.15);
+}
+.quiz-answer__skip:hover { background: var(--tint-blue); }
+
 .prose .quiz__feedback {
   margin: 0.75rem 0 0;
   font-weight: 600;
@@ -1474,6 +1523,18 @@ body.has-fullscreen-chart {
   padding-top: 1rem;
 }
 
+@media (max-width: 639.98px) {
+  .ch-tool { display: flex; flex-direction: column; }
+  .ch-tool__readouts {
+    order: 1;
+    margin: 0 0 1.25rem;
+    border-top: 0;
+    border-bottom: 1px solid rgb(255 255 255 / 0.12);
+    padding: 0 0 1rem;
+  }
+  .ch-tool__figs { order: 2; }
+}
+
 .ch-tool__readouts dt {
   font-size: 0.75rem;
   color: rgb(255 255 255 / 0.65);
@@ -1540,11 +1601,22 @@ body.has-fullscreen-chart {
 .ratio-legend dt { font-weight: 700; color: var(--navy); }
 .ratio-legend dd { margin: 0; font-size: 0.875rem; color: var(--gray-medium); }
 
-/* Vergleich NMC/LFP gegen Graphit: zwei Tankbilder nebeneinander */
+/* Vergleich NMC/LFP gegen Graphit: beide Fuellbalken zusammen, darunter die Tankbilder nebeneinander */
 .ch-compare .ch-fig__parts { grid-template-columns: 1fr; }
+.ch-compare__gauges { display: grid; gap: 1rem; }
+.ch-compare__tanks { display: grid; gap: 0.75rem; }
+.ch-compare__tank { margin: 0; }
+.ch-compare .ch-compare__tank figcaption {
+  margin: 0 0 0.25rem;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: rgb(255 255 255 / 0.8);
+  text-align: center;
+}
 
 @media (min-width: 640px) {
-  .ch-compare .ch-fig__parts { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .ch-compare__gauges,
+  .ch-compare__tanks { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
 
 .ch-compare__name {
@@ -1607,6 +1679,7 @@ body.has-fullscreen-chart {
 
 @media (min-width: 640px) {
   .ch-fig--tanks-electrodes .ch-fig__parts,
+  .ch-fig--tanks-cell .ch-fig__parts,
   .ch-fig--electrodes-cell .ch-fig__parts {
     grid-template-columns: repeat(2, minmax(0, 1fr));
     align-items: end;
@@ -1664,6 +1737,10 @@ body.has-fullscreen-chart {
 @media (min-width: 640px) {
   .math-box .katex math[display="block"] { font-size: 1.2rem; }
 }
+/* aligned-Umgebungen: Chrome kennt columnalign nicht, also Spalten per CSS ausrichten (rechts | links) */
+.math-box mtable[columnalign="right left"] > mtr > mtd { padding: 0.12em 0; }
+.math-box mtable[columnalign="right left"] > mtr > mtd:nth-child(odd) { text-align: right; text-align: -webkit-right; }
+.math-box mtable[columnalign="right left"] > mtr > mtd:nth-child(even) { text-align: left; text-align: -webkit-left; }
 .math-box p .katex { display: inline; }
 .math-box p .katex math { font-size: 1.05em; color: var(--navy); }
 

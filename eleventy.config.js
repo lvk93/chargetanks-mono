@@ -72,7 +72,10 @@ export default function (eleventyConfig) {
   eleventyConfig.addFilter('hasSecondaryControls', (groups) => groups.some((g) => g.items.some((c) => !c.primary)));
 
   // LaTeX -> MathML beim Build (KaTeX, siehe config/vendor/katex/README.md). Fehler brechen den Build ab.
-  const tex = (source, displayMode) => katex.renderToString(source.trim(), { displayMode, output: 'mathml', throwOnError: true });
+  // KaTeX schreibt Betragsstriche als U+2223 (Teiler); Chrome streckt das nicht. Deshalb ein dehnbares "|".
+  const tex = (source, displayMode) => katex
+    .renderToString(source.trim(), { displayMode, output: 'mathml', throwOnError: true })
+    .replaceAll('<mo fence="true">∣</mo>', '<mo fence="true" stretchy="true" symmetric="true">|</mo>');
   eleventyConfig.addPairedShortcode('math', (content) => tex(content, true));
   eleventyConfig.addPairedShortcode('mi', (content) => tex(content, false));
 

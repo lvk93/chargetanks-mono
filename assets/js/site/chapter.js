@@ -21,6 +21,9 @@ const C = {
   warn: '#ff8a80',
 };
 
+// Dunkler Rand um Beschriftungen in Diagrammen (gleiche Farbe wie der Hintergrund)
+const HALO = { stroke: '#003b73', 'stroke-width': 4, 'stroke-linejoin': 'round', 'paint-order': 'stroke' };
+
 const fmt = (v, d = 2) => (Number.isFinite(v) ? v.toFixed(d) : '–');
 const pct = (v) => `${Math.round(v * 100)} %`;
 
@@ -72,9 +75,42 @@ function initTabs() {
 }
 
 /* Quiz ----------------------------------------------------------------------------------------- */
+// Scroll-Widerstand: Die Aufloesung direkt nach einem Quiz bleibt verschleiert, bis man antwortet oder
+// "Skip" drueckt. Ohne JavaScript (und fuer Suchmaschinen) steht der Text ganz normal da.
+function veilAnswer(quiz) {
+  const block = document.querySelector(`[data-quiz-answer="${quiz.dataset.quiz}"]`);
+  if (!block) return () => {};
+  const skip = document.createElement('button');
+  skip.type = 'button';
+  skip.className = 'quiz-answer__skip';
+  skip.textContent = 'Skip and show the answer';
+  const body = document.createElement('div');
+  body.className = 'quiz-answer__body';
+  body.append(...block.childNodes);
+  body.setAttribute('aria-hidden', 'true');
+  body.inert = true;
+  block.append(body, skip);
+  block.classList.add('is-veiled');
+  let open = false;
+  const reveal = () => {
+    if (open) return;
+    open = true;
+    block.classList.remove('is-veiled');
+    body.removeAttribute('aria-hidden');
+    body.inert = false;
+    skip.remove();
+  };
+  skip.addEventListener('click', () => {
+    track('tool_used', { tool: `quiz-${quiz.dataset.quiz}:skip` });
+    reveal();
+  });
+  return reveal;
+}
+
 function initQuiz() {
   for (const quiz of document.querySelectorAll('[data-quiz]')) {
     const feedback = quiz.querySelector('[data-quiz-feedback]');
+    const reveal = veilAnswer(quiz);
     let answered = false;
     quiz.addEventListener('click', (event) => {
       const button = event.target.closest('button[data-answer]');
@@ -87,6 +123,7 @@ function initQuiz() {
       }
       feedback.textContent = right ? button.dataset.yes : button.dataset.no;
       feedback.hidden = false;
+      reveal();
       // Nur die erste Antwort zaehlt (anonym, ueber das vorhandene Ereignis tool_used)
       if (!answered) track('tool_used', { tool: `quiz-${quiz.dataset.quiz}:${button.dataset.answer}` });
       answered = true;
@@ -257,7 +294,7 @@ function chart(container, { label, xMax, yMin, yMax, xTitle, yTitle, height = 24
     },
     hline(v, text, color, dash = '5 4') {
       g.append(el('line', { x1: m.l, x2: W - m.r, y1: py(v), y2: py(v), stroke: color, 'stroke-dasharray': dash, 'stroke-width': 1.25 }));
-      if (text) svg.append(el('text', { x: W - m.r - 4, y: py(v) - 4, fill: color, 'font-size': 10, 'text-anchor': 'end' }, text));
+      if (text) svg.append(el('text', { x: W - m.r - 4, y: py(v) - 4, fill: color, 'font-size': 10, 'text-anchor': 'end', ...HALO }, text));
     },
     band(x0, x1, color) {
       g.append(el('rect', { x: px(x0), y: m.t, width: Math.max(0, px(x1) - px(x0)), height: height - m.t - m.b, fill: color }));
@@ -269,7 +306,7 @@ function chart(container, { label, xMax, yMin, yMax, xTitle, yTitle, height = 24
       g.append(el('circle', { cx: px(xx), cy: py(v), r: 4.5, fill: color, stroke: '#003b73', 'stroke-width': 1.5 }));
     },
     label(xx, v, text, color, anchor = 'start') {
-      svg.append(el('text', { x: px(xx), y: py(v), fill: color, 'font-size': 11, 'font-weight': 600, 'text-anchor': anchor }, text));
+      svg.append(el('text', { x: px(xx), y: py(v), fill: color, 'font-size': 11, 'font-weight': 600, 'text-anchor': anchor, ...HALO }, text));
     },
   };
   draw(api);
@@ -540,7 +577,7 @@ function realLink(np, lip, soc) {
 const DEFAULTS = {
   intro: { soc: 0.5, vmin: 3.2, vmax: 4.0, curves: 'ideal' },
   np: { np: 1.1, soc: 1, vmin: 3.0, vmax: 4.2, curves: 'ideal' },
-  nli: { np: 1.2, bonus: 6, sei: 10, prelith: 0, soc: 0, vmin: 3.0, vmax: 4.2, curves: 'ideal' },
+  nli: { np: 1.1, bonus: 6, sei: 10, prelith: 0, soc: 0, vmin: 3.0, vmax: 4.2, curves: 'ideal' },
   aging: { lama: 0, lamc: 0, lli: 0, soc: 1, vmin: 3.0, vmax: 4.2, curves: 'ideal' },
   blend: { si: 25, soc: 0.5, curves: 'ideal' },
   dqdv: { guess: 70, curves: 'ideal' },
@@ -803,23 +840,43 @@ async function initCompare(fig) {
   await loadReal();
   const holder = fig.querySelector('[data-figure-parts]');
   holder.replaceChildren();
+  const legacy = Boolean(fig.closest('.og--post'));
+  const gauges = document.createElement('div');
+  gauges.className = 'ch-compare__gauges';
+  const tanksRow = document.createElement('div');
+  tanksRow.className = 'ch-compare__tanks';
   for (const c of compareCells()) {
     const part = document.createElement('div');
     part.className = 'ch-compare__cell';
     const head = document.createElement('p');
     head.className = 'ch-compare__name';
     head.textContent = c.name;
-    const tanks = document.createElement('div');
-    drawTanks(tanks, c.cell, c.cell.xMax);
     const facts = document.createElement('p');
     facts.className = 'ch-compare__facts';
     facts.textContent = `N/P ${fmt(COMPARE.np)} · N/Li ${fmt(c.acc.nLi)}`;
     const gauge = document.createElement('div');
     gauge.className = 'ch-compare__gauge';
     drawFillGauge(gauge, c.fill);
-    part.append(head, tanks, gauge, facts);
-    holder.append(part);
+    if (legacy) {
+      // Vorlage fuer das Post-Bild (config/og/render.html): Tanks und Balken je Zelle untereinander
+      const tanks = document.createElement('div');
+      drawTanks(tanks, c.cell, c.cell.xMax);
+      part.append(head, tanks, gauge, facts);
+      holder.append(part);
+      continue;
+    }
+    part.append(head, gauge, facts);
+    gauges.append(part);
+    const tank = document.createElement('figure');
+    tank.className = 'ch-compare__tank';
+    const label = document.createElement('figcaption');
+    label.textContent = c.name;
+    const tanks = document.createElement('div');
+    drawTanks(tanks, c.cell, c.cell.xMax);
+    tank.append(label, tanks);
+    tanksRow.append(tank);
   }
+  if (!legacy) holder.append(gauges, tanksRow);
 }
 
 initTabs();
