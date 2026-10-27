@@ -588,6 +588,23 @@ export function compareCells() {
   });
 }
 
+// Fuellgrad der Anode bei Vmax als grosser Balken: im Tankbild ist der Unterschied mit blossem Auge kaum zu sehen
+function drawFillGauge(container, fill) {
+  const W = 360;
+  const H = 74;
+  const x0 = 16;
+  const x1 = W - 16;
+  const svg = svgRoot(container, W, H, `Anode filled to ${pct(fill)} at Vmax`);
+  const xf = x0 + (x1 - x0) * Math.min(1, fill);
+  svg.append(el('text', { x: x0, y: 16, fill: C.text, 'font-size': 12, 'font-weight': 600 }, 'Anode at Vmax'));
+  svg.append(el('text', { x: x1, y: 16, fill: C.muted, 'font-size': 11, 'text-anchor': 'end' }, `room to the ceiling: ${pct(1 - fill)}`));
+  svg.append(el('rect', { x: x0, y: 26, width: x1 - x0, height: 26, rx: 4, fill: 'rgb(255 255 255 / 0.10)', stroke: C.anode, 'stroke-width': 1.5 }));
+  svg.append(el('rect', { x: x0, y: 26, width: xf - x0, height: 26, rx: 4, fill: C.water, opacity: 0.9 }));
+  svg.append(el('text', { x: xf - 8, y: 44, fill: '#003b73', 'font-size': 15, 'font-weight': 700, 'text-anchor': 'end' }, pct(fill)));
+  svg.append(el('line', { x1, x2: x1, y1: 22, y2: 58, stroke: C.metal, 'stroke-width': 2 }));
+  svg.append(el('text', { x: x1, y: 70, fill: C.muted, 'font-size': 10, 'text-anchor': 'end' }, 'full = ceiling'));
+}
+
 async function initCompare(fig) {
   await loadReal();
   const holder = fig.querySelector('[data-figure-parts]');
@@ -602,8 +619,11 @@ async function initCompare(fig) {
     drawTanks(tanks, c.cell, c.cell.xMax);
     const facts = document.createElement('p');
     facts.className = 'ch-compare__facts';
-    facts.textContent = `N/P ${fmt(COMPARE.np)} · N/Li ${fmt(c.acc.nLi)} · anode at Vmax ${pct(c.fill)}`;
-    part.append(head, tanks, facts);
+    facts.textContent = `N/P ${fmt(COMPARE.np)} · N/Li ${fmt(c.acc.nLi)}`;
+    const gauge = document.createElement('div');
+    gauge.className = 'ch-compare__gauge';
+    drawFillGauge(gauge, c.fill);
+    part.append(head, tanks, gauge, facts);
     holder.append(part);
   }
 }

@@ -1500,6 +1500,20 @@ body.has-fullscreen-chart {
   color: var(--gray-medium);
 }
 
+/* N/P und N/Li als Balken, Formeln als Text darunter */
+.ratio-figure svg { max-width: 26rem; }
+
+.ratio-legend {
+  display: grid;
+  gap: 0.5rem;
+  max-width: 26rem;
+  margin: 0.75rem auto 0;
+}
+
+.ratio-legend div { display: grid; gap: 0.125rem; }
+.ratio-legend dt { font-weight: 700; color: var(--navy); }
+.ratio-legend dd { margin: 0; font-size: 0.875rem; color: var(--gray-medium); }
+
 /* Vergleich NMC/LFP gegen Graphit: zwei Tankbilder nebeneinander */
 .ch-compare .ch-fig__parts { grid-template-columns: 1fr; }
 
