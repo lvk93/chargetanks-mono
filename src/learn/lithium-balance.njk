@@ -311,18 +311,19 @@ sitemap: false
     <h3>The lithium account</h3>
     <p>Let's do the books.</p>
     {{ fig("nli", "account", "The lithium account from the cathode in operation to the lithium in operation. The dashed line is the room in the cathode.") }}
-    <p>On the account sits what the cathode can take back, plus the bonus it brings from the factory by being overfull. The SEI makes a one-off withdrawal, and that's the real loss. The bonus covers part of it, but usually not all. So in the end you're usually short of lithium, not of room.</p>
-    <p>N/P tells you how big the tanks are. N/Li tells you how much water is really in there.{{ draftTag(draft) }}</p>
+    <p>On the account sits what the cathode can take back, plus the bonus it brings from the factory by being overfull. During formation the SEI makes its biggest withdrawal, and that's the real loss. The bonus covers part of it, but usually not all. So in the end you're usually short of lithium, not of room.</p>
+    <p>N/P tells you how big the tanks are. N/Li tells you how much water is really in there: the anode tank divided by the lithium in operation. And that's what decides how close the anode gets to the ceiling.</p>
+    <p>Take two cells with the same N/P against graphite, one with an NMC cathode, one with LFP. NMC brings a big formation bonus that roughly covers what the SEI takes. LFP brings very little. Same tanks, but the LFP cell has less water in play, so its anode stays emptier. N/P can't tell the two apart, N/Li can. Which also means an LFP cell can get away with a lower N/P.{{ draftTag(draft) }}</p>
+    <figure class="ch-fig ch-compare" data-chapter-compare>
+      <div class="ch-fig__parts" data-figure-parts></div>
+      <figcaption>Both cells charged to Vmax, same N/P of 1.1, same SEI. Only the formation bonus of the cathode differs.</figcaption>
+    </figure>
+    {{ note(draft, "Vergleichsbild NMC/LFP von Claude ergänzt (im Diktat nur Text). Annahmen: SEI 8 % der Anode, Bonus NMC 9 %, LFP 2 %, Vmax 4,2 V bzw. 3,65 V. Dasselbe Bild geht in den LinkedIn-Post.") }}
 
     <h3>What this does to the plot</h3>
     <p>In the plot, the two lines shift against each other. On discharge the anode runs empty before the cathode is full again, and a gap stays in the cathode. On charge the anode doesn't get as close to the ceiling anymore. Lithium has always been the limit. What's new is that there's now less of it than fits into the cathode.</p>
     {{ fig("nli", "tanks", "Discharged after formation: the anode is empty, and a gap stays in the cathode.") }}
-    <p>So N/Li is a design lever of its own, and one that protects better against plating. You see it most clearly in a comparison: NMC against graphite and LFP against graphite at the same N/P, and the same again with prelithiation.</p>
-    <figure class="ch-fig ch-compare" data-chapter-compare>
-      <div class="ch-fig__parts" data-figure-parts></div>
-      <figcaption>Both cells charged to Vmax, same N/P of 1.1 and the same SEI. NMC brings a big formation bonus that roughly covers the SEI, LFP brings very little, so its anode stays emptier.</figcaption>
-    </figure>
-    {{ note(draft, "Vergleichsbild NMC/LFP von Claude ergänzt (im Diktat nur Text). Annahmen: SEI 8 % der Anode, Bonus NMC 9 %, LFP 2 %, Vmax 4,2 V bzw. 3,65 V. Dasselbe Bild geht in den LinkedIn-Post.") }}
+    <p>So N/Li is a design lever of its own, and one that protects better against plating.</p>
 
     <section class="ch-tool" data-chapter-tool="nli" aria-label="Tool: lithium account and N/Li ratio">
       <form class="ch-tool__controls">
