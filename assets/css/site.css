@@ -1412,6 +1412,32 @@ body.has-fullscreen-chart {
   justify-self: start;
 }
 
+/* Detailregler eingeklappt, damit das Tool nicht erschlaegt */
+.ch-tool__more { grid-column: 1 / -1; }
+
+.ch-tool__more summary {
+  display: inline-block;
+  cursor: pointer;
+  border: 1px solid rgb(255 255 255 / 0.3);
+  border-radius: 9999px;
+  padding: 0.3rem 0.85rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #fff;
+}
+
+.ch-tool__more summary::-webkit-details-marker { display: none; }
+.ch-tool__more summary::before { content: '+ '; }
+.ch-tool__more[open] summary::before { content: '− '; }
+
+.ch-tool__more-body {
+  display: grid;
+  gap: 0.25rem 1.5rem;
+  grid-template-columns: repeat(auto-fit, minmax(12rem, 1fr));
+  align-items: end;
+  margin-top: 0.75rem;
+}
+
 .ch-tool__figs {
   display: grid;
   gap: 1.25rem;

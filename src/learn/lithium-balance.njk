@@ -89,7 +89,7 @@ sitemap: false
       <p class="quiz__feedback" data-quiz-feedback role="status" hidden></p>
     </div>
     <p>If you had to think about that for a second, this section is for you.</p>
-    <p>The obvious answer is the electrolyte, there's lithium in there after all. But no. The conducting salt is only a means of transport. It doesn't change the capacity, no matter how much of it you pour in. The lithium comes out of the factory inside the cathode. So the cell is built discharged: cathode full, anode empty. Strictly speaking the cathode is even overfull, but we'll get to that with the N/Li ratio.</p>
+    <p>The obvious answer is the electrolyte, there's lithium in there after all. But no. The conducting salt is only a means of transport. It doesn't change the capacity, no matter how much of it you pour in. The lithium comes out of the factory inside the cathode. So the cell is built discharged: cathode full, anode empty. Strictly speaking, measured against what it takes back later, the cathode is even overfull, but we'll get to that with the N/Li ratio.</p>
 
     <h3>Step 2: One tank</h3>
     <p>From here on we only keep an eye on the lithium, because it's the only thing in the cell that really moves. Think of the lithium as water and the cathode as a tank. Water flows downhill. So does lithium. In equilibrium that's not a cute analogy, it's the actual physics.</p>
@@ -311,11 +311,11 @@ sitemap: false
       </svg>
       <figcaption>The cathode as a mine, lithium as the support beams. Where the roof has sagged, a beam no longer fits back in. That surplus is the formation bonus.</figcaption>
     </figure>
-    <p>For the tank, that's a loss: it gets a bit smaller. In return, there's now some extra lithium that no longer fits back in, and during the first charge that surplus flows over to the anode.</p>
+    <p>For the tank, that's a loss: it gets a bit smaller. As built, the cathode was simply full. But measured against what it takes back in reversible operation, from the second cycle on, it's overfull, and during the first charge that surplus flows over to the anode.</p>
     <p>You can measure this in a half cell against lithium metal, so against the ceiling. On the first discharge, not everything comes back.</p>
 
     <h3>The SEI takes its cut</h3>
-    <p>The anode grabs it. During the first charge a thin layer forms on the anode, the SEI. The anode needs it to stay stable in the electrolyte at such low potentials at all. And that layer is built from lithium and electrolyte. The lithium in it is gone for good, and the bigger the anode, the more lithium is lost.</p>
+    <p>The anode grabs it. During the first charge a thin layer forms on its surface, the SEI, which it needs to stay stable in the electrolyte at such low potentials at all. That layer is built from lithium and electrolyte. The lithium in it is gone for good, and the bigger the anode, the more lithium is lost.</p>
     <figure class="sei-figure">
       <svg viewBox="0 0 640 300" role="img" aria-label="A graphite particle with a thin SEI skin, and a zoom into the skin: lithium between graphite layers, lithium locked in the SEI, lithium ions in the electrolyte">
         <defs>
@@ -380,8 +380,9 @@ sitemap: false
     <h3>The lithium account</h3>
     <p>Let's do the books.</p>
     {{ fig("nli", "account", "The lithium account from the cathode in operation to the lithium in operation. The dashed line is the room in the cathode.") }}
-    <p>On the account sits what the cathode can take back, plus the bonus it brings from the factory by being overfull. During formation the SEI makes its biggest withdrawal, and that's the real loss. The bonus covers part of it, but usually not all. So in the end you're usually short of lithium, not of room.</p>
+    <p>On the account sits what the cathode can take back, plus the bonus it brings from the factory by being overfull. During formation the SEI makes its biggest withdrawal, and that's the real loss. The bonus covers part of it, but usually not all, so in the end you're short of lithium, not of room.</p>
     <h3>N/P and N/Li</h3>
+    <p>Here are the three items side by side, with the cathode set to 1.</p>
     <figure class="sei-figure ratio-figure">
       <svg viewBox="0 0 430 270" role="img" aria-label="Bar chart: cathode 1.00, anode 1.10, lithium in operation 0.92">
         <rect width="430" height="270" rx="16" fill="#003b73"/>
@@ -402,7 +403,12 @@ sitemap: false
         <div><dt>N/Li = anode / lithium ≈ 1.20</dt><dd>how much water is really in there</dd></div>
       </dl>
     </figure>
-    <p>Here are the three items side by side, with the cathode set to 1. N/P compares the two tanks, N/Li compares the anode tank with the water that's really in play. Since we always design against plating, N/Li is the more meaningful of the two.</p>
+    <p>N/P compares the two tanks, N/Li compares the anode tank with the water that's really in play. Since we always design against plating, N/Li is the more meaningful of the two.</p>
+    <p>Take two cells with the same N/P against graphite, one with an NMC cathode, one with LFP. NMC brings a big formation bonus that roughly covers what the SEI takes. LFP brings very little. Same tanks, but the LFP cell has less water in play, so its anode stays emptier. N/P can't tell the two apart, N/Li can. Which also means an LFP cell can get away with a lower N/P.{{ draftTag(draft) }}</p>
+    <figure class="ch-fig ch-compare" data-chapter-compare>
+      <div class="ch-fig__parts" data-figure-parts></div>
+      <figcaption>Both cells charged to Vmax, same N/P of 1.1, same SEI. Only the formation bonus of the cathode differs.</figcaption>
+    </figure>
 
     <h3>What this does to the plot</h3>
     <p>In the plot, the two lines shift against each other. On discharge the anode runs empty before the cathode is full again, and a gap stays in the cathode. On charge the anode doesn't get as close to the ceiling anymore. Lithium has always been the limit. What's new is that there's now less of it than fits into the cathode.</p>
@@ -411,13 +417,16 @@ sitemap: false
       <form class="ch-tool__controls">
         {{ curves("t3") }}
         {{ presets([["Typical", '{"np":1.2,"bonus":6,"sei":10,"prelith":0}'], ["No SEI", '{"sei":0,"prelith":0}'], ["Big anode", '{"np":1.5,"prelith":0}'], ["Prelithiated", '{"np":1.1,"bonus":6,"sei":10,"prelith":1.1,"soc":1}'], ["Too much", '{"np":1.1,"bonus":6,"sei":10,"prelith":2,"soc":1}']]) }}
-        {{ sl("t3", "np", "N/P ratio", 1.0, 1.6, 0.01, 1.2) }}
-        {{ sl("t3", "bonus", "Formation bonus of the cathode [%]", 0, 15, 0.5, 6, 1) }}
-        {{ sl("t3", "sei", "SEI loss [% of anode capacity]", 0, 20, 0.5, 10, 1) }}
-        {{ sl("t3", "prelith", "Prelithiation [Ah]", 0, 2.5, 0.05, 0) }}
         {{ sl("t3", "soc", "Charge (Vmin → Vmax)", 0, 1, 0.01, 0) }}
-        {{ sl("t3", "vmin", "Vmin [V]", 2.8, 3.6, 0.01, 3.0) }}
-        {{ sl("t3", "vmax", "Vmax [V]", 3.8, 4.4, 0.01, 4.2) }}
+        <details class="ch-tool__more">
+          <summary>More settings</summary>
+          <div class="ch-tool__more-body">
+            {{ sl("t3", "np", "N/P ratio", 1.0, 1.6, 0.01, 1.2) }}
+            {{ sl("t3", "bonus", "Formation bonus of the cathode [%]", 0, 15, 0.5, 6, 1) }}
+            {{ sl("t3", "sei", "SEI loss [% of anode capacity]", 0, 20, 0.5, 10, 1) }}
+            {{ sl("t3", "prelith", "Prelithiation [Ah]", 0, 2.5, 0.05, 0) }}
+          </div>
+        </details>
         <button type="button" class="controls__action" data-reset>Reset</button>
       </form>
       <div class="ch-tool__figs">
@@ -435,13 +444,6 @@ sitemap: false
         <div><dt>Usable capacity</dt><dd data-readout="capacity">–</dd></div>
       </dl>
     </section>
-
-    <h3>Same N/P, different cells</h3>
-    <p>Take two cells with the same N/P against graphite, one with an NMC cathode, one with LFP. NMC brings a big formation bonus that roughly covers what the SEI takes. LFP brings very little. Same tanks, but the LFP cell has less water in play, so its anode stays emptier. N/P can't tell the two apart, N/Li can. Which also means an LFP cell can get away with a lower N/P.{{ draftTag(draft) }}</p>
-    <figure class="ch-fig ch-compare" data-chapter-compare>
-      <div class="ch-fig__parts" data-figure-parts></div>
-      <figcaption>Both cells charged to Vmax, same N/P of 1.1, same SEI. Only the formation bonus of the cathode differs.</figcaption>
-    </figure>
 
     <h3>Outlook: prelithiation</h3>
     <p>Prelithiation is popular when the SEI takes too much or the books don't balance otherwise. You put extra lithium into the anode. If you then design naively by N/P alone, you slide into plating very quickly. This is where N/Li really matters.</p>
