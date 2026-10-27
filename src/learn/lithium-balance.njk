@@ -313,7 +313,6 @@ sitemap: false
     </figure>
     {{ note(draft, "Bergwerk-Schema neu (27.10.), bitte drüberschauen.") }}
     <p>For the tank, that's a loss: it gets a bit smaller. In return, there's now some extra lithium that no longer fits back in, and during the first charge that surplus flows over to the anode.</p>
-    {{ fig("nli", "tanks", "Before the SEI takes its cut: the cathode brings 6 % more water than fits back in. With nothing withdrawn, the anode can't fully empty on discharge.", 'data-sei="0"') }}
     <p>You can measure this in a half cell against lithium metal, so against the ceiling. On the first discharge, not everything comes back.</p>
 
     <h3>The SEI takes its cut</h3>
@@ -405,7 +404,7 @@ sitemap: false
         <div><dt>N/Li = anode / lithium ≈ 1.20</dt><dd>how much water is really in there</dd></div>
       </dl>
     </figure>
-    <p>Here are the three items side by side, with the cathode set to 1. N/P compares the two tanks. N/Li compares the anode tank with the water that's really in play. Since lithium is usually the scarcest item, N/Li decides how close the anode gets to the ceiling. That makes it the number that dominates the design, not N/P.{{ draftTag(draft) }}</p>
+    <p>Here are the three items side by side, with the cathode set to 1. N/P compares the two tanks, N/Li compares the anode tank with the water that's really in play. Since we always design against plating, N/Li is the more meaningful of the two.</p>
 
     <h3>What this does to the plot</h3>
     <p>In the plot, the two lines shift against each other. On discharge the anode runs empty before the cathode is full again, and a gap stays in the cathode. On charge the anode doesn't get as close to the ceiling anymore. Lithium has always been the limit. What's new is that there's now less of it than fits into the cathode.</p>
