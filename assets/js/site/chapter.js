@@ -476,20 +476,33 @@ function drawBlendSplit(container, blend, q) {
 }
 
 function drawDqdv(container, d) {
-  const yMax = Math.ceil(Math.max(...d.si) * 3);
-  chart(container, {
-    label: 'dQ/dV of the blend, the subtracted graphite and the remainder',
-    xMax: U_RANGE, yMin: -yMax / 2, yMax, xTitle: 'potential vs Li/Li⁺ [V]', yTitle: 'dQ/dV [Ah/V]', height: 260,
+  // Oben in voller Hoehe: Blend und der geschaetzte Graphit, damit man die Graphitpeaks wirklich anpassen kann.
+  // Unten eigener Massstab: was fuer das Silizium uebrig bleibt.
+  const top = document.createElement('div');
+  const bottom = document.createElement('div');
+  container.replaceChildren(top, bottom);
+  const pts = (arr) => d.grid.map((u, i) => [u, arr[i]]);
+  const yTop = Math.ceil(Math.max(...d.blendCurve, ...d.graphite) * 1.08);
+  chart(top, {
+    label: 'dQ/dV of the blend and of your graphite share',
+    xMax: U_RANGE, yMin: 0, yMax: yTop, xTitle: 'potential vs Li/Li⁺ [V]', yTitle: 'dQ/dV [Ah/V]', height: 240,
+    draw(p) {
+      p.line(pts(d.blendCurve), { stroke: C.cell, 'stroke-width': 2.5 });
+      p.line(pts(d.graphite), { stroke: C.anode, 'stroke-dasharray': '5 4', 'stroke-width': 2 });
+      p.label(0.42, yTop * 0.85, 'blend', C.cell);
+      p.label(0.42, yTop * 0.72, 'your graphite', C.anode);
+    },
+  });
+  const yRest = Math.ceil(Math.max(...d.si) * 2.2);
+  chart(bottom, {
+    label: 'Remainder: blend minus your graphite',
+    xMax: U_RANGE, yMin: -yRest, yMax: yRest, xTitle: 'potential vs Li/Li⁺ [V]', yTitle: 'remainder [Ah/V]', height: 200,
     draw(p) {
       p.hline(0, null, C.muted, '2 3');
-      const pts = (arr) => d.grid.map((u, i) => [u, arr[i]]);
-      p.line(pts(d.blendCurve), { stroke: C.cell, opacity: 0.5, 'stroke-width': 2 });
-      p.line(pts(d.graphite), { stroke: C.anode, 'stroke-dasharray': '5 4', 'stroke-width': 2 });
+      p.line(pts(d.si), { stroke: '#c39bd3', 'stroke-dasharray': '4 4', 'stroke-width': 1.5, opacity: 0.8 });
       p.line(pts(d.rest), { stroke: C.water, 'stroke-width': 3 });
-      p.label(0.42, yMax * 0.88, 'blend', C.cell);
-      p.label(0.42, yMax * 0.76, 'your graphite', C.anode);
-      p.label(0.42, yMax * 0.64, 'remainder', C.water);
-      p.label(0.42, -yMax * 0.4, 'graphite peaks cut off', C.muted);
+      p.label(0.42, yRest * 0.8, 'remainder', C.water);
+      p.label(0.42, yRest * 0.6, 'true silicon', '#c39bd3');
     },
   });
 }
