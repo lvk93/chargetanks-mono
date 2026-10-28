@@ -1724,31 +1724,17 @@ body.has-fullscreen-chart {
 
 .ch-tool__controls [data-control="curves"] { grid-column: 1 / -1; max-width: 20rem; }
 
-/* Formeln in der Klappbox: MathML aus dem Build (KaTeX), gezeichnet vom Browser */
-@font-face {
-  font-family: "Latin Modern Math";
-  src: url("/assets/fonts/latinmodern-math-subset.woff2") format("woff2");
-  font-display: swap;
-}
-.math-box math { font-family: "Latin Modern Math", math; }
-.math-box .katex { display: block; }
-.math-box .katex math[display="block"] {
+/* Formeln in der Klappbox: von KaTeX beim Build gesetzt (HTML), Stil und Schriften aus assets/vendor/katex */
+.math-box .katex { color: var(--navy); }
+.math-box .katex-display {
   margin: 0.25rem 0 1rem;
   overflow-x: auto;
   overflow-y: hidden;
-  font-size: 1.05rem;
-  color: var(--navy);
+  padding: 0.125rem 0;
 }
+.math-box .katex-display > .katex { font-size: 1.1em; }
+.math-box p .katex { font-size: 1.05em; }
 
-@media (min-width: 640px) {
-  .math-box .katex math[display="block"] { font-size: 1.2rem; }
-}
-/* aligned-Umgebungen: Chrome kennt columnalign nicht, also Spalten per CSS ausrichten (rechts | links) */
-.math-box mtable[columnalign="right left"] > mtr > mtd { padding: 0.12em 0; }
-.math-box mtable[columnalign="right left"] > mtr > mtd:nth-child(odd) { text-align: right; text-align: -webkit-right; }
-.math-box mtable[columnalign="right left"] > mtr > mtd:nth-child(even) { text-align: left; text-align: -webkit-left; }
-.math-box p .katex { display: inline; }
-.math-box p .katex math { font-size: 1.05em; color: var(--navy); }
 
 .prose .math-step {
   margin: 1rem 0 0.25rem;

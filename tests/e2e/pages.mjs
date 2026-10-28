@@ -199,7 +199,7 @@ for (const width of [1280, 390, 320]) {
   })()`);
   check(`[${width}] Kapitel: Quiz-Aufloesung verschleiert, Antwort und Skip decken auf`, veil.blocks === 3 && veil.fresh > 0 && veil.veiled === veil.fresh && veil.open, JSON.stringify(veil));
   const wide = await evaluate(`(() => { document.querySelectorAll('details.math-box').forEach((d) => { d.open = true; });
-    return [...document.querySelectorAll('[data-chapter-panel]')].flatMap((p) => { p.hidden = false; return [...p.querySelectorAll('math[display="block"]')]; })
+    return [...document.querySelectorAll('[data-chapter-panel]')].flatMap((p) => { p.hidden = false; return [...p.querySelectorAll('.katex-display')]; })
       .filter((m) => m.scrollWidth - m.clientWidth > 1).length; })()`);
   check(`[${width}] Kapitel: keine Formel breiter als die Box`, width < 340 || wide === 0, `${wide} Formeln`);
 

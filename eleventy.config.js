@@ -71,13 +71,10 @@ export default function (eleventyConfig) {
   eleventyConfig.addFilter('bySlug', (items, slug) => items.find((item) => item.slug === slug));
   eleventyConfig.addFilter('hasSecondaryControls', (groups) => groups.some((g) => g.items.some((c) => !c.primary)));
 
-  // LaTeX -> MathML beim Build (KaTeX, siehe config/vendor/katex/README.md). Fehler brechen den Build ab.
-  // KaTeX schreibt Betragsstriche als U+2223 (Teiler); Chrome streckt das nicht. Deshalb ein dehnbares "|".
-  const tex = (source, displayMode) => katex
-    .renderToString(source.trim(), { displayMode, output: 'mathml', throwOnError: true })
-    .replaceAll('<mo fence="true">∣</mo>', '<mo fence="true" stretchy="true" symmetric="true">|</mo>')
-    // \max/\min im Index: KaTeX haengt ein unsichtbares <mo> als drittes Kind an <msub>, Chrome setzt den Index dann nicht
-    .replaceAll('<mo>\u2061</mo></msub>', '</msub>');
+  // LaTeX -> HTML beim Build (KaTeX, siehe config/vendor/katex/README.md). Gesetzt wird mit KaTeX-CSS und -Schriften
+  // aus assets/vendor/katex, nicht vom Browser; daneben steht unsichtbares MathML fuer Screenreader.
+  // Fehler brechen den Build ab.
+  const tex = (source, displayMode) => katex.renderToString(source.trim(), { displayMode, output: 'htmlAndMathml', throwOnError: true });
   eleventyConfig.addPairedShortcode('math', (content) => tex(content, true));
   eleventyConfig.addPairedShortcode('mi', (content) => tex(content, false));
 
