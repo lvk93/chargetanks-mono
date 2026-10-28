@@ -180,20 +180,20 @@ sitemap: false
     <h2 id="t2">2 · Sizing the tanks: the N/P ratio</h2>
 
     <p>So far we've simply assumed everything fits: the cathode gives up its lithium and the anode takes it in. But that doesn't happen by itself. The cathode brings all the lithium, so it sets how much water is in play. How big the anode tank has to be so that all of it fits is something you have to actively design.</p>
-    <h3>Step 1: Anode too small</h3>
+    <h3>Scenario 1: Anode too small</h3>
     <p>What happens if the anode tank is too small? During charging the level rises, and at some point it hits the ceiling. Then the water overflows, which is also known as lithium plating. And it costs you capacity, because part of the plated lithium reacts with the electrolyte or loses contact and never comes back.</p>
     {{ fig("np", "tanks,electrodes", "Anode too small (N/P = 0.8): the anode is full before the cell reaches Vmax. What doesn't fit plates onto the ceiling, and the anode curve sits flat on zero.", 'data-np="0.8"') }}
 
-    <h3>Step 2: Anode too big</h3>
+    <h3>Scenario 2: Anode too big</h3>
     <p>And if the anode tank is too big? Then it never fills up. Empty space stays at the top, which you build, pay for and carry around without ever using it. And that's not even all: a bigger anode also costs more lithium during formation, but that's for the next chapter.</p>
     {{ fig("np", "tanks,electrodes", "Anode too big (N/P = 1.5): fully charged, a good part of the anode tank is still empty. The dashed rest of the anode curve is never reached.", 'data-np="1.5"') }}
 
-    <h3>Step 3: About 10 % more</h3>
-    <p>That's why the anode is designed a bit bigger, typically by around 10 %, to allow some headroom for kinetics and manufacturing tolerances.</p>
+    <h3>Scenario 3: Just right</h3>
+    <p>That's why the anode is designed a bit bigger than the cathode, typically by around 10 %. That leaves headroom for kinetics and manufacturing tolerances. And headroom is scarce: with real curves, fully charged graphite sits only about 0.1 V below the ceiling.</p>
+    {{ fig("np", "tanks,electrodes", "Just right (N/P = 1.1), with real curves: graphite against NMC, fully charged. The anode is nearly full and its surface sits just below the ceiling.", 'data-np="1.1" data-curves="real" data-vmin="2.8"') }}
 
-    <h3>Step 4: Two ways to count N/P</h3>
+    <h3>Two ways to count N/P</h3>
     <p>There are two definitions of N/P. One just compares the tank sizes. The other asks: how much room does the anode have left to the ceiling at Vmax? The second one is the more honest one for plating. With the ideal tanks here, both give the same number as long as the cathode runs empty before the cell reaches Vmax. A lower Vmax pulls them apart.</p>
-    <p>Switch the tool to graphite against NMC and you see how tight it really is: fully charged graphite sits only about 0.1 V below the ceiling.</p>
 
     <section class="ch-tool" data-chapter-tool="np" aria-label="Tool: N/P ratio">
       <form class="ch-tool__controls">
@@ -238,9 +238,6 @@ sitemap: false
       &= \frac{1}{\theta_a(V_{\max})}
       \end{aligned}
       {% endmath %}
-      <p class="math-step">How they relate</p>
-      {% math %}\mathrm{N/P}_\mathrm{fill} = \mathrm{N/P}_\mathrm{cap}\,\frac{Q_c}{x_{\max}}{% endmath %}
-      {% math %}\mathrm{N/P}_\mathrm{fill} = \mathrm{N/P}_\mathrm{cap} \;\Leftrightarrow\; x_{\max} = Q_c{% endmath %}
       <p class="math-step">Who limits at the top</p>
       {% math %}x_{\max} = \min\big(Q_c,\ x_V\big){% endmath %}
       <p class="math-step">Plating</p>

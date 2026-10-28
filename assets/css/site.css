@@ -1725,6 +1725,12 @@ body.has-fullscreen-chart {
 .ch-tool__controls [data-control="curves"] { grid-column: 1 / -1; max-width: 20rem; }
 
 /* Formeln in der Klappbox: MathML aus dem Build (KaTeX), gezeichnet vom Browser */
+@font-face {
+  font-family: "Latin Modern Math";
+  src: url("/assets/fonts/latinmodern-math-subset.woff2") format("woff2");
+  font-display: swap;
+}
+.math-box math { font-family: "Latin Modern Math", math; }
 .math-box .katex { display: block; }
 .math-box .katex math[display="block"] {
   margin: 0.25rem 0 1rem;

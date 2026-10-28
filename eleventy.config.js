@@ -75,7 +75,9 @@ export default function (eleventyConfig) {
   // KaTeX schreibt Betragsstriche als U+2223 (Teiler); Chrome streckt das nicht. Deshalb ein dehnbares "|".
   const tex = (source, displayMode) => katex
     .renderToString(source.trim(), { displayMode, output: 'mathml', throwOnError: true })
-    .replaceAll('<mo fence="true">∣</mo>', '<mo fence="true" stretchy="true" symmetric="true">|</mo>');
+    .replaceAll('<mo fence="true">∣</mo>', '<mo fence="true" stretchy="true" symmetric="true">|</mo>')
+    // \max/\min im Index: KaTeX haengt ein unsichtbares <mo> als drittes Kind an <msub>, Chrome setzt den Index dann nicht
+    .replaceAll('<mo>\u2061</mo></msub>', '</msub>');
   eleventyConfig.addPairedShortcode('math', (content) => tex(content, true));
   eleventyConfig.addPairedShortcode('mi', (content) => tex(content, false));
 
