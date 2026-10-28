@@ -1,4 +1,4 @@
-// Kapitel "Lithium balance" (/learn/lithium-balance/): Reiter, Quiz und die schlanken Tools
+// Kapitel "Lithium balance" (/blog/lithium-balance/): Reiter, Quiz und die schlanken Tools
 // (Einleitung, N/P, N/Li, Alterung) plus der feste Vergleich NMC/LFP gegen Graphit. Gezeichnet wird als SVG ohne Plotly, damit die Seite leicht bleibt.
 // Rechnung: assets/js/model/idealCell.js (ideale Tanks, alles Geraden).
 import { agedBalance, IDEAL_ANODE, IDEAL_CATHODE, idealCell, lithiumAccount, realElectrode } from '../model/idealCell.js';

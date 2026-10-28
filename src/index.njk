@@ -19,33 +19,16 @@ mainClass: ""
   </div>
 </section>
 
+{%- set chapter = chapters[0] %}
 <section class="home-section" aria-labelledby="home-chapter">
   <div class="container container--article">
     <p class="eyebrow">Start here</p>
-    <h2 id="home-chapter" class="home-section__title"><a href="/learn/lithium-balance/">The lithium balance: designing a cell forwards</a></h2>
-    <p class="home-section__lead">Most of us take cells apart backwards, from the OCV to the electrodes. Built forwards, the balance gets simple.</p>
-    <ol class="home-parts">
-      <li>
-        <a href="/learn/lithium-balance/#voltage-window"><span class="home-parts__no">1</span><span class="home-parts__name">Voltage window</span></a>
-        <p>Why the cell voltage is a height difference, and what Vmin and Vmax cut out of the tanks.</p>
-      </li>
-      <li>
-        <a href="/learn/lithium-balance/#np-ratio"><span class="home-parts__no">2</span><span class="home-parts__name">N/P ratio</span></a>
-        <p>Why the anode is built bigger, and the more honest way to measure the margin to plating.</p>
-      </li>
-      <li>
-        <a href="/learn/lithium-balance/#n-li-ratio"><span class="home-parts__no">3</span><span class="home-parts__name">N/Li ratio</span></a>
-        <p>Why the cathode's first-cycle loss is no loss in the full cell, why most cells end up short of lithium, not of room, and what prelithiation does to that.</p>
-      </li>
-      <li>
-        <a href="/learn/lithium-balance/#aging"><span class="home-parts__no">4</span><span class="home-parts__name">Aging</span></a>
-        <p>Why aging losses don't add up, and why a cell can lose active material without losing capacity.</p>
-      </li>
-      <li>
-        <a href="/learn/lithium-balance/#blends"><span class="home-parts__no">5</span><span class="home-parts__name">Blends</span></a>
-        <p>Silicon and graphite as two connected tanks: where the kink in the curve comes from, and how dQ/dV takes a blend apart.</p>
-      </li>
-    </ol>
+    <h2 id="home-chapter" class="home-section__title"><a href="{{ chapter.url }}">{{ chapter.title }}</a></h2>
+    <p class="home-section__lead">{{ chapter.lead }}</p>
+    {% include "partials/chapter-parts.njk" %}
+    {%- if chapters.length > 1 %}
+    <p class="home-more">More chapters on the <a href="/blog/">blog</a>.</p>
+    {%- endif %}
   </div>
 </section>
 

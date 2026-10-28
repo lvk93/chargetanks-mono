@@ -127,7 +127,7 @@ for (const width of [1280, 390, 320]) {
   check(`[${width}] Startseite: keine JS-Fehler`, errors.length === 0, errors.join(' | '));
 
   // Kapitel
-  await open('/learn/lithium-balance/', width);
+  await open('/blog/lithium-balance/', width);
   const chapter = await evaluate(`(async () => { ${H}
     const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
     const out = {};
@@ -182,7 +182,7 @@ for (const width of [1280, 390, 320]) {
   check(`[${width}] Kapitel: keine JS-Fehler`, errors.length === 0, errors.join(' | '));
 
   // Direkter Einstieg auf einen Reiter (Links von der Startseite)
-  await open('/learn/lithium-balance/#n-li-ratio', width);
+  await open('/blog/lithium-balance/#n-li-ratio', width);
   const deep = await evaluate(`[...document.querySelectorAll('[data-chapter-panel]')].filter((p) => !p.hidden).map((p) => p.id).join()`);
   check(`[${width}] Kapitel: Link auf #n-li-ratio oeffnet Reiter 3`, deep === 'n-li-ratio', deep);
 

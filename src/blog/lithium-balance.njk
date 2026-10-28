@@ -3,7 +3,7 @@ layout: layouts/base.njk
 title: "The lithium balance: designing a cell forwards"
 metaTitle: "The lithium balance: voltage window, N/P and N/Li ratio | Charge Tanks"
 description: "Follow the lithium through a cell: why voltage is a height difference, how N/P prevents plating, why formation leaves the cell short of lithium, why aging losses don't add up, and how blended electrodes share the lithium."
-permalink: /learn/lithium-balance/
+permalink: /blog/lithium-balance/
 ldType: article
 ogType: article
 ogImage: /assets/img/og/chapter.jpg
@@ -11,7 +11,7 @@ ogImageAlt: "The lithium balance: anode and cathode of a graphite/NMC cell as tw
 date: 2026-10-30
 category: Cell design
 math: true
-crumbs: [["Learn", "/learn/lithium-balance/"]]
+crumbs: [["Blog", "/blog/"]]
 llms: "Five-part chapter on the lithium balance of a cell in equilibrium: voltage window, N/P ratio, N/Li ratio including formation and prelithiation, aging modes and blended electrodes, each with a small interactive tool."
 # Entwurf: Notizen (gelbe Kaesten) sichtbar, nicht indexiert, nicht in der Sitemap. Fuer die Veroeffentlichung
 # draft auf false setzen und robots/sitemap entfernen.
@@ -131,6 +131,7 @@ sitemap: false
         <div><dt>Cell voltage</dt><dd data-readout="voltage">–</dd></div>
         <div><dt>Usable capacity</dt><dd data-readout="capacity">–</dd></div>
       </dl>
+      <p class="ch-tool__link">The full model with real material curves: <a href="/tools/cell-reconstruction/">Cell Reconstruction tool →</a></p>
     </section>
 
     <h3>Step 5: The real cell</h3>
@@ -223,6 +224,7 @@ sitemap: false
         <div><dt>Ceiling</dt><dd data-readout="status">–</dd></div>
         <div><dt>Usable capacity</dt><dd data-readout="capacity">–</dd></div>
       </dl>
+      <p class="ch-tool__link">The full model with real material curves: <a href="/tools/cell-reconstruction/">Cell Reconstruction tool →</a></p>
     </section>
     {{ note(draft, "Ideale Tanks hier: Kathode 3,6–4,3 V, Anode 0,6–0,08 V. So gewählt, dass N/P knapp unter 1 bei Vmax 4,2 V die Decke erreicht. Bei N/P = 1,1 begrenzt oben die leere Kathode, nicht Vmax.") }}
 
@@ -464,6 +466,7 @@ sitemap: false
         <div><dt>Scarcest item</dt><dd data-readout="limit">–</dd></div>
         <div><dt>Usable capacity</dt><dd data-readout="capacity">–</dd></div>
       </dl>
+      <p class="ch-tool__link">The full model with real material curves: <a href="/tools/cell-reconstruction/">Cell Reconstruction tool →</a></p>
     </section>
 
     <h3>Outlook: prelithiation</h3>
@@ -553,6 +556,7 @@ sitemap: false
         <div><dt>N/P</dt><dd data-readout="np">–</dd></div>
         <div><dt>N/Li</dt><dd data-readout="nli">–</dd></div>
       </dl>
+      <p class="ch-tool__link">The full model with real material curves: <a href="/tools/aging/">Aging tool →</a></p>
     </section>
     <p>Next up: what happens when one electrode is really two tanks?</p>
 
@@ -652,6 +656,7 @@ sitemap: false
         <div><dt>Graphite share (guess)</dt><dd data-readout="guess">–</dd></div>
         <div><dt>Remainder</dt><dd data-readout="status">–</dd></div>
       </dl>
+      <p class="ch-tool__link">The full model with real material curves: <a href="/tools/blending/">Blending tool →</a></p>
     </section>
 
     <p>On the cathode side it works the same way, for example NMC with LFP.</p>

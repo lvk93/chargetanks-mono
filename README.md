@@ -1,6 +1,6 @@
 # chargetanks.com
 
-Statische Seite: Startseite, Kapitel unter `/learn/<kapitel>/`, `/about/` (Lebenslauf), `/tools/` und fuenf interaktive
+Statische Seite: Startseite, Kapitel unter `/blog/<kapitel>/` (Uebersicht `/blog/`, Kapitel in `src/_data/chapters.json`), `/about/` (Lebenslauf), `/tools/` und fuenf interaktive
 Tools unter `/tools/<tool>/`.
 Die Seiten entstehen mit [Eleventy](https://www.11ty.dev/) aus `src/`; im Browser laeuft nur Vanilla-JavaScript
 (ES-Module) ohne Framework, und alle Inhalte kommen von der eigenen Domain.
@@ -36,7 +36,7 @@ Header aus `_redirects` und `_headers` uebertragen.
   `src/_includes/partials/`, das Grundgeruest mit Meta-Tags und JSON-LD in `src/_includes/layouts/base.njk`.
 - Navigation (Kopf): `src/_includes/partials/header.njk`, Fuss: `footer.njk`. Eine Hierarchieebene:
   Lithium balance, Tools, About; Imprint und Privacy nur im Fuss.
-- Kapitel: `src/learn/<kapitel>.njk` (Reiter, Abbildungen per Makro `fig`, Tools im Text, Mathe-Box mit
+- Kapitel: `src/blog/<kapitel>.njk` (Reiter, Abbildungen per Makro `fig`, Tools im Text, Mathe-Box mit
   `{% math %}`/`{% mi %}`, beim Build per KaTeX zu MathML). Zeichnungen und Kapitel-Tools: `assets/js/site/chapter.js`,
   Rechnung: `assets/js/model/idealCell.js`. Mit `draft: true` im Front Matter sind gelbe Notizen sichtbar und die Seite
   ist nicht indexiert und nicht in der Sitemap; zum Veroeffentlichen `draft`, `robots` und `sitemap` entfernen.

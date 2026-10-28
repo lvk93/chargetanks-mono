@@ -14,7 +14,7 @@ controls:
 tryThis:
   - { query: "material=nca&sol=0.6", label: "NCA at SoL 0.6:", text: "a real cathode. Where the tank is wide, the voltage curve is flat." }
   - { query: "sol=0.2", label: "Ideal anode at SoL 0.2:", text: "a tank of constant width, so the voltage changes linearly with the fill level." }
-readMore: { url: "/learn/lithium-balance/#voltage-window", title: "The lithium balance: two tanks on one ceiling" }
+readMore: { url: "/blog/lithium-balance/#voltage-window", title: "The lithium balance: two tanks on one ceiling" }
 charts:
   - { id: dqdv, title: Electrode dQ/dV tank }
   - { id: voltage, title: Voltage vs. SoL }

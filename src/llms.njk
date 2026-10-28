@@ -7,7 +7,10 @@ eleventyExcludeFromCollections: true
 {{ site.description }}
 
 Preferred starting pages:
-- {{ site.url }}/learn/lithium-balance/ - The lithium balance: voltage window, N/P ratio and N/Li ratio including formation, each with a small interactive tool.
+- {{ site.url }}/blog/ - Blog: chapters on battery cell design with the two-tank picture.
+{%- for chapter in chapters %}
+- {{ site.url }}{{ chapter.url }} - {{ chapter.llms }}
+{%- endfor %}
 - {{ site.url }}/tools/ - Interactive battery tools built around the two-tank model.
 - {{ site.url }}/about/ - Author, CV and publications.
 

@@ -1,0 +1,25 @@
+---
+layout: layouts/base.njk
+title: Blog
+metaTitle: "Blog: battery cell design from first principles | Charge Tanks"
+description: "Chapters on battery cell design with the two-tank picture: each one built forwards from first principles, with small interactive tools and the math folded away."
+ldType: collection
+crumbs: [["Blog", "/blog/"]]
+permalink: /blog/
+---
+{#- Uebersicht aller Kapitel; neue Kapitel kommen ueber src/_data/chapters.json dazu -#}
+<section class="home-intro home-intro--page">
+  <div class="container container--article">
+    <h1 class="page-title">Blog</h1>
+    <p class="home-lead">Chapters on battery cell design, built forwards from first principles. Each one has a few short parts, a small tool in every part and the math folded away.</p>
+  </div>
+</section>
+{%- for chapter in chapters %}
+<section class="home-section" aria-labelledby="chapter-{{ chapter.slug }}">
+  <div class="container container--article">
+    <h2 id="chapter-{{ chapter.slug }}" class="home-section__title"><a href="{{ chapter.url }}">{{ chapter.title }}</a></h2>
+    <p class="home-section__lead">{{ chapter.lead }}</p>
+    {% include "partials/chapter-parts.njk" %}
+  </div>
+</section>
+{%- endfor %}

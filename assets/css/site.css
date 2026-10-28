@@ -1243,7 +1243,7 @@ body.has-fullscreen-chart {
   }
 }
 
-/* 7 Kapitel (/learn/...) ---------------------------------------------------------------------- */
+/* 7 Kapitel (/blog/...) ---------------------------------------------------------------------- */
 .chapter {
   padding-block: 2rem 4rem;
 }
@@ -1546,6 +1546,15 @@ body.has-fullscreen-chart {
   font-variant-numeric: tabular-nums;
   color: var(--blue);
 }
+
+.prose .ch-tool__link {
+  margin: 1rem 0 0;
+  font-size: 0.875rem;
+  color: rgb(255 255 255 / 0.75);
+}
+@media (max-width: 639.98px) { .ch-tool__link { order: 3; } }
+
+.home-more { margin-top: 1rem; }
 
 .ch-tool.is-warning [data-readout="status"] { color: #ff8a80; }
 .prose .ch-tool a { color: var(--blue); }
