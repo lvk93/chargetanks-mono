@@ -7,9 +7,11 @@
 //   li     zyklisierbares Lithium (Wasser, das mitspielt)
 // Laufvariable x = Lithium in der Anode. Entladen heisst x klein, geladen x gross.
 
-// Gewaehlt so, dass N/P knapp unter 1 vor Vmax = 4.2 V platet und die Anode voll knapp unter der Decke steht
-export const IDEAL_CATHODE = { empty: 4.3, full: 3.6 };
-export const IDEAL_ANODE = { empty: 0.6, full: 0.08 };
+// Die volle Anode reicht bis an die Decke (0 V): Wird sie voll, laeuft das Wasser ueber (Plating), ohne dass die
+// Zellspannung springt. Kathode oben 4.25 V, damit bei Vmax = 4.2 V gilt: N/P 1.1 wird oben von der leeren Kathode
+// begrenzt (N/P_cap = N/P_fill), ab N/P ~0.92 erreicht die Anode die Decke, und das Alterungs-Quiz verliert 2 %.
+export const IDEAL_CATHODE = { empty: 4.25, full: 3.6 };
+export const IDEAL_ANODE = { empty: 0.6, full: 0 };
 
 // Spannung gegen Li/Li+ bei Fuellgrad 0..1 (Gerade: Steigung = 1/Querschnitt)
 export function potential(tank, fill) {

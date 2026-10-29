@@ -23,6 +23,22 @@ test('N/P zu klein: Anode erreicht vor Vmax die Decke, darueber wird Lithium abg
   near(ok.platedAtVmax, 0);
 });
 
+test('Volle Anode reicht bis an die Decke: Zellspannung springt beim Plating nicht', () => {
+  const c = idealCell({ qCath: 10, qAnode: 8, li: 10, vMin: 3.0, vMax: 4.2 });
+  near(c.uAnode(8), 0);
+  near(c.vCell(8 + 1e-9), c.vCell(8 - 1e-9), 1e-6);
+  // nach dem Vollwerden folgt die Zellspannung nur noch der Kathode
+  near(c.vCell(9), c.uCath(9));
+});
+
+test('Ideale Tanks: N/P 1.1 wird oben von der leeren Kathode begrenzt, ein niedrigeres Vmax trennt N/P_cap und N/P_fill', () => {
+  const c = idealCell({ qCath: 10, qAnode: 11, li: 10, vMin: 3.0, vMax: 4.2 });
+  assert.equal(c.highLimit, 'cathode-empty');
+  near(c.npFill, c.npCap);
+  const low = idealCell({ qCath: 10, qAnode: 11, li: 10, vMin: 3.0, vMax: 4.0 });
+  assert.ok(low.npFill > low.npCap + 0.1);
+});
+
 test('N/P zu gross: Anode bleibt bei Vmax teilweise leer', () => {
   const c = idealCell({ qCath: 10, qAnode: 15, li: 10, vMin: 3.0, vMax: 4.2 });
   assert.ok(c.fillAnode(c.xMax) < 0.7);

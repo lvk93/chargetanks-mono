@@ -226,7 +226,7 @@ sitemap: false
       </dl>
       <p class="ch-tool__link">The full model with real material curves: <a href="/tools/cell-reconstruction/">Cell Reconstruction tool →</a></p>
     </section>
-    {{ note(draft, "Ideale Tanks hier: Kathode 3,6–4,3 V, Anode 0,6–0,08 V. So gewählt, dass N/P knapp unter 1 bei Vmax 4,2 V die Decke erreicht. Bei N/P = 1,1 begrenzt oben die leere Kathode, nicht Vmax.") }}
+    {{ note(draft, "Ideale Tanks hier: Kathode 3,6–4,25 V, Anode 0,6–0 V (die volle Anode reicht bis an die Decke, die Zellspannung springt beim Plating nicht). Bei N/P = 1,1 begrenzt oben die leere Kathode, nicht Vmax; ab N/P ≈ 0,92 erreicht die Anode bei Vmax 4,2 V die Decke.") }}
 
     <p>And the honest one depends on a quantity we've ignored so far: how much lithium actually takes part. That's what the next chapter is about.</p>
 
@@ -440,7 +440,7 @@ sitemap: false
     <section class="ch-tool" data-chapter-tool="nli" aria-label="Tool: lithium account and N/Li ratio">
       <form class="ch-tool__controls">
         {{ curves("t3") }}
-        {{ presets([["Typical", '{"np":1.1,"bonus":6,"sei":10,"prelith":0}'], ["No SEI", '{"sei":0,"prelith":0}'], ["Big anode", '{"np":1.5,"prelith":0}'], ["Prelithiated", '{"np":1.1,"bonus":6,"sei":10,"prelith":1.1,"soc":1}'], ["Too much", '{"np":1.1,"bonus":6,"sei":10,"prelith":2,"soc":1}']]) }}
+        {{ presets([["Typical", '{"np":1.1,"bonus":6,"sei":10,"prelith":0}'], ["No SEI", '{"sei":0,"prelith":0}'], ["Big anode", '{"np":1.5,"prelith":0}'], ["Prelithiated", '{"np":1.1,"bonus":6,"sei":10,"prelith":1.1,"soc":1}'], ["Too much", '{"np":1.1,"bonus":6,"sei":10,"prelith":2.5,"soc":1}']]) }}
         {{ sl("t3", "soc", "Charge (empty → full)", 0, 1, 0.01, 0) }}
         <details class="ch-tool__more">
           <summary>More settings</summary>
@@ -496,10 +496,10 @@ sitemap: false
   <section class="chapter-panel prose" id="aging" data-chapter-panel aria-labelledby="t4">
     <h2 id="t4">4 · Three accounts: aging modes</h2>
 
-    <p>Aging is genuinely complicated, there are hundreds of different mechanisms. In equilibrium, though, it gets simple again. A cell is just lithium, two tanks and bookkeeping, so it can only lose three things: water, or room in one of the two tanks, meaning active material.</p>
+    <p>Aging is genuinely complicated, and hundreds of different mechanisms exist. In equilibrium, though, it gets simple again. A cell is just lithium, two tanks and bookkeeping, so it can only lose three things: water, or room in one of the two tanks, meaning active material.</p>
 
     <h3>You can only measure capacity</h3>
-    <p>From the outside, though, you can only measure one thing: capacity. How do the three modes show up in it? An example: a cell with N/P = 1.1 and N/Li = 1.2 loses 5 % of its anode, 3 % of its cathode and 2 % of its lithium. How much capacity does it lose?</p>
+    <p>How do the three modes show up in the capacity you measure? An example: a cell with N/P = 1.1 and N/Li = 1.2 loses 5 % of its anode, 3 % of its cathode and 2 % of its lithium. How much capacity does it lose?</p>
     <div class="quiz" data-quiz="aging-loss">
       <p class="quiz__question">How much capacity does the cell lose?</p>
       <div class="quiz__options">
@@ -522,7 +522,7 @@ sitemap: false
     <h3>Scenario 2: A tank gets smaller</h3>
     <p>If the anode or the cathode loses active material, its tank gets smaller. As long as its buffer lasts, nothing shows. Once the tank is smaller than the water, it becomes the scarcest item and the capacity drops.</p>
     <p>At the anode that also means N/Li drops below 1: the full anode sits right at the ceiling. That's the plating limit from chapters 2 and 3, now reached by aging.</p>
-    {{ fig("aging", "tanks,cell", "The anode loses 30 %: its tank is now smaller than the water. Charged to Vmax, the anode is full and the first lithium plates onto the ceiling. The capacity drops by about 16 %. Solid: aged, dashed: fresh.", 'data-lama="30"') }}
+    {{ fig("aging", "tanks,cell", "The anode loses 25 %: its tank is now smaller than the water. Charged to Vmax, the anode is full and the first lithium plates onto the ceiling. The capacity drops by about 8 %. Solid: aged, dashed: fresh.", 'data-lama="25"') }}
 
     <h3>Scenario 3: Everything the same</h3>
     <p>If a cell loses the same share of everything, the ratios stay the same. The OCV looks exactly the same, just with less capacity.</p>
@@ -532,7 +532,7 @@ sitemap: false
     <section class="ch-tool" data-chapter-tool="aging" aria-label="Tool: aging modes">
       <form class="ch-tool__controls">
         {{ curves("t4") }}
-        {{ presets([["Lithium is lost", '{"lama":0,"lamc":0,"lli":20}'], ["Anode loses", '{"lama":30,"lamc":0,"lli":0}'], ["Cathode loses", '{"lama":0,"lamc":25,"lli":0}'], ["Quiz case", '{"lama":5,"lamc":3,"lli":2}'], ["All the same", '{"lama":20,"lamc":20,"lli":20}']]) }}
+        {{ presets([["Lithium is lost", '{"lama":0,"lamc":0,"lli":20}'], ["Anode loses", '{"lama":25,"lamc":0,"lli":0}'], ["Cathode loses", '{"lama":0,"lamc":25,"lli":0}'], ["Quiz case", '{"lama":5,"lamc":3,"lli":2}'], ["All the same", '{"lama":20,"lamc":20,"lli":20}']]) }}
         {{ sl("t4", "lama", "Anode active material lost [%]", 0, 40, 1, 0, 0) }}
         {{ sl("t4", "lamc", "Cathode active material lost [%]", 0, 40, 1, 0, 0) }}
         {{ sl("t4", "lli", "Lithium lost [%]", 0, 40, 1, 0, 0) }}
@@ -637,7 +637,7 @@ sitemap: false
     </section>
 
     <h3>Graphite and silicon</h3>
-    <p>Graphite takes up lithium in clear steps, hence the plateaus. Silicon has no fixed bottom, its tank is more like a slanted funnel.</p>
+    <p>Graphite takes up lithium in clear steps, hence the plateaus. Silicon takes it up more continuously, so its tank is a bit slimmer.</p>
     <p>Connect the two and the sharp kink becomes a smooth transition, and graphite and silicon share the lithium depending on where the level is.</p>
 
     <p>If you know dQ/dV: that's exactly the width of the tanks. With real curves, graphite shows sharp peaks and silicon a broad hump; ideal tanks give two boxes. In the blend, the graphite peaks simply sit on top of the silicon hump. And because the widths simply add up, you can turn it around: from a measured dQ/dV curve you can read off how much graphite and how much silicon contribute.</p>
