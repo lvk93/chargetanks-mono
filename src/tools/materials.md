@@ -4,8 +4,8 @@ permalink: /tools/materials/
 toolSlug: materials
 title: Materials
 metaTitle: "Electrode materials as tanks: dQ/dV and OCV | Charge Tanks"
-heading: Understand Materials with the Tank Analogy
-lead: Pick an electrode material and fill it with lithium to see how the tank shape and the voltage curve belong together.
+heading: One material, one tank
+lead: Fill one electrode material with lithium and watch where the level moves fast and where it barely moves.
 controls:
   - group: Material
     items:
@@ -20,15 +20,7 @@ charts:
   - { id: voltage, title: Voltage vs. SoL }
 ---
 
-## What does this tool show?
+## How to read the charts
 
-This tool shows how a **single electrode material** behaves inside a battery, using the **tank analogy**.
-
-- Think of the material as a tank that can be filled with lithium, just like filling water into a container.
-- The **curve shape** of the tank tells us how much lithium fits at each "height".
-- The **steep parts** of the curve (big dQ/dV) mean the material can take in a lot of lithium without much change in voltage, like a wide part of the tank.
-- The **flat parts** mean even a small amount of lithium changes the voltage a lot, like a narrow neck of the tank.
-
-The **tank view** shows the dQ/dV shape of the tank, the **voltage chart** shows how the voltage changes as the tank fills (the OCV curve). Observe how peaks in the dQ/dV show up as plateaus in the OCV curve.
-
-By moving the **SoL** slider (state of lithiation), you can explore how the lithium filling level relates to both views at the same time.
+- **Tank:** the width at each voltage is the material's dQ/dV. The filling is the lithium at the current state of lithiation (SoL).
+- **Voltage:** the same state as a dot on the voltage curve.

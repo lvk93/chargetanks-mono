@@ -1,7 +1,7 @@
 {
   "name": "Charge Tanks",
   "short_name": "Charge Tanks",
-  "description": "Battery intuition, tools, and articles built around the two-tank analogy.",
+  "description": "Battery cell design from first principles, with anode and cathode as two tanks and lithium as the water between them.",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#ffffff",

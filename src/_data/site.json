@@ -7,7 +7,7 @@
   "linkedin": "https://www.linkedin.com/in/lars-von-kolzenberg/",
   "scholar": "https://scholar.google.com/citations?user=8o-FsVYAAAAJ",
   "orcid": "https://orcid.org/0000-0003-0494-8176",
-  "description": "Battery cell design from first principles: follow the lithium through anode and cathode as two tanks, with small tools that compute along.",
+  "description": "Battery cell design from first principles, with anode and cathode as two tanks and lithium as the water between them.",
   "tagline": "A battery is lithium, two tanks and bookkeeping.",
   "themeColor": "#003B73",
   "ogImage": "/assets/img/og/home.jpg",

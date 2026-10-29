@@ -1,7 +1,7 @@
 ---
 layout: layouts/base.njk
 metaTitle: "Charge Tanks | A battery is lithium, two tanks and bookkeeping"
-description: "Battery cell design from first principles: follow the lithium through anode and cathode as two tanks, with small tools that compute along. By Lars von Kolzenberg."
+description: "Anode and cathode as two tanks, lithium as the water between them: battery cell design from first principles, by Lars von Kolzenberg."
 ldType: website
 mainClass: ""
 ---
@@ -10,10 +10,10 @@ mainClass: ""
 <section class="home-intro">
   <div class="container container--article">
     <h1 class="home-thesis">A battery is lithium, two tanks and bookkeeping. <span>The complexity is in the curves, not in the logic.</span></h1>
-    <p class="home-lead">Charge Tanks follows the lithium through a cell from scratch: anode and cathode as two tanks hanging from one ceiling, with small tools that compute along and the math folded away for whoever wants it.</p>
+    <p class="home-lead">Anode and cathode are two tanks hanging from one ceiling, the lithium is the water, and the cell voltage is the height difference between the two water levels.</p>
     <figure class="ch-fig ch-fig--tanks-electrodes home-fig" data-chapter-figure data-tool="intro" data-show="tanks,electrodes" data-curves="real" data-vmin="2.8" data-vmax="4.2" data-soc="0.5">
       <div class="ch-fig__parts" data-figure-parts></div>
-      <figcaption>Graphite against NMC at half charge: the two tanks, shaped by their dQ/dV curves, and the same state as two potential curves. The cell voltage is the distance between them.</figcaption>
+      <figcaption>Graphite against NMC at half charge: the two tanks, shaped by their dQ/dV curves, and the same state as two potential curves.</figcaption>
     </figure>
     <p class="home-byline">Written by <a href="/about/">Lars von Kolzenberg</a>, principal battery model developer at Breathe, PhD on SEI growth at Ulm University.</p>
   </div>
@@ -36,7 +36,7 @@ mainClass: ""
   <div class="container container--article">
     <p class="eyebrow">The lab</p>
     <h2 id="home-tools" class="home-section__title"><a href="/tools/">Tools</a></h2>
-    <p class="home-section__lead">The full models behind the chapters, with real material curves. Every setting lives in the link, so you can share exactly what you see.</p>
+    <p class="home-section__lead">The full models with real material curves and every knob.</p>
     {% include "partials/tool-list.njk" %}
   </div>
 </section>
