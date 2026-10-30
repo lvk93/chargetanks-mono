@@ -6,11 +6,93 @@
     "lead": "Fit a cell OCV backwards and you get dozens of answers that all sort of work. Build it forwards and you see the design decision behind them.",
     "llms": "The lithium balance of a cell in equilibrium: voltage window, N/P ratio, N/Li ratio including formation and prelithiation, aging modes and blended electrodes, each with a small interactive tool.",
     "tabs": [
-      { "id": "voltage-window", "name": "Voltage window", "teaser": "Where the lithium in a cell comes from, and what Vmin and Vmax cut out of the tanks.", "tool": "cell-reconstruction" },
-      { "id": "np-ratio", "name": "N/P ratio", "teaser": "Why the anode is built bigger, and the more honest way to measure the margin to plating.", "tool": "cell-reconstruction" },
-      { "id": "n-li-ratio", "name": "N/Li ratio", "teaser": "Why the cathode's first-cycle loss is a bonus in the full cell, and why most cells still end up short of lithium, not of room.", "tool": "cell-reconstruction" },
-      { "id": "aging", "name": "Aging", "teaser": "Why aging losses don't add up, and why a cell can lose active material without losing capacity.", "tool": "aging" },
-      { "id": "blends", "name": "Blends", "teaser": "Graphite and silicon as two tanks joined by a pipe: who fills first, and how dQ/dV takes the blend apart again.", "tool": "blending" }
+      {
+        "id": "voltage-window",
+        "name": "Voltage window",
+        "teaser": "Where the lithium in a cell comes from, and what Vmin and Vmax cut out of the tanks.",
+        "tool": "cell-reconstruction"
+      },
+      {
+        "id": "np-ratio",
+        "name": "N/P ratio",
+        "teaser": "Why the anode is built bigger, and the more honest way to measure the margin to plating.",
+        "tool": "cell-reconstruction"
+      },
+      {
+        "id": "n-li-ratio",
+        "name": "N/Li ratio",
+        "teaser": "Why the cathode's first-cycle loss is a bonus in the full cell, and why most cells still end up short of lithium, not of room.",
+        "tool": "cell-reconstruction"
+      },
+      {
+        "id": "aging",
+        "name": "Aging",
+        "teaser": "Why aging losses don't add up, and why a cell can lose active material without losing capacity.",
+        "tool": "aging"
+      },
+      {
+        "id": "blends",
+        "name": "Blends",
+        "teaser": "Graphite and silicon as two tanks joined by a pipe: who fills first, and how dQ/dV takes the blend apart again.",
+        "tool": "blending"
+      }
+    ]
+  },
+  {
+    "slug": "materials",
+    "url": "/blog/materials/",
+    "title": "Materials: what the shape of a tank tells you",
+    "lead": "Every electrode material is a tank with its own shape. The shape tells you what happens inside when lithium goes in, and what that means for the cell.",
+    "llms": "Electrode materials in the tank picture: lithium metal, graphite, silicon, LTO, LFP, LMFP, NMC/NCA and LCO, each with its open-circuit curve, its tank and what the shape means for the cell.",
+    "tabs": [
+      {
+        "id": "lithium-metal",
+        "name": "Lithium metal",
+        "teaser": "The ceiling every other material hangs from.",
+        "tool": "materials"
+      },
+      {
+        "id": "graphite",
+        "name": "Graphite",
+        "teaser": "A staircase of reservoirs just below the ceiling, and why that's never far from plating.",
+        "tool": "materials"
+      },
+      {
+        "id": "silicon",
+        "name": "Silicon",
+        "teaser": "Ten times the capacity of graphite, and a tank that depends on the direction.",
+        "tool": "materials"
+      },
+      {
+        "id": "lto",
+        "name": "LTO",
+        "teaser": "Far from the ceiling: no plating, hardly any SEI, and little voltage.",
+        "tool": "materials"
+      },
+      {
+        "id": "lfp",
+        "name": "LFP",
+        "teaser": "What hides behind the flat line: two narrow tanks and a weir.",
+        "tool": "materials"
+      },
+      {
+        "id": "lmfp",
+        "name": "LMFP",
+        "teaser": "LFP with manganese: two reservoirs, one of them deeper.",
+        "tool": "materials"
+      },
+      {
+        "id": "nmc",
+        "name": "NMC/NCA",
+        "teaser": "The same tank for every nickel content, emptied further.",
+        "tool": "materials"
+      },
+      {
+        "id": "lco",
+        "name": "LCO",
+        "teaser": "The cathode in your phone, and the race to a higher upper limit.",
+        "tool": "materials"
+      }
     ]
   }
 ]

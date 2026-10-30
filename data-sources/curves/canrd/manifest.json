@@ -3,12 +3,156 @@
   "status": "nicht digitalisiert (Platzhalter). Digitalisierung folgt mit eigener Pipeline.",
   "note": "Halbzellen gegen Li, erster Zyklus (Formierung): Ladekurve = erste Ladung, Entladekurve = erste Entladung. Keine OCV, sondern 0.1C mit Überspannung.",
   "curves": [
-    { "file": "ncm111-polycrystalline.jpg", "material": "NCM111", "window_V": [3.0, 4.3], "protocol": "25 °C, rest 4 h, 0.1C CC to 4.3 V, CV to 0.02C, rest 3 min, 0.1C DC to 3.0 V", "discharge_mAhg_approx": 155, "axes": { "x": [0, 180], "y": [2.8, 4.4] } },
-    { "file": "ncm523.jpg", "material": "NCM523", "window_V": [3.0, 4.3], "protocol": "0.1C CC to 4.3 V, CV to 0.02C, 0.1C DC to 3.0 V", "discharge_mAhg": 161.6, "first_cycle_efficiency": 0.824, "axes": { "x": [0, 220], "y": [2.8, 4.4] } },
-    { "file": "ncm622-single-crystal.jpg", "material": "NCM622 (single crystal)", "window_V": [3.0, 4.3], "protocol": "0.1C CC to 4.3 V, CV to 0.02C, rest 3 min, 0.1C DC to 3.0 V", "discharge_mAhg_approx": 173, "axes": { "x": [0, 220], "y": [2.8, 4.4] } },
-    { "file": "ncm811-coated-polycrystalline.jpg", "material": "NCM811 (solid-electrolyte coated, polycrystalline)", "window_V": [3.0, 4.3], "protocol": "0.1C CC to 4.3 V, CV to 0.02C, 0.1C DC to 3.0 V", "discharge_mAhg_approx": 208, "axes": { "x": [0, 240], "y": [2.8, 4.4] } },
-    { "file": "ni90-polycrystalline.jpg", "material": "NCM Ni90 (polycrystalline)", "window_V": [3.0, 4.3], "protocol": "25 °C, rest 4 h, 0.1C CC to 4.3 V, CV to 0.02C, rest 5 min, 0.1C DC to 3.0 V", "discharge_mAhg_approx": 221, "axes": { "x": [0, 280], "y": [2.8, 4.4] } },
-    { "file": "nca-s.jpg", "material": "NCA-S", "window_V": [3.0, 4.25], "protocol": "25 °C, rest 4 h, 0.1C CC to 4.25 V, CV to 0.02C, rest 5 min, 0.1C DC to 3.0 V", "discharge_mAhg_approx": 200, "axes": { "x": [0, 240], "y": [2.8, 4.4] }, "caveat": "Obergrenze 4.25 V statt 4.3 V" },
-    { "file": "lmfp.png", "material": "LMFP (Mn-Anteil nicht angegeben)", "window_V": [2.5, 4.5], "protocol": "0.1C CC to 4.5 V, CV to 0.02C, 0.1C DC to 2.5 V", "discharge_mAhg_approx": 156, "axes": { "x": [0, 180], "y": [2.4, 4.8] }, "caveat": "Mn-Anteil aus Plateaulängen schätzen (Mn-Stufe ca. 90 von 156 mAh/g)" }
+    {
+      "file": "ncm111-polycrystalline.jpg",
+      "material": "NCM111",
+      "window_V": [
+        3.0,
+        4.3
+      ],
+      "protocol": "25 °C, rest 4 h, 0.1C CC to 4.3 V, CV to 0.02C, rest 3 min, 0.1C DC to 3.0 V",
+      "discharge_mAhg_approx": 155,
+      "axes": {
+        "x": [
+          0,
+          180
+        ],
+        "y": [
+          2.8,
+          4.4
+        ]
+      }
+    },
+    {
+      "file": "ncm523.jpg",
+      "material": "NCM523",
+      "window_V": [
+        3.0,
+        4.3
+      ],
+      "protocol": "0.1C CC to 4.3 V, CV to 0.02C, 0.1C DC to 3.0 V",
+      "discharge_mAhg": 161.6,
+      "first_cycle_efficiency": 0.824,
+      "axes": {
+        "x": [
+          0,
+          220
+        ],
+        "y": [
+          2.8,
+          4.4
+        ]
+      }
+    },
+    {
+      "file": "ncm622-single-crystal.jpg",
+      "material": "NCM622 (single crystal)",
+      "window_V": [
+        3.0,
+        4.3
+      ],
+      "protocol": "0.1C CC to 4.3 V, CV to 0.02C, rest 3 min, 0.1C DC to 3.0 V",
+      "discharge_mAhg_approx": 173,
+      "axes": {
+        "x": [
+          0,
+          220
+        ],
+        "y": [
+          2.8,
+          4.4
+        ]
+      }
+    },
+    {
+      "file": "ncm811-coated-polycrystalline.jpg",
+      "material": "NCM811 (solid-electrolyte coated, polycrystalline)",
+      "window_V": [
+        3.0,
+        4.3
+      ],
+      "protocol": "0.1C CC to 4.3 V, CV to 0.02C, 0.1C DC to 3.0 V",
+      "discharge_mAhg_approx": 208,
+      "axes": {
+        "x": [
+          0,
+          240
+        ],
+        "y": [
+          2.8,
+          4.4
+        ]
+      }
+    },
+    {
+      "file": "ni90-polycrystalline.jpg",
+      "material": "NCM Ni90 (polycrystalline)",
+      "window_V": [
+        3.0,
+        4.3
+      ],
+      "protocol": "25 °C, rest 4 h, 0.1C CC to 4.3 V, CV to 0.02C, rest 5 min, 0.1C DC to 3.0 V",
+      "discharge_mAhg_approx": 221,
+      "axes": {
+        "x": [
+          0,
+          280
+        ],
+        "y": [
+          2.8,
+          4.4
+        ]
+      }
+    },
+    {
+      "file": "nca-s.jpg",
+      "material": "NCA-S",
+      "window_V": [
+        3.0,
+        4.25
+      ],
+      "protocol": "25 °C, rest 4 h, 0.1C CC to 4.25 V, CV to 0.02C, rest 5 min, 0.1C DC to 3.0 V",
+      "discharge_mAhg_approx": 200,
+      "axes": {
+        "x": [
+          0,
+          240
+        ],
+        "y": [
+          2.8,
+          4.4
+        ]
+      },
+      "caveat": "Obergrenze 4.25 V statt 4.3 V"
+    },
+    {
+      "file": "lmfp.png",
+      "material": "LMFP, LiMn0.6Fe0.4PO4",
+      "window_V": [
+        2.5,
+        4.5
+      ],
+      "protocol": "0.1C CC to 4.5 V, CV to 0.02C, 0.1C DC to 2.5 V",
+      "discharge_mAhg_approx": 156,
+      "axes": {
+        "x": [
+          0,
+          180
+        ],
+        "y": [
+          2.4,
+          4.8
+        ]
+      },
+      "caveat": "Mn/(Mn+Fe) = 0.60 aus Zusammensetzung (lmfp-composition.jpg); passt zur Plateaulänge",
+      "composition_wt%": {
+        "Li": 4.56,
+        "Mn": 19.74,
+        "Fe": 13.4,
+        "P": 19.2,
+        "C": 1.71
+      },
+      "mn_share": 0.6
+    }
   ]
 }

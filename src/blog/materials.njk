@@ -1,0 +1,234 @@
+---
+layout: layouts/base.njk
+title: "Materials: what the shape of a tank tells you"
+metaTitle: "Electrode materials as tanks: graphite, silicon, LTO, LFP, LMFP, NMC, LCO | Charge Tanks"
+description: "Every electrode material is a tank with its own shape. The shape tells you what happens inside when lithium goes in, and what that means for the cell."
+permalink: /blog/materials/
+ldType: article
+ogType: article
+ogImage: /assets/img/og/chapter.jpg
+ogImageAlt: "Electrode materials as tanks on one voltage axis."
+date: 2026-10-30
+category: Cell design
+crumbs: [["Blog", "/blog/"]]
+llms: "Eight-part chapter on electrode materials in the tank picture: lithium metal, graphite, silicon, LTO, LFP, LMFP, NMC/NCA and LCO, each with its open-circuit curve, its tank and what the shape means for the cell."
+# Entwurf: Notizen sichtbar, nicht indexiert, nicht in der Sitemap.
+draft: true
+robots: "noindex, follow"
+sitemap: false
+---
+{%- macro sl(p, name, label, min, max, step, value, d = 2) -%}
+<div class="control" data-control="{{ name }}">
+  <div class="control__head">
+    <label for="{{ p }}-{{ name }}">{{ label }}</label>
+    <output for="{{ p }}-{{ name }}">{{ value | fixed(d) }}</output>
+  </div>
+  <input class="slider" type="range" id="{{ p }}-{{ name }}" name="{{ name }}" min="{{ min }}" max="{{ max }}" step="{{ step }}" value="{{ value }}" data-decimals="{{ d }}" autocomplete="off">
+</div>
+{%- endmacro -%}
+{%- macro pick(p, name, label, options, selected) -%}
+<div class="control" data-control="{{ name }}">
+  <div class="control__head"><label for="{{ p }}-{{ name }}">{{ label }}</label></div>
+  <select class="select" id="{{ p }}-{{ name }}" name="{{ name }}" autocomplete="off">
+    {%- for o in options %}<option value="{{ o[0] }}"{% if o[0] == selected %} selected{% endif %}>{{ o[1] }}</option>{% endfor %}
+  </select>
+</div>
+{%- endmacro -%}
+{%- macro tool(slug, name, extra = "", readouts = "") -%}
+<section class="ch-tool" data-mat-tool="{{ slug }}" aria-label="Tool: {{ name }} as a curve and as a tank">
+  <form class="ch-tool__controls">
+    {{ extra | safe }}
+    {{ sl(slug, "fill", "Lithium in " + name + " (empty → full)", 0, 1, 0.01, 0.5) }}
+  </form>
+  <div class="ch-tool__figs">
+    <figure><figcaption>The curve you know</figcaption><div data-curve></div></figure>
+    <figure><figcaption>The same material as a tank</figcaption><div data-tank></div></figure>
+  </div>
+  <dl class="ch-tool__readouts">
+    <div><dt>Potential vs Li/Li⁺</dt><dd data-readout="voltage">–</dd></div>
+    <div><dt>Lithium in the material</dt><dd data-readout="lithium">–</dd></div>
+    {{ readouts | safe }}
+  </dl>
+</section>
+{%- endmacro -%}
+{%- macro shelf(current, caption) -%}
+<figure class="ch-fig ch-shelf" data-shelf data-current="{{ current }}">
+  <div class="ch-fig__parts" data-figure-parts></div>
+  <figcaption>{{ caption | safe }}</figcaption>
+</figure>
+{%- endmacro -%}
+{%- macro note(on, text) -%}{% if on %}<aside class="draft-note"><strong>Entwurf:</strong> {{ text | safe }}</aside>{% endif %}{%- endmacro -%}
+{%- macro draftTag(on) -%}{% if on %} <span class="draft-tag">Vorschlag</span>{% endif %}{%- endmacro -%}
+
+<article class="container container--article chapter">
+  <header class="article-header">
+    <span class="badge">Cell design</span>
+    <h1 class="article-title">Materials: what the shape of a tank tells you</h1>
+    <p class="chapter__lead">Every electrode material is a tank with its own shape. The shape tells you what happens inside the material when lithium goes in, and that decides how the cell behaves. Eight materials, from the ceiling all the way down.</p>
+    <p class="chapter__byline">By <a href="/about/">Lars von Kolzenberg</a> · draft</p>
+  </header>
+
+  {%- if draft %}
+  <aside class="draft-note draft-note--banner"><strong>Entwurfsvorschau.</strong> Nur der Graphit-Teil ist abgenommen. „Vorschlag“ = aus Notion übersetzt, noch nicht gegengelesen. Gelbe Kästen mit <b>DATEN</b> = Platzhalterkurve, echte Daten fehlen noch.</aside>
+  {%- endif %}
+
+  <figure class="ch-fig ch-shelf ch-shelf--nav" data-shelf data-nav>
+    <div class="ch-fig__parts" data-figure-parts></div>
+    <figcaption>All eight materials on one voltage axis: anodes on the left, cathodes on the right. Depth below the ceiling is the voltage, the area of a tank is its capacity per gram. Tap a material to open its part.</figcaption>
+  </figure>
+
+  <nav class="chapter-tabs chapter-tabs--grouped" data-chapter-tabs aria-label="Materials">
+    <span class="chapter-tabs__group">Anodes</span>
+    <a href="#lithium-metal"><b class="tab-long">Lithium metal</b><b class="tab-short" aria-hidden="true">Li</b></a>
+    <a href="#graphite"><b class="tab-long">Graphite</b><b class="tab-short" aria-hidden="true">Gr</b></a>
+    <a href="#silicon"><b class="tab-long">Silicon</b><b class="tab-short" aria-hidden="true">Si</b></a>
+    <a href="#lto"><b class="tab-long">LTO</b><b class="tab-short" aria-hidden="true">LTO</b></a>
+    <span class="chapter-tabs__group">Cathodes</span>
+    <a href="#lfp"><b class="tab-long">LFP</b><b class="tab-short" aria-hidden="true">LFP</b></a>
+    <a href="#lmfp"><b class="tab-long">LMFP</b><b class="tab-short" aria-hidden="true">LMFP</b></a>
+    <a href="#nmc"><b class="tab-long">NMC/NCA</b><b class="tab-short" aria-hidden="true">NMC</b></a>
+    <a href="#lco"><b class="tab-long">LCO</b><b class="tab-short" aria-hidden="true">LCO</b></a>
+  </nav>
+
+  {# ------------------------------------------------------------------ Lithiummetall ---- #}
+  <section class="chapter-panel prose" id="lithium-metal" data-chapter-panel aria-labelledby="m1">
+    <h2 id="m1">Lithium metal: the ceiling itself{{ draftTag(draft) }}</h2>
+    <p>At the very top of the shelf there is no real tank. There is the ceiling: lithium metal, at 0 V. Every other material hangs from it, and every voltage in this chapter is measured as the distance down from it. Higher than this is not possible, and no material holds more lithium per gram: about 3860 mAh/g.</p>
+    <p>An anode made of lithium metal would give the highest waterfall to any cathode. But keep this ceiling in mind for the next part. In a graphite cell, lithium metal is not the dream, it's the accident: when graphite overflows, the lithium lands on its surface as metal. That's plating.</p>
+    {{ note(draft, "Lithiummetall war als Abschluss gedacht und ist jetzt Tab 1 (Reihenfolge nach Spannung). Text deshalb als Einstieg umgeschrieben, Plating nur als Vorgriff. Kein Tool: es gibt keine Kurve, nur die Decke.") }}
+    {{ shelf("lithium", "Lithium metal is the ceiling: no height, just 3860 mAh/g.") }}
+    <p class="chapter-next"><a href="#graphite">Next: graphite →</a></p>
+  </section>
+
+  {# ------------------------------------------------------------------ Graphit ---- #}
+  <section class="chapter-panel prose" id="graphite" data-chapter-panel aria-labelledby="m2">
+    <h2 id="m2">Graphite: a staircase just below the ceiling</h2>
+    <p>Graphite is the backbone of today's battery industry. Almost every cell you can buy has a graphite anode. And you've probably seen its open-circuit curve: it looks like a staircase with a few wide steps.</p>
+    {{ tool("graphite", "graphite") }}
+    <p>Where the curve is flat, the tank gets wide. A lot of lithium goes in there without the voltage moving much. Where the curve is steep, the tank is narrow, and even a little lithium shifts the voltage noticeably.</p>
+    <p>But why does graphite have steps at all?</p>
+    <h3>Why does graphite have steps?</h3>
+    <p>Graphite is a stack of carbon layers, and the lithium slides in between them. It doesn't fill the layers evenly, though, but stage by stage. Each of these stages shows up in the tank as a wide cross-section: a reservoir that takes a lot of water at one height before the level rises further.</p>
+    <p>All the reservoirs of graphite sit close under the ceiling, none of them more than a few hundred millivolts below it. That's what makes graphite so valuable, because it gives the cell a lot of voltage. But it also means it's never far to overflowing. And overflowing means plating.</p>
+    {{ shelf("graphite", "Graphite sits just below the ceiling.") }}
+    <div class="quiz" data-quiz="graphite-last-step">
+      <p class="quiz__question">How far below the ceiling is the last reservoir of graphite?</p>
+      <div class="quiz__options">
+        <button type="button" data-answer="10" data-correct="false" data-no="Closer than you'd like, but not that close.">About 10 mV</button>
+        <button type="button" data-answer="100" data-correct="true" data-yes="Right. About a tenth of a volt.">About 100 mV</button>
+        <button type="button" data-answer="300" data-correct="false" data-no="That would be comfortable. It's much less.">About 300 mV</button>
+      </div>
+      <p class="quiz__feedback" data-quiz-feedback role="status" hidden></p>
+    </div>
+    <div class="quiz-answer" data-quiz-answer="graphite-last-step">
+      <p>About a tenth of a volt. A strong charging current pushes the level up that far easily.</p>
+    </div>
+    {{ note(draft, "Quiz: Lars' Zahl war 85 mV; die Graphitkurve der Seite hat das letzte Staubecken bei ca. 98 mV, PyBaMM Chen2020 bei 86–96 mV. Deshalb Optionen 10/100/300 mV.") }}
+    <p class="chapter-next"><a href="#lithium-metal">← Lithium metal</a> <a href="#silicon">Next: silicon →</a></p>
+  </section>
+
+  {# ------------------------------------------------------------------ Silizium ---- #}
+  <section class="chapter-panel prose" id="silicon" data-chapter-panel aria-labelledby="m3">
+    <h2 id="m3">Silicon: one material, two tanks{{ draftTag(draft) }}</h2>
+    <p>Silicon is the big hope for more energy in the anode. Today it's mostly a small addition to graphite, and the reason is on the shelf.</p>
+    {{ tool("silicon", "silicon", pick("silicon", "dir", "Direction", [["in", "Lithium going in (charging the cell)"], ["out", "Lithium coming out (discharging)"]], "in")) }}
+    <p>The curve slopes, but charging and discharging are clearly apart, around 0.3 V. So there isn't one tank but two: one for filling and one for emptying.</p>
+    <h3>Why two curves?</h3>
+    <p>Silicon swells enormously when it takes up lithium, to several times its volume. In the electrode it's held in place and ends up under pressure. Under pressure it's harder to push more lithium in, so the voltage while filling is lower. When the lithium comes out, the silicon shrinks against tension, and the voltage is higher.</p>
+    <p>Picture a springy lid on the water: when filling, it presses back, and you need a higher level. When emptying, it pulls up.</p>
+    <p><strong>Where the picture starts to crumble:</strong> the lid is a crutch. A tank doesn't really know a direction, it looks the same whether you fill or empty it. And the stress explains only part of the hysteresis.</p>
+    {{ note(draft, "Skizze des federnden Deckels fehlt noch (nur Text). Im Tool: zwei Umrisse, durchgezogen = Lithium rein, gestrichelt = Lithium raus.") }}
+    <p>On the shelf, silicon sits a little lower than graphite and is smeared out. And it's huge: over 3400 mAh/g, almost ten times graphite. The price is energy lost to the hysteresis in every cycle, and a material that inflates with every charge. How to mix it with graphite is in the <a href="/blog/lithium-balance/#blends">blends part of the lithium balance</a>.</p>
+    {{ shelf("silicon", "Silicon: a little lower than graphite, and much bigger.") }}
+    <p class="chapter-next"><a href="#graphite">← Graphite</a> <a href="#lto">Next: LTO →</a></p>
+  </section>
+
+  {# ------------------------------------------------------------------ LTO ---- #}
+  <section class="chapter-panel prose" id="lto" data-chapter-panel aria-labelledby="m4">
+    <h2 id="m4">LTO: far from the ceiling{{ draftTag(draft) }}</h2>
+    <p>LTO is the anode for everyone who cares more about lifetime and fast charging than about energy, for example in buses.</p>
+    {{ tool("lto", "LTO") }}
+    {{ note(draft, "<b>DATEN:</b> LTO ist eine schematische Kurve (Plateau 1,55 V, 175 mAh/g). Echte Kurve gesucht: Halbzelle Li₄Ti₅O₁₂ gegen Li, z. B. Canrd-Datenblatt.") }}
+    <p>The curve is flat, one big reservoir, but at about 1.55 V.</p>
+    <h3>Why is it so flat?</h3>
+    <p>LTO knows only two states it likes, Li₄Ti₅O₁₂ and Li₇Ti₅O₁₂, and in between there is a weir: the water rises to an edge and then spills over at one height. We'll look at that weir properly in LFP. The special thing about LTO: the two crystal lattices fit almost perfectly onto each other. LTO barely expands when it takes up lithium, so the weir is almost level and the hysteresis is tiny.</p>
+    <p>On the shelf, LTO sits well below graphite, far from the ceiling. Plating is not an issue. And it sits above the line below which the electrolyte breaks down, so hardly any SEI forms. Together with the missing swelling, that makes LTO extremely stable, good for tens of thousands of cycles. The price is on the shelf too: the waterfall to the cathode is low, against LFP just under 2 V, and at about 175 mAh/g the tank is small.</p>
+    {{ shelf("lto", "LTO: far below the ceiling, small and very stable.") }}
+    <p class="chapter-next"><a href="#silicon">← Silicon</a> <a href="#lfp">Next: LFP →</a></p>
+  </section>
+
+  {# ------------------------------------------------------------------ LFP ---- #}
+  <section class="chapter-panel prose" id="lfp" data-chapter-panel aria-labelledby="m5">
+    <h2 id="m5">LFP: what hides behind the flat line{{ draftTag(draft) }}</h2>
+    <p>Half of all electric cars now drive on LFP: cheaper, safer, and a material that's notorious for giving modellers headaches. Because its curve does almost nothing.</p>
+    {{ note(draft, "Fakt prüfen: LFP-Anteil an E-Autos weltweit ca. 50 %.") }}
+    {{ tool("lfp", "LFP", pick("lfp", "dir", "Direction", [["in", "Lithium going in (discharging the cell)"], ["out", "Lithium coming out (charging)"]], "in")) }}
+    <p>Over almost the whole capacity the voltage stays at about 3.4 V. In the tank that's one huge reservoir: the level stands still while the water runs in.</p>
+    <h3>What is hiding behind the flat line?</h3>
+    <p>The flat line is not what the material actually wants. There are exactly two states LFP is comfortable in: almost empty and almost full. Both are perfectly normal, narrow tanks. In between there is an overflow weir, the same one you saw in LTO: the level rises to an edge, and then the water spills over all at once, at the same height, into the upper part.</p>
+    <p>The weir has a small step in both directions. When filling, the level has to rise a bit above the equilibrium height before it spills over, when emptying it has to drop a bit below. That's why the voltage is a little higher when you charge the cell than when you discharge it: hysteresis.</p>
+    <section class="ch-tool" data-lfp-extras aria-label="Tool: LFP as a weir and as many particles">
+      <form class="ch-tool__controls">{{ sl("lfpx", "fill", "Lithium in LFP (empty → full)", 0, 1, 0.01, 0.5) }}</form>
+      <div class="ch-tool__figs">
+        <figure><figcaption>Two narrow tanks and a weir</figcaption><div data-weir></div></figure>
+        <figure><figcaption>Many particles, one plateau</figcaption><div data-particles></div></figure>
+      </div>
+    </section>
+    <h3>Many particles, one plateau</h3>
+    <p>A real electrode is made of millions of small particles. Each has its own weir. When charging, they don't all flip at once but one after another: one spills over and is full, the others are still waiting. From the outside, all you see is that the level stands still. That's the flat plateau.</p>
+    <details class="math-box">
+      <summary>For the curious: where the weir comes from</summary>
+      <p>Calculate the material as if it had to stay evenly filled, and you get an S-shaped curve (regular solution or Cahn–Hilliard models, the source of the headaches). At its turning points dQ/dV shoots to infinity, in between it turns negative, and because the same voltage appears three times, three branches stand on top of each other. A measurement shows only one sharp peak at the plateau voltage. The stretch between equilibrium and turning point is the step of the weir.</p>
+      <div data-scurve></div>
+    </details>
+    <p>LFP stands in the middle of the shelf, a good bit higher than NMC. Against graphite the waterfall is lower, so the cell has less voltage. In return the material is extremely stable, because it switches back and forth between two states that both like to exist.</p>
+    {{ shelf("lfp", "LFP: in the middle, one wide, flat reservoir.") }}
+    <p class="chapter-next"><a href="#lto">← LTO</a> <a href="#lmfp">Next: LMFP →</a></p>
+  </section>
+
+  {# ------------------------------------------------------------------ LMFP ---- #}
+  <section class="chapter-panel prose" id="lmfp" data-chapter-panel aria-labelledby="m6">
+    <h2 id="m6">LMFP: two reservoirs{{ draftTag(draft) }}</h2>
+    <p>LMFP is LFP with manganese. The idea: more voltage, with almost the same safety.</p>
+    {{ tool("lmfp", "LMFP", pick("lmfp", "variant", "Manganese share", [["0", "Mn 40 %"], ["1", "Mn 50 %"], ["2", "Mn 60 %"], ["3", "Mn 70 %"], ["4", "Mn 80 %"]], "2")) }}
+    {{ note(draft, "<b>DATEN:</b> LMFP-Kurven sind schematisch (Mn-Plateau 4,1 V, Fe-Plateau 3,45 V). Canrd-Kurve (Mn 60 % laut Zusammensetzung) liegt als Bild in data-sources/curves/canrd/ und wird später digitalisiert. Für die anderen Mn-Anteile fehlen Daten.") }}
+    <p>The curve has two plateaus instead of one. In the tank, those are two reservoirs on top of each other, separated by a narrow, sloped piece.</p>
+    <h3>Why two steps?</h3>
+    <p>Iron and manganese share the sites in the crystal, but they react at different voltages: iron at about 3.45 V, manganese at about 4.1 V. Each gets its own reservoir, and the ratio of the two decides how big the reservoirs are. More manganese means a bigger lower reservoir.</p>
+    <p>On the shelf, the manganese reservoir sits deeper than LFP. Against graphite the waterfall gets higher there, and that brings more energy out of the same gram.</p>
+    {{ shelf("lmfp", "LMFP: the manganese reservoir sits deeper than LFP.") }}
+    <p class="chapter-next"><a href="#lfp">← LFP</a> <a href="#nmc">Next: NMC/NCA →</a></p>
+  </section>
+
+  {# ------------------------------------------------------------------ NMC ---- #}
+  <section class="chapter-panel prose" id="nmc" data-chapter-panel aria-labelledby="m7">
+    <h2 id="m7">NMC/NCA: the same tank, emptied further{{ draftTag(draft) }}</h2>
+    <p>NMC is the cathode for everything where range counts, and you pay for it: an oxide of nickel, manganese and cobalt. Of the three, nickel is the one that matters.</p>
+    {{ tool("nmc", "NMC", pick("nmc", "variant", "Nickel content", [["0", "NMC111"], ["1", "NMC523"], ["2", "NMC622"], ["3", "NMC811"], ["4", "Ni90"], ["5", "NCA"]], "3"), '<div><dt>Reached at 4.3 V</dt><dd data-readout="reach">–</dd></div>') }}
+    {{ note(draft, "<b>DATEN:</b> Platzhalter. Alle Stufen haben die Form der NMC-Kurve der Seite (≈ NCM811), gestreckt auf die Canrd-Kapazitäten bei 3,0–4,3 V (111: 155, 523: 162, 622: 173, 811: 207, Ni90: 221 mAh/g). Canrd-Kurven liegen als Bilder in data-sources/curves/canrd/ und werden später digitalisiert. Achtung: Canrd ist erster Zyklus bei 0,1C, keine OCV.") }}
+    <p>NMC's curve has no staircase. It falls evenly and smoothly, and the tank is narrow and tall, without a single reservoir.</p>
+    <h3>Why are there no steps?</h3>
+    <p>In NMC, the lithium doesn't look for ordered stages. It spreads evenly through the whole material, however full it is. Each bit of lithium raises the level a little, so the tank is about equally wide everywhere.</p>
+    <p>And all NMC tanks are the same size. In theory each holds about 275 mAh/g. The difference is how far you can empty the tank before the voltage hits the upper limit. More nickel shifts the curve down, and at the same limit you get deeper into the tank. In NMC111 a lot of lithium stays inside at the upper limit, in NMC811 much less. It's a game of filling levels, not of tank size.</p>
+    <p>Next to NMC there is NCA, with aluminium instead of manganese. It behaves very similarly, and the more nickel you put into both, the more they end up as the same material: lithium nickel oxide.</p>
+    <p>NMC stands at the very bottom of the shelf, far from the ceiling. That distance is the high cell voltage you get with graphite. The catch: the more lithium you pull out, the emptier the framework that holds it. At some point the structure starts to suffer. More nickel brings capacity, but you drive closer to that limit.</p>
+    {{ shelf("nmc", "NMC: at the bottom of the shelf, far from the ceiling.") }}
+    <p class="chapter-next"><a href="#lmfp">← LMFP</a> <a href="#lco">Next: LCO →</a></p>
+  </section>
+
+  {# ------------------------------------------------------------------ LCO ---- #}
+  <section class="chapter-panel prose" id="lco" data-chapter-panel aria-labelledby="m8">
+    <h2 id="m8">LCO: the cathode in your phone{{ draftTag(draft) }}</h2>
+    <p>LCO behaves much like NMC, but it rules a different market: almost every phone and laptop runs on it.</p>
+    {{ tool("lco", "LCO") }}
+    {{ note(draft, "<b>DATEN:</b> LCO aus PyBaMM Ai2020 (Rieger 2016), Plateau 3,89 V. Die kleine Ordnungsstufe bei halber Füllung (ca. 4,05/4,17 V), auf die der Text baut, ist darin kaum zu sehen. Gesucht: LCO-Halbzellkurve bis 4,45–4,5 V. Text noch nicht diktiert, nur Stichpunkte.") }}
+    <p>The curve slopes like NMC, but at about half filling there is a small step: a tiny reservoir where the lithium orders itself for a moment.</p>
+    <h3>Why push it higher?</h3>
+    <p>Phone makers keep raising the upper limit, by now to about 4.5 V. It's the same game of filling levels as in NMC: every bit of extra voltage empties the tank a little further and brings capacity. And just as with NMC, the structure suffers if you empty it too far.</p>
+    {{ shelf("lco", "LCO: down with NMC.") }}
+    <p class="chapter-contact">Questions, or a material where this doesn't fit? <a href="mailto:{{ site.email }}">Write me</a> or find me on <a href="{{ site.linkedin }}" target="_blank" rel="noopener noreferrer">LinkedIn</a>. All materials side by side: <a href="/tools/materials/">Materials tool</a>.</p>
+    <p class="chapter-next"><a href="#nmc">← NMC/NCA</a></p>
+  </section>
+</article>
+<script type="module" src="/assets/js/site/chapter.js"></script>
+<script type="module" src="/assets/js/site/materials.js"></script>
