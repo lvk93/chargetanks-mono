@@ -153,6 +153,7 @@ sitemap: false
     <h3>Why is it so flat?</h3>
     <p>LTO knows only two states it likes, Li₄Ti₅O₁₂ and Li₇Ti₅O₁₂, and in between there is a weir: the water rises to an edge and then spills over at one height. We'll look at that weir properly in LFP. The special thing about LTO: the two crystal lattices fit almost perfectly onto each other. LTO barely expands when it takes up lithium, so the weir is almost level and the hysteresis is tiny.</p>
     <p>On the shelf, LTO sits well below graphite, far from the ceiling. Plating is not an issue. And it sits above the line below which the electrolyte breaks down, so hardly any SEI forms. Together with the missing swelling, that makes LTO extremely stable, good for tens of thousands of cycles. The price is on the shelf too: the waterfall to the cathode is low, against LFP just under 2 V, and at about 175 mAh/g the tank is small.</p>
+    {{ note(draft, "Fakt geprüft (Frontiers Mater. 2020, Mini-Review LTO): Plateau ~1,55 V, 175 mAh/g, Volumenänderung <1 % (0,2 %), über 20 000 Zyklen. Aber: LTO bildet keine stabile SEI, die blanke Oberfläche ist Hauptquelle für Gasbildung (CO₂, H₂, CO). Im Text ergänzen? (Ehrlichkeit: nicht ganz SEI-frei in der Praxis.)") }}
     {{ shelf("lto", "LTO: far below the ceiling, small and very stable.") }}
     <p class="chapter-next"><a href="#silicon">← Silicon</a> <a href="#lfp">Next: LFP →</a></p>
   </section>
@@ -160,8 +161,8 @@ sitemap: false
   {# ------------------------------------------------------------------ LFP ---- #}
   <section class="chapter-panel prose" id="lfp" data-chapter-panel aria-labelledby="m5">
     <h2 id="m5">LFP: what hides behind the flat line{{ draftTag(draft) }}</h2>
-    <p>Half of all electric cars now drive on LFP: cheaper, safer, and a material that's notorious for giving modellers headaches. Because its curve does almost nothing.</p>
-    {{ note(draft, "Fakt prüfen: LFP-Anteil an E-Autos weltweit ca. 50 %.") }}
+    <p>More than half of the batteries in new electric cars are now LFP: cheaper, safer, and a material that's notorious for giving modellers headaches. Because its curve does almost nothing.</p>
+    {{ note(draft, "Fakt geprüft: IEA Global EV Outlook 2026: LFP war 2025 über 55 % der weltweit eingesetzten EV-Batterien (2024 knapp 50 %), in der EU über 10 %, in den USA gesunken. Quelle: iea.org/reports/global-ev-outlook-2026/electric-vehicle-batteries") }}
     {{ tool("lfp", "LFP", pick("lfp", "dir", "Direction", [["in", "Lithium going in (discharging the cell)"], ["out", "Lithium coming out (charging)"]], "in")) }}
     <p>Over almost the whole capacity the voltage stays at about 3.4 V. In the tank that's one huge reservoir: the level stands still while the water runs in.</p>
     <h3>What is hiding behind the flat line?</h3>
