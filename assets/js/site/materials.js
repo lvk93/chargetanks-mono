@@ -156,7 +156,7 @@ export function drawShelf(container, data, current, nav) {
   const uMax = 4.5;
   const H = top + uMax * pxPerV + 40;
   const y = (u) => top + u * pxPerV;
-  const svg = svgRoot(container, W, H, 'All materials on one voltage axis: anodes left, cathodes right, tank area proportional to capacity per gram');
+  const svg = svgRoot(container, W, H, 'All materials on one voltage axis: anodes left, cathodes right, tank shapes normalised to the same width');
   svg.append(el('rect', { x: 30, y: top - 6, width: W - 34, height: 6, fill: C.metal, opacity: 0.5 }));
   svg.append(el('text', { x: 34, y: top - 10, fill: C.muted, 'font-size': 10 }, 'ceiling = Li/Li⁺'));
   for (let t = 0; t <= 4; t += 1) {
@@ -166,8 +166,7 @@ export function drawShelf(container, data, current, nav) {
   svg.append(el('line', { x1: 195, x2: 195, y1: top, y2: H - 30, stroke: C.grid, 'stroke-dasharray': '2 3' }));
   svg.append(el('text', { x: 112, y: H - 4, fill: C.anode, 'font-size': 10, 'text-anchor': 'middle' }, 'anodes'));
   svg.append(el('text', { x: 278, y: H - 4, fill: C.cathode, 'font-size': 10, 'text-anchor': 'middle' }, 'cathodes'));
-  // Massstab: Breite [px] = k * dQ/dU [mAh/g/V]; gedeckelt auf die Slotbreite, mindestens 2 px
-  const k = 1 / 200;
+  // Form statt Massstab: jeder Tank wird auf die gleiche mittlere Breite normiert (die Kapazitaet steht darunter und im Balkendiagramm)
   const slotW = 40;
   ORDER.forEach((slug, i) => {
     const m = data[slug];
@@ -179,9 +178,14 @@ export function drawShelf(container, data, current, nav) {
       g.append(el('rect', { x: cx - slotW / 2, y: top - 2, width: slotW, height: 6, fill: C.cell }));
     } else {
       const v = m.variants[m.defaultVariant ?? 0];
-      // breit geglaettet (Flaeche bleibt), damit Plateaus als Becken statt als Strich erscheinen
-      const pts = profile(v.x, v.uIn, v.q, Math.max(0, v.uIn[v.uIn.length - 1] - 0.08), v.uIn[0] + 0.08, 140, 0.06);
-      const w = (p) => Math.min(slotW, Math.max(2.5, p.w * k));
+      // Nur das genutzte Fenster: erste und letzte Prozente der Fuellung abschneiden (steile Enden = lange duenne Schwaenze)
+      const at = (x) => v.uIn[Math.round(x * (v.uIn.length - 1))];
+      const lo = at(0.95);
+      const hi = at(0.04);
+      const pts = profile(v.x, v.uIn, v.q, Math.max(0, lo), hi, 140, 0.05);
+      const sorted = pts.map((p) => p.w).sort((a, b) => a - b);
+      const k = 22 / Math.max(1e-6, sorted[Math.floor(sorted.length / 2)]);
+      const w = (p) => Math.min(slotW, Math.max(3, p.w * k));
       const d = [...pts.map((p, j) => `${j ? 'L' : 'M'}${(cx - w(p) / 2).toFixed(1)} ${y(p.u).toFixed(1)}`),
         ...[...pts].reverse().map((p) => `L${(cx + w(p) / 2).toFixed(1)} ${y(p.u).toFixed(1)}`), 'Z'];
       g.append(el('path', { d: d.join(''), fill: color, 'fill-opacity': 0.35, stroke: color, 'stroke-width': 1.5 }));
@@ -192,14 +196,46 @@ export function drawShelf(container, data, current, nav) {
     svg.append(g);
   });
   svg.append(el('text', { x: 4, y: H - 18, fill: C.muted, 'font-size': 9 }, 'mAh/g'));
-  if (nav) {
-    const go = (slug) => {
-      document.querySelector(`[data-chapter-tabs] a[href="#${TAB[slug]}"]`)?.click();
-      track('tool_used', { tool: `materials-shelf:${slug}` });
-    };
-    svg.addEventListener('click', (e) => { const g = e.target.closest('.shelf-item'); if (g) go(g.dataset.slug); });
-    svg.addEventListener('keydown', (e) => { const g = e.target.closest('.shelf-item'); if (g && (e.key === 'Enter' || e.key === ' ')) { e.preventDefault(); go(g.dataset.slug); } });
+  if (nav) bindNav(svg, 'shelf');
+}
+
+function bindNav(svg, name) {
+  const go = (slug) => {
+    document.querySelector(`[data-chapter-tabs] a[href="#${TAB[slug]}"]`)?.click();
+    track('tool_used', { tool: `materials-${name}:${slug}` });
+  };
+  svg.addEventListener('click', (e) => { const g = e.target.closest('.shelf-item'); if (g) go(g.dataset.slug); });
+  svg.addEventListener('keydown', (e) => { const g = e.target.closest('.shelf-item'); if (g && (e.key === 'Enter' || e.key === ' ')) { e.preventDefault(); go(g.dataset.slug); } });
+}
+
+// Balken: Kapazitaet je Material (linear, Lithium und Silizium sprengen den Massstab - das ist die Aussage)
+export function drawCapacity(container, data, current, nav) {
+  const W = 360;
+  const rowH = 24;
+  const top = 8;
+  const left = 56;
+  const H = top + ORDER.length * rowH + 34;
+  const xMax = 4000;
+  const x = (v) => left + (v / xMax) * (W - left - 44);
+  const svg = svgRoot(container, W, H, 'Capacity per gram of all eight materials as horizontal bars');
+  for (const t of [0, 1000, 2000, 3000, 4000]) {
+    svg.append(el('line', { x1: x(t), x2: x(t), y1: top, y2: H - 30, stroke: C.grid }));
+    svg.append(el('text', { x: x(t), y: H - 16, fill: C.muted, 'font-size': 10, 'text-anchor': 'middle' }, t));
   }
+  svg.append(el('text', { x: (left + W - 44) / 2 + 10, y: H - 3, fill: C.text, 'font-size': 10.5, 'text-anchor': 'middle' }, 'capacity [mAh/g]'));
+  ORDER.forEach((slug, i) => {
+    const m = data[slug];
+    const color = m.kind === 'anode' ? C.anode : C.cathode;
+    const y = top + i * rowH;
+    const g = el('g', { class: 'shelf-item', opacity: !current || current === slug ? 1 : 0.4, 'data-slug': slug });
+    if (nav) { g.setAttribute('role', 'link'); g.setAttribute('tabindex', '0'); g.setAttribute('aria-label', `${m.name}: open part`); g.style.cursor = 'pointer'; }
+    g.append(el('rect', { x: 0, y, width: W, height: rowH, fill: 'transparent' }));
+    g.append(el('text', { x: left - 8, y: y + rowH / 2, fill: color, 'font-size': 11, 'font-weight': 700, 'text-anchor': 'end', 'dominant-baseline': 'middle' }, SHORT[slug]));
+    g.append(el('rect', { x: left, y: y + 5, width: Math.max(2, x(m.q) - left), height: rowH - 10, fill: color, 'fill-opacity': 0.55, stroke: color, rx: 2 }));
+    g.append(el('text', { x: x(m.q) + 5, y: y + rowH / 2, fill: C.text, 'font-size': 10.5, 'dominant-baseline': 'middle' }, m.q));
+    svg.append(g);
+  });
+  if (nav) bindNav(svg, 'capacity');
 }
 
 /* LFP: Ueberlaufwehr, Partikel, S-Kurve ---------------------------------------------------------- */
@@ -312,6 +348,7 @@ function initLfpExtras(root) {
 async function init() {
   const data = await loadData();
   for (const root of document.querySelectorAll('[data-mat-tool]')) initMaterialTool(root, data);
+  for (const fig of document.querySelectorAll('[data-capacity]')) drawCapacity(fig.querySelector('[data-figure-parts]') ?? fig, data, fig.dataset.current, 'nav' in fig.dataset);
   for (const fig of document.querySelectorAll('[data-shelf]')) drawShelf(fig.querySelector('[data-figure-parts]') ?? fig, data, fig.dataset.current, 'nav' in fig.dataset);
   for (const fig of document.querySelectorAll('[data-scurve]')) drawSCurve(fig);
   for (const root of document.querySelectorAll('[data-lfp-extras]')) initLfpExtras(root);
