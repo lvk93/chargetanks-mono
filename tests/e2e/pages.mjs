@@ -203,6 +203,31 @@ for (const width of [1280, 390, 320]) {
       .filter((m) => m.scrollWidth - m.clientWidth > 1).length; })()`);
   check(`[${width}] Kapitel: keine Formel breiter als die Box`, width < 340 || wide === 0, `${wide} Formeln`);
 
+  // Kapitel Materials (Entwurf): acht Reiter, Regal als Navigation, Kurve+Tank je Material
+  await open('/blog/materials/', width);
+  const mat = await evaluate(`(async () => { ${H}
+    const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+    const out = { panels: 0, tools: [], shelf: svgIn(document.querySelector('[data-shelf][data-nav]')), nav: false,
+      pageOverflow: document.documentElement.scrollWidth - innerWidth };
+    const panels = [...document.querySelectorAll('[data-chapter-panel]')];
+    out.panels = panels.length;
+    for (const panel of panels) {
+      document.querySelector('[data-chapter-tabs] a[href="#' + panel.id + '"]').click();
+      await sleep(250);
+      const tool = panel.querySelector('[data-mat-tool]');
+      if (tool) out.tools.push({ id: panel.id, drawn: tool.querySelectorAll('svg').length >= 2, filled: readouts(tool).every((t) => t && t !== '-') });
+    }
+    const g = document.querySelector('[data-shelf][data-nav] .shelf-item[data-slug="lfp"]');
+    if (g) { g.dispatchEvent(new MouseEvent('click', { bubbles: true })); await sleep(300);
+      out.nav = [...document.querySelectorAll('[data-chapter-panel]')].filter((p) => !p.hidden).map((p) => p.id).join() === 'lfp'; }
+    out.pageOverflow = Math.max(out.pageOverflow, document.documentElement.scrollWidth - innerWidth);
+    return out; })()`);
+  check(`[${width}] Materials: acht Reiter`, mat.panels === 8, `${mat.panels}`);
+  check(`[${width}] Materials: Regal gezeichnet, Klick auf LFP oeffnet Reiter`, mat.shelf && mat.nav, JSON.stringify(mat));
+  check(`[${width}] Materials: Kurve+Tank in ${mat.tools.length} Reitern gezeichnet, Kennzahlen gefuellt`, mat.tools.length >= 7 && mat.tools.every((t) => t.drawn && t.filled), JSON.stringify(mat.tools.filter((t) => !t.drawn || !t.filled)));
+  check(`[${width}] Materials: kein Querscrollen`, mat.pageOverflow <= 0, `${mat.pageOverflow}px`);
+  check(`[${width}] Materials: keine JS-Fehler`, errors.length === 0, errors.join(' | '));
+
   // About
   await open('/about/', width);
   const about = await evaluate(`({ overflow: document.documentElement.scrollWidth - innerWidth,

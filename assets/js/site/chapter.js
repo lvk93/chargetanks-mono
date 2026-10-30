@@ -6,39 +6,10 @@ import { blendElectrode, dqdv, IDEAL_GRAPHITE, IDEAL_SILICON, lineU } from '../m
 import { loadMaterial } from '../ui/data.js';
 import { initControls } from '../ui/controls.js';
 import { track } from './track.js';
+import { C, chart, el, fmt, niceTicks, svgRoot } from './chartKit.js';
 
-const NS = 'http://www.w3.org/2000/svg';
-const C = {
-  anode: '#70ad47',
-  cathode: '#f39c12',
-  water: '#5dade2',
-  cell: '#ffffff',
-  text: '#e6eaf1',
-  muted: 'rgb(255 255 255 / 0.55)',
-  grid: 'rgb(255 255 255 / 0.12)',
-  tank: 'rgb(255 255 255 / 0.75)',
-  metal: '#b8c2cc',
-  warn: '#ff8a80',
-};
 
-// Dunkler Rand um Beschriftungen in Diagrammen (gleiche Farbe wie der Hintergrund)
-const HALO = { stroke: '#003b73', 'stroke-width': 4, 'stroke-linejoin': 'round', 'paint-order': 'stroke' };
-
-const fmt = (v, d = 2) => (Number.isFinite(v) ? v.toFixed(d) : '–');
 const pct = (v) => `${Math.round(v * 100)} %`;
-
-function el(name, attrs = {}, text) {
-  const node = document.createElementNS(NS, name);
-  for (const [k, v] of Object.entries(attrs)) if (v !== undefined && v !== null) node.setAttribute(k, String(v));
-  if (text !== undefined) node.textContent = text;
-  return node;
-}
-
-function svgRoot(container, width, height, label) {
-  const svg = el('svg', { viewBox: `0 0 ${width} ${height}`, role: 'img', 'aria-label': label, class: 'ch-svg' });
-  container.replaceChildren(svg);
-  return svg;
-}
 
 /* Reiter --------------------------------------------------------------------------------------- */
 function initTabs() {
@@ -255,63 +226,6 @@ function interpU(pts, f) {
 }
 
 /* Diagramme ------------------------------------------------------------------------------------ */
-function niceTicks(min, max, count = 5) {
-  const step0 = (max - min) / count;
-  const mag = 10 ** Math.floor(Math.log10(step0));
-  const step = [1, 2, 2.5, 5, 10].map((m) => m * mag).find((s) => s >= step0);
-  const out = [];
-  for (let t = Math.ceil(min / step) * step; t <= max + 1e-9; t += step) out.push(Math.round(t * 1e6) / 1e6);
-  return out;
-}
-
-function chart(container, { label, xMax, yMin, yMax, xTitle, yTitle, height = 240, draw }) {
-  const W = 360;
-  const m = { l: 44, r: 12, t: 12, b: 40 };
-  const svg = svgRoot(container, W, height, label);
-  const px = (x) => m.l + (x / xMax) * (W - m.l - m.r);
-  const py = (v) => height - m.b - ((v - yMin) / (yMax - yMin)) * (height - m.t - m.b);
-  for (const t of niceTicks(yMin, yMax)) {
-    svg.append(el('line', { x1: m.l, x2: W - m.r, y1: py(t), y2: py(t), stroke: C.grid }));
-    svg.append(el('text', { x: m.l - 6, y: py(t), fill: C.muted, 'font-size': 10, 'text-anchor': 'end', 'dominant-baseline': 'middle' }, t));
-  }
-  for (const t of niceTicks(0, xMax, 6)) {
-    svg.append(el('text', { x: px(t), y: height - m.b + 14, fill: C.muted, 'font-size': 10, 'text-anchor': 'middle' }, t));
-  }
-  svg.append(el('text', { x: (m.l + W - m.r) / 2, y: height - 6, fill: C.text, 'font-size': 11, 'text-anchor': 'middle' }, xTitle));
-  svg.append(el('text', { x: 12, y: (m.t + height - m.b) / 2, fill: C.text, 'font-size': 11, 'text-anchor': 'middle', transform: `rotate(-90 12 ${(m.t + height - m.b) / 2})` }, yTitle));
-  const clip = `clip-${Math.random().toString(36).slice(2)}`;
-  const defs = el('defs');
-  const cp = el('clipPath', { id: clip });
-  cp.append(el('rect', { x: m.l, y: m.t, width: W - m.l - m.r, height: height - m.t - m.b }));
-  defs.append(cp);
-  svg.append(defs);
-  const g = el('g', { 'clip-path': `url(#${clip})` });
-  svg.append(g);
-  const api = {
-    line(points, attrs) {
-      const d = points.filter(([, v]) => Number.isFinite(v)).map(([xx, v], i) => `${i ? 'L' : 'M'}${px(xx).toFixed(1)} ${py(v).toFixed(1)}`).join('');
-      g.append(el('path', { d, fill: 'none', 'stroke-width': 2.5, 'stroke-linejoin': 'round', ...attrs }));
-    },
-    hline(v, text, color, dash = '5 4') {
-      g.append(el('line', { x1: m.l, x2: W - m.r, y1: py(v), y2: py(v), stroke: color, 'stroke-dasharray': dash, 'stroke-width': 1.25 }));
-      if (text) svg.append(el('text', { x: W - m.r - 4, y: py(v) - 4, fill: color, 'font-size': 10, 'text-anchor': 'end', ...HALO }, text));
-    },
-    band(x0, x1, color) {
-      g.append(el('rect', { x: px(x0), y: m.t, width: Math.max(0, px(x1) - px(x0)), height: height - m.t - m.b, fill: color }));
-    },
-    vline(xx, v0, v1, color) {
-      g.append(el('line', { x1: px(xx), x2: px(xx), y1: py(v0), y2: py(v1), stroke: color, 'stroke-width': 1.5 }));
-    },
-    dot(xx, v, color) {
-      g.append(el('circle', { cx: px(xx), cy: py(v), r: 4.5, fill: color, stroke: '#003b73', 'stroke-width': 1.5 }));
-    },
-    label(xx, v, text, color, anchor = 'start') {
-      svg.append(el('text', { x: px(xx), y: py(v), fill: color, 'font-size': 11, 'font-weight': 600, 'text-anchor': anchor, ...HALO }, text));
-    },
-  };
-  draw(api);
-}
-
 function sample(f, x0, x1, n = 160) {
   const out = [];
   for (let i = 0; i <= n; i += 1) {

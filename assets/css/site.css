@@ -1759,3 +1759,24 @@ body.has-fullscreen-chart {
   font-size: 0.875rem;
   color: var(--gray-medium);
 }
+
+/* Kapitel Materials: Reiter in zwei Gruppen (Anoden, Kathoden), am Handy umbrechend statt quer scrollend */
+.chapter-tabs--grouped { flex-wrap: wrap; overflow-x: visible; align-items: center; }
+.chapter-tabs__group {
+  font-size: 0.75rem; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase;
+  color: var(--slate); padding-inline: 0.5rem 0.25rem;
+}
+@media (max-width: 559px) {
+  .chapter-tabs--grouped .chapter-tabs__group { flex-basis: 4.5rem; }
+  .chapter-tabs--grouped a { padding-block: 0.5rem 0.4375rem; }
+}
+
+/* Regal: dunkle Flaeche wie die Tools, damit die Farben der Zeichnungen gleich bleiben */
+.ch-shelf .ch-fig__parts { background: var(--navy); border-radius: 0.75rem; padding: 0.75rem 0.5rem 0.25rem; max-width: 32rem; margin-inline: auto; }
+.ch-shelf--nav { margin-top: 1.5rem; }
+.ch-shelf .shelf-item:focus-visible { outline: 2px solid var(--blue); }
+[data-scurve] { background: var(--navy); border-radius: 0.75rem; padding: 0.5rem; margin-top: 0.75rem; }
+
+/* Skizze federnder Deckel (Silizium) */
+.ch-spring svg { display: block; width: 100%; max-width: 560px; margin: 0 auto; background: #003b73; border-radius: 12px; padding: 12px; box-sizing: border-box; }
+.ch-spring figcaption { text-align: center; font-size: 0.875rem; color: var(--muted, #5b6b7f); margin-top: 0.5rem; }

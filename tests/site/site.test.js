@@ -31,7 +31,7 @@ const pages = built ? files(SITE, '.html') : [];
 
 test('Seite gebaut (npm run build)', { skip: !built && 'kein _site/ - erst "npm run build"' }, () => {
   const names = pages.map((p) => relative(SITE, p).replaceAll('\\', '/'));
-  for (const page of ['index.html', '404.html', 'about/index.html', 'blog/index.html', 'blog/lithium-balance/index.html', 'tools/index.html',
+  for (const page of ['index.html', '404.html', 'about/index.html', 'blog/index.html', 'blog/lithium-balance/index.html', 'blog/materials/index.html', 'tools/index.html',
     'imprint/index.html', 'privacy/index.html', ...TOOLS.map((t) => `tools/${t}/index.html`)]) {
     assert.ok(names.includes(page), page);
   }
