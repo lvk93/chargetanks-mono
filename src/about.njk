@@ -7,10 +7,6 @@ permalink: /about/
 ldType: website
 ogImage: /assets/img/og/about.jpg
 ogImageAlt: "Lars von Kolzenberg, principal battery model developer at Breathe."
-# Entwurf bis zum Launch: Notizen sichtbar, nicht indexiert, nicht in der Sitemap.
-draft: true
-robots: "noindex, follow"
-sitemap: false
 ---
 {%- macro note(on, text) -%}{% if on %}<aside class="draft-note"><strong>Entwurf:</strong> {{ text | safe }}</aside>{% endif %}{%- endmacro -%}
 {%- macro todo(on) -%}{% if on %} <span class="draft-tag">fehlt</span>{% endif %}{%- endmacro -%}
