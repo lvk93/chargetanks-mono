@@ -137,7 +137,32 @@ sitemap: false
     <p>Silicon swells enormously when it takes up lithium, to several times its volume. In the electrode it's held in place and ends up under pressure. Under pressure it's harder to push more lithium in, so the voltage while filling is lower. When the lithium comes out, the silicon shrinks against tension, and the voltage is higher.</p>
     <p>Picture a springy lid on the water: when filling, it presses back, and you need a higher level. When emptying, it pulls up.</p>
     <p><strong>Where the picture starts to crumble:</strong> the lid is a crutch. A tank doesn't really know a direction, it looks the same whether you fill or empty it. And the stress explains only part of the hysteresis.</p>
-    {{ note(draft, "Skizze des federnden Deckels fehlt noch (nur Text). Im Tool: zwei Umrisse, durchgezogen = Lithium rein, gestrichelt = Lithium raus.") }}
+    <figure class="ch-fig ch-spring">
+      <svg viewBox="0 0 520 250" role="img" aria-label="Sketch: a tank with a springy lid. Filling: the spring is compressed and presses on the water, so the level must be higher. Emptying: the spring is stretched and pulls the lid up, so the level is lower." class="ch-svg">
+        <g font-size="12" fill="#e6eaf1" text-anchor="middle">
+          <g transform="translate(20 0)">
+            <text x="110" y="22" font-weight="600">Filling</text>
+            <path d="M40 60 V220 H180 V60" fill="none" stroke="rgb(255 255 255 / 0.75)" stroke-width="2.5"/>
+            <rect x="42" y="100" width="136" height="118" fill="#5dade2" opacity="0.8"/>
+            <rect x="40" y="90" width="140" height="10" rx="2" fill="#b8c2cc"/>
+            <path d="M110 90 V84 l-14 -6 l28 -8 l-28 -8 l28 -8 l-14 -6 V40" fill="none" stroke="#ff8a80" stroke-width="2.5" stroke-linejoin="round"/>
+            <line x1="70" y1="40" x2="150" y2="40" stroke="rgb(255 255 255 / 0.55)" stroke-width="3"/>
+            <text x="110" y="240" fill="#ff8a80">spring pushed together, presses back</text>
+          </g>
+          <g transform="translate(300 0)">
+            <text x="110" y="22" font-weight="600">Emptying</text>
+            <path d="M40 60 V220 H180 V60" fill="none" stroke="rgb(255 255 255 / 0.75)" stroke-width="2.5"/>
+            <rect x="42" y="150" width="136" height="68" fill="#5dade2" opacity="0.8"/>
+            <rect x="40" y="140" width="140" height="10" rx="2" fill="#b8c2cc"/>
+            <path d="M110 140 l-16 -8 l32 -12 l-32 -12 l32 -12 l-32 -12 l16 -8 V40" fill="none" stroke="#ff8a80" stroke-width="2.5" stroke-linejoin="round"/>
+            <line x1="70" y1="40" x2="150" y2="40" stroke="rgb(255 255 255 / 0.55)" stroke-width="3"/>
+            <text x="110" y="240" fill="#ff8a80">spring stretched, pulls the lid up</text>
+          </g>
+        </g>
+      </svg>
+      <figcaption>The springy lid: a picture for the hysteresis, not a law.</figcaption>
+    </figure>
+    {{ note(draft, "Im Tool: zwei Umrisse, durchgezogen = Lithium rein, gestrichelt = Lithium raus. Skizze oben ist schematisch (Entwurf).") }}
     <p>On the shelf, silicon sits a little lower than graphite and is smeared out. And it's huge: over 3400 mAh/g, almost ten times graphite. The price is energy lost to the hysteresis in every cycle, and a material that inflates with every charge. How to mix it with graphite is in the <a href="/blog/lithium-balance/#blends">blends part of the lithium balance</a>.</p>
     {{ shelf("silicon", "Silicon: a little lower than graphite, and much bigger.") }}
     <p class="chapter-next"><a href="#graphite">← Graphite</a> <a href="#lto">Next: LTO →</a></p>
@@ -193,6 +218,7 @@ sitemap: false
     <p>LMFP is LFP with manganese. The idea: more voltage, with almost the same safety.</p>
     {{ tool("lmfp", "LMFP", pick("lmfp", "variant", "Manganese share", [["0", "Mn 40 %"], ["1", "Mn 50 %"], ["2", "Mn 60 %"], ["3", "Mn 70 %"], ["4", "Mn 80 %"]], "2")) }}
     {{ note(draft, "<b>DATEN:</b> Mn 60 % ist die digitalisierte Canrd-Halbzellkurve (0,1C, erster Zyklus, Entladen = Lithiieren, Laden = Delithiieren; Mn-Plateau beim Laden ≈ 4,1 V, beim Entladen ≈ 3,95 V, Fe ≈ 3,5 V). Die anderen Mn-Anteile sind schematisch, dafür fehlen Daten.") }}
+    {{ note(draft, "Quellen LMFP: Mn²⁺/³⁺-Plateau ca. 4,0 V, Fe²⁺/³⁺ ca. 3,4 V vs. Li, theoretisch 170 mAh/g, „moderates Mn“ = 40–60 % (RSC J. Mater. Chem. A 2025, d5ta05970d). Text nennt 4,1 / 3,45 V als Näherung, passt zur Canrd-Kurve (Laden 4,1 / Entladen 3,95 V).") }}
     <p>The curve has two plateaus instead of one. In the tank, those are two reservoirs on top of each other, separated by a narrow, sloped piece.</p>
     <h3>Why two steps?</h3>
     <p>Iron and manganese share the sites in the crystal, but they react at different voltages: iron at about 3.45 V, manganese at about 4.1 V. Each gets its own reservoir, and the ratio of the two decides how big the reservoirs are. More manganese means a bigger lower reservoir.</p>
@@ -225,7 +251,8 @@ sitemap: false
     {{ note(draft, "<b>DATEN:</b> LCO aus PyBaMM Ai2020 (Rieger 2016), Plateau 3,89 V. Die kleine Ordnungsstufe bei halber Füllung (ca. 4,05/4,17 V), auf die der Text baut, ist darin kaum zu sehen. Gesucht: LCO-Halbzellkurve bis 4,45–4,5 V. Text noch nicht diktiert, nur Stichpunkte.") }}
     <p>The curve slopes like NMC, but at about half filling there is a small step: a tiny reservoir where the lithium orders itself for a moment.</p>
     <h3>Why push it higher?</h3>
-    <p>Phone makers keep raising the upper limit, by now to about 4.5 V. It's the same game of filling levels as in NMC: every bit of extra voltage empties the tank a little further and brings capacity. And just as with NMC, the structure suffers if you empty it too far.</p>
+    <p>Phone makers keep raising the upper limit, by now beyond 4.4 V. It's the same game of filling levels as in NMC: every bit of extra voltage empties the tank a little further and brings capacity. And just as with NMC, the structure suffers if you empty it too far.</p>
+    {{ note(draft, "Quellen: LCO-Standardfenster 3,0–4,2 V (Li0,5CoO₂, 137 mAh/g), Test bis 4,7 V mit mehr Polarisation und weniger Kapazität (ECS Meeting Abstracts 203, electrochem.org/dl/ma/203/pdfs/1148.pdf). Obergrenze „über 4,4 V“ in Handys und die Ordnungsstufe bei halber Füllung: noch ohne Quelle.") }}
     {{ shelf("lco", "LCO: down with NMC.") }}
     <p class="chapter-contact">Questions, or a material where this doesn't fit? <a href="mailto:{{ site.email }}">Write me</a> or find me on <a href="{{ site.linkedin }}" target="_blank" rel="noopener noreferrer">LinkedIn</a>. All materials side by side: <a href="/tools/materials/">Materials tool</a>.</p>
     <p class="chapter-next"><a href="#nmc">← NMC/NCA</a></p>
