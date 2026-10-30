@@ -5,6 +5,10 @@
 > die Tools im Seitenrahmen ohne Streamlit-Nachbau, `/tools/suite/` entfaellt. Behoben wurden B1, B2, B6, B7, B8,
 > B14 und B16 sowie der neu gefundene B18 (Shapes/Labels ohne Position); B3 und B12 bleiben bewusst. Der Rechenkern
 > (`assets/js/core/`, `assets/js/model/`, `assets/data/`) ist unveraendert. Aktueller Aufbau: [README.md](README.md).
+>
+> **Seitenumbau (Oktober 2026, Branch `claude/lithium-balance-chapter`):** Blog und Zwei-Tank-Artikel sind entfallen
+> (`/blog/*` leitet per 301 auf `/learn/lithium-balance/` um), dazu kamen das Kapitel unter `/learn/`, `/about/` als
+> Lebenslauf und eine schlichte Startseite. Abschnitte unten, die den Blog nennen, beschreiben den alten Stand.
 
 Dieses Dokument ist die Arbeitsgrundlage des Umzugs. Eine neue Session kann allein damit weiterarbeiten.
 

@@ -1,0 +1,42 @@
+---
+layout: layouts/base.njk
+title: About
+metaTitle: "About Lars von Kolzenberg | Charge Tanks"
+description: "Lars von Kolzenberg models batteries from first principles: PhD on SEI growth at Ulm University, now Principal Battery Model Developer at Breathe."
+permalink: /about/
+ldType: website
+ogImage: /assets/img/og/about.jpg
+ogImageAlt: "Lars von Kolzenberg, principal battery model developer at Breathe."
+---
+{%- macro note(on, text) -%}{% if on %}<aside class="draft-note"><strong>Entwurf:</strong> {{ text | safe }}</aside>{% endif %}{%- endmacro -%}
+{%- macro todo(on) -%}{% if on %} <span class="draft-tag">fehlt</span>{% endif %}{%- endmacro -%}
+{%- macro doi(id) -%}<a href="https://doi.org/{{ id }}">doi</a>{%- endmacro -%}
+<article class="container container--article">
+  <img class="cv-photo" src="/images/lars.jpg" alt="Lars von Kolzenberg" width="768" height="512" decoding="async">
+  <h1 class="article-title">Dr. Lars von Kolzenberg</h1>
+  <div class="prose">
+    <p>I model batteries from first principles. My PhD at Ulm University was on the SEI: how it grows, and what happens to it on silicon particles that swell and crack. Since then I've worked wherever batteries meet software, from aging analysis to cell design and swelling. Today I'm Principal Battery Model Developer at Breathe.</p>
+    <p>Charge Tanks is where I write down, from scratch, how I think about cells.</p>
+  </div>
+  <ul class="cv-links">
+    <li><a href="{{ site.scholar }}">Google Scholar</a></li>
+    <li><a href="{{ site.orcid }}">ORCID</a></li>
+    <li><a href="{{ site.linkedin }}">LinkedIn</a></li>
+    <li><a href="mailto:{{ site.email }}">{{ site.email }}</a></li>
+  </ul>
+
+  <section class="prose" aria-labelledby="cv-publications">
+    <h2 id="cv-publications">Publications</h2>
+    <ol class="pubs" reversed>
+      <li><span class="pubs__title">Electrolyte parameter identification by high-frequency impedance measurement during current pulses.</span> C. Bieneck, L. von Kolzenberg, C. G. Staacke, F. Riewald, A. Latz, T. Danner. <em>J. Electrochem. Soc.</em> 173, 090531 (2026). {{ doi("10.1149/1945-7111/ae67ae") }}</li>
+      <li><span class="pubs__title">Electrode properties from blocking condition impedance spectra: influence of manufacturing parameters.</span> C. Bieneck, L. von Kolzenberg, C. G. Staacke, F. Riewald, A. Latz, T. Danner. <em>J. Electrochem. Soc.</em> 173, 020506 (2026). {{ doi("10.1149/1945-7111/ae3864") }}</li>
+      <li><span class="pubs__title">Inhomogeneous carbon binder distribution: implications for tortuosity determination from electrochemical impedance spectroscopy.</span> C. Bieneck, L. von Kolzenberg, C. G. Staacke, J. Lammel, J. Zausch, A. Latz, T. Danner. <em>J. Electrochem. Soc.</em> 172, 070507 (2025). {{ doi("10.1149/1945-7111/adde17") }}</li>
+      <li><span class="pubs__title">Transition between growth of dense and porous films: theory of dual-layer SEI.</span> L. von Kolzenberg, M. Werres, J. Tetzloff, B. Horstmann. <em>Phys. Chem. Chem. Phys.</em> 24, 18469 (2022). {{ doi("10.1039/D2CP00188H") }}</li>
+      <li><span class="pubs__title">A four parameter model for the solid-electrolyte interphase to predict battery aging during operation.</span> L. von Kolzenberg, J. Stadler, J. Fath, M. Ecker, B. Horstmann, A. Latz. <em>J. Power Sources</em> 539, 231560 (2022). {{ doi("10.1016/j.jpowsour.2022.231560") }}</li>
+      <li><span class="pubs__title">Chemo-mechanical model of SEI growth on silicon electrode particles.</span> L. von Kolzenberg, A. Latz, B. Horstmann. <em>Batteries &amp; Supercaps</em> 5, e202100216 (2022). {{ doi("10.1002/batt.202100216") }}</li>
+      <li><span class="pubs__title">Efficient simulation of chemical-mechanical coupling in battery active particles.</span> G. F. Castelli, L. von Kolzenberg, B. Horstmann, A. Latz, W. Dörfler. <em>Energy Technol.</em> 9, 2000835 (2021). {{ doi("10.1002/ente.202000835") }}</li>
+      <li><span class="pubs__title">Solid-electrolyte interphase during battery cycling: theory of growth regimes.</span> L. von Kolzenberg, A. Latz, B. Horstmann. <em>ChemSusChem</em> 13, 3901 (2020). {{ doi("10.1002/cssc.202000867") }}</li>
+      <li><span class="pubs__title">Rational design of ion separation membranes.</span> D. Rall, D. Menne, A. M. Schweidtmann, J. Kamp, L. von Kolzenberg, A. Mitsos, M. Wessling. <em>J. Membr. Sci.</em> 569, 209 (2019). {{ doi("10.1016/j.memsci.2018.10.013") }}</li>
+    </ol>
+  </section>
+</article>

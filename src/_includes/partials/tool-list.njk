@@ -1,0 +1,10 @@
+{#- Die fuenf Tools als schlichte Liste (Startseite und /tools/) -#}
+{%- from "partials/icons.njk" import icon -%}
+<ul class="tool-list">
+  {%- for tool in tools %}
+  <li>
+    <a href="/tools/{{ tool.slug }}/"><span class="tool-list__name">{{ tool.name }}</span>{{ icon("arrow-right") }}</a>
+    <p>{{ tool.teaser }}</p>
+  </li>
+  {%- endfor %}
+</ul>

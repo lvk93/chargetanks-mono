@@ -31,11 +31,13 @@ const pages = built ? files(SITE, '.html') : [];
 
 test('Seite gebaut (npm run build)', { skip: !built && 'kein _site/ - erst "npm run build"' }, () => {
   const names = pages.map((p) => relative(SITE, p).replaceAll('\\', '/'));
-  for (const page of ['index.html', '404.html', 'blog/index.html', 'blog/two-tank-battery-model/index.html', 'tools/index.html',
+  for (const page of ['index.html', '404.html', 'about/index.html', 'blog/index.html', 'blog/lithium-balance/index.html', 'tools/index.html',
     'imprint/index.html', 'privacy/index.html', ...TOOLS.map((t) => `tools/${t}/index.html`)]) {
     assert.ok(names.includes(page), page);
   }
   assert.ok(!names.some((n) => n.startsWith('tools/suite/')), 'tools/suite/ ist entfallen');
+  assert.ok(!names.some((n) => n.startsWith('learn/')), '/learn/ ist entfallen (Umleitung in _redirects)');
+  assert.ok(!names.includes('blog/two-tank-battery-model/index.html'), 'alter Artikel entfallen (Umleitung in _redirects)');
 });
 
 for (const file of pages) {
@@ -67,6 +69,7 @@ for (const file of pages) {
     assert.equal(html.match(/<h1[\s>]/g)?.length, 1, 'genau eine h1');
     assert.ok(!html.includes('onrender.com'), 'kein Verweis auf Render');
     assert.ok(!html.includes('/tools/suite/'), 'kein Verweis auf /tools/suite/');
+    assert.ok(!html.includes('href="/learn/'), 'kein Verweis auf den entfallenen Pfad /learn/');
   });
 }
 
@@ -86,4 +89,50 @@ test('Sitemap und llms.txt nennen alle Tools', { skip: !built }, () => {
     assert.ok(llms.includes(`https://chargetanks.com/tools/${tool}/`), `llms ${tool}`);
   }
   assert.equal(sitemap.match(/<loc>/g).length, new Set(sitemap.match(/<loc>[^<]*<\/loc>/g)).size, 'keine doppelten URLs');
+});
+
+test('Umleitungen: alter Artikel und Entwurfs-Pfad fuehren aufs Kapitel', { skip: !built }, () => {
+  const redirects = readFileSync(join(SITE, '_redirects'), 'utf8');
+  for (const [from, target] of [['/blog/two-tank-battery-model/', '/blog/lithium-balance/'], ['/learn/*', '/blog/lithium-balance/'], ['/learn', '/blog/']]) {
+    const rule = redirects.split('\n').find((l) => l.trim().split(/\s+/)[0] === from);
+    assert.ok(rule, `Regel fuer ${from}`);
+    const [, to, status] = rule.trim().split(/\s+/);
+    assert.equal(to, target, `${from} -> ${to}`);
+    assert.equal(status, '301', `${from} dauerhaft`);
+    assert.ok(exists(to), `Ziel ${to} gebaut`);
+  }
+});
+
+test('Vorschaubilder: jede Seite verweist auf ein vorhandenes Bild', { skip: !built }, () => {
+  for (const file of pages) {
+    const html = readFileSync(file, 'utf8');
+    const og = html.match(/<meta property="og:image" content="https:\/\/chargetanks\.com([^"]+)"/)?.[1];
+    assert.ok(og, `${relative(SITE, file)}: og:image`);
+    assert.ok(exists(og), `${relative(SITE, file)}: ${og} fehlt`);
+  }
+  // Startseite, Kapitel und About haben eigene Bilder statt des Standardbilds
+  const ogOf = (page) => readFileSync(join(SITE, page), 'utf8').match(/<meta property="og:image" content="[^"]*(\/assets\/img\/og\/[^"]+)"/)?.[1];
+  assert.equal(ogOf('index.html'), '/assets/img/og/home.jpg');
+  assert.equal(ogOf('blog/lithium-balance/index.html'), '/assets/img/og/chapter.jpg');
+  assert.equal(ogOf('about/index.html'), '/assets/img/og/about.jpg');
+});
+
+test('Entwuerfe: Notizen nur mit noindex und ohne Sitemap-Eintrag', { skip: !built }, () => {
+  const sitemap = readFileSync(join(SITE, 'sitemap.xml'), 'utf8');
+  for (const file of pages) {
+    const name = relative(SITE, file).replaceAll('\\', '/');
+    const html = readFileSync(file, 'utf8');
+    const url = '/' + name.replace(/index\.html$/, '');
+    if (html.includes('class="draft-note')) {
+      assert.match(html, /<meta name="robots" content="noindex/, `${name}: Entwurf ohne noindex`);
+      assert.ok(!sitemap.includes(`<loc>https://chargetanks.com${url}</loc>`), `${name}: Entwurf in der Sitemap`);
+    }
+  }
+});
+
+test('Navigation: eine Ebene, alle Ziele gebaut', { skip: !built }, () => {
+  const html = readFileSync(join(SITE, 'index.html'), 'utf8');
+  const nav = html.match(/<nav class="site-nav"[^>]*>([\s\S]*?)<\/nav>/)[1];
+  const links = [...nav.matchAll(/href="([^"]+)"/g)].map((m) => m[1]);
+  assert.deepEqual(links, ['/blog/', '/tools/', '/about/']);
 });

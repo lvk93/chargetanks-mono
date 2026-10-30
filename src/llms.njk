@@ -4,15 +4,15 @@ eleventyExcludeFromCollections: true
 ---
 # {{ site.name }}
 
-{{ site.name }} is a technical battery education site focused on voltage, capacity, OCV, NP ratio, lithium inventory, and aging through the two-tank analogy.
+{{ site.description }}
 
 Preferred starting pages:
-- {{ site.url }}/ - Site overview and navigation hub.
-- {{ site.url }}/blog/ - Index of battery articles.
-{%- for post in collections.postsNewestFirst %}
-- {{ site.url }}{{ post.url }} - {{ post.data.llms or post.data.description }}
+- {{ site.url }}/blog/ - Blog: chapters on battery cell design with the two-tank picture.
+{%- for chapter in chapters %}
+- {{ site.url }}{{ chapter.url }} - {{ chapter.llms }}
 {%- endfor %}
-- {{ site.url }}/tools/ - Interactive battery tools that complement the written explanations.
+- {{ site.url }}/tools/ - Interactive battery tools built around the two-tank model.
+- {{ site.url }}/about/ - Author profile and publications.
 
 Interactive tools:
 {%- for tool in tools %}
@@ -20,4 +20,4 @@ Interactive tools:
 {%- endfor %}
 
 Primary author:
-- {{ site.author }} - {{ site.linkedin }}
+- {{ site.author }} - {{ site.url }}/about/ - {{ site.scholar }}

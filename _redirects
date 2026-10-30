@@ -1,4 +1,10 @@
 # Netlify-Weiterleitungen
+# Der fruehere Zwei-Tank-Artikel ist im Kapitel "Lithium balance" aufgegangen (Okt. 2026).
+/blog/two-tank-battery-model    /blog/lithium-balance/   301
+/blog/two-tank-battery-model/   /blog/lithium-balance/   301
+# Kapitel lag im Entwurf kurz unter /learn/
+/learn                          /blog/                   301
+/learn/*                        /blog/lithium-balance/   301
 # Die fruehere Landing der Tool-Suite ist in der Tool-Uebersicht aufgegangen.
 /tools/suite    /tools/   301
 /tools/suite/*  /tools/   301

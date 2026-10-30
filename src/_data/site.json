@@ -2,12 +2,14 @@
   "name": "Charge Tanks",
   "url": "https://chargetanks.com",
   "author": "Lars von Kolzenberg",
-  "jobTitle": "Battery modeling engineer",
+  "jobTitle": "Principal Battery Model Developer",
   "email": "lars@chargetanks.com",
   "linkedin": "https://www.linkedin.com/in/lars-von-kolzenberg/",
-  "description": "Battery intuition, interactive tools, and articles that explain voltage, capacity, OCV, and aging through the two-tank analogy.",
-  "tagline": "Making battery concepts accessible through the two-tank analogy and interactive tools.",
+  "scholar": "https://scholar.google.com/citations?user=8o-FsVYAAAAJ",
+  "orcid": "https://orcid.org/0000-0003-0494-8176",
+  "description": "Battery cell design from first principles, with anode and cathode as two tanks and lithium as the water between them.",
+  "tagline": "A battery is lithium, two tanks and bookkeeping.",
   "themeColor": "#003B73",
-  "ogImage": "/images/introduction_post/2026-03-03_twotank_charge.png",
-  "ogImageAlt": "Two connected tanks illustrating lithium movement during battery charging."
+  "ogImage": "/assets/img/og/home.jpg",
+  "ogImageAlt": "A battery is lithium, two tanks and bookkeeping: anode and cathode of a graphite/NMC cell drawn as two tanks."
 }

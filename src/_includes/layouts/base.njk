@@ -37,6 +37,9 @@
   {%- endif %}
   <script type="application/ld+json">{{ { type: ldType, url: page.url, metaTitle: fullTitle, title: title, description: description, image: ogImg, date: page.date, modified: modified, section: category, crumbs: crumbs } | structuredData | safe }}</script>
   <link rel="stylesheet" href="/assets/css/site.css">
+  {%- if math %}
+  <link rel="stylesheet" href="/assets/vendor/katex/katex.min.css">
+  {%- endif %}
   <script type="module" src="/assets/js/site/site.js"></script>
 </head>
 <body>

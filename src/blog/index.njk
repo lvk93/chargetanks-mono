@@ -1,28 +1,26 @@
 ---
 layout: layouts/base.njk
-title: Battery Blog
-description: "Articles from Charge Tanks about battery design trade-offs, OCV interpretation, and battery aging through the two-tank analogy."
+title: Blog
+metaTitle: "Blog: battery cell design from first principles | Charge Tanks"
+description: "Battery cell design, worked out from the lithium up. First up: the lithium balance, from the voltage window to aging and blended electrodes."
 ldType: collection
+mainClass: ""
 crumbs: [["Blog", "/blog/"]]
+permalink: /blog/
 ---
-<section class="page-hero">
-  <div class="container container--hero">
-    <p class="eyebrow">Charge Tanks Blog</p>
-    <h1 class="page-title">Battery articles and tutorials for engineers</h1>
-    <p class="page-hero__lead">Practical explanations of OCV, capacity balance, voltage limits, and aging through the two-tank analogy.</p>
+{#- Uebersicht aller Kapitel; neue Kapitel kommen ueber src/_data/chapters.json dazu -#}
+<section class="home-intro home-intro--page">
+  <div class="container container--article">
+    <h1 class="page-title">Blog</h1>
+    <p class="home-lead">Battery cell design, worked out from the lithium up.</p>
   </div>
 </section>
-
-<section class="section">
-  <div class="container">
-    <div class="section-head">
-      <h2>Latest Articles</h2>
-      <p>Explaining battery concepts, design trade-offs and aging behavior in more depth.</p>
-    </div>
-    <ul class="post-grid">
-      {%- for post in collections.postsNewestFirst %}
-      {% include "partials/post-card.njk" %}
-      {%- endfor %}
-    </ul>
+{%- for chapter in chapters %}
+<section class="home-section" aria-labelledby="chapter-{{ chapter.slug }}">
+  <div class="container container--article">
+    <h2 id="chapter-{{ chapter.slug }}" class="home-section__title"><a href="{{ chapter.url }}">{{ chapter.title }}</a></h2>
+    <p class="home-section__lead">{{ chapter.lead }}</p>
+    {% include "partials/chapter-parts.njk" %}
   </div>
 </section>
+{%- endfor %}

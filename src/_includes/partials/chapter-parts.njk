@@ -1,0 +1,9 @@
+{#- Reiter eines Kapitels als nummerierte Liste (Startseite und /blog/), Daten aus src/_data/chapters.json -#}
+<ol class="home-parts">
+  {%- for tab in chapter.tabs %}
+  <li>
+    <a href="{{ chapter.url }}#{{ tab.id }}"><span class="home-parts__no">{{ loop.index }}</span><span class="home-parts__name">{{ tab.name }}</span></a>
+    <p>{{ tab.teaser }}</p>
+  </li>
+  {%- endfor %}
+</ol>

@@ -14,7 +14,7 @@ const person = {
   '@id': `${site.url}/#author`,
   name: site.author,
   url: site.url,
-  sameAs: [site.linkedin],
+  sameAs: [site.linkedin, site.scholar, site.orcid],
   jobTitle: site.jobTitle,
 };
 
@@ -58,8 +58,8 @@ export function structuredData({ type, url, metaTitle, title, description, image
         person,
         {
           '@context': 'https://schema.org',
-          '@type': 'BlogPosting',
-          '@id': `${pageUrl}#blog-posting`,
+          '@type': 'Article',
+          '@id': `${pageUrl}#article`,
           headline: title,
           description,
           url: pageUrl,
@@ -67,13 +67,13 @@ export function structuredData({ type, url, metaTitle, title, description, image
           image: `${site.url}${image}`,
           datePublished: new Date(date).toISOString(),
           dateModified: new Date(modified ?? date).toISOString(),
-          author: { '@id': `${site.url}/#author`, '@type': 'Person', name: site.author, sameAs: site.linkedin },
+          author: { '@id': `${site.url}/#author`, '@type': 'Person', name: site.author, sameAs: [site.linkedin, site.scholar, site.orcid] },
           publisher,
           inLanguage: 'en',
           articleSection: section,
-          isPartOf: { '@type': 'Blog', name: `${site.name} Blog`, url: `${site.url}/blog/` },
+          isPartOf: { '@type': 'WebSite', name: site.name, url: site.url },
         },
-        breadcrumbs([['Home', '/'], ['Blog', '/blog/'], [title, url]]),
+        breadcrumbs([['Home', '/'], [title, url]]),
       ];
     case 'tool':
       return [

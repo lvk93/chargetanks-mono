@@ -1,0 +1,16 @@
+[
+  {
+    "slug": "lithium-balance",
+    "url": "/blog/lithium-balance/",
+    "title": "The lithium balance: designing a cell forwards",
+    "lead": "Fit a cell OCV backwards and you get dozens of answers that all sort of work. Build it forwards and you see the design decision behind them.",
+    "llms": "The lithium balance of a cell in equilibrium: voltage window, N/P ratio, N/Li ratio including formation and prelithiation, aging modes and blended electrodes, each with a small interactive tool.",
+    "tabs": [
+      { "id": "voltage-window", "name": "Voltage window", "teaser": "Where the lithium in a cell comes from, and what Vmin and Vmax cut out of the tanks.", "tool": "cell-reconstruction" },
+      { "id": "np-ratio", "name": "N/P ratio", "teaser": "Why the anode is built bigger, and the more honest way to measure the margin to plating.", "tool": "cell-reconstruction" },
+      { "id": "n-li-ratio", "name": "N/Li ratio", "teaser": "Why the cathode's first-cycle loss is a bonus in the full cell, and why most cells still end up short of lithium, not of room.", "tool": "cell-reconstruction" },
+      { "id": "aging", "name": "Aging", "teaser": "Why aging losses don't add up, and why a cell can lose active material without losing capacity.", "tool": "aging" },
+      { "id": "blends", "name": "Blends", "teaser": "Graphite and silicon as two tanks joined by a pipe: who fills first, and how dQ/dV takes the blend apart again.", "tool": "blending" }
+    ]
+  }
+]
