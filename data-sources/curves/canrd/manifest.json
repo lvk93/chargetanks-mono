@@ -1,6 +1,6 @@
 {
   "source": "Canrd (canrud.com), Produktseiten, Screenshots von Lars am 30.10.2026",
-  "status": "nicht digitalisiert (Platzhalter). Digitalisierung folgt mit eigener Pipeline.",
+  "status": "Digitalisierung mit scripts/digitize-canrd.py (Ergebnis data-sources/curves/canrd/digitized/)",
   "note": "Halbzellen gegen Li, erster Zyklus (Formierung): Ladekurve = erste Ladung, Entladekurve = erste Entladung. Keine OCV, sondern 0.1C mit Überspannung.",
   "curves": [
     {
@@ -12,16 +12,18 @@
       ],
       "protocol": "25 °C, rest 4 h, 0.1C CC to 4.3 V, CV to 0.02C, rest 3 min, 0.1C DC to 3.0 V",
       "discharge_mAhg_approx": 155,
-      "axes": {
-        "x": [
-          0,
-          180
-        ],
-        "y": [
-          2.8,
-          4.4
-        ]
-      }
+      "xticks": [
+        0,
+        180,
+        20
+      ],
+      "yticks": [
+        2.8,
+        4.4,
+        0.2
+      ],
+      "color": "black",
+      "slug": "nmc111"
     },
     {
       "file": "ncm523.jpg",
@@ -33,16 +35,18 @@
       "protocol": "0.1C CC to 4.3 V, CV to 0.02C, 0.1C DC to 3.0 V",
       "discharge_mAhg": 161.6,
       "first_cycle_efficiency": 0.824,
-      "axes": {
-        "x": [
-          0,
-          220
-        ],
-        "y": [
-          2.8,
-          4.4
-        ]
-      }
+      "xticks": [
+        0,
+        220,
+        20
+      ],
+      "yticks": [
+        2.8,
+        4.4,
+        0.2
+      ],
+      "color": "black",
+      "slug": "nmc523"
     },
     {
       "file": "ncm622-single-crystal.jpg",
@@ -53,16 +57,18 @@
       ],
       "protocol": "0.1C CC to 4.3 V, CV to 0.02C, rest 3 min, 0.1C DC to 3.0 V",
       "discharge_mAhg_approx": 173,
-      "axes": {
-        "x": [
-          0,
-          220
-        ],
-        "y": [
-          2.8,
-          4.4
-        ]
-      }
+      "xticks": [
+        0,
+        220,
+        20
+      ],
+      "yticks": [
+        2.8,
+        4.4,
+        0.2
+      ],
+      "color": "black",
+      "slug": "nmc622"
     },
     {
       "file": "ncm811-coated-polycrystalline.jpg",
@@ -73,16 +79,18 @@
       ],
       "protocol": "0.1C CC to 4.3 V, CV to 0.02C, 0.1C DC to 3.0 V",
       "discharge_mAhg_approx": 208,
-      "axes": {
-        "x": [
-          0,
-          240
-        ],
-        "y": [
-          2.8,
-          4.4
-        ]
-      }
+      "xticks": [
+        0,
+        240,
+        20
+      ],
+      "yticks": [
+        2.8,
+        4.4,
+        0.2
+      ],
+      "color": "black",
+      "slug": "nmc811"
     },
     {
       "file": "ni90-polycrystalline.jpg",
@@ -93,16 +101,18 @@
       ],
       "protocol": "25 °C, rest 4 h, 0.1C CC to 4.3 V, CV to 0.02C, rest 5 min, 0.1C DC to 3.0 V",
       "discharge_mAhg_approx": 221,
-      "axes": {
-        "x": [
-          0,
-          280
-        ],
-        "y": [
-          2.8,
-          4.4
-        ]
-      }
+      "xticks": [
+        0,
+        280,
+        40
+      ],
+      "yticks": [
+        2.8,
+        4.4,
+        0.4
+      ],
+      "color": "black",
+      "slug": "ni90"
     },
     {
       "file": "nca-s.jpg",
@@ -113,17 +123,19 @@
       ],
       "protocol": "25 °C, rest 4 h, 0.1C CC to 4.25 V, CV to 0.02C, rest 5 min, 0.1C DC to 3.0 V",
       "discharge_mAhg_approx": 200,
-      "axes": {
-        "x": [
-          0,
-          240
-        ],
-        "y": [
-          2.8,
-          4.4
-        ]
-      },
-      "caveat": "Obergrenze 4.25 V statt 4.3 V"
+      "caveat": "Obergrenze 4.25 V statt 4.3 V",
+      "xticks": [
+        0,
+        240,
+        40
+      ],
+      "yticks": [
+        2.8,
+        4.4,
+        0.4
+      ],
+      "color": "purple",
+      "slug": "nca"
     },
     {
       "file": "lmfp.png",
@@ -134,16 +146,6 @@
       ],
       "protocol": "0.1C CC to 4.5 V, CV to 0.02C, 0.1C DC to 2.5 V",
       "discharge_mAhg_approx": 156,
-      "axes": {
-        "x": [
-          0,
-          180
-        ],
-        "y": [
-          2.4,
-          4.8
-        ]
-      },
       "caveat": "Mn/(Mn+Fe) = 0.60 aus Zusammensetzung (lmfp-composition.jpg); passt zur Plateaulänge",
       "composition_wt%": {
         "Li": 4.56,
@@ -152,7 +154,19 @@
         "P": 19.2,
         "C": 1.71
       },
-      "mn_share": 0.6
+      "mn_share": 0.6,
+      "xticks": [
+        0,
+        180,
+        20
+      ],
+      "yticks": [
+        2.4,
+        4.8,
+        0.2
+      ],
+      "color": "black",
+      "slug": "lmfp-mn60"
     }
   ]
 }

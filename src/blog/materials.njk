@@ -191,7 +191,7 @@ sitemap: false
     <h2 id="m6">LMFP: two reservoirs{{ draftTag(draft) }}</h2>
     <p>LMFP is LFP with manganese. The idea: more voltage, with almost the same safety.</p>
     {{ tool("lmfp", "LMFP", pick("lmfp", "variant", "Manganese share", [["0", "Mn 40 %"], ["1", "Mn 50 %"], ["2", "Mn 60 %"], ["3", "Mn 70 %"], ["4", "Mn 80 %"]], "2")) }}
-    {{ note(draft, "<b>DATEN:</b> LMFP-Kurven sind schematisch (Mn-Plateau 4,1 V, Fe-Plateau 3,45 V). Canrd-Kurve (Mn 60 % laut Zusammensetzung) liegt als Bild in data-sources/curves/canrd/ und wird später digitalisiert. Für die anderen Mn-Anteile fehlen Daten.") }}
+    {{ note(draft, "<b>DATEN:</b> Mn 60 % ist die digitalisierte Canrd-Halbzellkurve (0,1C, erster Zyklus, Entladen = Lithiieren, Laden = Delithiieren; Mn-Plateau beim Laden ≈ 4,1 V, beim Entladen ≈ 3,95 V, Fe ≈ 3,5 V). Die anderen Mn-Anteile sind schematisch, dafür fehlen Daten.") }}
     <p>The curve has two plateaus instead of one. In the tank, those are two reservoirs on top of each other, separated by a narrow, sloped piece.</p>
     <h3>Why two steps?</h3>
     <p>Iron and manganese share the sites in the crystal, but they react at different voltages: iron at about 3.45 V, manganese at about 4.1 V. Each gets its own reservoir, and the ratio of the two decides how big the reservoirs are. More manganese means a bigger lower reservoir.</p>
@@ -205,7 +205,7 @@ sitemap: false
     <h2 id="m7">NMC/NCA: the same tank, emptied further{{ draftTag(draft) }}</h2>
     <p>NMC is the cathode for everything where range counts, and you pay for it: an oxide of nickel, manganese and cobalt. Of the three, nickel is the one that matters.</p>
     {{ tool("nmc", "NMC", pick("nmc", "variant", "Nickel content", [["0", "NMC111"], ["1", "NMC523"], ["2", "NMC622"], ["3", "NMC811"], ["4", "Ni90"], ["5", "NCA"]], "3"), '<div><dt>Reached at 4.3 V</dt><dd data-readout="reach">–</dd></div>') }}
-    {{ note(draft, "<b>DATEN:</b> Platzhalter. Alle Stufen haben die Form der NMC-Kurve der Seite (≈ NCM811), gestreckt auf die Canrd-Kapazitäten bei 3,0–4,3 V (111: 155, 523: 162, 622: 173, 811: 207, Ni90: 221 mAh/g). Canrd-Kurven liegen als Bilder in data-sources/curves/canrd/ und werden später digitalisiert. Achtung: Canrd ist erster Zyklus bei 0,1C, keine OCV.") }}
+    {{ note(draft, "<b>DATEN:</b> Digitalisierte Canrd-Halbzellkurven (Entladekurve = Lithiieren, 0,1C, erster Zyklus, 3,0–4,3 V; NCA bis 4,25 V; 111: 155, 523: 161, 622: 173, 811: 208, Ni90: 220, NCA: 200 mAh/g). Das ist keine OCV: die Überspannung steckt noch in der Kurve. Sauberer wären OCV-/GITT-Daten.") }}
     <p>NMC's curve has no staircase. It falls evenly and smoothly, and the tank is narrow and tall, without a single reservoir.</p>
     <h3>Why are there no steps?</h3>
     <p>In NMC, the lithium doesn't look for ordered stages. It spreads evenly through the whole material, however full it is. Each bit of lithium raises the level a little, so the tank is about equally wide everywhere.</p>

@@ -45,6 +45,35 @@ function variant(label, q, uIn, uOut = uIn) {
   return { label, q: Math.round(q), x: grid.map(r4), uIn: grid.map((x) => r4(uIn(x))), uOut: grid.map((x) => r4(uOut(x))) };
 }
 
+// Digitalisierte Canrd-Halbzellkurven (scripts/digitize-canrd.py): discharge/charge als [[mAh/g, V], ...]
+function digitized(slug) {
+  const d = JSON.parse(readFileSync(new URL(`../data-sources/curves/canrd/digitized/${slug}.json`, import.meta.url), 'utf8'));
+  const prep = (pts) => {
+    const seen = new Map();
+    pts.forEach(([q, u]) => { const k = Math.round(q * 2) / 2; if (!seen.has(k)) seen.set(k, []); seen.get(k).push(u); });
+    const xs = [...seen.keys()].sort((a, b) => a - b);
+    const raw = xs.map((k) => seen.get(k).reduce((a, b) => a + b, 0) / seen.get(k).length);
+    // Pixelrauschen glaetten (gleitender Mittelwert +-3 mAh/g, am Rand schmaler, damit der steile Abfall erhalten bleibt)
+    const us = raw.map((_, i) => {
+      const w = Math.min(6, i, raw.length - 1 - i);
+      let t = 0;
+      for (let j = i - w; j <= i + w; j += 1) t += raw[j];
+      return t / (2 * w + 1);
+    });
+    return { xs, us };
+  };
+  const dis = prep(d.discharge);
+  const cha = prep(d.charge);
+  const qd = dis.xs[dis.xs.length - 1];
+  const qc = cha.xs[cha.xs.length - 1];
+  // Fuellgrad x: Entladen (Lithiieren) x = Q/qd; Laden (Delithiieren) x = 1 - Q/qc. Spannung faellt mit x -> Glaetten per laufendem Minimum.
+  const mono = (f) => { let m = Infinity; return (x) => { m = Math.min(m, f(x)); return m; }; };
+  const uInRaw = (x) => interp(dis.xs, dis.us, x * qd);
+  const uOutRaw = (x) => interp(cha.xs, cha.us, (1 - x) * qc);
+  const mk = (raw) => { const f = mono(raw); const vals = grid.map((x) => f(x)); return (x) => vals[Math.round(x * (N - 1))]; };
+  return { q: qd, qCharge: qc, uIn: mk(uInRaw), uOut: mk(uOutRaw) };
+}
+
 const sig = (z) => 1 / (1 + Math.exp(-z));
 const out = {};
 
@@ -71,20 +100,22 @@ for (const [slug, name, file] of [['graphite', 'Graphite', 'graphite.json'], ['s
   out.lmfp = { name: 'LMFP', kind: 'cathode', q: 156, qTheo: 170, source: 'schematic, Mn share 0.6 from Canrd composition, 156 mAh/g (Canrd 0.1C)', placeholder: true,
     defaultVariant: 2,
     variants: [0.4, 0.5, 0.6, 0.7, 0.8].map((m) => variant(`Mn ${Math.round(m * 100)} %`, 156, (x) => lmfp(m)(x) - 0.02, (x) => lmfp(m)(x) + 0.02)) };
+  // Mn 60 %: echte Canrd-Halbzellkurve (Entladen = Lithiieren, Laden = Delithiieren)
+  const dg = digitized('lmfp-mn60');
+  out.lmfp.variants[2] = variant('Mn 60 %', dg.q, dg.uIn, dg.uOut);
+  out.lmfp.variants[2].digitized = true;
+  out.lmfp.source = 'Mn 60 %: Canrd half-cell, 0.1C, first cycle, digitized; other Mn shares schematic';
 }
 
-// NMC-Reihe: Platzhalter. Form von nmc.json (entspricht NCM811, 207 mAh/g), fuer jede Stufe so gestreckt, dass
-// das Fenster 3,0-4,3 V die Canrd-Kapazitaet ergibt. Theoretisch fassen alle Stufen ca. 275 mAh/g.
+// NMC-Reihe: digitalisierte Canrd-Halbzellkurven (Entladekurve = Lithiieren), 0,1C, erster Zyklus, 3,0-4,3 V (NCA 4,25 V).
+// Theoretisch fassen alle Stufen ca. 275 mAh/g.
 {
-  const base = fromSite('nmc.json');
-  const nca = fromSite('nca.json');
   const QT = 274;
-  const stages = [['NMC111', 155], ['NMC523', 162], ['NMC622', 173], ['NMC811', base.q], ['Ni90', 221]];
-  const variants = stages.map(([label, cap]) => variant(label, cap, base.uIn));
-  variants.push(variant('NCA', nca.q, nca.uIn));
-  out.nmc = { name: 'NMC/NCA', kind: 'cathode', q: Math.round(base.q), qTheo: QT,
-    source: 'placeholder: shape of chargetanks NMC curve, stretched to Canrd capacities at 3.0-4.3 V, 0.1C (NCA: chargetanks NCA curve)',
-    placeholder: true, defaultVariant: 3, variants };
+  const stages = [['NMC111', 'nmc111'], ['NMC523', 'nmc523'], ['NMC622', 'nmc622'], ['NMC811', 'nmc811'], ['Ni90', 'ni90'], ['NCA', 'nca']];
+  const variants = stages.map(([label, slug]) => { const d = digitized(slug); const v = variant(label, d.q, d.uIn, d.uIn); v.digitized = true; return v; });
+  out.nmc = { name: 'NMC/NCA', kind: 'cathode', q: variants[3].q, qTheo: QT,
+    source: 'Canrd half-cell curves, 0.1C first discharge, digitized (data-sources/curves/canrd/digitized)',
+    placeholder: false, defaultVariant: 3, variants };
 }
 
 // LCO: PyBaMM Ai2020 (Rieger 2016), Stoechiometrie 0,4-1 -> Fenster bis 4,39 V
