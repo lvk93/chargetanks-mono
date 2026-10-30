@@ -29,21 +29,45 @@ export function loadData() {
 
 /* Diagramm (Spannung nach oben, datenblattkonform) ------------------------------------------- */
 /* Tank (haengt von der Decke, Tiefe = Spannung) ------------------------------------------------ */
-// Breite ~ dQ/dU aus der Kurve (x faellt mit u), ueber ein kleines Spannungsfenster geglaettet, gedeckelt.
-function profile(xs, us, q, uTop, uBot, n = 180, smooth = 0) {
+// Breite ~ dQ/dU, geglaettet mit einer Glocke der Breite sigma (V). Jedes Kurvenstueck (x_j, u_j) -> (x_j+1, u_j+1) verteilt sein
+// Lithium gleichmaessig ueber seinen Spannungsbereich; gefaltet mit der Glocke ergibt das eine glatte Breite ohne Zacken.
+// Flaeche = Kapazitaet; flache Stuecke (Plateaus) werden Becken, getrennte Plateaus (Graphit-Stufen) bleiben getrennt.
+const SQ2 = Math.SQRT2;
+function erf(z) {
+  const t = 1 / (1 + 0.3275911 * Math.abs(z));
+  const y = 1 - (((((1.061405429 * t - 1.453152027) * t) + 1.421413741) * t - 0.284496736) * t + 0.254829592) * t * Math.exp(-z * z);
+  return z >= 0 ? y : -y;
+}
+const Phi = (z) => 0.5 * (1 + erf(z / SQ2));
+function profile(xs, us, q, uTop, uBot, n = 300, smooth = 0) {
+  const sigma = Math.max(0.003, smooth, (uBot - uTop) / 300);
   const pts = [];
-  const h = Math.max(0.004, smooth, (uBot - uTop) / 120);
   for (let i = 0; i <= n; i += 1) {
     const u = uTop + ((uBot - uTop) * i) / n;
-    // Fuellgrad bei u (us faellt mit x): Anteil der Stuetzstellen unterhalb von u -> x(u)
-    const xAt = (uu) => {
-      if (uu >= us[0]) return xs[0];
-      for (let j = 1; j < us.length; j += 1) if (us[j] <= uu) return xs[j - 1] + ((us[j - 1] - uu) / (us[j - 1] - us[j] || 1)) * (xs[j] - xs[j - 1]);
-      return xs[xs.length - 1];
-    };
-    pts.push({ u, w: (q * Math.abs(xAt(u - h) - xAt(u + h))) / (2 * h) });
+    let w = 0;
+    for (let j = 0; j < xs.length - 1; j += 1) {
+      const dx = q * Math.abs(xs[j + 1] - xs[j]);
+      if (!dx) continue;
+      const hi = Math.max(us[j], us[j + 1]);
+      const lo = Math.min(us[j], us[j + 1]);
+      if (u < lo - 6 * sigma || u > hi + 6 * sigma) continue;
+      if (hi - lo < 1e-6) w += (dx * Math.exp(-0.5 * ((u - lo) / sigma) ** 2)) / (sigma * Math.sqrt(2 * Math.PI));
+      else w += (dx * (Phi((hi - u) / sigma) - Phi((lo - u) / sigma))) / (hi - lo);
+    }
+    pts.push({ u, w });
   }
   return pts; // u steigt (von der Decke nach unten)
+}
+
+// Breite fuers Bild: logarithmisch gestaucht, damit breite Becken und schmale Haelse zugleich lesbar sind
+// (w0 = mittlere Breite der Kurve, die breiteste Stelle wird cap). Die Flaeche ist dann nicht mehr massstaeblich.
+function widthScale(ws, cap, min = 1.5) {
+  const all = ws.filter(Number.isFinite);
+  const wMax = Math.max(...all, 1e-9);
+  const pos = all.filter((w) => w > 1e-3 * wMax).sort((a, b) => a - b);
+  const w0 = pos[Math.floor(pos.length / 2)] || wMax;
+  const den = Math.log(1 + wMax / w0);
+  return (w) => Math.max(min, (cap * Math.log(1 + w / w0)) / den);
 }
 
 function drawTank(container, { variants, fill, color, uTop, uBot, ceiling, label }) {
@@ -67,10 +91,9 @@ function drawTank(container, { variants, fill, color, uTop, uBot, ceiling, label
   const cap = 230;
   const cx = 200;
   const shapes = variants.map((v) => profile(v.x, v.u, v.q, uTop, uBot));
-  // Breiten aller Umrisse mit demselben Massstab: der Median wird ca. 70 px breit, Plateaus gedeckelt
-  const ws = shapes[0].map((p) => p.w).filter((w) => w > 1e-6).sort((a, b) => a - b);
-  const scale = 70 / (ws[Math.floor(ws.length / 2)] || 1);
-  const W_ = (p) => Math.min(cap, Math.max(1.5, p.w * scale));
+  // Alle Umrisse (z. B. Lade- und Entladekurve) mit derselben Stauchung, die breiteste Stelle wird cap breit
+  const sc = widthScale(shapes.flatMap((sh) => sh.map((p) => p.w)), cap);
+  const W_ = (p) => sc(p.w);
   variants.forEach((v, i) => {
     const pts = shapes[i].filter((p) => p.u <= v.u[0] + 1e-9 && p.u >= v.u[v.u.length - 1] - 1e-9);
     if (!pts.length) return;
@@ -174,6 +197,8 @@ export function drawShelf(container, data, current, nav) {
     const color = m.kind === 'anode' ? C.anode : C.cathode;
     const g = el('g', { class: 'shelf-item', opacity: !current || current === slug ? 1 : 0.4, 'data-slug': slug });
     if (nav) { g.setAttribute('role', 'link'); g.setAttribute('tabindex', '0'); g.setAttribute('aria-label', `${m.name}: open part`); g.style.cursor = 'pointer'; }
+    // ganze Spalte anklickbar, nicht nur der (oft schmale) Tank
+    g.append(el('rect', { x: cx - slotW / 2, y: top - 8, width: slotW, height: H - top - 10, fill: 'transparent' }));
     if (slug === 'lithium') {
       g.append(el('rect', { x: cx - slotW / 2, y: top - 2, width: slotW, height: 6, fill: C.cell }));
     } else {
@@ -182,10 +207,9 @@ export function drawShelf(container, data, current, nav) {
       const at = (x) => v.uIn[Math.round(x * (v.uIn.length - 1))];
       const lo = at(0.95);
       const hi = at(0.04);
-      const pts = profile(v.x, v.uIn, v.q, Math.max(0, lo), hi, 140, 0.05);
-      const sorted = pts.map((p) => p.w).sort((a, b) => a - b);
-      const k = 22 / Math.max(1e-6, sorted[Math.floor(sorted.length / 2)]);
-      const w = (p) => Math.min(slotW, Math.max(3, p.w * k));
+      const pts = profile(v.x, v.uIn, v.q, Math.max(0, lo), hi, 200, 0.012);
+      const sc = widthScale(pts.map((p) => p.w), slotW, 3);
+      const w = (p) => sc(p.w);
       const d = [...pts.map((p, j) => `${j ? 'L' : 'M'}${(cx - w(p) / 2).toFixed(1)} ${y(p.u).toFixed(1)}`),
         ...[...pts].reverse().map((p) => `L${(cx + w(p) / 2).toFixed(1)} ${y(p.u).toFixed(1)}`), 'Z'];
       g.append(el('path', { d: d.join(''), fill: color, 'fill-opacity': 0.35, stroke: color, 'stroke-width': 1.5 }));
@@ -348,8 +372,15 @@ function initLfpExtras(root) {
 async function init() {
   const data = await loadData();
   for (const root of document.querySelectorAll('[data-mat-tool]')) initMaterialTool(root, data);
-  for (const fig of document.querySelectorAll('[data-capacity]')) drawCapacity(fig.querySelector('[data-figure-parts]') ?? fig, data, fig.dataset.current, 'nav' in fig.dataset);
-  for (const fig of document.querySelectorAll('[data-shelf]')) drawShelf(fig.querySelector('[data-figure-parts]') ?? fig, data, fig.dataset.current, 'nav' in fig.dataset);
+  // Regal und Balken: jeder Tank/Balken oeffnet sein Material; das obere Regal markiert den offenen Reiter
+  const slugOf = (id) => Object.keys(TAB).find((k) => TAB[k] === id);
+  const drawNav = (current) => {
+    for (const fig of document.querySelectorAll('[data-capacity]')) drawCapacity(fig.querySelector('[data-figure-parts]') ?? fig, data, fig.dataset.current ?? current, true);
+    for (const fig of document.querySelectorAll('[data-shelf]')) drawShelf(fig.querySelector('[data-figure-parts]') ?? fig, data, fig.dataset.current ?? current, true);
+  };
+  const open = document.querySelector('[data-chapter-panel]:not([hidden])');
+  drawNav(open ? slugOf(open.id) : undefined);
+  document.addEventListener('chapter:tab', (e) => drawNav(slugOf(e.detail.id)));
   for (const fig of document.querySelectorAll('[data-scurve]')) drawSCurve(fig);
   for (const root of document.querySelectorAll('[data-lfp-extras]')) initLfpExtras(root);
 }

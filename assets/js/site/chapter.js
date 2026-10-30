@@ -28,6 +28,8 @@ function initTabs() {
       if (active) a.setAttribute('aria-current', 'true');
       else a.removeAttribute('aria-current');
     }
+    // Andere Skripte (z. B. das Regal in materials.js) erfahren, welcher Reiter offen ist
+    document.dispatchEvent(new CustomEvent('chapter:tab', { detail: { id: target } }));
     // Beim Umschalten an den Anfang des Kapitels, falls man schon tiefer gescrollt war
     const panel = panels.find((p) => p.id === target);
     if (scroll && panel.getBoundingClientRect().top < 0) panel.scrollIntoView({ block: 'start' });
